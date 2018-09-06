@@ -1,11 +1,10 @@
 package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
-import com.ga.cdz.domain.dto.admin.LoginDTO;
+import com.ga.cdz.domain.dto.admin.AdminLoginDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.service.IMAccountService;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 
 /**
  * @author:luqi
@@ -33,7 +31,7 @@ public class MAccountServiceImpl extends ServiceImpl<AdminInfoMapper,AdminInfo> 
     MRedisUtil mRedisUtil;
 
     @Override
-    public LoginDTO login(AdminInfoVo adminInfoVo) {
+    public AdminLoginDTO login(AdminInfoVo adminInfoVo) {
         AdminInfo adminInfo=new AdminInfo();
         BeanUtils.copyProperties(adminInfoVo,adminInfo);
         //密码MD5

@@ -1,7 +1,7 @@
 package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ga.cdz.domain.dto.admin.LoginDTO;
+import com.ga.cdz.domain.dto.admin.AdminLoginDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 
@@ -20,6 +20,6 @@ public interface IMAccountService extends IService<AdminInfo> {
      * @param:
      * @return:
      */
-    LoginDTO login(AdminInfoVo adminInfoVo);
+    AdminLoginDTO login(AdminInfoVo adminInfoVo);
 
 }

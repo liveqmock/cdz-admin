@@ -7,12 +7,12 @@ import java.util.List;
 
 /**
  * @author:luqi
- * @description: 登陆返回的实体类
+ * @description: 后台登陆返回的实体类
  * @date:2018/9/5_16:17
  */
 @Data
 @Accessors(chain = true)
-public class LoginDTO {
+public class AdminLoginDTO {
     /**
      * 管理员姓名
      */

@@ -11,7 +11,8 @@ public class RedisConstant {
         //管理后台前缀
         public final static String ADMIN_ROOT="CDZ-ADMIN:";
 
-        //用户标识
+
+    //用户标识
         public final static String USER=API_ROOT+"USER:";
 
         //管理员标识

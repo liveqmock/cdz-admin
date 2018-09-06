@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author:luqi
- * @description: 管理员接口具体实现类
+ * @description: 管理员权限接口具体实现类
  * @date:2018/9/4_10:54
  */
 @Slf4j
