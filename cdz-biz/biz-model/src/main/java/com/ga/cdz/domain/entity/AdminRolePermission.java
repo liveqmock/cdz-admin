@@ -29,8 +29,7 @@ public class AdminRolePermission extends Model<AdminRolePermission> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "role_perm_id", type = IdType.AUTO)
-    private Integer rolePermId;
+
     /**
      * 角色关联ID
      */
@@ -45,7 +44,7 @@ public class AdminRolePermission extends Model<AdminRolePermission> {
 
     @Override
     protected Serializable pkVal() {
-        return this.rolePermId;
+        return null;
     }
 
 }

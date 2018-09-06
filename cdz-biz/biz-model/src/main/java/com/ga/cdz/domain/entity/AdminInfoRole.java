@@ -29,8 +29,6 @@ public class AdminInfoRole extends Model<AdminInfoRole> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "admin_info_role_id", type = IdType.AUTO)
-    private Integer adminInfoRoleId;
     /**
      * admin关联ID
      */
@@ -45,7 +43,6 @@ public class AdminInfoRole extends Model<AdminInfoRole> {
 
     @Override
     protected Serializable pkVal() {
-        return this.adminInfoRoleId;
+        return null;
     }
-
 }

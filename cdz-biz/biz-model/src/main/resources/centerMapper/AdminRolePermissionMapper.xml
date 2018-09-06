@@ -4,14 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.AdminRolePermission">
-        <id column="role_perm_id" property="rolePermId" />
         <result column="role_id" property="roleId" />
         <result column="perm_id" property="permId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        role_perm_id, role_id, perm_id
+        role_id, perm_id
     </sql>
 
 </mapper>

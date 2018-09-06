@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AdminInfoRoleVo {
 
-    private Integer adminInfoRoleId;
     /**
      * admin关联ID
      */
