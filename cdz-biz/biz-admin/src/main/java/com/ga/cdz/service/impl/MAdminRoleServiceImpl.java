@@ -19,7 +19,7 @@ import org.springframework.util.ObjectUtils;
  * @date:2018/9/6_11:43
  */
 @Slf4j
-@Service("mAdminInfoRoleService")
+@Service("mAdminRoleService")
 public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements IMAdminRoleService {
 
     @Override

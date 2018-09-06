@@ -1,8 +1,10 @@
 package com.ga.cdz;
 
 import com.ga.cdz.domain.entity.AdminInfo;
+import com.ga.cdz.domain.vo.base.AdminInfoRoleVo;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.AdminRoleVo;
+import com.ga.cdz.service.IMAdminInfoRoleService;
 import com.ga.cdz.service.IMAdminInfoService;
 import com.ga.cdz.service.IMAdminRoleService;
 import com.ga.cdz.util.MUtil;
@@ -37,7 +39,10 @@ public class SuperAdminInfoInitTest {
      * 后台管理员角色服务
      **/
     @Resource
-    IMAdminRoleService mAdminInfoRoleService;
+    IMAdminRoleService mAdminRoleService;
+
+    @Resource
+    IMAdminInfoRoleService mAdminInfoRoleService;
 
     /**
      * @author:luqi
@@ -72,7 +77,7 @@ public class SuperAdminInfoInitTest {
     public void initSuperRole() {
         AdminRoleVo adminRoleVo = new AdminRoleVo();
         adminRoleVo.setRoleName("超级管理员");
-        boolean hasSuccess = mAdminInfoRoleService.saveAdminRole(adminRoleVo);
+        boolean hasSuccess = mAdminRoleService.saveAdminRole(adminRoleVo);
         if (hasSuccess) {
             System.out.println("初始化超级管理员角色成功");
         }
@@ -87,7 +92,12 @@ public class SuperAdminInfoInitTest {
      */
     @Test
     public void bindSuperRoleWithAdmin() {
-
+        AdminInfoRoleVo adminInfoRoleVo = new AdminInfoRoleVo();
+        adminInfoRoleVo.setAdminId(1).setRoleId(1);
+        boolean hasSuccess = mAdminInfoRoleService.saveAdminInfoRole(adminInfoRoleVo);
+        if (hasSuccess) {
+            System.out.println("绑定超级管理员角色成功");
+        }
     }
 
 }
