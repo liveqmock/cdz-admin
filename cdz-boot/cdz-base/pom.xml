@@ -27,5 +27,22 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-shiro</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-util</artifactId>
+        </dependency>
     </dependencies>
 </project>

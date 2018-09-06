@@ -28,18 +28,6 @@
         </dependency>
         <dependency>
             <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-shiro</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-db</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
             <artifactId>biz-admin</artifactId>
         </dependency>
     </dependencies>

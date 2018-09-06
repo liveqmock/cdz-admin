@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
  * @date:2018/9/3_13:34
  */
 @Slf4j
-@Component("mRedisUtil")
 public class MRedisUtil {
 
     @Resource

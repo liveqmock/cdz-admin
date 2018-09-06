@@ -5,12 +5,13 @@ import com.ga.cdz.dao.center.AdminPermissionMapper;
 import com.ga.cdz.dao.center.AdminRolePermissionMapper;
 import com.ga.cdz.domain.entity.AdminPermission;
 import com.ga.cdz.domain.entity.AdminRolePermission;
-import com.ga.cdz.domain.vo.base.AdminRolePermissionVo;
 import com.ga.cdz.service.IMAdminRolePermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -22,17 +23,14 @@ import javax.annotation.Resource;
 @Service("mAdminRolePermissionService")
 public class MAdminRolePermissionServiceImpl extends ServiceImpl<AdminRolePermissionMapper, AdminRolePermission> implements IMAdminRolePermissionService {
 
-
-    /**
-     * 权限操作mapper
-     */
     @Resource
     AdminPermissionMapper adminPermissionMapper;
 
     @Override
     public boolean initSuperAdminRolePermission() {
-
+        //查询所有的权限
+        List<AdminPermission> adminPermissionList = adminPermissionMapper.selectList(null);
+        //if (ObjectUtils.isEmpty())
         return false;
     }
-
 }

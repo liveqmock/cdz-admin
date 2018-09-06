@@ -20,4 +20,5 @@ public interface IMAdminRoleService extends IService<AdminRole> {
      */
     boolean saveAdminRole(AdminRoleVo adminRoleVo);
 
+
 }

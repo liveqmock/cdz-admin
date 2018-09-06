@@ -2,7 +2,6 @@ package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.entity.AdminRolePermission;
-import com.ga.cdz.domain.vo.base.AdminRolePermissionVo;
 
 /**
  * @author:luqi
@@ -13,7 +12,7 @@ public interface IMAdminRolePermissionService extends IService<AdminRolePermissi
 
     /**
      * @author:luqi
-     * @description: 初始化超级管理员的关联
+     * @description: 初始化超级管理员的关联, 调用改方法的前提是数据已经插入了 超级管理员账号和超级管理员角色
      * @date:2018/9/6_13:57
      * @param:
      * @return: 布尔值

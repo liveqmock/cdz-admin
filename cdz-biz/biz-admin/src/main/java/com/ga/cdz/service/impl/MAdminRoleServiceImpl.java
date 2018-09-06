@@ -22,6 +22,7 @@ import org.springframework.util.ObjectUtils;
 @Service("mAdminRoleService")
 public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements IMAdminRoleService {
 
+
     @Override
     public boolean saveAdminRole(AdminRoleVo adminRoleVo) {
         AdminRole adminRole = new AdminRole();
@@ -32,4 +33,6 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
         }
         return save(adminRole);
     }
+
+
 }
