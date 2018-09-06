@@ -15,4 +15,11 @@ public interface IMAdminRoleGroup {
     interface Add {
     }
 
+    /**
+     * @author　huanghaohao
+     * @desc 查找
+     * @date 2018年9月6日 16点39分
+     */
+    interface Find{}
+
 }

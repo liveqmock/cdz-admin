@@ -98,5 +98,4 @@ public class AdminController extends AbstractBaseController {
         return Result.success().message("操作成功");
     }
 
-
 }
