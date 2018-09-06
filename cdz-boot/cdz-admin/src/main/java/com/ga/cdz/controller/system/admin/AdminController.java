@@ -8,6 +8,7 @@ import com.ga.cdz.domain.group.admin.IMAdminInfoGroup;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMAdminInfoService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,23 +28,26 @@ import javax.annotation.Resource;
 @RequestMapping("/admin")
 public class AdminController extends AbstractBaseController {
 
-    /**管理员信息服务**/
+    /**
+     * 管理员信息服务
+     **/
     @Resource
     IMAdminInfoService mAdminInfoService;
 
 
-     /**
-      * @author:luqi
-      * @description: 添加管理员
-      * @date:2018/9/5_16:55
-      * @param: AdminInfoVo
-      * @return: Result
-      */
+    /**
+     * @author:luqi
+     * @description: 添加管理员
+     * @date:2018/9/5_16:55
+     * @param: AdminInfoVo
+     * @return: Result
+     */
+    @RequiresPermissions("system:admin-insert")
     @PostMapping("/save")
     public Result saveAdminInfo(@RequestBody @Validated(value = {IMAdminInfoGroup.Add.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean rs=mAdminInfoService.saveAdminIno(adminInfoVo);
-        if(!rs){
+        boolean rs = mAdminInfoService.saveAdminIno(adminInfoVo);
+        if (!rs) {
             return Result.fail().message("操作失败");
         }
         return Result.success().message("操作成功");
@@ -56,11 +60,12 @@ public class AdminController extends AbstractBaseController {
      * @param: AdminInfoVo
      * @return: Result
      */
+    @RequiresPermissions("system:admin-update")
     @PostMapping("/update/id")
     public Result updateAdminInfoById(@RequestBody @Validated(value = {IMAdminInfoGroup.Update.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean rs=mAdminInfoService.updateAdminInfoById(adminInfoVo);
-        if(!rs){
+        boolean rs = mAdminInfoService.updateAdminInfoById(adminInfoVo);
+        if (!rs) {
             return Result.fail().message("操作失败");
         }
         return Result.success().message("操作成功");
@@ -73,11 +78,12 @@ public class AdminController extends AbstractBaseController {
      * @param: PageVo
      * @return: Result
      */
+    @RequiresPermissions("system:admin-select")
     @PostMapping("/page/con")
-    public Result getAdminInfoPageByCon(@RequestBody @Validated PageVo<AdminInfoVo> pageVo,BindingResult bindingResult){
+    public Result getAdminInfoPageByCon(@RequestBody @Validated PageVo<AdminInfoVo> pageVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-       IPage<AdminInfo> page= mAdminInfoService.getAdminInfoPageByCon(pageVo);
-       return Result.success().data(page);
+        IPage<AdminInfo> page = mAdminInfoService.getAdminInfoPageByCon(pageVo);
+        return Result.success().data(page);
     }
 
 
@@ -88,11 +94,12 @@ public class AdminController extends AbstractBaseController {
      * @param: AdminInfoVo
      * @return: Result
      */
+    @RequiresPermissions("system:admin-delete")
     @PostMapping("/remove/id")
-    public Result removeAdminInfoById(@RequestBody @Validated({IMAdminInfoGroup.Remove.class}) AdminInfoVo adminInfoVo,BindingResult bindingResult){
+    public Result removeAdminInfoById(@RequestBody @Validated({IMAdminInfoGroup.Remove.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean isDelete= mAdminInfoService.removeAdminInfoById(adminInfoVo.getAdminId());
-        if(!isDelete){
+        boolean isDelete = mAdminInfoService.removeAdminInfoById(adminInfoVo.getAdminId());
+        if (!isDelete) {
             return Result.fail().message("操作失败");
         }
         return Result.success().message("操作成功");

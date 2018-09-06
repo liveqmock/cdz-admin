@@ -13,25 +13,30 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class AdminLoginDTO {
+
+    /**
+     * adminId
+     */
+    private Integer adminId;
+
+    /**
+     * token
+     */
+    private String token;
+
     /**
      * 管理员姓名
      */
     private String adminName;
+
     /**
      * 管理员的账号
      */
     private String adminAccount;
 
     /**
-     *  角色名称
-     * */
-    private String adminRoleName;
-
-    /**
      *  权限code集合
      * */
     private List<String> adminPermissionList;
-
-
 
 }

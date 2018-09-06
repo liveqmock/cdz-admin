@@ -15,8 +15,8 @@ public interface IMAdminRolePermissionService extends IService<AdminRolePermissi
      * @description: 初始化超级管理员的关联, 调用改方法的前提是数据已经插入了 超级管理员账号和超级管理员角色
      * @date:2018/9/6_13:57
      * @param:
-     * @return: 布尔值
+     * @return:
      */
-    boolean initSuperAdminRolePermission();
+    void initSuperAdminRolePermission();
 
 }

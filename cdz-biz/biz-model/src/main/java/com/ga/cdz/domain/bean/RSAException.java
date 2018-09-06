@@ -15,10 +15,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class RSAException extends BaseException {
-    private String detail;
 
-    public RSAException(String detail) {
+    public RSAException() {
         super(ResultEnum.RSA_ERROR);
-        this.detail = detail;
     }
 }

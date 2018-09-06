@@ -7,9 +7,12 @@ import com.ga.cdz.util.MRedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -33,22 +36,20 @@ public class CustomRealm extends BaseCustomRealm {
       */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-
-      /*  Manager manager = (Manager) principals.getPrimaryPrincipal();
+        //获取到用户的凭证
+        String adminAccount = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        Set<Permission> perms = null;
-        String key = REDIS_ADMIN_PERMS_KEY + manager.getUsername();
-        if (!objectRedis.hasKey(key)) {
-            perms = permissionService.getPerms(manager.getId());
-        } else {
-            perms = objectRedis.get(key);
+        String key = RedisConstant.ADMIN_PERM + adminAccount;
+        if (!mRedisUtil.hasKey(key)) {
+            //没有登陆 抛出token失效异常
+            log.info("{}，没有登陆，没有权限redis缓存", adminAccount);
+            throw new TokenLoseException();
         }
-        for (Permission permission : perms) {
-            simpleAuthorizationInfo.addStringPermission(permission.getPerCode());
-        }
-        return simpleAuthorizationInfo;*/
+        List<String> perms = mRedisUtil.get(key);
+        //加入到认证中
+        simpleAuthorizationInfo.addStringPermissions(perms);
+        return simpleAuthorizationInfo;
 
-        return null;
     }
 
 
@@ -62,9 +63,10 @@ public class CustomRealm extends BaseCustomRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         StatelessToken statelessToken = (StatelessToken) token;
-        String phone = statelessToken.getUsername();
+        //管理后台的用户凭证是账号
+        String adminAccount = statelessToken.getUsername();
         String clientDigest = statelessToken.getClientDigest();
-        String key = RedisConstant.ADMIN + phone;
+        String key = RedisConstant.ADMIN_TOKEN + adminAccount;
         //判断缓存中是否有登陆信息
         if (mRedisUtil.hasKey(key)) {
             //判断token是否一致
@@ -74,7 +76,7 @@ public class CustomRealm extends BaseCustomRealm {
                 // 异地登陆或主动刷新了token调用了autoLogin接口
                 throw new DisabledAccountException();
             }
-            return new SimpleAuthenticationInfo(phone, clientDigest, this.getName());
+            return new SimpleAuthenticationInfo(adminAccount, clientDigest, this.getName());
         } else {
             //没有登录 或 过期需要重新登陆
             return null;

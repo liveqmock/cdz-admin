@@ -2,6 +2,7 @@ package com.ga.cdz.config;
 
 import com.ga.cdz.domain.entity.AdminPermission;
 import com.ga.cdz.service.IMAdminPermissionService;
+import com.ga.cdz.service.IMAdminRolePermissionService;
 import com.google.common.collect.Lists;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ApplicationContextEvent;
@@ -22,10 +23,14 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
     @Resource
     IMAdminPermissionService mAdminPermissionService;
 
+    @Resource
+    IMAdminRolePermissionService mAdminRolePermissionService;
+
     @Override
     public void onApplicationEvent(ApplicationContextEvent applicationContextEvent) {
         if (applicationContextEvent.getApplicationContext().getParent() == null) {
             initAdmin();
+            superAdminPermission();
         }
     }
 
@@ -62,4 +67,16 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
                 adminUpdate,adminSelect,roleModule);
        mAdminPermissionService.saveOrUpdateBatch(lists);
     }
+
+    /**
+     * @author:luqi
+     * @description: 初始化超级管理员角色
+     * @date:2018/9/6_14:56
+     * @param:
+     * @return:
+     */
+    private void superAdminPermission() {
+        mAdminRolePermissionService.initSuperAdminRolePermission();
+    }
+
 }

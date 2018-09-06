@@ -34,8 +34,8 @@ public class AdminInfoVo {
     /**
      * 管理员姓名
      */
-    @NotBlank(groups = {IMAdminInfoGroup.Add.class,IMAdminInfoGroup.Login.class},message = "姓名不能为空")
-    @Size(groups = {IMAdminInfoGroup.Add.class,IMAdminInfoGroup.Login.class},min = 2,max = 10,message = "姓名，字符串长度2~10")
+    @NotBlank(groups = {IMAdminInfoGroup.Add.class}, message = "姓名不能为空")
+    @Size(groups = {IMAdminInfoGroup.Add.class}, min = 2, max = 10, message = "姓名，字符串长度2~10")
     private String adminName;
 
     /**

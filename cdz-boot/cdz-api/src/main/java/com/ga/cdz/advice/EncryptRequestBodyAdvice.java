@@ -88,7 +88,7 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
             //未加密数据不进行解密操作
             String decryptBody;
             if (content.startsWith("{")) {
-                throw new RSAException("非密文数据，错误的请求");
+                throw new RSAException();
             } else {
                 StringBuilder json = new StringBuilder();
                 content = content.replaceAll(" ", "+");
