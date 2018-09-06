@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-sms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
             <artifactId>cdz-shiro</artifactId>
         </dependency>
         <dependency>
