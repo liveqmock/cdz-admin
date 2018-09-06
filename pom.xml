@@ -59,6 +59,11 @@
         </dependency>
         <dependency>
             <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-sms</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
             <artifactId>biz-model</artifactId>
             <version>1.0</version>
         </dependency>

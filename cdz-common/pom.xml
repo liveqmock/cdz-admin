@@ -21,5 +21,6 @@
         <module>cdz-shiro</module>
         <module>cdz-redis</module>
         <module>cdz-constant</module>
+        <module>cdz-sms</module>
     </modules>
 </project>
