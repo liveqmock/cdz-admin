@@ -15,7 +15,10 @@ public class RedisConstant {
     //用户标识
         public final static String USER=API_ROOT+"USER:";
 
-        //管理员标识
-        public final static String ADMIN=ADMIN_ROOT+"ADMIN:";
+    //管理员token
+    public final static String ADMIN_TOKEN = ADMIN_ROOT + "ADMIN-TOKEN:";
+
+    //管理员权限
+    public final static String ADMIN_PERM = ADMIN_ROOT + "ADMIN-PERM:";
 
 }

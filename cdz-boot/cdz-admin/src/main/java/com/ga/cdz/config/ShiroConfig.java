@@ -43,7 +43,7 @@ public class ShiroConfig extends BaseShiroConfig {
         //认证相关的接口不需要过滤
         list.add("/account/**");
         //暂时通过
-        list.add("/admin/**");
+        //list.add("/admin/**");
         return list;
     }
 }

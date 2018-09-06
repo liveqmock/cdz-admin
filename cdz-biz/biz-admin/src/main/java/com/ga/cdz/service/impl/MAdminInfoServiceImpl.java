@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.AdminInfo;
+import com.ga.cdz.domain.entity.AdminRolePermission;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMAdminInfoService;
@@ -19,6 +20,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -118,4 +120,5 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper,AdminInfo
         }
         return  removeById(id);
     }
+
 }

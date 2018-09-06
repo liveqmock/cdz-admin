@@ -14,9 +14,22 @@
         <result column="insert_dt" property="insertDt" />
     </resultMap>
 
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         admin_id, admin_name, admin_account, admin_pwd, admin_tel, admin_sex, admin_state, insert_dt
     </sql>
+    <!--通过ID查询管理员的权限-->
+    <select id="selectAdminPermCodeListById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT DISTINCT
+        d.perm_code
+        FROM
+        t_admin_info AS a
+        LEFT JOIN t_admin_info_role AS b ON a.admin_id = b.admin_id
+        LEFT JOIN t_admin_role_permission AS c ON b.role_id = c.role_id
+        LEFT JOIN t_admin_permission AS d ON c.perm_id = d.perm_id
+        WHERE
+        a.admin_id =#{adminId,jdbcType=INTEGER}
+    </select>
 
 </mapper>
