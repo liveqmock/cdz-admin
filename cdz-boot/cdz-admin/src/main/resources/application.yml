@@ -10,6 +10,17 @@ spring:
       properties:
         log-base-dir: ${atomikos.logdir}
         log-base-name: ${atomikos.logname}
+  redis:
+      prot: 6379
+      host: ${redis.url}
+      password: ${redis.password}
+      database: 1
+      lettuce:
+          pool:
+             max-active: 8
+             max-wait: -1ms
+             max-idle: 500
+             min-idle: 0
 
 #多数据源配置
 mysql:
@@ -38,3 +49,4 @@ mysql:
       maintenanceInterval: 60
       maxIdleTime: 60
       testQuery: select 1
+
