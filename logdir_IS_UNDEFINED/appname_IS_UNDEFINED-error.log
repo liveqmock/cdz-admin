@@ -1,0 +1,1 @@
+2018-09-05 10:01:22,939 [http-nio-8010-exec-3] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:java.lang.IllegalStateException,detail:Method [setUserScore] was discovered in the .class file but cannot be resolved in the class object

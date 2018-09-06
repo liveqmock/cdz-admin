@@ -1,0 +1,46 @@
+server:
+  port: 8010
+
+spring:
+  profiles:
+    active: dev
+  #atomic配置
+  jta:
+    atomikos:
+      properties:
+          log-base-dir: ${atomikos.logdir}
+          log-base-name: ${atomikos.logname}
+
+
+#多数据源配置
+mysql:
+  datasource:
+    center:
+      url: jdbc:mysql://${jdbc.center.url}:3306/DB_CENTER?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.center.username}
+      password: ${jdbc.center.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
+    charging:
+      url: jdbc:mysql://${jdbc.charging.url}:3306/DB_CHARGING?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.charging.username}
+      password: ${jdbc.charging.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
+
+#参数加密私钥
+privateKey: MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKvlz32eKywjFnlzhYRGS/W9nCB6r2FzRi3SaPfPh9Ln00kgGXT3ojY6QuG4SHMYsOVYc0k0wi877ASpQhy+wq7RGSlp0nPcg+kQN3QQvLU4ztFo45I2aDEO+iD2FR92wiYLYloRGwhU0mq8FEn+JbrWsmgyCiYExCK9txYjAo/XAgMBAAECgYBbIWJ2/jt1EsT/bjcCgSIUDYmPznrb9vjlof70IZmoPi7NPa9BS2c7yHdcow4FtrlRXSsBTG8GC4Z8kh7yjk827lSa+lu40O6m3YjWuF/rgpcxbHfZbP1r7hPSboqTxzZYOCo3p4lJEDsoOBjYqq+wg5CObCWrRG9WCHEnRTDYAQJBAO9qsDwMcgQ5oRR7Ym3r27fN0AcBZuBoFcRNE1SH5vrCjgae2G7K4xSNncYNhaFYdURd0qQCXVJpNNEehOSFZ1cCQQC3zeGyWe/VDVVGL1W1gvQ/JFfUDSfwvZwAs4iS5XHiT+G2HM9ewTLMHXsP1jC8tBQXqDaPHsbpr46NWJ0atUuBAkAIe40283HuuGP+p8h7AIpOXtpqBSCx/r4WsGxo6E/EvrPthB9C/alCByp54+zCJLIy8+gMq5DG5LdcWWp39koNAkBECJ7b51JQqAjCW877yqchoBAqW1xHTceqssmAphELVcoUIIHZbuWgi+D7MasEjhtJzmezfg7efK7lPsGYGzcBAkBttsaZOm3BSK4PTVbS4CiFzUrhLqApWFKQBv+e6LCqgJzZvlsNg+rckDlRcGVZ9TfRFYxIODUVyR3700nQqHMa
+
+

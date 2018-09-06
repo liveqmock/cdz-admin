@@ -1,0 +1,23 @@
+config:
+  base_path: D:\\logs\\cdz
+
+logback:
+  logdir: ${config.base_path}\\logs\\cdz-admin
+  appname: cdz-admin
+  ##打印输出等级
+  level: info
+
+atomikos:
+  logdir: ${config.base_path}\\logs\\cdz-admin\\transaction-logs
+  logname: cdz-admin-transaction
+
+
+jdbc:
+  center:
+      url: 192.168.2.123
+      username: root
+      password: 123456
+  charging:
+      url: 192.168.2.123
+      username: root
+      password: 123456

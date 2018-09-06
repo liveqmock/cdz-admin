@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.UserInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap"  type="com.ga.cdz.domain.entity.UserInfo">
+        <id column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="user_pwd" property="userPwd" />
+        <result column="user_tel" property="userTel" />
+        <result column="user_nick_name" property="userNickName" />
+        <result column="user_sex" property="userSex" />
+        <result column="user_price" property="userPrice" />
+        <result column="user_score" property="userScore" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="country" property="country" />
+        <result column="insert_dt" property="insertDt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, user_name, user_pwd, user_tel, user_nick_name, user_sex, user_price, user_score, province, city, country, insert_dt
+    </sql>
+
+</mapper>

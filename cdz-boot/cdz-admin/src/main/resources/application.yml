@@ -1,0 +1,40 @@
+server:
+  port: 8011
+
+spring:
+  profiles:
+    active: dev
+  #atomic配置
+  jta:
+    atomikos:
+      properties:
+        log-base-dir: ${atomikos.logdir}
+        log-base-name: ${atomikos.logname}
+
+#多数据源配置
+mysql:
+  datasource:
+    center:
+      url: jdbc:mysql://${jdbc.center.url}:3306/DB_CENTER?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.center.username}
+      password: ${jdbc.center.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
+    charging:
+      url: jdbc:mysql://${jdbc.charging.url}:3306/DB_CHARGING?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.charging.username}
+      password: ${jdbc.charging.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
