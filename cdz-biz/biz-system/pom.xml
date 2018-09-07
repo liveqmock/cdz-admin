@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-model</artifactId>
+            <artifactId>biz-model</artifactId>
         </dependency>
     </dependencies>
 
