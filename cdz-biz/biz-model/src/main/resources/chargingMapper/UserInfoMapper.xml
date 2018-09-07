@@ -7,7 +7,6 @@
         <id column="user_id" property="userId" />
         <result column="user_type" property="userType"/>
         <result column="user_real_name" property="userRealName"/>
-        <result column="user_name" property="userName" />
         <result column="user_pwd" property="userPwd" />
         <result column="user_tel" property="userTel" />
         <result column="user_nick_name" property="userNickName" />
@@ -15,13 +14,14 @@
         <result column="province" property="province" />
         <result column="city" property="city" />
         <result column="country" property="country" />
+        <result column="user_state" property="userState"/>
         <result column="insert_dt" property="insertDt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         user_id, user_type, user_real_name, user_name, user_pwd, user_tel, user_nick_name, user_sex, province, city,
-        country, insert_dt
+        country,user_state, insert_dt
     </sql>
 
 </mapper>

@@ -5,6 +5,7 @@ import com.ga.cdz.controller.AbstractBaseController;
 
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
+import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.base.UserInfoVo;
 import com.ga.cdz.service.IAccountService;
@@ -61,7 +62,10 @@ public class AccountController extends AbstractBaseController {
      * @return:
      */
     @PostMapping("/login")
-    public Result login() {
+    public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoLoginVo userInfoLoginVo,
+                        BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.login(userInfoLoginVo);
         return null;
     }
 

@@ -46,12 +46,7 @@ public class UserInfo extends Model<UserInfo> {
     @TableField("user_real_name")
     private String userRealName;
     /**
-     * 登录的用户名
-     */
-    @TableField("user_name")
-    private String userName;
-    /**
-     * 密码MD5加密
+     * 密码
      */
     @TableField("user_pwd")
     private String userPwd;
@@ -85,6 +80,13 @@ public class UserInfo extends Model<UserInfo> {
      */
     @TableField("country")
     private String country;
+
+    /**
+     * 用户状态
+     */
+    @TableField("user_state")
+    private UserState userState;
+
     /**
      * 插入时间
      */
@@ -136,6 +138,30 @@ public class UserInfo extends Model<UserInfo> {
         private String desc;
 
         UserType(final int value, final String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        @Override
+        @JsonValue
+        public Integer getValue() {
+            return this.value;
+        }
+    }
+
+    /**
+     * @author:luqi
+     * @description: 用户状态
+     * @date:2018/9/7_13:07
+     */
+    public enum UserState implements IEnum<Integer> {
+        FREEZE(0, "冻结"),
+        NORMAL(1, "正常");
+
+        private int value;
+        private String desc;
+
+        UserState(final int value, final String desc) {
             this.value = value;
             this.desc = desc;
         }

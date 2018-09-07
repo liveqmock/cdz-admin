@@ -7,14 +7,13 @@ import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
-import com.ga.cdz.domain.vo.base.UserInfoVo;
 import com.ga.cdz.service.IAccountService;
 import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
 import com.ga.cdz.util.MUtil;
-import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -72,12 +71,6 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         if (!cacheSmsCode.equals(registerVo.getSmsCode())) {
             throw new BusinessException("验证码不一致");
         }
-        /**去数据库验证用户名是否被注册*/
-        String userName = registerVo.getUserName();
-        UserInfo hasUserName = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserName, userName));
-        if (!ObjectUtils.isEmpty(hasUserName)) {
-            throw new BusinessException("用户名已被注册");
-        }
         /**去数据库验证电话是否被注册*/
         UserInfo hasUserTel = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
         if (!ObjectUtils.isEmpty(hasUserTel)) {
@@ -89,7 +82,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         String userNickName = "cdz_" + System.currentTimeMillis();
         /**生成数据库插入对象 设置用户的属性userType为个人**/
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserName(userName).setUserPwd(md5Pwd).setUserTel(userTel)
+        userInfo.setUserPwd(md5Pwd).setUserTel(userTel)
                 .setUserSex(registerVo.getUserSex()).setUserNickName(userNickName)
                 .setUserType(UserInfo.UserType.PERSONAL);
         boolean isSuccess = save(userInfo);
@@ -101,7 +94,8 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
-    public UserLoginDTO login(UserInfoVo userInfoVo) {
+    public UserLoginDTO login(UserInfoLoginVo userInfoLoginVo) {
+
         return null;
     }
 }

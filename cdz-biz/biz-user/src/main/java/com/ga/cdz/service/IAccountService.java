@@ -3,6 +3,7 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.domain.vo.base.UserInfoVo;
@@ -42,6 +43,6 @@ public interface IAccountService extends IService<UserInfo> {
      * @param: UserInfoVo
      * @return: UserLoginDTO
      */
-    UserLoginDTO login(UserInfoVo userInfoVo);
+    UserLoginDTO login(UserInfoLoginVo userInfoLoginVo);
 
 }

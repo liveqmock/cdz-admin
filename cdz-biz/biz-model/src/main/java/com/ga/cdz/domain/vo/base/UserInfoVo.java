@@ -1,9 +1,13 @@
 package com.ga.cdz.domain.vo.base;
 
+import com.ga.cdz.constant.RegexConstant;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -26,14 +30,12 @@ public class UserInfoVo {
      * 用户真实姓名
      */
     private String userRealName;
+
     /**
-     * 登录的用户名
-     */
-    private String userName;
-    /**
-     * 密码MD5加密
+     * 密码
      */
     private String userPwd;
+
     /**
      * 电话
      */
@@ -58,6 +60,12 @@ public class UserInfoVo {
      * 县编码
      */
     private String country;
+
+    /**
+     * 用户状态
+     */
+    private UserInfo.UserState userState;
+
     /**
      * 插入时间
      */
