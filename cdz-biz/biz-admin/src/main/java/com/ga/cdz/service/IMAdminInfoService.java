@@ -4,11 +4,9 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.entity.AdminInfo;
-import com.ga.cdz.domain.entity.AdminPermission;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
-import java.util.List;
 
 /**
  * @author:luqi
