@@ -30,6 +30,10 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-admin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-system</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
