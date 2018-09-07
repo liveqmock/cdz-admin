@@ -15,10 +15,7 @@ public class UserLoginDTO {
     /**
      * userId
      **/
-    private Long userId;
-
-    /***用户名***/
-    private String userName;
+    private Integer userId;
 
     /***用户电话**/
     private String userTel;

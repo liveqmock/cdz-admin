@@ -4,6 +4,7 @@ package com.ga.cdz.controller.account;
 import com.ga.cdz.controller.AbstractBaseController;
 
 import com.ga.cdz.domain.bean.Result;
+import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
@@ -67,8 +68,8 @@ public class AccountController extends AbstractBaseController {
     public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoLoginVo userInfoLoginVo,
                         BindingResult bindingResult) {
         checkParams(bindingResult);
-        accountService.login(userInfoLoginVo);
-        return null;
+        UserLoginDTO userLoginDTO = accountService.login(userInfoLoginVo);
+        return Result.success().message("登录成功").data(userLoginDTO);
     }
 
 }

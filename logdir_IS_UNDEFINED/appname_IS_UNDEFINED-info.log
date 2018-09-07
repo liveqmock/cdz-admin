@@ -1,3 +1,2 @@
-2018-09-05 10:00:12,739 [http-nio-8010-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
-2018-09-05 10:00:12,806 [http-nio-8010-exec-1] DEBUG o.a.s.s.mgt.DefaultSessionManager [retrieveSession] - Unable to resolve session ID from SessionKey [org.apache.shiro.web.session.mgt.WebSessionKey@4b8053c3].  Returning null to indicate a session could not be found.
-2018-09-05 10:01:22,662 [http-nio-8010-exec-3] DEBUG o.a.s.s.mgt.DefaultSessionManager [retrieveSession] - Unable to resolve session ID from SessionKey [org.apache.shiro.web.session.mgt.WebSessionKey@31b798fe].  Returning null to indicate a session could not be found.
+2018-09-07 17:36:51,243 [sdk-apache-idle-connection-cleaner] DEBUG o.a.h.i.c.PoolingHttpClientConnectionManager [closeIdleConnections] - Closing connections idle longer than 60000 MILLISECONDS
+2018-09-07 17:36:51,246 [sdk-apache-idle-connection-cleaner] DEBUG o.a.h.i.c.DefaultManagedHttpClientConnection [close] - http-outgoing-0: Close connection

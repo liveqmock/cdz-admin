@@ -97,11 +97,11 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         String md5Pwd = mUtil.MD5(registerVo.getUserPwd());
         /**生成一个随机昵称**/
         String userNickName = "cdz_" + System.currentTimeMillis();
-        /**生成数据库插入对象 设置用户的属性userType为个人**/
+        /**生成数据库插入对象 设置用户的属性userType为个人 默认可用状态**/
         UserInfo userInfo = new UserInfo();
         userInfo.setUserPwd(md5Pwd).setUserTel(userTel)
                 .setUserSex(registerVo.getUserSex()).setUserNickName(userNickName)
-                .setUserType(UserInfo.UserType.PERSONAL);
+                .setUserType(UserInfo.UserType.PERSONAL).setUserState(UserInfo.UserState.NORMAL);
         boolean isSuccess = save(userInfo);
         if (!isSuccess) {
             throw new BusinessException("注册失败，稍后重试");
@@ -112,7 +112,24 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
 
     @Override
     public UserLoginDTO login(UserInfoLoginVo userInfoLoginVo) {
-
-        return null;
+        /**用户密码md5*/
+        String md5Pwd = mUtil.MD5(userInfoLoginVo.getUserPwd());
+        String userTel = userInfoLoginVo.getUserTel();
+        UserInfo hasUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda()
+                .eq(UserInfo::getUserTel, userTel).eq(UserInfo::getUserPwd, md5Pwd));
+        if (ObjectUtils.isEmpty(hasUserInfo)) {
+            throw new BusinessException("电话或密码错误");
+        }
+        /**生成token*/
+        String token = mUtil.MD5(mUtil.UUID16());
+        String redisTokenKey = RedisConstant.USER_TOKEN + userTel;
+        /**redis 7天*/
+        mRedisUtil.put(redisTokenKey, token, 7L, TimeUnit.DAYS);
+        /**组成返回前端*/
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setUserTel(userTel);
+        userLoginDTO.setToken(token);
+        userLoginDTO.setUserId(hasUserInfo.getUserId());
+        return userLoginDTO;
     }
 }

@@ -6,7 +6,6 @@ import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
-import com.ga.cdz.domain.vo.base.UserInfoVo;
 
 /**
  * @author:luqi

@@ -18,12 +18,12 @@ import javax.validation.constraints.Pattern;
 public class UserInfoLoginVo {
 
     /**
-     * 登录的用户名
+     * 用户电话
      */
-    @NotBlank(groups = {IUserInfoGroup.Login.class}, message = "用户名不能为空")
-    @Pattern(regexp = RegexConstant.REGEX_USERNAME_PASSWORD,
-            groups = {IUserInfoGroup.Login.class}, message = "用户名为大小写字母，数字与下划线组合，6~12位")
-    private String userName;
+    @NotBlank(groups = {IUserInfoGroup.Login.class}, message = "电话不能为空")
+    @Pattern(regexp = RegexConstant.REGEX_PHONE,
+            groups = {IUserInfoGroup.Login.class}, message = "电话格式错误")
+    private String userTel;
 
     /**
      * 密码
