@@ -3,6 +3,7 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.AdminRolePermDTO;
 import com.ga.cdz.domain.entity.AdminRole;
+import com.ga.cdz.domain.vo.base.AdminRolePermVo;
 import com.ga.cdz.domain.vo.base.AdminRoleVo;
 
 import java.util.List;
@@ -49,6 +50,15 @@ public interface IMAdminRoleService extends IService<AdminRole> {
    * @return
    */
   AdminRolePermDTO getAdminRolePermById(Integer id);
+
+  /**
+   * @author huanghaohao
+   * @date  2018-09-07 14:17
+   * @desc  用于更新或者新增角色的权限
+   * @param
+   */
+
+    Integer updateOrInsertAdminRolePermission(List<AdminRolePermVo> adminRolePermVoList);
 
 
 }

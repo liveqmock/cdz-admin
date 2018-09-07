@@ -22,4 +22,11 @@ public interface IMAdminRoleGroup {
      */
     interface Find{}
 
+    /**
+     * @author huanghaohao
+     * @desc 更信息
+     * @date 2018-09-07 13:55
+     */
+    interface Update{}
+
 }

@@ -10,6 +10,7 @@ import com.ga.cdz.domain.dto.admin.AdminRolePermDTO;
 import com.ga.cdz.domain.entity.AdminPermission;
 import com.ga.cdz.domain.entity.AdminRole;
 import com.ga.cdz.domain.entity.AdminRolePermission;
+import com.ga.cdz.domain.vo.base.AdminRolePermVo;
 import com.ga.cdz.domain.vo.base.AdminRoleVo;
 import com.ga.cdz.service.IMAdminRoleService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -146,6 +148,26 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
         }
     }
 
+    /**
+     * @author huanghaohao
+     * @date  2018-09-07 14:17
+     * @desc  用于更新或者新增角色的权限
+     * @param
+     */
 
-
+    @Override
+    @Transactional
+    public Integer updateOrInsertAdminRolePermission(List<AdminRolePermVo> adminRolePermVoList) {
+        List<AdminRolePermission> list=new LinkedList<AdminRolePermission>();
+        for(int i= 0;i<adminRolePermVoList.size();i++){
+            if(adminRolePermVoList.get(i).getIsValid()){
+               AdminRolePermission adminRolePermission=new AdminRolePermission();
+               adminRolePermission.setPermId(adminRolePermVoList.get(i).getPermId());
+               adminRolePermission.setRoleId(adminRolePermVoList.get(i).getRoleId());
+                list.add(adminRolePermission);
+            }
+        }
+        adminRolePermissionMapper.delete(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId,adminRolePermVoList.get(0).getRoleId()));
+        return adminRolePermissionMapper.insertBatch(list);
+    }
 }
