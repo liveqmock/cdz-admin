@@ -65,9 +65,6 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         if (!ObjectUtils.isEmpty(hasUserTel)) {
             throw new BusinessException("电话已被注册");
         }
-        if (mRedisUtil.hasKey(smsRedisKey)) {
-            throw new BusinessException("验证码已发送，1分钟之内不重复发送");
-        }
         /**生成验证码*/
         String code = mSmsUtil.buildCode();
         String isSend = mSmsUtil.sendCodeDetail(userTel, code);
