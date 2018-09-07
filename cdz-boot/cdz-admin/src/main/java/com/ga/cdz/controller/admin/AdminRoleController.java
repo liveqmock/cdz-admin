@@ -52,13 +52,17 @@ public class AdminRoleController extends AbstractBaseController {
     return Result.success().data(adminRole);
   }
 
+  /**
+   * @author :huanghaohao
+   * @date 2018年9月7日 10点09分
+   * @param adminRoleVo
+   * @param bindingResult
+   * @return
+   */
   @PostMapping("/permission/list")
   public Result findAdminRolePermiseListById(@RequestBody @Validated(value = IMAdminRoleGroup.Find.class)AdminRoleVo adminRoleVo , BindingResult bindingResult){
     checkParams(bindingResult);
     AdminRolePermDTO adminRolePermDTO=mAdminRoleService.getAdminRolePermById(adminRoleVo.getRoleId());
     return Result.success().data(adminRolePermDTO);
   }
-
-
-
 }
