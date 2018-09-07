@@ -11,6 +11,7 @@ import com.ga.cdz.domain.vo.base.UserInfoVo;
 import com.ga.cdz.service.IAccountService;
 import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
+import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,9 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     @Resource
     MSmsUtil mSmsUtil;
 
+    @Resource
+    MUtil mUtil;
+
 
     @Override
     public String registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo) {
@@ -53,7 +57,14 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
 
     @Override
     public boolean register(UserInfoRegisterVo registerVo) {
-        return false;
+        boolean rs = false;
+        /**判断在缓存中验证码是否存在*/
+        /**判断上传验证码是否与缓存验证码一致*/
+        /**去数据库验证用户名是否被注册*/
+        /**去数据库验证电话是否被注册*/
+        /**把用户上传的密码**/
+        rs = true;
+        return true;
     }
 
     @Override
