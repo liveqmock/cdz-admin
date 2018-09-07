@@ -1,4 +1,4 @@
-package com.ga.cdz.controller.system.admin;
+package com.ga.cdz.controller.admin;
 
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
