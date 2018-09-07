@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:luqi
@@ -27,17 +28,25 @@ import java.time.LocalDateTime;
 @TableName("t_user_info")
 public class UserInfo extends Model<UserInfo> {
 
-    private static final long serialVersionUID = 1L;
 
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Long userId;
+    private static final long serialVersionUID = 1L;
     /**
-     * 登录的用户名
+     * 用户id
      */
-    @TableField("user_name")
-    private String userName;
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Integer userId;
     /**
-     * 密码MD5加密
+     * 类型 1个人用户 2 单位
+     */
+    @TableField("user_type")
+    private UserType userType;
+    /**
+     * 用户真实姓名
+     */
+    @TableField("user_real_name")
+    private String userRealName;
+    /**
+     * 密码
      */
     @TableField("user_pwd")
     private String userPwd;
@@ -55,34 +64,34 @@ public class UserInfo extends Model<UserInfo> {
      * 性别 0 女 1男
      */
     @TableField("user_sex")
-    private Integer userSex;
-    /**
-     * 用户余额
-     */
-    @TableField("user_price")
-    private BigDecimal userPrice;
-    /**
-     * 用户积分
-     */
-    @TableField("user_score")
-    private UserSex userScore;
+    private UserSex userSex;
     /**
      * 省级编码
      */
+    @TableField("province")
     private String province;
     /**
      * 城市编码
      */
+    @TableField("city")
     private String city;
     /**
      * 县编码
      */
+    @TableField("country")
     private String country;
+
+    /**
+     * 用户状态
+     */
+    @TableField("user_state")
+    private UserState userState;
+
     /**
      * 插入时间
      */
     @TableField("insert_dt")
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 
     @Override
@@ -96,7 +105,7 @@ public class UserInfo extends Model<UserInfo> {
      * @description: 用户性别枚举类
      * @date:2018/9/5_9:45
      */
-    enum UserSex implements IEnum<Integer> {
+    public enum UserSex implements IEnum<Integer> {
 
         WOMEN(0,"女"),
         MAN(1,"男");
@@ -107,6 +116,54 @@ public class UserInfo extends Model<UserInfo> {
         UserSex(final int value, final String desc){
             this.value=value;
             this.desc=desc;
+        }
+
+        @Override
+        @JsonValue
+        public Integer getValue() {
+            return this.value;
+        }
+    }
+
+    /**
+     * @author:luqi
+     * @description: 用人单位枚举
+     * @date:2018/9/7_13:07
+     */
+    public enum UserType implements IEnum<Integer> {
+        PERSONAL(1, "个人用户"),
+        COMPANY(2, "单位");
+
+        private int value;
+        private String desc;
+
+        UserType(final int value, final String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        @Override
+        @JsonValue
+        public Integer getValue() {
+            return this.value;
+        }
+    }
+
+    /**
+     * @author:luqi
+     * @description: 用户状态
+     * @date:2018/9/7_13:07
+     */
+    public enum UserState implements IEnum<Integer> {
+        FREEZE(0, "冻结"),
+        NORMAL(1, "正常");
+
+        private int value;
+        private String desc;
+
+        UserState(final int value, final String desc) {
+            this.value = value;
+            this.desc = desc;
         }
 
         @Override

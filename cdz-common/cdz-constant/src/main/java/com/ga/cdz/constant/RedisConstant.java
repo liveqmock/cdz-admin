@@ -12,8 +12,11 @@ public class RedisConstant {
         public final static String ADMIN_ROOT="CDZ-ADMIN:";
 
 
-    //用户标识
-        public final static String USER=API_ROOT+"USER:";
+    //用户token
+    public final static String USER_TOKEN = API_ROOT + "USER-TOKEN:";
+
+    //用户注册发送短信
+    public final static String USER_REGISTER_SMS = API_ROOT + "USER-REGISTER-SMS:";
 
     //管理员token
     public final static String ADMIN_TOKEN = ADMIN_ROOT + "ADMIN-TOKEN:";

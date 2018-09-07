@@ -48,7 +48,7 @@ public class CustomRealm extends BaseCustomRealm {
         StatelessToken statelessToken = (StatelessToken) token;
         String phone = statelessToken.getUsername();
         String clientDigest = statelessToken.getClientDigest();
-        String key = RedisConstant.USER + phone;
+        String key = RedisConstant.USER_TOKEN + phone;
         //判断缓存中是否有登陆信息
         if (mRedisUtil.hasKey(key)) {
             //判断token是否一致

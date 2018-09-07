@@ -5,6 +5,7 @@ import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.AdminRolePermDTO;
 import com.ga.cdz.domain.entity.AdminRole;
 import com.ga.cdz.domain.group.admin.IMAdminRoleGroup;
+import com.ga.cdz.domain.vo.base.AdminRolePermVo;
 import com.ga.cdz.domain.vo.base.AdminRoleVo;
 import com.ga.cdz.service.IMAdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,23 @@ public class AdminRoleController extends AbstractBaseController {
    * @return
    */
   @PostMapping("/permission/list")
-  public Result findAdminRolePermiseListById(@RequestBody @Validated(value = IMAdminRoleGroup.Find.class)AdminRoleVo adminRoleVo , BindingResult bindingResult){
+  public Result findAdminRolePermissionListById(@RequestBody @Validated(value = IMAdminRoleGroup.Find.class)AdminRoleVo adminRoleVo , BindingResult bindingResult){
     checkParams(bindingResult);
     AdminRolePermDTO adminRolePermDTO=mAdminRoleService.getAdminRolePermById(adminRoleVo.getRoleId());
     return Result.success().data(adminRolePermDTO);
   }
+
+  /**
+   * @author :huanghaohao
+   * @date 2018-09-07 13:43
+   * @desc :用于更新角色权限
+   *
+   */
+  @PostMapping("/permission/update")
+  public Result updateAdminRolePermissionList(@RequestBody @Validated(value=IMAdminRoleGroup.Update.class) List<AdminRolePermVo> adminRolePermVoList,BindingResult bindingResult){
+    checkParams(bindingResult);
+    int successNum=mAdminRoleService.updateOrInsertAdminRolePermission(adminRolePermVoList);
+   return Result.success().data(successNum);
+  }
+
 }
