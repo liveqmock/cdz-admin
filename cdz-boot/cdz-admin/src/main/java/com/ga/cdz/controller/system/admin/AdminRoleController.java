@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,9 +27,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/roles")
 public class AdminRoleController extends AbstractBaseController {
-  @Autowired
+
+
+    @Resource
   IMAdminRoleService imAdminRoleService;
-  @GetMapping("/")
+
+    @GetMapping("/")
   public Result getListAdminRole(){
     List<AdminRole> list =imAdminRoleService.listAdminRole();
       //如果查询结构不为空 返回正常

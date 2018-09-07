@@ -67,7 +67,6 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
      * @param id :roleId
      * @return ：返回AdminRole实体
      */
-
     @Override
     public AdminRole findAdminRoleById(Integer id) {
         return this.baseMapper.selectById(id);
@@ -82,7 +81,8 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
      */
     public  AdminRolePermDTO findAdminRolePermById(Integer id){
         //首先查询出，当前角色所拥有的权限
-        List<AdminRolePermission> adminRolePermissionList=adminRolePermissionMapper.selectList(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId,id));      AdminRole adminRole=this.baseMapper.selectOne(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleId,id));
+        List<AdminRolePermission> adminRolePermissionList = adminRolePermissionMapper.selectList(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId, id));
+        AdminRole adminRole = this.baseMapper.selectOne(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleId, id));
         //用于封装前端数据的 DTO
         AdminRolePermDTO permDTO=new AdminRolePermDTO();
         //查询出 权限的总母列数据
