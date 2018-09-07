@@ -22,7 +22,7 @@ public interface IAccountService extends IService<UserInfo> {
      * @param: 发送验证码Vo
      * @return: 是否发送成功
      */
-    String registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo);
+    void registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo);
 
 
     /**

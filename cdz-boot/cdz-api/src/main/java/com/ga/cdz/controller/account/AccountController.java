@@ -7,7 +7,7 @@ import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
-import com.ga.cdz.domain.vo.base.UserInfoVo;
+import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.service.IAccountService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/account")
 public class AccountController extends AbstractBaseController {
+
     @Resource
     private IAccountService accountService;
 
@@ -31,12 +32,12 @@ public class AccountController extends AbstractBaseController {
      * @author:luqi
      * @description: 发送验证码
      * @date:2018/9/7_13:36
-     * @param:
-     * @return:
+     * @param: UserInfoSendSmsVo 传手机号
      */
     @PostMapping("/register/send/sms")
-    public Result registerSendSms() {
-        return null;
+    public void registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.registerSendSms(userInfoSendSmsVo);
     }
 
     /**

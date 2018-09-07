@@ -15,10 +15,13 @@ import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
 import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -46,16 +49,33 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     MUtil mUtil;
 
 
+    @Value("${sms.timeout}")
+    private Long REDIS_TIME_OUT;
+
     @Override
-    public String registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo) {
-        //结果，结果为空字符串代表短信发送成功，如果有错误，把错误提示放在rs上
-        String rs = "";
+    public void registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo) {
         String userTel = userInfoSendSmsVo.getUserTel();
         String smsRedisKey = RedisConstant.USER_REGISTER_SMS + userTel;
         /**判断用户是否已经发送过短信**/
         /**调用 sms 工具类发送短信，并判断短信是否发送成功，可参照以前项目**/
         /**发送成功后把短信存入到redis 中 设置 其时效性 **/
-        return rs;
+
+        /**去数据库验证电话是否被注册*/
+        UserInfo hasUserTel = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if (!ObjectUtils.isEmpty(hasUserTel)) {
+            throw new BusinessException("电话已被注册");
+        }
+        if (mRedisUtil.hasKey(smsRedisKey)) {
+            throw new BusinessException("验证码已发送，1分钟之内不重复发送");
+        }
+        /**生成验证码*/
+        String code = mSmsUtil.buildCode();
+        String isSend = mSmsUtil.sendCodeDetail(userTel, code);
+        if (StringUtils.isEmpty(isSend)) {
+            mRedisUtil.put(smsRedisKey, code, REDIS_TIME_OUT, TimeUnit.SECONDS);
+        } else {
+            throw new BusinessException(isSend);
+        }
     }
 
     @Override
