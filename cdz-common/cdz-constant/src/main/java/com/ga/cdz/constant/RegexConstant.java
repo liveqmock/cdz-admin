@@ -12,4 +12,5 @@ public class RegexConstant {
      * 验证用户名和密码
      */
     public final static String REGEX_USERNAME_PASSWORD = "^[a-zA-Z_0-9]{6,12}$";
+    public final static String REGEX_CODE = "^\\d{2}$";
 }
