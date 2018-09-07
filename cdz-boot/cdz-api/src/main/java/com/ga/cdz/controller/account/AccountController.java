@@ -35,9 +35,10 @@ public class AccountController extends AbstractBaseController {
      * @param: UserInfoSendSmsVo 传手机号
      */
     @PostMapping("/register/send/sms")
-    public void registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
+    public Result registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
         checkParams(bindingResult);
         accountService.registerSendSms(userInfoSendSmsVo);
+        return Result.success().message("发送成功");
     }
 
     /**
