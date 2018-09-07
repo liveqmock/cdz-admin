@@ -61,4 +61,6 @@ public interface IMAdminRoleService extends IService<AdminRole> {
     Integer updateOrInsertAdminRolePermission(List<AdminRolePermVo> adminRolePermVoList);
 
 
+    Boolean addAdminRole(AdminRoleVo adminRoleVo);
+
 }

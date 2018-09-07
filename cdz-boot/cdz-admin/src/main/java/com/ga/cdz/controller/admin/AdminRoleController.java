@@ -56,6 +56,7 @@ public class AdminRoleController extends AbstractBaseController {
   /**
    * @author :huanghaohao
    * @date 2018年9月7日 10点09分
+   * @desc 角色所有权限查询
    * @param adminRoleVo
    * @param bindingResult
    * @return
@@ -78,6 +79,23 @@ public class AdminRoleController extends AbstractBaseController {
     checkParams(bindingResult);
     int successNum=mAdminRoleService.updateOrInsertAdminRolePermission(adminRolePermVoList);
    return Result.success().data(successNum);
+  }
+
+  /**
+   * @author huanghaohao\
+   * @date 2018年9月7日 16点10分
+   * @desc 新增角色
+   * @param adminRoleVo
+   * @return
+   */
+  @PostMapping("/insert")
+  public Result insertAdminRole(@RequestBody @Validated(value=IMAdminRoleGroup.Add.class) AdminRoleVo adminRoleVo){
+    boolean flag=mAdminRoleService.addAdminRole(adminRoleVo);
+    if(flag){
+      return Result.success();
+    }else{
+      return Result.fail().message("角色名已经存在或者新增失败");
+    }
   }
 
 }
