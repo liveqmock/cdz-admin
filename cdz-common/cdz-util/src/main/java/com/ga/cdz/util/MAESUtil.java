@@ -202,7 +202,7 @@ public class MAESUtil {
 
     public static void main(String[] args) {
         MAESUtil maesUtil = new MAESUtil();
-        String content = "中文测试";
+        String content = "中文测试中";
         String encryptResultStr = maesUtil.encryptAES(content);
         System.out.println("加密前: " + content);
         System.out.println("加密后: " + encryptResultStr);
