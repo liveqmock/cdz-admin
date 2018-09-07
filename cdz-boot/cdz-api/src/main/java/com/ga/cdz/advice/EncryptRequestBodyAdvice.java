@@ -2,6 +2,7 @@ package com.ga.cdz.advice;
 
 import com.ga.cdz.annotation.UnDecrypt;
 import com.ga.cdz.domain.bean.RSAException;
+import com.ga.cdz.util.MAESUtil;
 import com.ga.cdz.util.MBase64Util;
 import com.ga.cdz.util.MJsonUtil;
 import com.ga.cdz.util.MRSAUtils;
@@ -34,9 +35,11 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
 
     @Value("${privateKey}")
    private String privateKey;
+    @Value("${hasEncrypt}")
+    private boolean hasEncrypt;
 
     @Resource
-    private MJsonUtil mJsonUtil;
+    private MAESUtil mAESUtil;
 
     @Override
     public boolean supports(MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -45,12 +48,14 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public HttpInputMessage beforeBodyRead(HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) throws IOException {
-        //判断是否需要解密
-        if (!methodParameter.getMethod().isAnnotationPresent(UnDecrypt.class)) {
-            try {
-                return new DecryptHttpInputMessage(httpInputMessage, privateKey, "utf-8");
-            } catch (Exception e) {
-                log.error("数据解密失败", e);
+        if (hasEncrypt) {
+            //判断是否需要解密
+            if (!methodParameter.getMethod().isAnnotationPresent(UnDecrypt.class)) {
+                try {
+                    return new DecryptHttpInputMessage(httpInputMessage, privateKey, "utf-8");
+                } catch (Exception e) {
+                    log.error("数据解密失败", e);
+                }
             }
         }
         return httpInputMessage;
@@ -85,22 +90,22 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
             String content = IOUtils.toString(inputMessage.getBody(), charset);
             JSONObject jsonObject=new JSONObject(content);
             content=jsonObject.getString("data");
-            //未加密数据不进行解密操作
             String decryptBody;
+            //未加密数据不进行解密操作
             if (content.startsWith("{")) {
                 throw new RSAException();
             } else {
                 StringBuilder json = new StringBuilder();
                 content = content.replaceAll(" ", "+");
-                if (!StringUtils.isEmpty(content)) {
+              /*  if (!StringUtils.isEmpty(content)) {
                     String[] contents = content.split("\\|");
                     for (int k = 0; k < contents.length; k++) {
                         String value = contents[k];
-                        value = new String(MRSAUtils.decryptByPrivateKey(MBase64Util.decode(value), privateKey), charset);
+                        value = mAESUtil.decryptAES(value);
                         json.append(value);
                     }
-                }
-                decryptBody = json.toString();
+                }*/
+                decryptBody = mAESUtil.decryptAES(content);
             }
             this.body = IOUtils.toInputStream(decryptBody, charset);
         }

@@ -2,18 +2,17 @@ package com.ga.cdz.controller.account;
 
 
 import com.ga.cdz.controller.AbstractBaseController;
-import com.ga.cdz.domain.bean.ValidException;
-import com.ga.cdz.domain.entity.AdminInfo;
-import com.ga.cdz.domain.entity.UserInfo;
-import com.ga.cdz.domain.group.admin.IMAdminInfoGroup;
-import com.ga.cdz.service.IMAdminInfoService;
-import com.ga.cdz.service.IUserService;
+
+import com.ga.cdz.domain.bean.Result;
+import com.ga.cdz.domain.group.api.IUserInfoGroup;
+import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
+import com.ga.cdz.domain.vo.base.UserInfoVo;
+import com.ga.cdz.service.IAccountService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-
 
 
 /**
@@ -24,31 +23,20 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/account")
 public class AccountController extends AbstractBaseController {
-
-
-    /**管理员信息服务层*/
     @Resource
-    IMAdminInfoService adminInfoService;
+    private IAccountService accountService;
 
+    /**
+     * @author:luqi
+     * @description: 登陆
+     * @date:2018/9/7_12:57
+     * @param: UserInfoVo 传用户名与密码
+     * @return:
+     */
 
-    /**用户信息服务层*/
-    @Resource
-    IUserService userService;
-
-
-
-
-    @GetMapping("/test/user")
-    public UserInfo testUserInfo(){
-        return userService.getUserInfoById(1L);
-    }
-
-
-    @PostMapping("/rsa")
-    public UserInfo testRSA(@RequestBody @Validated(value = {IMAdminInfoGroup.Add.class}) UserInfo userInfo, BindingResult result){
-        checkParams(result);
-        //adminInfoService.sav
-        return userInfo;
+    @PostMapping("/login")
+    public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoRegisterVo registerVo, BindingResult bindingResult) {
+        return null;
     }
 
 }
