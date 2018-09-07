@@ -40,13 +40,28 @@ public class AccountController extends AbstractBaseController {
 
     /**
      * @author:luqi
+     * @description: 注册
+     * @date:2018/9/7_15:08
+     * @param: registerVo 注册的Vo对象
+     * @param: bindingResult 验证对象
+     * @return: Result
+     */
+    @PostMapping("/register")
+    public Result register(@RequestBody @Validated({IUserInfoGroup.Register.class}) UserInfoRegisterVo registerVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.register(registerVo);
+        return Result.success().message("注册成功");
+    }
+
+    /**
+     * @author:luqi
      * @description: 登陆
      * @date:2018/9/7_12:57
      * @param: UserInfoVo 传用户名与密码
      * @return:
      */
     @PostMapping("/login")
-    public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoRegisterVo registerVo, BindingResult bindingResult) {
+    public Result login() {
         return null;
     }
 

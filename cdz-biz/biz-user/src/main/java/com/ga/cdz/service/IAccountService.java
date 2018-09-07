@@ -31,7 +31,7 @@ public interface IAccountService extends IService<UserInfo> {
      * @param: UserInfoRegisterVo
      * @return: 返回是否注册成功
      */
-    boolean register(UserInfoRegisterVo registerVo);
+    void register(UserInfoRegisterVo registerVo);
 
 
 
