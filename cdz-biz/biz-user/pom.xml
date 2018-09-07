@@ -18,6 +18,14 @@
     <dependencies>
         <dependency>
             <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-sms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
             <artifactId>biz-model</artifactId>
         </dependency>
     </dependencies>

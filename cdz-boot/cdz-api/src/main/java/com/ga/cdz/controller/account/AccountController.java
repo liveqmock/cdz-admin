@@ -28,12 +28,23 @@ public class AccountController extends AbstractBaseController {
 
     /**
      * @author:luqi
+     * @description: 发送验证码
+     * @date:2018/9/7_13:36
+     * @param:
+     * @return:
+     */
+    @PostMapping("/register/send/sms")
+    public Result registerSendSms() {
+        return null;
+    }
+
+    /**
+     * @author:luqi
      * @description: 登陆
      * @date:2018/9/7_12:57
      * @param: UserInfoVo 传用户名与密码
      * @return:
      */
-
     @PostMapping("/login")
     public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoRegisterVo registerVo, BindingResult bindingResult) {
         return null;
