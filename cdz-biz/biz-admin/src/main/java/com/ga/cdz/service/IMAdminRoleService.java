@@ -39,7 +39,7 @@ public interface IMAdminRoleService extends IService<AdminRole> {
    * @param id :roleId
    * @return ：返回AdminRole实体
    */
-  AdminRole findAdminRoleById(Integer id);
+  AdminRole getAdminRoleById(Integer id);
 
   /**
    * @author huanghaohoa
@@ -48,7 +48,7 @@ public interface IMAdminRoleService extends IService<AdminRole> {
    * @param id
    * @return
    */
-  AdminRolePermDTO findAdminRolePermById(Integer id);
+  AdminRolePermDTO getAdminRolePermById(Integer id);
 
 
 }

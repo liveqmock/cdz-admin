@@ -69,18 +69,18 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
      */
 
     @Override
-    public AdminRole findAdminRoleById(Integer id) {
+    public AdminRole getAdminRoleById(Integer id) {
         return this.baseMapper.selectById(id);
     }
 
     /**
      * @author :huanghaohao
-     * @desc :首先这里的这个方法里面涉及的循环递归算法，我也说不清，但是我告诉你 这里是用于根据用户传递的 role_id 把查询到的数据，按照树状结构整理好 排序给前端使用
+     * @desc :但是我告诉你 这里是用于根据用户传递的 role_id 把查询到的数据，按照树状结构整理好 排序给前端使用
      * @date : 2018年9月6日 20点04分
      * @param id ：用户传递的roleId
      * @return :封装好的角色权限数据
      */
-    public  AdminRolePermDTO findAdminRolePermById(Integer id){
+    public  AdminRolePermDTO getAdminRolePermById(Integer id){
         //首先查询出，当前角色所拥有的权限
         List<AdminRolePermission> adminRolePermissionList=adminRolePermissionMapper.selectList(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId,id));      AdminRole adminRole=this.baseMapper.selectOne(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleId,id));
         //用于封装前端数据的 DTO
@@ -123,18 +123,21 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
                 AdminRolePermDTO childAdminRolePermDTO= new AdminRolePermDTO();
                 childAdminRolePermDTO.setPermId(list.get(i).getPermId());
                 childAdminRolePermDTO.setPermName(list.get(i).getPermName());
+                childAdminRolePermDTO.setRoleId(currentPermDTO.getRoleId());
+                childAdminRolePermDTO.setRoleName(currentPermDTO.getRoleName());
+                childAdminRolePermDTO.setPermParentId(currentPermDTO.getPermId());
                 for(int j=0;j<adminRolePermissionList.size();j++){
                     if(list.get(i).getPermId() == adminRolePermissionList.get(j).getPermId()){
                         childAdminRolePermDTO.setIsValid(true);
                     }
                 }
-                List list_t=currentPermDTO.getChild();
-                if(list_t==null){
-                    list_t=new LinkedList();
+                List listT=currentPermDTO.getChild();
+                if(listT==null){
+                    listT=new LinkedList();
                 }
-                list_t.add(childAdminRolePermDTO);
+                listT.add(childAdminRolePermDTO);
                 //把孩子权限挂靠到母权限的child 属性之下
-                currentPermDTO.setChild(list_t);
+                currentPermDTO.setChild(listT);
                 //递归孩子的子节点
                 sortPermDate(childAdminRolePermDTO,adminRolePermissionList);
             }
@@ -142,4 +145,7 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
             return ;
         }
     }
+
+
+
 }

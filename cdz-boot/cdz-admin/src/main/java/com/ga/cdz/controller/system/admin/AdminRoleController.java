@@ -8,7 +8,6 @@ import com.ga.cdz.domain.group.admin.IMAdminRoleGroup;
 import com.ga.cdz.domain.vo.base.AdminRoleVo;
 import com.ga.cdz.service.IMAdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +26,10 @@ import java.util.List;
 @RequestMapping("/roles")
 public class AdminRoleController extends AbstractBaseController {
   @Autowired
-  IMAdminRoleService imAdminRoleService;
-  @GetMapping("/")
+  IMAdminRoleService mAdminRoleService;
+  @GetMapping("/list")
   public Result getListAdminRole(){
-    List<AdminRole> list =imAdminRoleService.listAdminRole();
+    List<AdminRole> list =mAdminRoleService.listAdminRole();
       //如果查询结构不为空 返回正常
       return Result.success().data(list);
   }
@@ -46,7 +45,7 @@ public class AdminRoleController extends AbstractBaseController {
   public Result getRoleById(@RequestBody @Validated(value = IMAdminRoleGroup.Find.class)AdminRoleVo adminRoleVo , BindingResult bindingResult){
     checkParams(bindingResult);
     System.out.println(adminRoleVo.getRoleId());
-    AdminRole adminRole=imAdminRoleService.findAdminRoleById(adminRoleVo.getRoleId());
+    AdminRole adminRole=mAdminRoleService.getAdminRoleById(adminRoleVo.getRoleId());
     if(adminRole==null){
       return Result.fail().message("根据角色Id未查询到角色");
     }
@@ -56,7 +55,7 @@ public class AdminRoleController extends AbstractBaseController {
   @PostMapping("/permission/list")
   public Result findAdminRolePermiseListById(@RequestBody @Validated(value = IMAdminRoleGroup.Find.class)AdminRoleVo adminRoleVo , BindingResult bindingResult){
     checkParams(bindingResult);
-    AdminRolePermDTO adminRolePermDTO=imAdminRoleService.findAdminRolePermById(adminRoleVo.getRoleId());
+    AdminRolePermDTO adminRolePermDTO=mAdminRoleService.getAdminRolePermById(adminRoleVo.getRoleId());
     return Result.success().data(adminRolePermDTO);
   }
 
