@@ -170,4 +170,19 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
         adminRolePermissionMapper.delete(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId,adminRolePermVoList.get(0).getRoleId()));
         return adminRolePermissionMapper.insertBatch(list);
     }
+
+    @Override
+    public Boolean addAdminRole(AdminRoleVo adminRoleVo) {
+        AdminRole adminRole=new AdminRole();
+        BeanUtils.copyProperties(adminRoleVo,adminRole);
+        List<AdminRole> list=baseMapper.selectList(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleName,adminRole.getRoleName()));
+        if(list.size()>0){
+            return false;
+        }
+        int i = baseMapper.insert(adminRole);
+        if(i!=1){
+            return false;
+        }
+        return true;
+    }
 }
