@@ -13,12 +13,9 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
- * 地区信息表
- * </p>
- *
- * @author wanzhs
- * @since 2018-09-07
+ * @author:wanzhongsu
+ * @description: 地区信息表
+ * @date:2018/9/10 10:27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -42,7 +39,7 @@ public class District extends Model<District> {
      * 上一级区域code
      */
     @TableField("district_parent_code")
-    private String districtParentCode;
+    private Integer districtParentCode;
 
 
     @Override

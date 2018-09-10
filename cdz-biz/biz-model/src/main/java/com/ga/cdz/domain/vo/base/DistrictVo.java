@@ -9,6 +9,11 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author:wanzhongsu
+ * @description: 地区表vo
+ * @date:2018/9/10 9:39
+ */
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Accessors(chain = true)
@@ -25,6 +30,6 @@ public class DistrictVo {
     /**
      * 上一级区域code
      */
-    private String districtParentCode;
+    private Integer districtParentCode;
 
 }

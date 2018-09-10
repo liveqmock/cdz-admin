@@ -21,30 +21,34 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>
- * 地区信息表 前端控制器
- * </p>
- *
- * @author wanzhs
- * @since 2018-09-07
+ * @author:wanzhongsu
+ * @description: 区域管理控制层
+ * @date:2018/9/10 10:02
  */
 @RestController
 @RequestMapping("/district")
 public class DistrictController extends AbstractBaseController {
+    /**
+     * 区域管理服务
+     */
     @Resource
     private IMDistrictService mDistrictService;
 
+    /**
+     * @author:wanzhongsu
+     * @description: 根据上一级id获取区域信息
+     * @date: 2018/9/10 10:02
+     * @param: DistrVo
+     * @return: Result
+     */
     @PostMapping("/list")
     public Result getDistrictListByParentCode(@RequestBody @Validated DistrictVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        String parentCode;
+        int parentCode;
         if (!ObjectUtils.isEmpty(vo)) {
-            parentCode = String.valueOf(vo.getDistrictCode());
+            parentCode = vo.getDistrictCode();
         } else {
-            parentCode = "0";
-        }
-        if (parentCode == null || "".equals(parentCode)) {
-            parentCode = "0";
+            parentCode = 0;
         }
         List<District> districtList = mDistrictService.getListByParentId(parentCode);
         return Result.success().data(districtList);
