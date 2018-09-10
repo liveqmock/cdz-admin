@@ -45,6 +45,7 @@ public class ShiroConfig extends BaseShiroConfig {
         //暂时通过
       /*  list.add("/admin/**");*/
       list.add("/roles/**");
+      list.add("/member/**");
         return list;
     }
 }

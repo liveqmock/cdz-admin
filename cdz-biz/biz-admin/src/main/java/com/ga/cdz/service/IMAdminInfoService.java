@@ -3,6 +3,7 @@ package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ga.cdz.domain.dto.admin.AdminDemoDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -52,5 +53,9 @@ public interface IMAdminInfoService extends IService<AdminInfo> {
      boolean removeAdminInfoById(Integer id);
 
 
+     /***
+      *  测试关联分页查询
+      * */
+     IPage<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo);
 
 }

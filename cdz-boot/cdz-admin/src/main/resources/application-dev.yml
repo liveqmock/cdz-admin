@@ -1,5 +1,5 @@
 config:
-  base_path: .\logs\\cdz
+  base_path: D:\\cdz
 
 logback:
   logdir: ${config.base_path}\\logs\\cdz-admin

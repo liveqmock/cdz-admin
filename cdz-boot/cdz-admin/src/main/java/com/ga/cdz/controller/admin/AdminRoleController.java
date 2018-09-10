@@ -56,7 +56,7 @@ public class AdminRoleController extends AbstractBaseController {
   /**
    * @author :huanghaohao
    * @date 2018年9月7日 10点09分
-   * @desc 角色所有权限查询
+   * @desc -
    * @param adminRoleVo
    * @param bindingResult
    * @return

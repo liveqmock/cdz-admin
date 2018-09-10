@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/member/rank")
-public class MemberRank {
+public class MemberRankController {
 
 
 

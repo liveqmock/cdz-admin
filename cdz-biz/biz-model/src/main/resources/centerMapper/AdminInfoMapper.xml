@@ -14,6 +14,11 @@
         <result column="insert_dt" property="insertDt" />
     </resultMap>
 
+    <resultMap id="AdminDemoDTOMap" type="com.ga.cdz.domain.dto.admin.AdminDemoDTO">
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="perm_id" property="permId" jdbcType="INTEGER"/>
+    </resultMap>
+
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -31,5 +36,15 @@
         WHERE
         a.admin_id =#{adminId,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAdminDemoDTOPage"  resultMap="AdminDemoDTOMap">
+        SELECT
+        role_name AS roleName,
+        perm_id AS permId
+        FROM
+        t_admin_role AS a
+        LEFT JOIN t_admin_role_permission AS b ON a.role_id=b.role_id
+    </select>
+
 
 </mapper>

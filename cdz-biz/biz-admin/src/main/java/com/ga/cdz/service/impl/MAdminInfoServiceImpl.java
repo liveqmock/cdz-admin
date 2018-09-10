@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.dto.admin.AdminDemoDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.entity.AdminRolePermission;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
@@ -121,4 +122,9 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper,AdminInfo
         return  removeById(id);
     }
 
+    @Override
+    public IPage<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo) {
+        IPage<AdminDemoDTO>  page=new Page<>(pageVo.getIndex(),pageVo.getSize());
+        return page.setRecords(baseMapper.selectAdminDemoDTOPage());
+    }
 }

@@ -28,5 +28,18 @@ public interface IMUserInfoGroup {
      * @date:2018/9/5_11:55
      */
     interface GetListByCon{}
+
+    /**
+     * @author huanghaohao
+     * @date 2018年9月9日 23点09分
+     * @desc 更新user会员状态
+     */
+    interface  updateMemSate{}
+
+    /**
+     * @author huanghaohao
+     * @date 2018年9月9日 23点10分
+     */
+    interface updateMemCardStat{}
     
 }

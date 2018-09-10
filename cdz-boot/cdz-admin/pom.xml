@@ -34,6 +34,11 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-system</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-user</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -18,10 +18,93 @@
         <result column="insert_dt" property="insertDt" />
     </resultMap>
 
+
+    <resultMap id="userMemberResultBase" type="com.ga.cdz.domain.dto.admin.UserMemberDTO">
+        <id column="user_id" property="userId" />
+        <result column="user_type" property="userType"></result>
+        <result column="user_real_name" property="userRealName"></result>
+        <result column="user_tel" property="userTel"></result>
+        <result column="user_nick_name" property="userNickName"></result>
+        <result column="user_sex" property="userSex"></result>
+        <result column="province" property="province"></result>
+        <result column="city" property="city"></result>
+        <result column="country" property="country"></result>
+        <result column="user_state" property="userState"></result>
+        <result column="insert_dt" property="insertDt"></result>
+        <result column="used_price" property="usedPrice"></result>
+        <result column="card_score" property="cardScore"></result>
+        <result column="car_num" property="carNum"></result>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         user_id, user_type, user_real_name, user_name, user_pwd, user_tel, user_nick_name, user_sex, province, city,
         country,user_state, insert_dt
     </sql>
+
+    <select id="getUserMemberListPage"  resultMap="userMemberResultBase">
+    SELECT
+    u.user_id,
+    u.user_type,
+    u.user_real_name,
+    u.user_tel,
+    u.user_nick_name,
+    u.user_sex,
+    u.province,
+    u.city,
+    u.country,
+    u.user_state,
+    u.insert_dt,
+    c.used_price,
+    c.card_score,
+    d.car_num
+    FROM
+    t_user_info u
+    LEFT JOIN t_user_card c ON u.user_id = c.user_id
+    LEFT JOIN (
+    SELECT
+    a.user_id,
+    count( * ) car_num
+    FROM
+    t_user_info a
+    LEFT JOIN t_user_cars b ON a.user_id = b.user_id
+    GROUP BY
+    a.user_id
+    ) d ON u.user_id = d.user_id
+    where 1=1 and u.user_type=1
+</select>
+
+    <select id="getCompanyMemberListPage"  resultMap="userMemberResultBase">
+        SELECT
+        u.user_id,
+        u.user_type,
+        u.user_real_name,
+        u.user_tel,
+        u.user_nick_name,
+        u.user_sex,
+        u.province,
+        u.city,
+        u.country,
+        u.user_state,
+        u.insert_dt,
+        c.used_price,
+        c.card_score,
+        d.car_num
+        FROM
+        t_user_info u
+        LEFT JOIN t_user_card c ON u.user_id = c.user_id
+        LEFT JOIN (
+        SELECT
+        a.user_id,
+        count( * ) car_num
+        FROM
+        t_user_info a
+        LEFT JOIN t_user_cars b ON a.user_id = b.user_id
+        GROUP BY
+        a.user_id
+        ) d ON u.user_id = d.user_id
+        where 1=1 and u.user_type=2
+    </select>
+
 
 </mapper>
