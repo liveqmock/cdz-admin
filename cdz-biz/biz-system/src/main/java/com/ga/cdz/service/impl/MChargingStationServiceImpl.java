@@ -13,6 +13,7 @@ import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -42,6 +43,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
+    @Transactional
     public boolean updateStationById(ChargingStationVo vo) {
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
@@ -56,6 +58,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
+    @Transactional
     public boolean deleteStationById(ChargingStationVo vo) {
         //根据传入的id判断该充电站是否存在
         ChargingStation hasAccount = getById(vo.getStationId());
@@ -70,6 +73,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
+    @Transactional
     public boolean saveStation(ChargingStationVo vo) {
         //属性复制
         ChargingStation chargingStation = new ChargingStation();
