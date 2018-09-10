@@ -24,6 +24,14 @@ public interface IUserInfoGroup {
     }
 
     /**
+     * @author: liuyi
+     * @description: 找回密码规则组
+     * @date: 2018/9/8_16:19
+     */
+    interface Retriever {
+    }
+
+    /**
      * @author:luqi
      * @description: 登陆规则组
      * @date:2018/9/5_11:49

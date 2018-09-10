@@ -8,6 +8,7 @@ import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
+import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.service.IAccountService;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class AccountController extends AbstractBaseController {
      * @description: 发送验证码
      * @date:2018/9/7_13:36
      * @param: UserInfoSendSmsVo 传手机号
+     * @return: Result
      */
     @PostMapping("/register/send/sms")
     public Result registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
@@ -55,6 +57,35 @@ public class AccountController extends AbstractBaseController {
         checkParams(bindingResult);
         accountService.register(registerVo);
         return Result.success().message("注册成功");
+    }
+
+    /**
+     * @author: liuyi
+     * @description:
+     * @date: 2018/9/8_16:34
+     * @param: retrieverVo 找回密码的Vo对象
+     * @param: bindingResult 验证对象
+     * @return: Result
+     */
+    @PostMapping("/retriever")
+    public Result result(@RequestBody @Validated({IUserInfoGroup.Retriever.class})UserInfoRetrieverVo retrieverVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.retriever(retrieverVo);
+        return Result.success().message("找回密码成功");
+    }
+
+    /**
+     * @author: liuyi
+     * @description: 找回密码发送验证码
+     * @date: 2018/9/7_17:43
+     * @param: UserInfoSendSmsVo 传手机号
+     * @return: Result
+     */
+    @PostMapping("/retrieve/send/sms")
+    public Result retrieveSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.retrieveSendSms(userInfoSendSmsVo);
+        return Result.success().message("发送成功");
     }
 
     /**
