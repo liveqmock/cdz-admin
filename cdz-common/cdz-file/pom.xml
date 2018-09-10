@@ -3,25 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cdz</artifactId>
+        <artifactId>cdz-common</artifactId>
         <groupId>com.ga.cdz</groupId>
         <version>1.0</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <name>cdz-common</name>
+    <name>cdz-file</name>
     <groupId>com.ga.cdz</groupId>
-    <artifactId>cdz-common</artifactId>
+    <artifactId>cdz-file</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>cdz-db</module>
-        <module>cdz-util</module>
-        <module>cdz-shiro</module>
-        <module>cdz-redis</module>
-        <module>cdz-constant</module>
-        <module>cdz-sms</module>
-        <module>cdz-file</module>
-    </modules>
 </project>

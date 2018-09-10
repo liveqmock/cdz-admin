@@ -21,6 +21,10 @@ spring:
              max-wait: -1ms
              max-idle: 500
              min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 20Mb
+      max-request-size: 20Mb
 
 #多数据源配置
 mysql:
