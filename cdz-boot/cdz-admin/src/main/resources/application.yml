@@ -54,3 +54,10 @@ mysql:
       maxIdleTime: 60
       testQuery: select 1
 
+sms:
+    id: LTAIWsKjeek9LEWo
+    secret: l7QBI83XV18P6GFnrGFfTGSxpvPT8R
+    signName: 贵安行
+    templateCode: SMS_142946785
+    #短信有效时间 5分钟=300秒
+    timeout: 300
