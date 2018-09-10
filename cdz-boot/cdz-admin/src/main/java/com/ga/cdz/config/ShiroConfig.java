@@ -46,7 +46,8 @@ public class ShiroConfig extends BaseShiroConfig {
         list.add("/operator/**");
         list.add("/sttpe/**");
         list.add("/chargingtype/**");
-        list.add("/chargingShop/**");
+        list.add("/chargingshop/**");
+        list.add("/chargingstation/**");
         //暂时通过
         /*  list.add("/admin/**");*/
         list.add("/roles/**");

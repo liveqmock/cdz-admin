@@ -1,15 +1,16 @@
 package com.ga.cdz.domain.group.admin;
 
+
 /**
  * @author:wanzhongsu
- * @description: 商户管理后台验证组
- * @date:2018/9/10 15:25
+ * @description: 充电站列表后台验证组
+ * @date:2018/9/10 15:27
  */
-public interface IMChargingShopGroup {
+public interface IMChargingStationGroup {
     /**
      * @author:wanzhongsu
      * @description: 添加验证
-     * @date:2018/9/10 15:25
+     * @date:2018/9/10 15:27
      */
     interface add {
     }
@@ -19,7 +20,7 @@ public interface IMChargingShopGroup {
     /**
      * @author:wanzhongsu
      * @description: 删除验证
-     * @date:2018/9/10 15:26
+     * @date:2018/9/10 15:27
      */
     interface delete {
     }
@@ -29,7 +30,7 @@ public interface IMChargingShopGroup {
     /**
      * @author:wanzhongsu
      * @description: 修改验证
-     * @date:2018/9/10 15:26
+     * @date:2018/9/10 15:27
      */
     interface update {
     }

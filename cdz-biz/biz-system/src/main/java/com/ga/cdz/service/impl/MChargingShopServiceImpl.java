@@ -48,6 +48,7 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
     public boolean updateShopById(ChargingShopVo vo) {
         ChargingShop chargingShop = new ChargingShop();
         BeanUtils.copyProperties(vo, chargingShop);
+        chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
         boolean result = updateById(chargingShop);
         return result;
     }
@@ -84,7 +85,8 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
             updateById(hasName);
             return true;
         }
-        //保存商户
+        //保存商户，初始化状态为正常
+        chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
         boolean result = save(chargingShop);
         return result;
     }

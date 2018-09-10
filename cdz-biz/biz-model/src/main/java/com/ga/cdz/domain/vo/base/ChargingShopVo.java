@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.constant.RegexConstant;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.group.admin.IMChargingShopGroup;
+import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,7 +28,7 @@ public class ChargingShopVo {
     /**
      * 商户ID
      */
-    @NotNull(groups = {IMChargingShopGroup.delete.class}, message = "商户ID不能为空")
+    @NotNull(groups = {IMChargingShopGroup.delete.class, IMChargingStationGroup.update.class}, message = "商户ID不能为空")
     private Integer shopId;
     /**
      * 商户编码

@@ -25,7 +25,7 @@ import javax.annotation.Resource;
  * @date:2018/9/10 9:57
  */
 @RestController
-@RequestMapping("/chargingShop")
+@RequestMapping("/chargingshop")
 public class ChargingShopController extends AbstractBaseController {
     @Resource
     IMChargingShopService mChargingShopService;

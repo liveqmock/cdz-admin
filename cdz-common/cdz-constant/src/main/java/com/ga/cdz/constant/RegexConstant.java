@@ -20,4 +20,8 @@ public class RegexConstant {
      * 商户编码验证
      */
     public final static String SHOP_CODE = "^[5]\\d{4}$";
+    /**
+     * 充电站编码
+     */
+    public final static String STATION_CODE="^\\d{4}$";
 }
