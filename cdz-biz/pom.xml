@@ -19,5 +19,6 @@
         <module>biz-admin</module>
         <module>biz-model</module>
         <module>biz-system</module>
+        <module>biz-message</module>
     </modules>
 </project>
