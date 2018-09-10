@@ -20,19 +20,18 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
    * @author huanghaohao
    * @desc 分页查询 会员用户信息
    * @date 2018年9月7日 18点05分
-   * @param pageVo
    * @return
    */
-    List<UserMemberDTO> getUserMemberListPage(PageVo<UserMemberDTO> pageVo);
+    List<UserMemberDTO> getUserMemberListPage( );
 
   /**
    * @author huanghaohao
    * @date 2018年9月9日 22点31分
    * @desc 分页查询企业会员列表
-   * @param pageVo
+   * @param
    * @return
    */
-  List<UserMemberDTO> getCompanyMemberListPage(PageVo<UserMemberDTO> pageVo);
+  List<UserMemberDTO> getCompanyMemberListPage();
 
 
 }

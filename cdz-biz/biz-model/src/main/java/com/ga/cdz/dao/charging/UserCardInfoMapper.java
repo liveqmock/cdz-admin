@@ -18,8 +18,7 @@ public interface UserCardInfoMapper extends BaseMapper<UserCardInfo> {
    * @author huanghaohao
    * @date 2018-09-09 23:07
    * @desc 查询会员卡信息
-   * @param pageVo
    * @return
    */
-  List<UserMemberCardInfoDTO> getMemberCardInfoListByPage(PageVo<UserMemberCardInfoVo> pageVo);
+  List<UserMemberCardInfoDTO> getMemberCardInfoListByPage();
 }

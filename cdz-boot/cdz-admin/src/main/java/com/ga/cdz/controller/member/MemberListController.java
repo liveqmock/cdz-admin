@@ -1,5 +1,6 @@
 package com.ga.cdz.controller.member;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
@@ -34,9 +35,9 @@ public class MemberListController extends AbstractBaseController {
    * @return
    */
   @PostMapping("/company/list")
-  public Result getCompanyMemListByPage(@RequestBody @Validated PageVo<UserMemberDTO> pageVo , BindingResult bindingResult){
+  public Result getCompanyMemListByPage(@RequestBody @Validated PageVo<UserInfoVo> pageVo , BindingResult bindingResult){
     checkParams(bindingResult);
-    List<UserMemberDTO> list=mAdminUserService.getUserMemberListPage(pageVo);
+    IPage<UserMemberDTO> list=mAdminUserService.getUserMemberListPage(pageVo);
     return Result.success().data(list);
   }
 
@@ -49,9 +50,9 @@ public class MemberListController extends AbstractBaseController {
    * @return
    */
   @PostMapping("/user/list")
-  public Result getUserMemListByPage(@RequestBody @Validated PageVo<UserMemberDTO> pageVo , BindingResult bindingResult){
+  public Result getUserMemListByPage(@RequestBody @Validated PageVo<UserInfoVo> pageVo , BindingResult bindingResult){
     checkParams(bindingResult);
-    List<UserMemberDTO> list=mAdminUserService.getUserMemberListPage(pageVo);
+    IPage<UserMemberDTO> list=mAdminUserService.getUserMemberListPage(pageVo);
     return Result.success().data(list);
   }
 

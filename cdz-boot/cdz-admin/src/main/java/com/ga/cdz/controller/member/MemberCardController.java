@@ -1,5 +1,6 @@
 package com.ga.cdz.controller.member;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
@@ -37,8 +38,8 @@ public class MemberCardController extends AbstractBaseController {
 
   @PostMapping("/list")
   public Result getMemberCardListByPage(@RequestBody @Validated PageVo< UserMemberCardInfoVo> pageVo , BindingResult bindingResult){
-    List<UserMemberCardInfoDTO> list=mAdminUserCardInfoService.getMemberCardListPage(pageVo);
-    return Result.success().data(list);
+    IPage<UserMemberCardInfoDTO> page=mAdminUserCardInfoService.getMemberCardListPage(pageVo);
+    return Result.success().data(page);
   }
 
   /**

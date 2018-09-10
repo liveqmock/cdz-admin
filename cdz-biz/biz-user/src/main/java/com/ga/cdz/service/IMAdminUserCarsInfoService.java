@@ -1,5 +1,6 @@
 package com.ga.cdz.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.entity.UserCarsInfo;
@@ -22,5 +23,5 @@ public interface IMAdminUserCarsInfoService extends IService<UserCarsInfo> {
    * @param pageVo
    * @return
    */
-    List<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo> pageVo);
+   IPage<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo> pageVo);
 }

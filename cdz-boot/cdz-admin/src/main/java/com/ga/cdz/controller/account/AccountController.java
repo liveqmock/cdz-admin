@@ -26,7 +26,6 @@ public class AccountController extends AbstractBaseController {
 
     @Resource
     IMAccountService mAccountService;
-
     /**
      * @author:luqi
      * @description: 添加管理员

@@ -1,5 +1,7 @@
 package com.ga.cdz.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserCardInfoMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
@@ -7,6 +9,7 @@ import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
 import com.ga.cdz.service.IMAdminUserCardInfoService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +34,6 @@ public class MAdminUserCardInfoServiceImpl extends ServiceImpl<UserCardInfoMappe
     userCardInfo.setCardId(userMemberCardInfoVo.getCardId());
     userCardInfo.setCardState(userMemberCardInfoVo.getCardState());
     return this.baseMapper.updateById(userCardInfo);
-//    return false;
   }
 
   /**
@@ -41,8 +43,10 @@ public class MAdminUserCardInfoServiceImpl extends ServiceImpl<UserCardInfoMappe
    * @param pageVo
    * @return
    */
-  public List<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
-    return this.baseMapper.getMemberCardInfoListByPage(pageVo);
+  public IPage<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
+    IPage<UserMemberCardInfoDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
+    return page.setRecords(this.baseMapper.getMemberCardInfoListByPage());
+
   }
 
 }

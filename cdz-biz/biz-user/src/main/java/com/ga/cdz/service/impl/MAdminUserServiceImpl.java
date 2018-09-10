@@ -1,18 +1,17 @@
 package com.ga.cdz.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserInfoMapper;
-import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.domain.vo.base.UserInfoVo;
-import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
 import com.ga.cdz.service.IMAdminUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
  * @author huanghaohao
@@ -29,8 +28,9 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
    * @return
    */
   @Override
-  public List<UserMemberDTO> getCompanyMemberListPage(PageVo<UserMemberDTO> pageVo) {
-    return this.baseMapper.getCompanyMemberListPage(pageVo);
+  public IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo) {
+    IPage<UserMemberDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
+    return page.setRecords(this.baseMapper.getCompanyMemberListPage());
   }
 
   /**
@@ -41,8 +41,9 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
    * @return
    */
   @Override
-  public List<UserMemberDTO> getUserMemberListPage(PageVo<UserMemberDTO> pageVo) {
-    return this.baseMapper.getUserMemberListPage(pageVo);
+  public IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo) {
+    IPage<UserMemberDTO> page = new Page<>(pageVo.getIndex(),pageVo.getSize());
+   return  page.setRecords(this.baseMapper.getUserMemberListPage());
   }
 
   /**

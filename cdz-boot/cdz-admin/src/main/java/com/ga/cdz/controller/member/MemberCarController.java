@@ -1,5 +1,6 @@
 package com.ga.cdz.controller.member;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
@@ -38,8 +39,8 @@ public class MemberCarController extends AbstractBaseController {
   @PostMapping("/list")
   public Result getCarListPage(@RequestBody @Validated PageVo<UserMemberCarsInfoVo> pageVo, BindingResult bindingResult){
     checkParams(bindingResult);
-    List<UserMemberCarsInfoDTO> list = mAdminUserCarsInfoService.getUserCarsListPage(pageVo);
-    return Result.success().data(list);
+    IPage<UserMemberCarsInfoDTO> page = mAdminUserCarsInfoService.getUserCarsListPage(pageVo);
+    return Result.success().data(page);
   }
 
 

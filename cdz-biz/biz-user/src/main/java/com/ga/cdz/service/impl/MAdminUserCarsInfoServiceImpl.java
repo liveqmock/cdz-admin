@@ -1,5 +1,7 @@
 package com.ga.cdz.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserCarsInfoMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
@@ -25,7 +27,8 @@ public class MAdminUserCarsInfoServiceImpl extends ServiceImpl<UserCarsInfoMappe
    * @param pageVo
    * @return
    */
-  public List<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo>pageVo){
-    return this.baseMapper.getUserCarListPage();
+  public IPage<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo>pageVo){
+    IPage<UserMemberCarsInfoDTO> page=new Page<>(pageVo.getIndex(),pageVo.getSize());
+    return page.setRecords(this.baseMapper.getUserCarListPage());
   }
 }

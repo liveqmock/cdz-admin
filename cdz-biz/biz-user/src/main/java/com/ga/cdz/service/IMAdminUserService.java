@@ -1,5 +1,6 @@
 package com.ga.cdz.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
@@ -23,7 +24,7 @@ public interface IMAdminUserService extends IService<UserInfo> {
    * @param pageVo
    * @return
    */
-    List<UserMemberDTO> getUserMemberListPage(PageVo<UserMemberDTO> pageVo);
+   IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo);
 
   /**
    * @author huanghaohao
@@ -32,7 +33,7 @@ public interface IMAdminUserService extends IService<UserInfo> {
    * @param pageVo
    * @return
    */
-    List<UserMemberDTO> getCompanyMemberListPage(PageVo<UserMemberDTO> pageVo);
+    IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo);
   /**
    * @author huanghaohao
    * @date 2018年9月9日 22点16分
