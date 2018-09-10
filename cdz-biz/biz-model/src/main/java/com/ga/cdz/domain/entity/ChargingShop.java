@@ -58,6 +58,11 @@ public class ChargingShop extends Model<ChargingShop> {
     @TableField("shop_tel")
     private String shopTel;
     /**
+     * 登录密码
+     */
+    @TableField("shop_pwd")
+    private String shopPwd;
+    /**
      * 商户状态 0 删除 1 正常
      */
     @TableField("shop_state")
