@@ -22,8 +22,9 @@ public class DistrictService extends ServiceImpl<DistrictMapper, District> imple
     private DistrictMapper districtMapper;
 
     @Override
-    public List<District> getListByParentId(int par_id) {
-        List<District> districts = districtMapper.selectList(new QueryWrapper<District>().lambda().eq(District::getDistrictParentCode, par_id));
+    public List<District> getListAllCity() {
+        List<District> districts = districtMapper.selectList(new QueryWrapper<District>().lambda().eq(District::getDistrictLevel, District.DistrictLevel.SHI));
+
         return districts;
     }
 }

@@ -13,10 +13,9 @@ import java.util.List;
 public interface IDistrictService extends IService<District> {
     /**
      * @author: liuyi
-     * @description: 根据上级区域获取数据
+     * @description: 得到所有的市级地区
      * @date: 2018/9/10_11:07
-     * @param: String 父区域id
-     * @return: 返回该上级区域包含的list
+     * @return: 返回包含所有市级地区的list
      */
-    List<District> getListByParentId(int par_id);
+    List<District> getListAllCity();
 }

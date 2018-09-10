@@ -3,14 +3,13 @@ package com.ga.cdz.controller.district;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.entity.District;
-import com.ga.cdz.domain.vo.base.DistrictVo;
 import com.ga.cdz.service.IDistrictService;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -33,15 +32,9 @@ public class DistrictController extends AbstractBaseController {
      * @return: 返回该上级区域包含的list
      */
     @PostMapping("/list")
-    public Result getDistrictListByParentCode(@RequestBody @Validated DistrictVo districtVo, BindingResult bindingResult) {
-        checkParams(bindingResult);
-        int parentCode;
-        if (!ObjectUtils.isEmpty(districtVo)) {
-            parentCode = districtVo.getDistrictParentCode();
-        } else {
-            parentCode = 0;
-        }
-        List<District> districtList = iDistrictService.getListByParentId(parentCode);
+    public Result getDistrictListByParentCode() {
+        List<District> districtList = iDistrictService.getListAllCity();
+        Collections.sort(districtList, Comparator.comparing(District::getDistrictCode));
         return Result.success().data(districtList);
     }
 }
