@@ -3,6 +3,7 @@ package com.ga.cdz.domain.vo.base;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.ga.cdz.domain.entity.District;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -31,5 +32,9 @@ public class DistrictVo {
      * 上一级区域code
      */
     private Integer districtParentCode;
+    /**
+     * 区域等级
+     */
+    private District.DistrictLevel districtLevel;
 
 }

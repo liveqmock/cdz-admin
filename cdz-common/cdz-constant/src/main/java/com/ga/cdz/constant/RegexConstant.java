@@ -16,4 +16,8 @@ public class RegexConstant {
      * 运营商编码验证
      */
     public final static String REGEX_CODE = "^\\d{2}$";
+    /**
+     * 商户编码验证
+     */
+    public final static String SHOP_CODE = "^[5]\\d{4}$";
 }

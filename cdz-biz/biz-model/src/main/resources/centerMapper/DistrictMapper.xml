@@ -7,6 +7,7 @@
         <id column="district_code" property="districtCode"/>
         <result column="district_name" property="districtName"/>
         <result column="district_parent_code" property="districtParentCode"/>
+        <result column="district_level" property="districtLevel"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
