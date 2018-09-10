@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 public class AccountController extends AbstractBaseController {
 
     @Resource
-    IMAccountService accountService;
+    IMAccountService mAccountService;
 
     /**
      * @author:luqi
@@ -37,7 +37,7 @@ public class AccountController extends AbstractBaseController {
     @PostMapping("/login")
     public Result login(@RequestBody @Validated({IMAdminInfoGroup.Login.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        AdminLoginDTO adminLoginDTO = accountService.login(adminInfoVo);
+        AdminLoginDTO adminLoginDTO = mAccountService.login(adminInfoVo);
         return Result.success().message("登录成功").data(adminLoginDTO);
     }
 
