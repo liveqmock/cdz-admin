@@ -54,10 +54,10 @@ public class District extends Model<District> {
 
 
     public enum DistrictLevel implements IEnum<Integer> {
-        Sheng(0, "省"),
-        Shi(1, "市"),
-        Qu(3, "县"),
-        Zhen(4, "镇");
+        SHENG(0, "省"),
+        SHI(1, "市"),
+        QU(3, "县"),
+        ZHEN(4, "镇");
 
         private int value;
         private String desc;

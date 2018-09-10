@@ -7,6 +7,7 @@
         <id column="operators_id" property="operatorsId"/>
         <result column="operators_name" property="operatorsName"/>
         <result column="operators_code" property="operatorsCode"/>
+        <result column="operators_state" property="operatorsState"/>
         <result column="insert_dt" property="insertDt"/>
     </resultMap>
 

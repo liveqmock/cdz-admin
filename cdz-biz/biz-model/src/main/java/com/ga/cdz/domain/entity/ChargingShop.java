@@ -2,6 +2,7 @@ package com.ga.cdz.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
@@ -11,17 +12,17 @@ import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * <p>
- *
- * </p>
- *
- * @author wanzhs
- * @since 2018-09-07
+ * @author:wanzhongsu
+ * @description: 商户管理表
+ * @date:2018/9/10 10:26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -56,17 +57,24 @@ public class ChargingShop extends Model<ChargingShop> {
      */
     @TableField("shop_tel")
     private String shopTel;
+    /**
+     * 商户状态 0 删除 1 正常
+     */
     @TableField("shop_state")
-    private Boolean shopState;
+    private ShopState shopState;
     /**
      * 更新时间
      */
     @TableField("update_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateDt;
     /**
      * 插入时间
      */
     @TableField("insert_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime insertDt;
 
 
@@ -75,4 +83,27 @@ public class ChargingShop extends Model<ChargingShop> {
         return this.shopId;
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 商户状态枚举
+     * @date:2018/9/10 12:48
+     */
+    public enum ShopState implements IEnum<Integer> {
+        DELETE(0, "删除"),
+        NORMAL(1, "正常");
+
+        private String desc;
+        private int value;
+
+        ShopState(int value, String desc) {
+            this.desc = desc;
+            this.value = value;
+        }
+
+        @JsonValue
+        @Override
+        public Integer getValue() {
+            return this.value;
+        }
+    }
 }

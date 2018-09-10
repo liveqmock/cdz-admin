@@ -16,12 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author:wanzhongsu
+ * @description: 充电站运营类型控制层
+ * @date:2018/9/10 10:09
+ */
 @RestController
 @RequestMapping("/sttpe")
 public class SttpeController extends AbstractBaseController {
+    /**
+     * 充电站运营类型服务
+     */
     @Resource
     IMChargingStationTypeService mChargingStationTypeService;
 
+    /**
+     * @author:wanzhongsu
+     * @description: 保存充电站运营类型
+     * @date: 2018/9/10 10:09
+     * @param: ChargingStationTypeVo
+     * @return: Result
+     */
     @PostMapping("/save")
     public Result saveStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.add.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -32,6 +47,13 @@ public class SttpeController extends AbstractBaseController {
         return Result.fail().message("保存失败");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 充电站运营类型删除
+     * @date: 2018/9/10 10:10
+     * @param: ChargingStationTypeVo
+     * @return: Result
+     */
     @PostMapping("/delete")
     public Result deleteStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.delete.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -42,6 +64,13 @@ public class SttpeController extends AbstractBaseController {
         return Result.fail().message("删除失败");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 获取充电站运营类型列表
+     * @date: 2018/9/10 10:10
+     * @param:
+     * @return: Result
+     */
     @PostMapping("/list")
     public Result listStpe() {
         List<ChargingStationType> list = mChargingStationTypeService.getCSTList();

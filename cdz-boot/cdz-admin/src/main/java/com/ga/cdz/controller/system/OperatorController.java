@@ -17,18 +17,40 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author:wanzhongsu
+ * @description: 运营商信息控制层
+ * @date:2018/9/10 10:04
+ */
 @RestController
 @RequestMapping("/operator")
 public class OperatorController extends AbstractBaseController {
+    /**
+     * 运营商信息服务
+     */
     @Resource
     IMOperatorsService mOperatorsService;
 
+    /**
+     * @author:wanzhongsu
+     * @description: 获取运营商信息列表
+     * @date: 2018/9/10 10:04
+     * @param:
+     * @return: Result
+     */
     @PostMapping("/list")
     public Result getOperatorList() {
         List<Operators> operators = mOperatorsService.getOperatorList();
         return Result.success().data(operators);
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 保存运营商信息
+     * @date: 2018/9/10 10:05
+     * @param: OperatorsVo
+     * @return: Result
+     */
     @PostMapping("/save")
     public Result saveOperators(@RequestBody @Validated(value = {IMOperatorsGroup.insert.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -39,6 +61,13 @@ public class OperatorController extends AbstractBaseController {
         return Result.fail().message("保存失败");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 删除运营商信息
+     * @date: 2018/9/10 10:05
+     * @param: OperatorsVo
+     * @return: Result
+     */
     @PostMapping("/delete")
     public Result delete(@RequestBody @Validated(value = {IMOperatorsGroup.delete.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -49,6 +78,13 @@ public class OperatorController extends AbstractBaseController {
         return Result.fail().message("删除失败");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 获取运营商下一个编码
+     * @date: 2018/9/10 10:06
+     * @param:
+     * @return: Result
+     */
     @PostMapping("/nextCode")
     public Result nextCode() {
         String nextCode = mOperatorsService.nextOperatorCode();

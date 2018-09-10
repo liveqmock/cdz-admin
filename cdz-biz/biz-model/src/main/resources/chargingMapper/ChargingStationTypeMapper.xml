@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingStationType">
         <id column="sttpe_id" property="sttpeId"/>
         <result column="sttpe_name" property="sttpeName"/>
+        <result column="sttpe_state" property="sttpeState"/>
         <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
