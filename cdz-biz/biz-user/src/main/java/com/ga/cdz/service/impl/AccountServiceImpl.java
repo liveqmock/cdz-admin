@@ -146,7 +146,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         /**去数据库验证电话是否被注册*/
         UserInfo hasUserTel = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
         if (ObjectUtils.isEmpty(hasUserTel)) {
-            throw new BusinessException("电话未被注册");
+            throw new BusinessException("该电话不存在");
         }
         /**把用户上传的密码md5加密**/
         String md5Pwd = mUtil.MD5(retrieverVo.getUserPwd());
@@ -156,7 +156,6 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         if (isSuccess == 0) {
             throw new BusinessException("找回密码失败，稍后重试");
         }
-
         /**找回成功后删除redis的短信键值对**/
         mRedisUtil.remove(smsRedisKey);
     }
