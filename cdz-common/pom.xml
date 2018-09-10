@@ -22,5 +22,6 @@
         <module>cdz-redis</module>
         <module>cdz-constant</module>
         <module>cdz-sms</module>
+        <module>cdz-file</module>
     </modules>
 </project>

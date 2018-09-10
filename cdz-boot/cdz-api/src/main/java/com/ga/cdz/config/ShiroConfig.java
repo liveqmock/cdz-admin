@@ -42,6 +42,7 @@ public class ShiroConfig extends BaseShiroConfig {
         List<String> list = new ArrayList<>();
         //认证相关的接口不需要过滤
         list.add("/account/**");
+        list.add("/district/**");
         return list;
     }
 }

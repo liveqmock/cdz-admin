@@ -1,6 +1,5 @@
 package com.ga.cdz.domain.vo.base;
 
-import com.ga.cdz.constant.RegexConstant;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.group.admin.IMUserInfoGroup;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;

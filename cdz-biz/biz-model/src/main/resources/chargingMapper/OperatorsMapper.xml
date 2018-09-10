@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.OperatorsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.Operators">
+        <id column="operators_id" property="operatorsId"/>
+        <result column="operators_name" property="operatorsName"/>
+        <result column="operators_code" property="operatorsCode"/>
+        <result column="operators_state" property="operatorsState"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        operators_id, operators_name, operators_code, insert_dt
+    </sql>
+
+</mapper>

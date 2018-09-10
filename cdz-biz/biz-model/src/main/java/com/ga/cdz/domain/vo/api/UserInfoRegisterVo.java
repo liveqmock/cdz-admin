@@ -19,13 +19,14 @@ import javax.validation.constraints.Size;
 @Data
 @Accessors(chain = true)
 public class UserInfoRegisterVo {
+
     /**
-     * 登录的用户名
+     * 电话
      */
-    @NotBlank(groups = {IUserInfoGroup.Register.class}, message = "用户名不能为空")
-    @Pattern(regexp = RegexConstant.REGEX_USERNAME_PASSWORD,
-            groups = {IUserInfoGroup.Register.class}, message = "用户名为大小写字母，数字与下划线组合，6~12位")
-    private String userName;
+    @NotBlank(groups = {IUserInfoGroup.Register.class}, message = "电话不能为空")
+    @Pattern(regexp = RegexConstant.REGEX_PHONE,
+            groups = {IUserInfoGroup.Register.class}, message = "电话格式不对")
+    private String userTel;
 
     /**
      * 密码
@@ -35,13 +36,6 @@ public class UserInfoRegisterVo {
             groups = {IUserInfoGroup.Register.class}, message = "密码为大小写字母，数字与下划线组合，6~12位")
     private String userPwd;
 
-    /**
-     * 电话
-     */
-    @NotBlank(groups = {IUserInfoGroup.Register.class}, message = "电话不能为空")
-    @Pattern(regexp = RegexConstant.REGEX_PHONE,
-            groups = {IUserInfoGroup.Register.class}, message = "电话格式不对")
-    private String userTel;
 
     /**
      * 性别 0 女 1男

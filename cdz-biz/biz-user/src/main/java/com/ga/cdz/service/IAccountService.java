@@ -5,8 +5,8 @@ import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
+import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
-import com.ga.cdz.domain.vo.base.UserInfoVo;
 
 /**
  * @author:luqi
@@ -20,10 +20,16 @@ public interface IAccountService extends IService<UserInfo> {
      * @description: 注册发送验证码
      * @date:2018/9/7_13:25
      * @param: 发送验证码Vo
-     * @return: 是否发送成功
      */
     void registerSendSms(UserInfoSendSmsVo userInfoSendSmsVo);
 
+    /**
+     * @author: liuyi
+     * @description: 找回密码发送验证码
+     * @date: 2018/9/7_16:39
+     * @param: 发送验证码Vo
+     */
+    void retrieveSendSms(UserInfoSendSmsVo userInfoSendSmsVo);
 
     /**
      * @author:luqi
@@ -34,7 +40,13 @@ public interface IAccountService extends IService<UserInfo> {
      */
     void register(UserInfoRegisterVo registerVo);
 
-
+    /**
+     * @author: liuyi
+     * @description: 找回密码
+     * @date: 2018/9/8_16:25
+     * @param: UserInfoRetrieverVo
+     */
+    void retriever(UserInfoRetrieverVo retrieverVo);
 
     /**
      * @author:luqi

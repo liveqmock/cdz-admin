@@ -9,6 +9,7 @@ import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
+import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.service.IAccountService;
 import com.ga.cdz.util.MRedisUtil;
@@ -76,6 +77,25 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
+    public void retrieveSendSms(UserInfoSendSmsVo userInfoSendSmsVo) {
+        String userTel = userInfoSendSmsVo.getUserTel();
+        String smsRedisKey = RedisConstant.USER_RETRIEVE_SMS + userTel;
+        /**去数据库验证是否存在该电话*/
+        UserInfo hasUserTel =baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if(ObjectUtils.isEmpty(hasUserTel)){
+            throw new BusinessException("该电话不存在");
+        }
+        /**生成验证码*/
+        String code = mSmsUtil.buildCode();
+        String isSend = mSmsUtil.sendCodeDetail(userTel, code);
+        if (StringUtils.isEmpty(isSend)) {
+            mRedisUtil.put(smsRedisKey, code, REDIS_TIME_OUT, TimeUnit.SECONDS);
+        } else {
+            throw new BusinessException(isSend);
+        }
+    }
+
+    @Override
     public void register(UserInfoRegisterVo registerVo) {
         String userTel = registerVo.getUserTel();
         String smsRedisKey = RedisConstant.USER_REGISTER_SMS + userTel;
@@ -97,11 +117,11 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         String md5Pwd = mUtil.MD5(registerVo.getUserPwd());
         /**生成一个随机昵称**/
         String userNickName = "cdz_" + System.currentTimeMillis();
-        /**生成数据库插入对象 设置用户的属性userType为个人**/
+        /**生成数据库插入对象 设置用户的属性userType为个人 默认可用状态**/
         UserInfo userInfo = new UserInfo();
         userInfo.setUserPwd(md5Pwd).setUserTel(userTel)
                 .setUserSex(registerVo.getUserSex()).setUserNickName(userNickName)
-                .setUserType(UserInfo.UserType.PERSONAL);
+                .setUserType(UserInfo.UserType.PERSONAL).setUserState(UserInfo.UserState.NORMAL);
         boolean isSuccess = save(userInfo);
         if (!isSuccess) {
             throw new BusinessException("注册失败，稍后重试");
@@ -111,8 +131,55 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
-    public UserLoginDTO login(UserInfoLoginVo userInfoLoginVo) {
+    public void retriever(UserInfoRetrieverVo retrieverVo) {
+        String userTel = retrieverVo.getUserTel();
+        String smsRedisKey = RedisConstant.USER_RETRIEVE_SMS + userTel;
+        /**判断在缓存中验证码是否存在*/
+        if (!mRedisUtil.hasKey(smsRedisKey)) {
+            throw new BusinessException("验证码失效");
+        }
+        /**判断上传验证码是否与缓存验证码一致*/
+        String cacheSmsCode = mRedisUtil.get(smsRedisKey);
+        if (!cacheSmsCode.equals(retrieverVo.getSmsCode())) {
+            throw new BusinessException("验证码不一致");
+        }
+        /**去数据库验证电话是否被注册*/
+        UserInfo hasUserTel = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if (ObjectUtils.isEmpty(hasUserTel)) {
+            throw new BusinessException("该电话不存在");
+        }
+        /**把用户上传的密码md5加密**/
+        String md5Pwd = mUtil.MD5(retrieverVo.getUserPwd());
+        /**生成数据库更新对象**/
+        hasUserTel.setUserPwd(md5Pwd);
+        int isSuccess = baseMapper.updateById(hasUserTel);
+        if (isSuccess == 0) {
+            throw new BusinessException("找回密码失败，稍后重试");
+        }
+        /**找回成功后删除redis的短信键值对**/
+        mRedisUtil.remove(smsRedisKey);
+    }
 
-        return null;
+    @Override
+    public UserLoginDTO login(UserInfoLoginVo userInfoLoginVo) {
+        /**用户密码md5*/
+        String md5Pwd = mUtil.MD5(userInfoLoginVo.getUserPwd());
+        String userTel = userInfoLoginVo.getUserTel();
+        UserInfo hasUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda()
+                .eq(UserInfo::getUserTel, userTel).eq(UserInfo::getUserPwd, md5Pwd));
+        if (ObjectUtils.isEmpty(hasUserInfo)) {
+            throw new BusinessException("电话或密码错误");
+        }
+        /**生成token*/
+        String token = mUtil.MD5(mUtil.UUID16());
+        String redisTokenKey = RedisConstant.USER_TOKEN + userTel;
+        /**redis 7天*/
+        mRedisUtil.put(redisTokenKey, token, 7L, TimeUnit.DAYS);
+        /**组成返回前端*/
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setUserTel(userTel);
+        userLoginDTO.setToken(token);
+        userLoginDTO.setUserId(hasUserInfo.getUserId());
+        return userLoginDTO;
     }
 }

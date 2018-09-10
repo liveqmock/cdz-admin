@@ -1,17 +1,30 @@
+#应用根路径
 config:
   base_path: D:\\cdz
 
+#文件存储路径
+file:
+  #文件基础路径
+  base: ${config.base_path}\\img
+  #用户头像图片
+  user_avatar: ${file.base}\\user\\avatar
+  #站点图片
+  station: ${file.base}\\station
+
+#日志路径
 logback:
   logdir: ${config.base_path}\\logs\\cdz-admin
   appname: cdz-admin
   ##打印输出等级
   level: info
 
+#分布式事务日志记录
 atomikos:
   logdir: ${config.base_path}\\logs\\cdz-admin\\transaction-logs
   logname: cdz-admin-transaction
 
 
+#数据库
 jdbc:
   center:
       url: 192.168.2.123
@@ -22,7 +35,7 @@ jdbc:
       username: root
       password: 123456
 
-
+#redis
 redis:
   url: 192.168.2.123
   password:

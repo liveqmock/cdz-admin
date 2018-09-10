@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingType">
+        <id column="cgtype_id" property="cgtypeId"/>
+        <result column="cgtype_name" property="cgtypeName"/>
+        <result column="cgtype_code" property="cgtypeCode"/>
+        <result column="cgtype_state" property="cgtypeState"/>
+        <result column="insret_dt" property="insretDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cgtype_id, cgtype_name, cgtype_code, insret_dt
+    </sql>
+
+</mapper>

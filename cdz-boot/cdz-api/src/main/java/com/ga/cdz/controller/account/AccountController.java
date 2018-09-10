@@ -4,9 +4,11 @@ package com.ga.cdz.controller.account;
 import com.ga.cdz.controller.AbstractBaseController;
 
 import com.ga.cdz.domain.bean.Result;
+import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
+import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.service.IAccountService;
 import org.springframework.validation.BindingResult;
@@ -33,11 +35,13 @@ public class AccountController extends AbstractBaseController {
      * @description: 发送验证码
      * @date:2018/9/7_13:36
      * @param: UserInfoSendSmsVo 传手机号
+     * @return: Result
      */
     @PostMapping("/register/send/sms")
-    public void registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
+    public Result registerSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
         checkParams(bindingResult);
         accountService.registerSendSms(userInfoSendSmsVo);
+        return Result.success().message("发送成功");
     }
 
     /**
@@ -56,6 +60,35 @@ public class AccountController extends AbstractBaseController {
     }
 
     /**
+     * @author: liuyi
+     * @description:
+     * @date: 2018/9/8_16:34
+     * @param: retrieverVo 找回密码的Vo对象
+     * @param: bindingResult 验证对象
+     * @return: Result
+     */
+    @PostMapping("/retriever")
+    public Result result(@RequestBody @Validated({IUserInfoGroup.Retriever.class})UserInfoRetrieverVo retrieverVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.retriever(retrieverVo);
+        return Result.success().message("找回密码成功");
+    }
+
+    /**
+     * @author: liuyi
+     * @description: 找回密码发送验证码
+     * @date: 2018/9/7_17:43
+     * @param: UserInfoSendSmsVo 传手机号
+     * @return: Result
+     */
+    @PostMapping("/retrieve/send/sms")
+    public Result retrieveSendSms(@RequestBody @Validated(value = {IUserInfoGroup.SendSms.class}) UserInfoSendSmsVo userInfoSendSmsVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.retrieveSendSms(userInfoSendSmsVo);
+        return Result.success().message("发送成功");
+    }
+
+    /**
      * @author:luqi
      * @description: 登陆
      * @date:2018/9/7_12:57
@@ -66,8 +99,8 @@ public class AccountController extends AbstractBaseController {
     public Result login(@RequestBody @Validated({IUserInfoGroup.Login.class}) UserInfoLoginVo userInfoLoginVo,
                         BindingResult bindingResult) {
         checkParams(bindingResult);
-        accountService.login(userInfoLoginVo);
-        return null;
+        UserLoginDTO userLoginDTO = accountService.login(userInfoLoginVo);
+        return Result.success().message("登录成功").data(userLoginDTO);
     }
 
 }

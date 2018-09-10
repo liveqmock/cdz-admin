@@ -18,6 +18,9 @@ public class RedisConstant {
     //用户注册发送短信
     public final static String USER_REGISTER_SMS = API_ROOT + "USER-REGISTER-SMS:";
 
+    //用户找回密码发送短信
+    public final static String USER_RETRIEVE_SMS = API_ROOT + "USER_RETRIEVER_SMS:";
+
     //管理员token
     public final static String ADMIN_TOKEN = ADMIN_ROOT + "ADMIN-TOKEN:";
 

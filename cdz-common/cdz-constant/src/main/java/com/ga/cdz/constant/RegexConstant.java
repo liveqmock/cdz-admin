@@ -12,4 +12,12 @@ public class RegexConstant {
      * 验证用户名和密码
      */
     public final static String REGEX_USERNAME_PASSWORD = "^[a-zA-Z_0-9]{6,12}$";
+    /**
+     * 运营商编码验证
+     */
+    public final static String REGEX_CODE = "^\\d{2}$";
+    /**
+     * 商户编码验证
+     */
+    public final static String SHOP_CODE = "^[5]\\d{4}$";
 }
