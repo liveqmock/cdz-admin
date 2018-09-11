@@ -7,15 +7,14 @@ import lombok.experimental.Accessors;
 
 /**
  * @author:luqi
- * @description: token 失效异常
- * @date:2018/9/4_15:59
+ * @description: 用户冻结异常
+ * @date:2018/9/11_17:18
  */
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Accessors(chain = true)
-public class TokenLoseException extends BaseException {
-    public TokenLoseException() {
-        super(ResultEnum.TOKEN_LOSE_ERROR);
+public class UserFreezeException extends BaseException {
+    public UserFreezeException() {
+        super(ResultEnum.USER_FREEZE);
     }
-
 }

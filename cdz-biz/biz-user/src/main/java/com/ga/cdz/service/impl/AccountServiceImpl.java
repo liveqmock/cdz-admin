@@ -146,7 +146,15 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         String userNickName = "cdz_" + System.currentTimeMillis();
         /**生成数据库插入对象 设置用户的属性userType为个人 默认可用状态**/
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserPwd(md5Pwd).setUserTel(userTel)
+        /**生成用户编码*/
+        String maxUserCode = baseMapper.getMaxUserCode();
+        if (StringUtils.isEmpty(maxUserCode)) {
+            maxUserCode = "9999";
+        }
+        /**userCode*/
+        String userCode = new BigInteger(maxUserCode).add(new BigInteger("1")).toString();
+        log.info("userCode=======>{}", userCode);
+        userInfo.setUserCode(userCode).setUserPwd(md5Pwd).setUserTel(userTel)
                 .setUserSex(registerVo.getUserSex()).setUserNickName(userNickName)
                 .setUserType(UserInfo.UserType.PERSONAL).setUserState(UserInfo.UserState.NORMAL);
         boolean isSuccess = save(userInfo);
@@ -161,7 +169,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         }
         /**cardCode*/
         String cardCode = new BigInteger(maxCardCode).add(new BigInteger("1")).toString();
-        log.info("cardCode=======>{}");
+        log.info("cardCode=======>{}", cardCode);
         UserCardInfo userCardInfo = new UserCardInfo();
         userCardInfo.setCardCode(cardCode).setUserId(userInfo.getUserId());
         int userCarInfoRow = userCardInfoMapper.insert(userCardInfo);

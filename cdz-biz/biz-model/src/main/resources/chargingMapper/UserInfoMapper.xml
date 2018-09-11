@@ -3,25 +3,34 @@
 <mapper namespace="com.ga.cdz.dao.charging.UserInfoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap"  type="com.ga.cdz.domain.entity.UserInfo">
-        <id column="user_id" property="userId" />
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserInfo">
+        <id column="user_id" property="userId"/>
         <result column="user_code" property="userCode"/>
         <result column="user_type" property="userType"/>
         <result column="user_real_name" property="userRealName"/>
-        <result column="user_pwd" property="userPwd" />
-        <result column="user_tel" property="userTel" />
-        <result column="user_nick_name" property="userNickName" />
-        <result column="user_sex" property="userSex" />
-        <result column="province" property="province" />
-        <result column="city" property="city" />
-        <result column="country" property="country" />
+        <result column="user_pwd" property="userPwd"/>
+        <result column="user_tel" property="userTel"/>
+        <result column="user_nick_name" property="userNickName"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="country" property="country"/>
         <result column="user_state" property="userState"/>
-        <result column="insert_dt" property="insertDt" />
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
+    <!--我的界面信息map-->
+    <resultMap id="MyInfoDTOMap" type="com.ga.cdz.domain.dto.api.MyInfoDTO">
+        <id column="user_id" property="userId"/>
+        <result column="user_code" property="userCode"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="user_nick_name" property="userNickName"/>
+        <result column="user_price" property="userPrice"/>
+        <result column="card_score" property="cardScore"/>
+    </resultMap>
 
     <resultMap id="userMemberResultBase" type="com.ga.cdz.domain.dto.admin.UserMemberDTO">
-        <id column="user_id" property="userId" />
+        <id column="user_id" property="userId"/>
         <result column="user_type" property="userType"></result>
         <result column="user_real_name" property="userRealName"></result>
         <result column="user_tel" property="userTel"></result>
@@ -44,39 +53,58 @@
         country,user_state, insert_dt
     </sql>
 
-    <select id="getUserMemberListPage"  resultMap="userMemberResultBase">
-    SELECT
-    u.user_id,
-    u.user_type,
-    u.user_real_name,
-    u.user_tel,
-    u.user_nick_name,
-    u.user_sex,
-    u.province,
-    u.city,
-    u.country,
-    u.user_state,
-    u.insert_dt,
-    c.used_price,
-    c.card_score,
-    d.car_num
-    FROM
-    t_user_info u
-    LEFT JOIN t_user_card c ON u.user_id = c.user_id
-    LEFT JOIN (
-    SELECT
-    a.user_id,
-    count( * ) car_num
-    FROM
-    t_user_info a
-    LEFT JOIN t_user_cars b ON a.user_id = b.user_id
-    GROUP BY
-    a.user_id
-    ) d ON u.user_id = d.user_id
-    where 1=1 and u.user_type=1
-</select>
+    <!--获取用户code编码-->
+    <select id="getMaxUserCode" resultType="java.lang.String">
+        SELECT MAX(user_code) FROM t_user_info
+    </select>
+    <!--获取我的界面信息通过id-->
+    <select id="getMyInfoDTOById" parameterType="java.lang.Integer" resultMap="MyInfoDTOMap">
+        SELECT
+        a.user_id,
+        a.user_code,
+        a.user_avatar,
+        a.user_nick_name,
+        b.used_price,
+        b.card_score
+        FROM
+        t_user_info AS a
+        LEFT JOIN t_user_card AS b ON a.user_id = b.user_id
+        WHERE
+        a.user_id =#{userId,jdbcType=INTEGER}
+    </select>
+    <select id="getUserMemberListPage" resultMap="userMemberResultBase">
+        SELECT
+        u.user_id,
+        u.user_type,
+        u.user_real_name,
+        u.user_tel,
+        u.user_nick_name,
+        u.user_sex,
+        u.province,
+        u.city,
+        u.country,
+        u.user_state,
+        u.insert_dt,
+        c.used_price,
+        c.card_score,
+        d.car_num
+        FROM
+        t_user_info u
+        LEFT JOIN t_user_card c ON u.user_id = c.user_id
+        LEFT JOIN (
+        SELECT
+        a.user_id,
+        count( * ) car_num
+        FROM
+        t_user_info a
+        LEFT JOIN t_user_cars b ON a.user_id = b.user_id
+        GROUP BY
+        a.user_id
+        ) d ON u.user_id = d.user_id
+        where 1=1 and u.user_type=1
+    </select>
 
-    <select id="getCompanyMemberListPage"  resultMap="userMemberResultBase">
+    <select id="getCompanyMemberListPage" resultMap="userMemberResultBase">
         SELECT
         u.user_id,
         u.user_type,

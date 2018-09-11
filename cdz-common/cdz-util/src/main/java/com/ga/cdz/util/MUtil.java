@@ -90,7 +90,6 @@ public class MUtil {
      */
      public String UUID16(){
          int first = new Random(10).nextInt(8) + 1;
-         System.out.println(first);
          int hashCodeV = UUID.randomUUID().toString().hashCode();
          if (hashCodeV < 0) {//有可能是负数
              hashCodeV = -hashCodeV;

@@ -67,8 +67,13 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
             //业务逻辑异常
             return Result.fail().message(businessException.getDetail());
         } else if(e instanceof RSAException){
+            //加密异常
             return Result.custom().code(ResultEnum.RSA_ERROR.getCode())
                     .message(ResultEnum.RSA_ERROR.getMessage());
+        } else if (e instanceof UserFreezeException) {
+            //用户冻结异常
+            return Result.custom().code(ResultEnum.USER_FREEZE.getCode())
+                    .message(ResultEnum.USER_FREEZE.getMessage());
         }
         log.error("class:{},detail:{}", e.getClass().getName(), e.getMessage());
         e.printStackTrace();

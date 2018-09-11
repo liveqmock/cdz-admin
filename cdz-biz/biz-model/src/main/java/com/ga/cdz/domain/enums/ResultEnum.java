@@ -15,7 +15,8 @@ public enum  ResultEnum {
     //参数验证错误
     PARAM_VALID_ERROR(101, "参数验证错误"),
     TOKEN_LOSE_ERROR(102, "token失效"),
-    RSA_ERROR(103,"参数RSA错误");
+    RSA_ERROR(103, "参数RSA错误"),
+    USER_FREEZE(104, "用户账号冻结，请联系客服");
 
     private Integer code;
     private String message;
