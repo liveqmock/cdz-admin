@@ -12,7 +12,7 @@ public interface IMChargingStationGroup {
      * @description: 添加验证
      * @date:2018/9/10 15:27
      */
-    interface add {
+    interface Add {
     }
 
     ;
@@ -22,7 +22,7 @@ public interface IMChargingStationGroup {
      * @description: 删除验证
      * @date:2018/9/10 15:27
      */
-    interface delete {
+    interface Delete {
     }
 
     ;
@@ -32,7 +32,7 @@ public interface IMChargingStationGroup {
      * @description: 修改验证
      * @date:2018/9/10 15:27
      */
-    interface update {
+    interface Update {
     }
 
     ;

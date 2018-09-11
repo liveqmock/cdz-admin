@@ -194,7 +194,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         BeanUtils.copyProperties(userSmsPushVo, userSmsPush);
        /* if(ObjectUtils.isEmpty(hasUserSmsPush)){
             //没有插入
-            int row=userSmsPushMapper.insert(userSmsPush);
+            int row=userSmsPushMapper.Add(userSmsPush);
             if(row==0){
                 throw new BusinessException("操作失败，稍后重试");
             }

@@ -38,7 +38,7 @@ public class SttpeController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/save")
-    public Result saveStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.add.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
+    public Result saveStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.Add.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer integer = mChargingStationTypeService.saveCST(vo);
         if (integer > 0) {
@@ -55,7 +55,7 @@ public class SttpeController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result deleteStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.delete.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
+    public Result deleteStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.Delete.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer integer = mChargingStationTypeService.removeCSTById(vo);
         if (integer > 0) {

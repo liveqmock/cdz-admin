@@ -23,12 +23,12 @@ public class ChargingStationTypeVo {
     /**
      * 运营商类型ID
      */
-    @NotNull(groups = {IMChargingStationTypeGroup.delete.class}, message = "运营商ID不能为空")
+    @NotNull(groups = {IMChargingStationTypeGroup.Delete.class}, message = "运营商ID不能为空")
     private Integer sttpeId;
     /**
      * 运营商类型名称
      */
-    @NotBlank(groups = {IMChargingStationTypeGroup.add.class}, message = "运营商名称不能为空")
+    @NotBlank(groups = {IMChargingStationTypeGroup.Add.class}, message = "运营商名称不能为空")
     private String sttpeName;
     /**
      * 运营商状态 0删除  1正常

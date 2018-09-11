@@ -11,7 +11,7 @@ public interface IMChargingShopGroup {
      * @description: 添加验证
      * @date:2018/9/10 15:25
      */
-    interface add {
+    interface Add {
     }
 
     ;
@@ -21,7 +21,7 @@ public interface IMChargingShopGroup {
      * @description: 删除验证
      * @date:2018/9/10 15:26
      */
-    interface delete {
+    interface Delete {
     }
 
     ;

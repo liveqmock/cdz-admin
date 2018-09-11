@@ -23,23 +23,23 @@ public class ChargingStationVo {
     /**
      * 充电站ID
      */
-    @NotNull(groups = {IMChargingStationGroup.delete.class,IMChargingStationGroup.update.class}, message = "充电站ID不能为空")
+    @NotNull(groups = {IMChargingStationGroup.Delete.class, IMChargingStationGroup.Update.class}, message = "充电站ID不能为空")
     private Integer stationId;
     /**
      * 商户ID
      */
-    @NotNull(groups = {IMChargingStationGroup.add.class, IMChargingStationGroup.update.class}, message = "商户ID不能为空")
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "商户ID不能为空")
     private Integer shopId;
     /**
      * 站编码
      */
-    @NotBlank(groups = {IMChargingStationGroup.add.class, IMChargingStationGroup.update.class}, message = "站编码不能为空")
-    @Pattern(groups = {IMChargingStationGroup.add.class, IMChargingStationGroup.update.class}, regexp = RegexConstant.STATION_CODE, message = "站编码格式不对")
+    @NotBlank(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "站编码不能为空")
+    @Pattern(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, regexp = RegexConstant.STATION_CODE, message = "站编码格式不对")
     private String stationCode;
     /**
      * 站名称
      */
-    @NotBlank(groups = {IMChargingStationGroup.add.class, IMChargingStationGroup.update.class}, message = "站名称不能为空")
+    @NotBlank(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "站名称不能为空")
     private String stationName;
     /**
      * 充电站类型 1对外开放 2不对外开放
@@ -48,7 +48,7 @@ public class ChargingStationVo {
     /**
      * 运营商类型ID
      */
-    @NotNull(groups = {IMChargingStationGroup.add.class, IMChargingStationGroup.update.class}, message = "运营商类型不能为空")
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "运营商类型不能为空")
     private Integer sttpeId;
     /**
      * 设备数

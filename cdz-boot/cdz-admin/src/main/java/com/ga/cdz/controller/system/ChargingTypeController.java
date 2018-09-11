@@ -22,7 +22,7 @@ import java.util.List;
  * @date:2018/9/10 9:58
  */
 @RestController
-@RequestMapping("/chargingtype")
+@RequestMapping("/charging/type")
 public class ChargingTypeController extends AbstractBaseController {
     /**
      * 充电站充电方式服务
@@ -51,7 +51,7 @@ public class ChargingTypeController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result deleteChargingType(@RequestBody @Validated(value = {IMChargingTypeGroup.delete.class}) ChargingTypeVo vo, BindingResult bindingResult) {
+    public Result deleteChargingType(@RequestBody @Validated(value = {IMChargingTypeGroup.Delete.class}) ChargingTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer integer = mChargingTypeService.removeChargingTypeById(vo);
         if (integer > 0) {
@@ -68,7 +68,7 @@ public class ChargingTypeController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/save")
-    public Result saveChargingTypeObj(@RequestBody @Validated(value = {IMChargingTypeGroup.add.class}) ChargingTypeVo vo, BindingResult bindingResult) {
+    public Result saveChargingTypeObj(@RequestBody @Validated(value = {IMChargingTypeGroup.Add.class}) ChargingTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer integer = mChargingTypeService.saveChargingTypeObj(vo);
         if (integer > 0) {

@@ -11,7 +11,7 @@ public interface IMOperatorsGroup {
      * @description: 添加验证组
      * @date: 2018/9/10 9:20
      */
-    interface insert {
+    interface Add {
     }
 
     /**
@@ -19,7 +19,7 @@ public interface IMOperatorsGroup {
      * @description: 删除验证组
      * @date:2018/9/10 9:22
      */
-    interface delete {
+    interface Delete {
     }
 
     ;

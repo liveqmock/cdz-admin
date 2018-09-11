@@ -42,7 +42,7 @@ public class AdminController extends AbstractBaseController {
      * @param: AdminInfoVo
      * @return: Result
      */
-    @RequiresPermissions("system:admin-insert")
+    @RequiresPermissions("system:admin-Add")
     @PostMapping("/save")
     public Result saveAdminInfo(@RequestBody @Validated(value = {IMAdminInfoGroup.Add.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -60,7 +60,7 @@ public class AdminController extends AbstractBaseController {
      * @param: AdminInfoVo
      * @return: Result
      */
-    @RequiresPermissions("system:admin-update")
+    @RequiresPermissions("system:admin-Update")
     @PostMapping("/update/id")
     public Result updateAdminInfoById(@RequestBody @Validated(value = {IMAdminInfoGroup.Update.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);
@@ -94,7 +94,7 @@ public class AdminController extends AbstractBaseController {
      * @param: AdminInfoVo
      * @return: Result
      */
-    @RequiresPermissions("system:admin-delete")
+    @RequiresPermissions("system:admin-Delete")
     @PostMapping("/remove/id")
     public Result removeAdminInfoById(@RequestBody @Validated({IMAdminInfoGroup.Remove.class}) AdminInfoVo adminInfoVo, BindingResult bindingResult) {
         checkParams(bindingResult);

@@ -67,7 +67,7 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/save")
-    public Result saveChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.add.class) ChargingPriceVo vo, BindingResult bindingResult) {
+    public Result saveChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Add.class) ChargingPriceVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingPriceService.saveChargingPriceByKeys(vo);
         if (result) {
@@ -84,7 +84,7 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/update")
-    public Result updateChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.update.class) ChargingPriceVo vo, BindingResult bindingResult) {
+    public Result updateChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Update.class) ChargingPriceVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingPriceService.updateChargingPriceByKeys(vo);
         if (result) {

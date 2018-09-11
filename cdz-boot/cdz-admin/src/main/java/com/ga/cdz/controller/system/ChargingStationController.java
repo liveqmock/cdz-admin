@@ -9,18 +9,15 @@ import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
-import io.lettuce.core.models.role.RedisSlaveInstance;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author:wanzhongsu
@@ -28,7 +25,7 @@ import java.util.List;
  * @date:2018/9/10 15:01
  */
 @RestController
-@RequestMapping("/chargingstation")
+@RequestMapping("/charging/station")
 public class ChargingStationController extends AbstractBaseController {
     /**
      * 充电站管理服务
@@ -46,7 +43,7 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getStationList(@RequestBody @Validated PageVo<ChargingStationVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        IPage<ChargingStation> iPage = mChargingStationService.getStationList(vo);
+        IPage<ChargingStation> iPage = mChargingStationService.getStationPage(vo);
         return Result.success().data(iPage);
     }
 
@@ -58,7 +55,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/add")
-    public Result saveStation(@RequestBody @Validated(value = IMChargingStationGroup.add.class) ChargingStationVo vo, BindingResult bindingResult) {
+    public Result saveStation(@RequestBody @Validated(value = IMChargingStationGroup.Add.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingStationService.saveStation(vo);
 
@@ -76,7 +73,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result deleteStation(@RequestBody @Validated(value = IMChargingStationGroup.delete.class) ChargingStationVo vo, BindingResult bindingResult) {
+    public Result deleteStation(@RequestBody @Validated(value = IMChargingStationGroup.Delete.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingStationService.deleteStationById(vo);
         if (result) {
@@ -93,7 +90,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/update")
-    public Result updateStation(@RequestBody @Validated(value = IMChargingStationGroup.update.class) ChargingStationVo vo, BindingResult bindingResult) {
+    public Result updateStation(@RequestBody @Validated(value = IMChargingStationGroup.Update.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingStationService.updateStationById(vo);
         if (result) {

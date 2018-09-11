@@ -11,7 +11,7 @@ public interface IMChargingTypeGroup {
      * @description: 添加验证
      * @date:2018/9/10 9:25
      */
-    interface add {
+    interface Add {
     }
 
     /**
@@ -19,7 +19,7 @@ public interface IMChargingTypeGroup {
      * @description: 删除验证
      * @date:2018/9/10 9:25
      */
-    interface delete {
+    interface Delete {
     }
 
     ;

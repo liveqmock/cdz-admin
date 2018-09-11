@@ -6,7 +6,6 @@ import com.ga.cdz.domain.entity.Operators;
 import com.ga.cdz.domain.group.admin.IMOperatorsGroup;
 import com.ga.cdz.domain.vo.base.OperatorsVo;
 import com.ga.cdz.service.IMOperatorsService;
-import com.ga.cdz.util.MUtil;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +51,7 @@ public class OperatorController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/save")
-    public Result saveOperators(@RequestBody @Validated(value = {IMOperatorsGroup.insert.class}) OperatorsVo vo, BindingResult bindingResult) {
+    public Result saveOperators(@RequestBody @Validated(value = {IMOperatorsGroup.Add.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         int integer = mOperatorsService.saveOperator(vo);
         if (integer > 0) {
@@ -69,7 +68,7 @@ public class OperatorController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result delete(@RequestBody @Validated(value = {IMOperatorsGroup.delete.class}) OperatorsVo vo, BindingResult bindingResult) {
+    public Result delete(@RequestBody @Validated(value = {IMOperatorsGroup.Delete.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         int integer = mOperatorsService.removeOperator(vo);
         if (integer > 0) {
@@ -85,7 +84,7 @@ public class OperatorController extends AbstractBaseController {
      * @param:
      * @return: Result
      */
-    @PostMapping("/nextCode")
+    @PostMapping("/nextcode")
     public Result nextCode() {
         String nextCode = mOperatorsService.nextOperatorCode();
         return Result.success().data(nextCode);

@@ -25,7 +25,7 @@ import org.springframework.util.ObjectUtils;
 public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IMChargingStationService {
 
     @Override
-    public IPage<ChargingStation> getStationList(PageVo<ChargingStationVo> vo) {
+    public IPage<ChargingStation> getStationPage(PageVo<ChargingStationVo> vo) {
         //属性复制
         ChargingStation chargingStation = new ChargingStation();
         if (!ObjectUtils.isEmpty(vo.getData())) {

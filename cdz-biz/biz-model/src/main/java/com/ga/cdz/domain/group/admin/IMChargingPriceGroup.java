@@ -11,7 +11,7 @@ public interface IMChargingPriceGroup {
      * @description: 添加验证
      * @date:2018/9/11 13:32
      */
-    interface add {
+    interface Add {
     }
 
     /**
@@ -19,7 +19,7 @@ public interface IMChargingPriceGroup {
      * @description: 修改验证
      * @date:2018/9/11 15:21
      */
-    interface update {
+    interface Update {
     }
 
     ;;

@@ -23,7 +23,7 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @param:
      * @return:
      */
-    IPage<ChargingShopDTO> getChargingShopList(PageVo<ChargingShopVo> vo);
+    IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo);
 
     /**
      * @author:wanzhongsu

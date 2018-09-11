@@ -32,7 +32,7 @@ import java.util.Map;
 public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, ChargingShop> implements IMChargingShopService {
 
     @Override
-    public IPage<ChargingShopDTO> getChargingShopList(PageVo<ChargingShopVo> vo) {
+    public IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo) {
         //分页获取商户
         Page<ChargingShopDTO> page = new Page<>(vo.getIndex(), vo.getSize());
         List<ChargingShopDTO> list = baseMapper.getShopList();

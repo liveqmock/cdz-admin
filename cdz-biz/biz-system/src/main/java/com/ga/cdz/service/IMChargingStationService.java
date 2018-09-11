@@ -20,7 +20,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param:
      * @return:
      */
-    IPage<ChargingStation> getStationList(PageVo<ChargingStationVo> vo);
+    IPage<ChargingStation> getStationPage(PageVo<ChargingStationVo> vo);
 
     /**
      * @author:wanzhongsu

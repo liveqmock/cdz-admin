@@ -41,7 +41,7 @@ public class AdminPermission extends Model<AdminPermission> {
      * 例如订单管理模块，下级权限命名不能包含父级权限的code，切记！！
      * order:module (模块权限)
      * order:create(创建表单)
-     * order:delete（删除表单）
+     * order:Delete（删除表单）
      */
     @TableField("perm_code")
     private String permCode;

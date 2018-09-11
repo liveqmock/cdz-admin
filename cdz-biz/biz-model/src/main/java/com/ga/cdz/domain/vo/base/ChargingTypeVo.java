@@ -1,8 +1,5 @@
 package com.ga.cdz.domain.vo.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.group.admin.IMChargingTypeGroup;
 import lombok.Data;
@@ -23,17 +20,17 @@ public class ChargingTypeVo {
     /**
      * 充电方式ID
      */
-    @NotNull(groups = {IMChargingTypeGroup.delete.class}, message = "充电方式Id不能为空")
+    @NotNull(groups = {IMChargingTypeGroup.Delete.class}, message = "充电方式Id不能为空")
     private Integer cgtypeId;
     /**
      * 充电方式名称
      */
-    @NotBlank(groups = {IMChargingTypeGroup.add.class}, message = "充电方式名称不能为空")
+    @NotBlank(groups = {IMChargingTypeGroup.Add.class}, message = "充电方式名称不能为空")
     private String cgtypeName;
     /**
      * 充电方式编码
      */
-    @NotBlank(groups = {IMChargingTypeGroup.add.class}, message = "充电方式编码不能为空")
+    @NotBlank(groups = {IMChargingTypeGroup.Add.class}, message = "充电方式编码不能为空")
     private String cgtypeCode;
     /**
      * 充电方式状态 0删除  1正常

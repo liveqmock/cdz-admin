@@ -50,13 +50,13 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
                 .setPermCode("system:admin-module").setPermParentId(1);
         //管理员基本信息添加
         AdminPermission adminInsert=new AdminPermission().setPermId(3).setPermName("添加")
-                .setPermCode("system:admin-insert").setPermParentId(2);
+                .setPermCode("system:admin-Add").setPermParentId(2);
         //管理员基本信息删除
         AdminPermission adminDelete=new AdminPermission().setPermId(4).setPermName("删除")
-                .setPermCode("system:admin-delete").setPermParentId(2);
+                .setPermCode("system:admin-Delete").setPermParentId(2);
         //管理员基本信息修改
         AdminPermission adminUpdate=new AdminPermission().setPermId(5).setPermName("修改")
-                .setPermCode("system:admin-update").setPermParentId(2);
+                .setPermCode("system:admin-Update").setPermParentId(2);
         //管理员基本信息修改
         AdminPermission adminSelect=new AdminPermission().setPermId(6).setPermName("查看")
                 .setPermCode("system:admin-select").setPermParentId(2);

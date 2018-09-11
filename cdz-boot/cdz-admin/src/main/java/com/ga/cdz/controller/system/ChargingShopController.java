@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
-import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.group.admin.IMChargingShopGroup;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -26,7 +25,7 @@ import javax.annotation.Resource;
  * @date:2018/9/10 9:57
  */
 @RestController
-@RequestMapping("/chargingshop")
+@RequestMapping("/charging/shop")
 public class ChargingShopController extends AbstractBaseController {
     //商户管理服务
     @Resource
@@ -42,7 +41,7 @@ public class ChargingShopController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getShopList(@RequestBody @Validated PageVo<ChargingShopVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        IPage<ChargingShopDTO> iPage = mChargingShopService.getChargingShopList(vo);
+        IPage<ChargingShopDTO> iPage = mChargingShopService.getChargingShopPage(vo);
         return Result.success().data(iPage);
     }
 
@@ -54,7 +53,7 @@ public class ChargingShopController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/add")
-    public Result saveShop(@RequestBody @Validated(value = {IMChargingShopGroup.add.class}) ChargingShopVo vo, BindingResult bindingResult) {
+    public Result saveShop(@RequestBody @Validated(value = {IMChargingShopGroup.Add.class}) ChargingShopVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Boolean result = mChargingShopService.saveChargingShop(vo);
         if (result) {
@@ -88,7 +87,7 @@ public class ChargingShopController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result deleteShop(@RequestBody @Validated(value = IMChargingShopGroup.delete.class) ChargingShopVo vo, BindingResult bindingResult) {
+    public Result deleteShop(@RequestBody @Validated(value = IMChargingShopGroup.Delete.class) ChargingShopVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingShopService.deleteShopById(vo);
         if (result) {
