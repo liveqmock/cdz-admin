@@ -33,8 +33,7 @@ public class DistrictController extends AbstractBaseController {
      */
     @PostMapping("/list")
     public Result getListAllCity() {
-        List<District> districtList = iDistrictService.getListAllCity();
-        Collections.sort(districtList, Comparator.comparing(District::getDistrictCode));
-        return Result.success().data(districtList);
+        List<District> districts = iDistrictService.getListAllCity();
+        return Result.success().data(districts);
     }
 }
