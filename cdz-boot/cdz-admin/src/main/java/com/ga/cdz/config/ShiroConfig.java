@@ -52,7 +52,8 @@ public class ShiroConfig extends BaseShiroConfig {
         /*  list.add("/admin/**");*/
         list.add("/roles/**");
         list.add("/demo/file/**");
-      list.add("/member/**");
+        list.add("/member/**");
+        list.add("/charging/**");
         return list;
     }
 }

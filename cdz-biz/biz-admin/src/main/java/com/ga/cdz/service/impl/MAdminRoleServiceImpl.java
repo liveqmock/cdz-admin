@@ -171,6 +171,13 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
         return adminRolePermissionMapper.insertBatch(list);
     }
 
+    /**
+     * @author huanghaohao
+     * @desc 新增角色
+     * @date 2018-09-11 16:38
+     * @param adminRoleVo
+     * @return
+     */
     @Override
     public Boolean addAdminRole(AdminRoleVo adminRoleVo) {
         AdminRole adminRole=new AdminRole();
@@ -184,5 +191,16 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
             return false;
         }
         return true;
+    }
+
+    /**
+     * @author huanghaohao
+     * @date 2018-09-11 16:40
+     * @desc 返回所有的role
+     * @return
+     */
+    @Override
+    public List<AdminRole> getRoleList() {
+        return this.baseMapper.selectList(new QueryWrapper<AdminRole>());
     }
 }

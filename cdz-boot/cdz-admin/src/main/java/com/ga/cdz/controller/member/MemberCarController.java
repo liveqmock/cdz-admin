@@ -26,8 +26,6 @@ import java.util.List;
 public class MemberCarController extends AbstractBaseController {
   @Resource
   IMAdminUserCarsInfoService mAdminUserCarsInfoService;
-
-
   /**
    * @author huanghaohao
    * @date 2018-09-10 11:25

@@ -60,7 +60,20 @@ public interface IMAdminRoleService extends IService<AdminRole> {
 
     Integer updateOrInsertAdminRolePermission(List<AdminRolePermVo> adminRolePermVoList);
 
+  /**
+   * @author huanghaohao
+   * @desc 新增角色
+   * @param adminRoleVo
+   * @return
+   */
 
-    Boolean addAdminRole(AdminRoleVo adminRoleVo);
+  Boolean addAdminRole(AdminRoleVo adminRoleVo);
 
+  /**
+   * @author huanghaohao
+   * @date 2018-09-11 16:36
+   * @desc 返回所有的角色
+   * @return
+   */
+  List<AdminRole> getRoleList();
 }

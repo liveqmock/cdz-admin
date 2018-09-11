@@ -37,6 +37,18 @@ public class AdminRoleController extends AbstractBaseController {
 
   /**
    * @author huanghaohao
+   * @date 2018-09-11 16:34
+   * @desc 给账号授权时 角色列表
+   * @return
+   */
+  @PostMapping("/list/all")
+  public Result getRoleList(){
+    List<AdminRole> list= mAdminRoleService.getRoleList();
+    return Result.success().data(list);
+  }
+
+  /**
+   * @author huanghaohao
    * @desc 用于根据角色Id查询 角色信息
    * @date 2018-09-06 16:30
    * @params :rolesId
