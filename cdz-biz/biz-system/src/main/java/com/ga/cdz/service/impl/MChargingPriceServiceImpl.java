@@ -101,7 +101,7 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
             save(middle);
             save(high);
         } catch (Exception e) {
-            throw new BusinessException("保存失败");
+            throw new BusinessException("复合主键重复");
         }
         return true;
     }
