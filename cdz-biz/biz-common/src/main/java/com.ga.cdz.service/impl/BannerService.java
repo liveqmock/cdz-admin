@@ -21,12 +21,14 @@ public class BannerService extends ServiceImpl<BannerMapper, Banner> implements 
     @Resource
     private BannerMapper bannerMapper;
 
+    //获得图片保存的路径
     @Value("${url.banner}")
     private String position;
 
     @Override
     public List<Banner> getListAllBanner() {
         List<Banner> banners = bannerMapper.selectList(null);
+        //补全图片路径
         for(Banner banner : banners ) {
             String picPosition = position + banner.getSmsPic();
             banner.setSmsPic(picPosition);

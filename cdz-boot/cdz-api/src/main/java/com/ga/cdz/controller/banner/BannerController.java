@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("/banner")
 public class BannerController extends AbstractBaseController {
 
+    //获得IBannerService对象
     @Resource
     private IBannerService iBannerService;
 

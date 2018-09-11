@@ -12,8 +12,10 @@ import java.util.List;
 public interface IBannerService {
 
     /**
-     * 得到所有的Banner消息
-     * @return
+     * @author: liuyi
+     * @description: 得到所有的Banner消息
+     * @date: 2018/9/11_14:58
+     * @return: 所有Banner消息
      */
     List<Banner> getListAllBanner();
 
