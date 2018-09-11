@@ -32,9 +32,8 @@ public class DistrictController extends AbstractBaseController {
      * @return: 返回该上级区域包含的list
      */
     @PostMapping("/list")
-    public Result getDistrictListByParentCode() {
-        List<District> districtList = iDistrictService.getListAllCity();
-        Collections.sort(districtList, Comparator.comparing(District::getDistrictCode));
-        return Result.success().data(districtList);
+    public Result getListAllCity() {
+        List<District> districts = iDistrictService.getListAllCity();
+        return Result.success().data(districts);
     }
 }

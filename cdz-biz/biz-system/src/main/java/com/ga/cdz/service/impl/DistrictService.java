@@ -8,6 +8,8 @@ import com.ga.cdz.service.IDistrictService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ public class DistrictService extends ServiceImpl<DistrictMapper, District> imple
     @Override
     public List<District> getListAllCity() {
         List<District> districts = districtMapper.selectList(new QueryWrapper<District>().lambda().eq(District::getDistrictLevel, District.DistrictLevel.SHI));
-
+        Collections.sort(districts, Comparator.comparing(District::getDistrictCode));
         return districts;
     }
 }
