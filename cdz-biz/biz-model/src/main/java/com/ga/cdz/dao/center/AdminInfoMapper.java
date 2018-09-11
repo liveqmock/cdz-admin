@@ -1,5 +1,6 @@
 package com.ga.cdz.dao.center;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.dto.admin.AdminDemoDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
@@ -26,6 +27,6 @@ public interface AdminInfoMapper extends SuperMapper<AdminInfo> {
     /**
      *  关联分页测试
      * */
-    List<AdminDemoDTO> selectAdminDemoDTOPage();
+    List<AdminDemoDTO> selectAdminDemoDTOPage(Page<AdminDemoDTO> page);
 
 }

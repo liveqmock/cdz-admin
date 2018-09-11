@@ -30,7 +30,7 @@ public class MybatisChargingConfig {
      */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
+        return new PaginationInterceptor().setDialectType("mysql");
     }
 
 

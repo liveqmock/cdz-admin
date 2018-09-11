@@ -17,10 +17,22 @@ public class UserLoginDTO {
      **/
     private Integer userId;
 
+    /**
+     * 用户昵称
+     */
+    private String userNickName;
+
     /***用户电话**/
     private String userTel;
 
+    /**
+     * 用户头像
+     */
+    private String userAvatar;
+
     /***token**/
     private String token;
+
+
 
 }

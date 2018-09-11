@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AdminDemoDTO {
 
+    private Integer roleId;
+
   private String  roleName;
 
   private Integer permId;

@@ -7,6 +7,14 @@ logback:
   ##打印输出等级
   level: info
 
+#文件请求路径
+url:
+  base: http:\\192.168.2.18:8081
+  #t头像路径
+  user_avatar: ${url.base}\user_avatar\
+  #站点路径
+  station: ${url.base}\station\
+
 atomikos:
   logdir: ${config.base_path}\\logs\\cdz-api\\transaction-logs
   logname: cdz-api-transaction

@@ -65,6 +65,13 @@ public class UserInfo extends Model<UserInfo> {
      */
     @TableField("user_sex")
     private UserSex userSex;
+
+    /**
+     * 用户头像
+     */
+    @TableField("user_avatar")
+    private String userAvatar;
+
     /**
      * 省级编码
      */

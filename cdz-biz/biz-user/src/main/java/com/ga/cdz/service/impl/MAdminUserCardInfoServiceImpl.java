@@ -44,8 +44,8 @@ public class MAdminUserCardInfoServiceImpl extends ServiceImpl<UserCardInfoMappe
    * @return
    */
   public IPage<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
-    IPage<UserMemberCardInfoDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
-    return page.setRecords(this.baseMapper.getMemberCardInfoListByPage());
+    Page<UserMemberCardInfoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+    return page.setRecords(this.baseMapper.getMemberCardInfoListByPage(page));
 
   }
 

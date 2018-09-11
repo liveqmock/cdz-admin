@@ -32,7 +32,7 @@ public class MybatisCenterConfig {
      */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
+        return new PaginationInterceptor().setDialectType("mysql");
     }
 
     // 配置数据源

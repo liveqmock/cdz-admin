@@ -1,5 +1,6 @@
 package com.ga.cdz.domain.vo.base;
 
+import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.group.admin.IMUserInfoGroup;
 import lombok.Data;
@@ -78,6 +79,6 @@ public class UserMemberCardInfoVo {
   /**
    * 卡状态
    */
-  private Integer cardState;
+  private UserCardInfo.CardState cardState;
 
 }

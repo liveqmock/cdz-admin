@@ -42,10 +42,13 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>cdz-file</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-push</artifactId>
         </dependency>
     </dependencies>
 

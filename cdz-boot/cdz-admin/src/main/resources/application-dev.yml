@@ -11,6 +11,14 @@ file:
   #站点图片
   station: ${file.base}\\station
 
+#文件请求路径
+url:
+  base: http:\\192.168.2.18:8081
+  #t头像路径
+  user_avatar: ${url.base}\user_avatar\
+  #站点路径
+  station: ${url.base}\station\
+
 #日志路径
 logback:
   logdir: ${config.base_path}\\logs\\cdz-admin
@@ -39,3 +47,9 @@ jdbc:
 redis:
   url: 192.168.2.123
   password:
+
+
+#激光推送
+jpush:
+  app_key: d67c63d217d62dc1c16a6a7c
+  master_secret: f16eb1d9e0080ff33e1ff71b

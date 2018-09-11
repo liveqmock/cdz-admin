@@ -54,7 +54,25 @@ public class MPushUtil {
     }*/
 
     /**
-     * 根据 alias 推送
+     * @author:luqi
+     * @description: 推送给所有用户消息
+     * @date:2018/9/10_16:04
+     * @param: content
+     * @return:
+     */
+    public void sendAll(String content) {
+        JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
+        PushPayload payload = buildPushObject_all_alert(content);
+        exec(jpushClient, payload);
+    }
+
+    /**
+     * @author:luqi
+     * @description: 根据 alias 推送
+     * @date:2018/9/10_15:36
+     * @param: alias
+     * @param: content
+     * @return:
      */
     public void sendAlias(String alias, String content) {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
@@ -63,7 +81,12 @@ public class MPushUtil {
     }
 
     /**
-     * 根据 rid 推送
+     * @author:luqi
+     * @description: 根据 rid 推送
+     * @date:2018/9/10_15:39
+     * @param: rid
+     * @param: content
+     * @return:
      */
     public void sendRid(String rid, String content) {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
@@ -71,18 +94,30 @@ public class MPushUtil {
         exec(jpushClient, payload);
     }
 
-    /****
-     *  发送自定义消息
-     * **/
+    /**
+     * @author:luqi
+     * @description: 发送自定义消息rid
+     * @date:2018/9/10_15:40
+     * @param: rid
+     * @param: content
+     * @param: message
+     * @return:
+     */
     public void sendRid(String rid, String content, Message message) {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
         PushPayload payload = buildPushObject_all_rid_alert(rid, content, message);
         exec(jpushClient, payload);
     }
 
-    /****
-     *  发送自定义消息
-     * **/
+    /**
+     * @author:luqi
+     * @description: 发送自定义消息 rid
+     * @date:2018/9/10_15:42
+     * @param: alias
+     * @param: content
+     * @param: message
+     * @return:
+     */
     public void sendAlias(String alias, String content, Message message) {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
         PushPayload payload = buildPushObject_all_alias_alert(alias, content, message);
@@ -90,7 +125,12 @@ public class MPushUtil {
     }
 
     /**
-     * rid集合推送
+     * @author:luqi
+     * @description: rid集合推送
+     * @date:2018/9/10_15:43
+     * @param: list
+     * @param: content
+     * @return:
      */
     public void sendRid(List<String> list, String content) {
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
@@ -98,6 +138,18 @@ public class MPushUtil {
         exec(jpushClient, payload);
     }
 
+    /**
+     * @author:luqi
+     * @description: 推送给所有用户
+     * @date:2018/9/10_16:03
+     * @param:
+     * @return:
+     */
+    private PushPayload buildPushObject_all_alert(String content) {
+        return PushPayload.newBuilder().setPlatform(Platform.all())
+                .setAudience(Audience.all()).setNotification(Notification.alert(content))
+                .build();
+    }
 
     /**
      * @author:luqi

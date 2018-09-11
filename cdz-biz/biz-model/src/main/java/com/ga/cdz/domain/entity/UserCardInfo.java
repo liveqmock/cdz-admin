@@ -4,15 +4,16 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.math.BigDecimal;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author huanghaohao
@@ -51,8 +52,11 @@ public class UserCardInfo extends Model<UserCardInfo> {
    */
   @TableField("card_score")
   private Integer cardScore;
-  @TableField("card_state")
-  private Integer cardState;
+    /**
+     * 车的状态
+     */
+    @TableField("card_state")
+    private CardState cardState;
   /**
    * 更新时间
    */
@@ -68,6 +72,29 @@ public class UserCardInfo extends Model<UserCardInfo> {
   protected Serializable pkVal() {
     return this.cardId;
   }
+
+
+    /**
+     * 车的状态枚举
+     */
+    public enum CardState implements IEnum<Integer> {
+        REMOVE(0, "删除"),
+        NORMAL(1, "正常");
+
+        private Integer value;
+        private String detail;
+
+        CardState(Integer value, String detail) {
+            this.value = value;
+            this.detail = detail;
+        }
+
+        @Override
+        @JsonValue
+        public Integer getValue() {
+            return this.value;
+        }
+    }
 
   @Override
   public String toString() {

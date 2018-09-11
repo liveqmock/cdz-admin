@@ -3,14 +3,17 @@ package com.ga.cdz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
+import com.ga.cdz.dao.charging.UserCardInfoMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
+import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
+import com.ga.cdz.domain.vo.base.UserSmsPushVo;
 import com.ga.cdz.service.IAccountService;
 import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
@@ -18,10 +21,12 @@ import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 
 
@@ -33,6 +38,18 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service("accountService")
 public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IAccountService {
+
+    /**
+     * 用户头像路径
+     */
+    @Value("${url.user_avatar}")
+    String userAvatar;
+
+    /**
+     * 用户卡信息
+     **/
+    @Resource
+    UserCardInfoMapper userCardInfoMapper;
 
     /**
      * redis工具类
@@ -96,6 +113,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
+    @Transactional
     public void register(UserInfoRegisterVo registerVo) {
         String userTel = registerVo.getUserTel();
         String smsRedisKey = RedisConstant.USER_REGISTER_SMS + userTel;
@@ -126,8 +144,28 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         if (!isSuccess) {
             throw new BusinessException("注册失败，稍后重试");
         }
+
+        /**注册成功后新生成card*/
+        String maxCardCode = userCardInfoMapper.getCardCodeLast();
+        if (StringUtils.isEmpty(maxCardCode)) {
+            maxCardCode = "10000";
+        }
+        /**cardCode*/
+        String cardCode = new BigInteger(maxCardCode).add(new BigInteger("1")).toString();
+        log.info("cardCode=======>{}");
+        UserCardInfo userCardInfo = new UserCardInfo();
+        userCardInfo.setCardCode(cardCode).setUserId(userInfo.getUserId());
+        int userCarInfoRow = userCardInfoMapper.insert(userCardInfo);
+        if (userCarInfoRow != 1) {
+            throw new BusinessException("注册失败，稍后重试");
+        }
         /**注册成功后删除redis的短信键值对**/
         mRedisUtil.remove(smsRedisKey);
+    }
+
+    @Override
+    public void registerCallBack(UserSmsPushVo userSmsPushVo) {
+
     }
 
     @Override
@@ -180,6 +218,8 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         userLoginDTO.setUserTel(userTel);
         userLoginDTO.setToken(token);
         userLoginDTO.setUserId(hasUserInfo.getUserId());
+        userLoginDTO.setUserNickName(hasUserInfo.getUserNickName());
+        userLoginDTO.setUserAvatar(userAvatar + hasUserInfo.getUserAvatar());
         return userLoginDTO;
     }
 }
