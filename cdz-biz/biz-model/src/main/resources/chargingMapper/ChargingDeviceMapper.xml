@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingDeviceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingDevice">
+        <id column="device_id" property="deviceId" />
+        <result column="station_id" property="stationId" />
+        <result column="device_code" property="deviceCode" />
+        <result column="device_name" property="deviceName" />
+        <result column="cgtype_id" property="cgtypeId" />
+        <result column="device_power" property="devicePower" />
+        <result column="device_subnum" property="deviceSubnum" />
+        <result column="device_state" property="deviceState" />
+        <result column="update_dt" property="updateDt" />
+        <result column="insert_dt" property="insertDt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        device_id, station_id, device_code, device_name, cgtype_id, device_power, device_subnum, device_state, update_dt, insert_dt
+    </sql>
+
+    <select id="getChargingDeviceListDetail" resultType="com.ga.cdz.domain.dto.admin.ChargingDeviceDTO">
+        SELECT device.*,type.cgtype_state,type.cgtype_name,type.cgtype_code FROM t_charging_device device
+        left join t_charging_type type on device.cgtype_id=type.cgtype_id where 1=1
+          <if test="device.stationId != null">
+              and device.station_id =#{device.stationId}
+          </if>
+    </select>
+
+</mapper>
