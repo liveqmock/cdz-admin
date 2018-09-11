@@ -12,12 +12,10 @@ import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.domain.vo.base.UserSmsPushVo;
 import com.ga.cdz.service.IAccountService;
+import com.ga.cdz.util.MPushUtil;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -33,6 +31,9 @@ public class AccountController extends AbstractBaseController {
 
     @Resource
     private IAccountService accountService;
+
+    @Resource
+    private MPushUtil mPushUtil;
 
     /**
      * @author:luqi
@@ -123,4 +124,33 @@ public class AccountController extends AbstractBaseController {
         return Result.success().message("登录成功").data(userLoginDTO);
     }
 
+    /**
+     * @author:luqi
+     * @description: 激光测试方法
+     * @date:2018/9/11_11:32
+     * @param:
+     * @return:
+     */
+    @GetMapping("/jpush/test")
+    public Result jpushAliasDefault() {
+        try {
+            mPushUtil.sendAlias("DEFAULT", "来自接口的消息");
+        } catch (Exception e) {
+            return Result.fail().message("推送失败");
+        }
+
+        return Result.success().message("消息推送成功");
+    }
+
+
+    @GetMapping("/jpush/tag")
+    public Result jpushTagDefault() {
+        try {
+            mPushUtil.sendTag("ddd", "来自TAG的消息");
+        } catch (Exception e) {
+            return Result.fail().message("推送失败");
+        }
+
+        return Result.success().message("消息推送成功");
+    }
 }

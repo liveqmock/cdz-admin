@@ -34,3 +34,8 @@ jdbc:
 redis:
   url: 192.168.2.123
   password:
+
+#激光推送
+jpush:
+  app_key: d67c63d217d62dc1c16a6a7c
+  master_secret: f16eb1d9e0080ff33e1ff71b

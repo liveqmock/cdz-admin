@@ -35,6 +35,13 @@ public class UserInfo extends Model<UserInfo> {
      */
     @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
+
+    /**
+     * 用户编码
+     */
+    @TableField("user_code")
+    private String userCode;
+
     /**
      * 类型 1个人用户 2 单位
      */
@@ -76,17 +83,17 @@ public class UserInfo extends Model<UserInfo> {
      * 省级编码
      */
     @TableField("province")
-    private String province;
+    private Integer province;
     /**
      * 城市编码
      */
     @TableField("city")
-    private String city;
+    private Integer city;
     /**
      * 县编码
      */
     @TableField("country")
-    private String country;
+    private Integer country;
 
     /**
      * 用户状态

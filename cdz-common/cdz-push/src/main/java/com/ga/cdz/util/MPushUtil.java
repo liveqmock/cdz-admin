@@ -140,6 +140,19 @@ public class MPushUtil {
 
     /**
      * @author:luqi
+     * @description: 单tag发送
+     * @date:2018/9/11_11:54
+     * @param:
+     * @return:
+     */
+    public void sendTag(String tag, String content) {
+        JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig.getInstance());
+        PushPayload payload = buildPushObject_all_tag_alert(tag, content);
+        exec(jpushClient, payload);
+    }
+
+    /**
+     * @author:luqi
      * @description: 推送给所有用户
      * @date:2018/9/10_16:03
      * @param:
@@ -223,6 +236,22 @@ public class MPushUtil {
 
     /**
      * @author:luqi
+     * @description: 单tag 发送消息
+     * @date:2018/9/11_11:53
+     * @param:
+     * @return:
+     */
+    private PushPayload buildPushObject_all_tag_alert(String tag, String content) {
+        return PushPayload.newBuilder()
+                .setPlatform(Platform.all())
+                .setAudience(Audience.tag(tag))
+                .setNotification(Notification.alert(content))
+                .build();
+    }
+
+
+    /**
+     * @author:luqi
      * @description: 推送给多用户信息
      * @date:2018/9/10_15:00
      * @param: 用户rid集合
@@ -254,4 +283,6 @@ public class MPushUtil {
                 .setMessage(message)
                 .build();
     }
+
+
 }

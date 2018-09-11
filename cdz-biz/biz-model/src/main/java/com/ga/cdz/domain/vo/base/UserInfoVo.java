@@ -24,6 +24,12 @@ public class UserInfoVo {
      */
     @NotNull(groups = {IMUserInfoGroup.updateMemSate.class},message ="更新会员用户状态时会员用户ID 必填" )
     private Integer userId;
+
+    /**
+     * 用户编码
+     */
+    private String userCode;
+
     /**
      * 类型 1个人用户 2 单位
      */
@@ -53,15 +59,15 @@ public class UserInfoVo {
     /**
      * 省级编码
      */
-    private String province;
+    private Integer province;
     /**
      * 城市编码
      */
-    private String city;
+    private Integer city;
     /**
      * 县编码
      */
-    private String country;
+    private Integer country;
 
     /**
      * 用户状态
