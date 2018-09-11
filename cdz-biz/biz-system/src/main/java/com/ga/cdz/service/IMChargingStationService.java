@@ -2,6 +2,7 @@ package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
@@ -20,7 +21,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param:
      * @return:
      */
-    IPage<ChargingStation> getStationPage(PageVo<ChargingStationVo> vo);
+    IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo);
 
     /**
      * @author:wanzhongsu

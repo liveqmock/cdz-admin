@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -15,6 +16,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 /**
  * @author:wanzhongsu
@@ -25,21 +28,13 @@ import org.springframework.util.ObjectUtils;
 public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IMChargingStationService {
 
     @Override
-    public IPage<ChargingStation> getStationPage(PageVo<ChargingStationVo> vo) {
-        //属性复制
-        ChargingStation chargingStation = new ChargingStation();
-        if (!ObjectUtils.isEmpty(vo.getData())) {
-            BeanUtils.copyProperties(vo.getData(), chargingStation);
-        }
+    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo) {
         //构建分页信息
-        Page<ChargingStation> page = new Page<>(vo.getIndex(), vo.getSize());
-        page.setAsc("station_id");
-        chargingStation.setStationState(ChargingStation.StationState.NORMAL);
-        //构建包装器
-        QueryWrapper<ChargingStation> wrapper = new QueryWrapper<ChargingStation>(chargingStation);
+        Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
         //分页查询
-        IPage<ChargingStation> iPage = baseMapper.selectPage(page,wrapper);
-        return iPage;
+        List<ChargingStationDTO> list = baseMapper.getStationList();
+        page.setRecords(list);
+        return page;
     }
 
     @Override

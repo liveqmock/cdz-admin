@@ -16,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * @author:wanzhongsu
@@ -80,6 +81,20 @@ public class ChargingStation extends Model<ChargingStation> {
      */
     @TableField("station_state")
     private StationState stationState;
+    /**
+     * 充电站开放时间
+     */
+    @TableField("station_opendt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalTime stationOpendt;
+    /**
+     * 充电站关闭时间
+     */
+    @TableField("station_closedt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalTime stationClosedt;
     /**
      * 更新时间
      */

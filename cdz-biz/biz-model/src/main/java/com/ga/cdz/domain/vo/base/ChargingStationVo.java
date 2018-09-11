@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * @author:wanzhongsu
@@ -66,6 +67,14 @@ public class ChargingStationVo {
      * 充电站状态 0 删除 1 正常
      */
     private ChargingStation.StationState stationState;
+    /**
+     * 充电站开放时间
+     */
+    private LocalTime stationOpendt;
+    /**
+     * 充电站关闭时间
+     */
+    private LocalTime stationClosedt;
     /**
      * 更新时间
      */

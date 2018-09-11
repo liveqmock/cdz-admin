@@ -14,13 +14,46 @@
         <result column="lat" property="lat" />
         <result column="lng" property="lng" />
         <result column="station_state" property="stationState" />
+        <result column="station_opendt" property="stationOpendt"/>
+        <result column="station_closedt" property="stationClosedt"/>
         <result column="update_dt" property="updateDt" />
         <result column="insert_dt" property="insertDt" />
     </resultMap>
-
+    <resultMap id="chargingStationDTO" type="com.ga.cdz.domain.dto.admin.ChargingStationDTO">
+        <id column="station_id" property="stationId"/>
+        <result column="station_code" property="stationCode"/>
+        <result column="station_name" property="stationName"/>
+        <result column="station_type" property="stationType"/>
+        <result column="device_num" property="deviceNum"/>
+        <result column="lat" property="lat"/>
+        <result column="lng" property="lng"/>
+        <result column="insert_dt" property="insertDt"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="sttpe_name" property="sttpeName"/>
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         station_id, shop_id, station_code, station_name, station_type, sttpe_id, device_num, lat, lng, station_state, update_dt, insert_dt
     </sql>
+    <select id="getStationList" resultMap="chargingStationDTO">
+        SELECT
+	a.station_id,
+	a.station_code,
+	a.station_type,
+	c.sttpe_name,
+	a.station_name,
+	a.device_num,
+	a.lat,
+	a.lng,
+	b.shop_code,
+	b.shop_name,
+	a.insert_dt
+FROM
+	t_charging_station a
+	LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
+	LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
+	where a.station_state=1
+    </select>
 
 </mapper>
