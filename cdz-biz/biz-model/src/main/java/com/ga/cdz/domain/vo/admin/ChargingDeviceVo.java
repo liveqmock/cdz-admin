@@ -1,8 +1,5 @@
 package com.ga.cdz.domain.vo.admin;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.ga.cdz.domain.group.admin.IMChargingDeviceGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -25,24 +22,27 @@ public class ChargingDeviceVo {
   /**
    * 充电站ID
    */
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "站ID 不能为空")
   private Integer stationId;
   /**
    * 充电桩编码
    */
-
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = " 充电桩编码不能为空")
   private String deviceCode;
   /**
    * 充电桩名称
    */
-
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "充电桩名称 不能为空")
   private String deviceName;
   /**
    * 充电桩充电方式
    */
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "充电方式 不能为空")
   private Integer cgtypeId;
   /**
    * 设备功率
    */
+
 
   private Integer devicePower;
   /**

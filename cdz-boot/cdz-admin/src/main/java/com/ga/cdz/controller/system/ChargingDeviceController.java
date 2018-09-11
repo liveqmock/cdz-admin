@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author huanghaohao
  * @date 2018-09-11 13:54
- * @desc
+ * @desc 充电桩
  */
 @RestController
 @RequestMapping("/charging/device")

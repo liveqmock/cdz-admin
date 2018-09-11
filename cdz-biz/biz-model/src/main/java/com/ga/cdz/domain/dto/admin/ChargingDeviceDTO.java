@@ -27,22 +27,22 @@ public class ChargingDeviceDTO {
   /**
    * 充电站ID
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "新增或者查询充电桩时站Id 不能为空")
+
   private Integer stationId;
   /**
    * 充电桩编码
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = "新增充电桩时站 充电桩编码不能为空")
+
   private String deviceCode;
   /**
    * 充电桩名称
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = "新增充电桩时站充电桩名称 不能为空")
+
   private String deviceName;
   /**
    * 充电桩充电方式
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = "新增充电桩时站充电方式 不能为空")
+
   private Integer cgtypeId;
   /**
    * 设备功率
