@@ -107,6 +107,7 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     }
 
     @Override
+    @Transactional
     public boolean updateChargingPriceByKeys(ChargingPriceVo chargingPriceVo) {
         //低谷时间段计费
         ChargingPrice low = new ChargingPrice();

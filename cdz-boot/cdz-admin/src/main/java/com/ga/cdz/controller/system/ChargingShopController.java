@@ -4,6 +4,7 @@ package com.ga.cdz.controller.system;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
+import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.group.admin.IMChargingShopGroup;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
@@ -41,7 +42,7 @@ public class ChargingShopController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getShopList(@RequestBody @Validated PageVo<ChargingShopVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        IPage<ChargingShop> iPage = mChargingShopService.getChargingShopList(vo);
+        IPage<ChargingShopDTO> iPage = mChargingShopService.getChargingShopList(vo);
         return Result.success().data(iPage);
     }
 

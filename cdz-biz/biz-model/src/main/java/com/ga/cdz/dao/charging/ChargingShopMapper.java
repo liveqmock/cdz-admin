@@ -2,7 +2,11 @@ package com.ga.cdz.dao.charging;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -10,5 +14,5 @@ import com.ga.cdz.domain.entity.ChargingShop;
  * @date:2018/9/10 12:37
  */
 public interface ChargingShopMapper extends BaseMapper<ChargingShop> {
-
+    List<ChargingShopDTO> getShopList();
 }

@@ -40,8 +40,14 @@ public class ChargingShop extends Model<ChargingShop> {
     /**
      * 商户编码
      */
+
     @TableField("shop_code")
     private String shopCode;
+    /**
+     * 登录名
+     */
+    @TableField("shop_login")
+    private String shopLogin;
     /**
      * 商户名称
      */

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.ChargingTypeVo;
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -29,18 +32,12 @@ import java.util.List;
 public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, ChargingShop> implements IMChargingShopService {
 
     @Override
-    public IPage<ChargingShop> getChargingShopList(PageVo<ChargingShopVo> vo) {
-        ChargingShop chargingShop = new ChargingShop();
-        if (!ObjectUtils.isEmpty(vo.getData())) {
-            BeanUtils.copyProperties(vo.getData(), chargingShop);
-        }
-        //分页获取状态正常的商户
-        Page<ChargingShop> page = new Page<>(vo.getIndex(), vo.getSize());
-        page.setAsc("shop_id");
-        chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
-        QueryWrapper wrapper = new QueryWrapper<ChargingShop>(chargingShop);
-        IPage<ChargingShop> iPage = page(page, wrapper);
-        return iPage;
+    public IPage<ChargingShopDTO> getChargingShopList(PageVo<ChargingShopVo> vo) {
+        //分页获取商户
+        Page<ChargingShopDTO> page = new Page<>(vo.getIndex(), vo.getSize());
+        List<ChargingShopDTO> list = baseMapper.getShopList();
+        page.setRecords(list);
+        return page;
     }
 
     @Override
@@ -49,6 +46,11 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
         ChargingShop chargingShop = new ChargingShop();
         BeanUtils.copyProperties(vo, chargingShop);
         chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
+        //判断登录名是否已存在数据库中且状态为正常
+        ChargingShop hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopState, ChargingShop.ShopState.NORMAL).eq(ChargingShop::getShopLogin, vo.getShopLogin()));
+        if (!ObjectUtils.isEmpty(hasName)) {
+            throw new BusinessException("登录名在数据库中已存在");
+        }
         boolean result = updateById(chargingShop);
         return result;
     }
@@ -73,13 +75,13 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
     public boolean saveChargingShop(ChargingShopVo vo) {
         ChargingShop chargingShop = new ChargingShop();
         BeanUtils.copyProperties(vo, chargingShop);
-        //判断是否已存在数据库中且状态为正常
-        ChargingShop hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopState, ChargingShop.ShopState.NORMAL).eq(ChargingShop::getShopName, vo.getShopName()));
+        //判断登录名是否已存在数据库中且状态为正常
+        ChargingShop hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopState, ChargingShop.ShopState.NORMAL).eq(ChargingShop::getShopLogin, vo.getShopLogin()));
         if (!ObjectUtils.isEmpty(hasName)) {
-            throw new BusinessException("商户名在数据库中已存在");
+            throw new BusinessException("登录名在数据库中已存在");
         }
-        //判断是否存在数据库中，只是状态删除了
-        hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName, vo.getShopName()));
+        //判断登录名是否存在数据库中，只是状态删除了
+        hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, vo.getShopLogin()));
         if (!ObjectUtils.isEmpty(hasName)) {
             hasName.setShopState(ChargingShop.ShopState.NORMAL);
             updateById(hasName);
