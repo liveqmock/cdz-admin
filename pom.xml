@@ -102,6 +102,11 @@
             <artifactId>cdz-push</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-common</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </dependencyManagement>
 

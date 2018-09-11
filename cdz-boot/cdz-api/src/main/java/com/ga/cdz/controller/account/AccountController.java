@@ -2,18 +2,22 @@ package com.ga.cdz.controller.account;
 
 
 import com.ga.cdz.controller.AbstractBaseController;
-
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
+import com.ga.cdz.domain.group.api.IUserSmsPushGroup;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
+import com.ga.cdz.domain.vo.base.UserSmsPushVo;
 import com.ga.cdz.service.IAccountService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -57,6 +61,22 @@ public class AccountController extends AbstractBaseController {
         checkParams(bindingResult);
         accountService.register(registerVo);
         return Result.success().message("注册成功");
+    }
+
+
+    /**
+     * @author:luqi
+     * @description: 注册回调 (暂时不用)
+     * @date:2018/9/11_9:35
+     * @param: UserSmsPushVo vo
+     * @return: Result
+     */
+    @Deprecated
+    @PostMapping("/register/callback")
+    public Result registerCallBack(@RequestBody @Validated({IUserSmsPushGroup.Register.class}) UserSmsPushVo userSmsPushVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        accountService.registerCallBack(userSmsPushVo);
+        return Result.success().message("操作成功");
     }
 
     /**

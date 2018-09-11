@@ -3,23 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cdz</artifactId>
+        <artifactId>cdz-biz</artifactId>
         <groupId>com.ga.cdz</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>cdz-biz</name>
+    <name>biz-common</name>
     <groupId>com.ga.cdz</groupId>
-    <artifactId>cdz-biz</artifactId>
+    <artifactId>biz-common</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>biz-user</module>
-        <module>biz-admin</module>
-        <module>biz-model</module>
-        <module>biz-system</module>
-        <module>biz-message</module>
-        <module>biz-common</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-model</artifactId>
+        </dependency>
+    </dependencies>
 </project>

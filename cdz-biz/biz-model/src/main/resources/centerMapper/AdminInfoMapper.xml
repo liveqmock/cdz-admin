@@ -38,7 +38,7 @@
         a.admin_id =#{adminId,jdbcType=INTEGER}
     </select>
 
-    <select id="selectAdminDemoDTOPage"  resultMap="AdminDemoDTOMap">
+    <select id="selectAdminDemoDTOPage" resultMap="AdminDemoDTOMap">
         SELECT
         a.role_id AS roleId,
         role_name AS roleName,

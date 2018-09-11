@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.UserCardInfoMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
+import com.ga.cdz.dao.charging.UserSmsPushMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.entity.UserSmsPush;
 import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
 import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
 import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
@@ -19,6 +21,7 @@ import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
 import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +53,12 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
      **/
     @Resource
     UserCardInfoMapper userCardInfoMapper;
+
+    /**
+     * 推送信息
+     */
+    @Resource
+    UserSmsPushMapper userSmsPushMapper;
 
     /**
      * redis工具类
@@ -148,7 +157,7 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         /**注册成功后新生成card*/
         String maxCardCode = userCardInfoMapper.getCardCodeLast();
         if (StringUtils.isEmpty(maxCardCode)) {
-            maxCardCode = "10000";
+            maxCardCode = "9999";
         }
         /**cardCode*/
         String cardCode = new BigInteger(maxCardCode).add(new BigInteger("1")).toString();
@@ -164,8 +173,30 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
+    @Transactional
     public void registerCallBack(UserSmsPushVo userSmsPushVo) {
-
+        /**验证用户是否存在*/
+        Integer userId = userSmsPushVo.getUserId();
+        UserInfo hasUserInfo = baseMapper.selectById(userId);
+        if (ObjectUtils.isEmpty(hasUserInfo)) {
+            throw new BusinessException("用户不存在");
+        }
+        UserSmsPush hasUserSmsPush = userSmsPushMapper.selectById(userId);
+        UserSmsPush userSmsPush = new UserSmsPush();
+        BeanUtils.copyProperties(userSmsPushVo, userSmsPush);
+       /* if(ObjectUtils.isEmpty(hasUserSmsPush)){
+            //没有插入
+            int row=userSmsPushMapper.insert(userSmsPush);
+            if(row==0){
+                throw new BusinessException("操作失败，稍后重试");
+            }
+        }else{
+            //更新
+           int row= userSmsPushMapper.updateById(userSmsPush);
+           if(row==0){
+               throw new BusinessException("操作失败，稍后重试");
+           }
+        }*/
     }
 
     @Override
@@ -199,16 +230,37 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     }
 
     @Override
+    @Transactional
     public UserLoginDTO login(UserInfoLoginVo userInfoLoginVo) {
         /**用户密码md5*/
         String md5Pwd = mUtil.MD5(userInfoLoginVo.getUserPwd());
         String userTel = userInfoLoginVo.getUserTel();
+        String pushTag = userInfoLoginVo.getPushTag();
+        String pushRegid = userInfoLoginVo.getPushRegid();
         UserInfo hasUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda()
                 .eq(UserInfo::getUserTel, userTel).eq(UserInfo::getUserPwd, md5Pwd));
         if (ObjectUtils.isEmpty(hasUserInfo)) {
             throw new BusinessException("电话或密码错误");
         }
-        /**生成token*/
+        Integer userId = hasUserInfo.getUserId();
+        /**用户极光推送,默认alias DEFAULT*/
+        UserSmsPush userSmsPush = new UserSmsPush().setUserId(userId)
+                .setPushTag(pushTag).setPushRegid(pushRegid).setPushAlias("DEFAULT");
+        UserSmsPush hasUserSmsPush = userSmsPushMapper.selectById(userId);
+        if (ObjectUtils.isEmpty(hasUserSmsPush)) {
+            //没有插入
+            int row = userSmsPushMapper.insert(userSmsPush);
+            if (row == 0) {
+                throw new BusinessException("操作失败，稍后重试");
+            }
+        } else {
+            //更新
+            int row = userSmsPushMapper.updateById(userSmsPush);
+            if (row == 0) {
+                throw new BusinessException("操作失败，稍后重试");
+            }
+        }
+        /**激光推送数据操作成功，生成token*/
         String token = mUtil.MD5(mUtil.UUID16());
         String redisTokenKey = RedisConstant.USER_TOKEN + userTel;
         /**redis 7天*/

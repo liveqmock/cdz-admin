@@ -5,6 +5,7 @@ import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.dto.admin.AdminDemoDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.entity.AdminPermission;
+import com.ga.cdz.domain.entity.UserInfo;
 
 import java.util.List;
 

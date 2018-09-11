@@ -45,11 +45,12 @@ public interface IAccountService extends IService<UserInfo> {
 
     /**
      * @author:luqi
-     * @description: 注册之后的回调
+     * @description: 注册之后的回调, 上传机关推送相关信息
      * @date:2018/9/11_9:02
      * @param: UserSmsPushVo
      * @return:
      */
+    @Deprecated
     void registerCallBack(UserSmsPushVo userSmsPushVo);
 
     /**
@@ -68,5 +69,6 @@ public interface IAccountService extends IService<UserInfo> {
      * @return: UserLoginDTO
      */
     UserLoginDTO login(UserInfoLoginVo userInfoLoginVo);
+
 
 }

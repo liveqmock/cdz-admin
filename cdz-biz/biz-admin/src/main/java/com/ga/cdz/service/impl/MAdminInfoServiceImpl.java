@@ -11,6 +11,7 @@ import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.vo.base.AdminInfoVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMAdminInfoService;
+import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +38,8 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInf
     @Resource
     MUtil mUtil;
 
+    @Resource
+    MRedisUtil mRedisUtil;
     /***
      *  如果不满足请直接 抛出异常
      * */
@@ -125,6 +128,7 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInf
     public Page<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo) {
         Page<AdminDemoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
         List<AdminDemoDTO> list = baseMapper.selectAdminDemoDTOPage(page);
+
         page.setRecords(list);
         return page;
     }
