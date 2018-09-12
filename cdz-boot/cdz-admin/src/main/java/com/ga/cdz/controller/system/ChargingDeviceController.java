@@ -4,10 +4,12 @@ package com.ga.cdz.controller.system;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceDTO;
+import com.ga.cdz.domain.dto.admin.ChargingDeviceSubDTO;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.group.admin.IMChargingDeviceGroup;
 import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceService;
+import com.ga.cdz.service.IMChargingDeviceSubService;
 import com.ga.cdz.service.IMChargingTypeService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -31,6 +33,8 @@ public class ChargingDeviceController extends AbstractBaseController {
   IMChargingDeviceService mChargingDeviceService;//充电桩Service
   @Resource
   IMChargingTypeService mChargingTypeService;//充电类型Service
+  @Resource
+  IMChargingDeviceSubService mChargingDeviceSubService;//充电枪
 
   /**
    * @author huanghaohao
@@ -72,9 +76,18 @@ public class ChargingDeviceController extends AbstractBaseController {
     return Result.success().data(list);
   }
 
+  /**
+   * @author huanghaohao
+   * @date 2018-09-12 11:38
+   * @desc 获取充电枪列表
+   * @param chargingDeviceVo
+   * @param bindingResult
+   * @return
+   */
   @PostMapping("/sub/list")
   public Result getChargingDeviceSubListByDeviceId(@RequestBody @Validated(value = {IMChargingDeviceGroup.subList.class})ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult){
-
-    return Result.success();
+    checkParams(bindingResult);
+    List<ChargingDeviceSubDTO> list=mChargingDeviceSubService.getChargingDeviceSubList(chargingDeviceVo);
+    return Result.success().data(list);
   }
 }

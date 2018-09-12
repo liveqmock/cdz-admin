@@ -3,12 +3,10 @@ package com.ga.cdz.domain.dto.admin;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingType;
-import com.ga.cdz.domain.group.admin.IMChargingDeviceGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 

@@ -65,7 +65,7 @@ public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper
 //    return this.baseMapper.selectList(new QueryWrapper<ChargingDevice>().lambda().eq(ChargingDevice::getStationId,stationId));
     }
 
-    @Override
+
     public void getRedisListAll() {
         List<ChargingDevice> list = baseMapper.selectList(null);
         Map<String, ChargingDevice> map = list.stream().collect(Collectors
