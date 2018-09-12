@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingType">
         <id column="cgtype_id" property="cgtypeId"/>
         <result column="cgtype_name" property="cgtypeName"/>
+        <result column="cgtype_mode" property="cgtypeMode"/>
         <result column="cgtype_code" property="cgtypeCode"/>
         <result column="cgtype_state" property="cgtypeState"/>
         <result column="insret_dt" property="insretDt"/>

@@ -43,6 +43,11 @@ public class ChargingType extends Model<ChargingType> {
     @TableField("cgtype_name")
     private String cgtypeName;
     /**
+     * 充电快慢 1 慢 2快
+     */
+    @TableField("cgtype_mode")
+    private CgtypeMode cgtypeMode;
+    /**
      * 充电方式编码
      */
     @TableField("cgtype_code")
@@ -83,6 +88,29 @@ public class ChargingType extends Model<ChargingType> {
         private String desc;
 
         CgtypeState(int value, String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        @Override
+        @JsonValue
+        public Integer getValue() {
+            return this.value;
+        }
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 充电快慢枚举
+     * @date:2018/9/12 18:52
+     */
+    public enum CgtypeMode implements IEnum<Integer> {
+        FAST(1, "慢"),
+        SLOW(2, "快");
+        private int value;
+        private String desc;
+
+        CgtypeMode(int value, String desc) {
             this.value = value;
             this.desc = desc;
         }

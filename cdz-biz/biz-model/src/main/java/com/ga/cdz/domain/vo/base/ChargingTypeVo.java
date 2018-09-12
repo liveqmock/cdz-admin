@@ -1,5 +1,6 @@
 package com.ga.cdz.domain.vo.base;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.group.admin.IMChargingTypeGroup;
 import lombok.Data;
@@ -27,6 +28,11 @@ public class ChargingTypeVo {
      */
     @NotBlank(groups = {IMChargingTypeGroup.Add.class}, message = "充电方式名称不能为空")
     private String cgtypeName;
+    /**
+     * 充电快慢 1 慢 2快
+     */
+    @NotNull(groups = {IMChargingTypeGroup.Add.class}, message = "充电快慢不能为空")
+    private ChargingType.CgtypeMode cgtypeMode;
     /**
      * 充电方式编码
      */
