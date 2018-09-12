@@ -4,9 +4,11 @@ package com.ga.cdz.controller.system;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceDTO;
+import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.group.admin.IMChargingDeviceGroup;
 import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceService;
+import com.ga.cdz.service.IMChargingTypeService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +28,9 @@ import java.util.List;
 @RequestMapping("/charging/device")
 public class ChargingDeviceController extends AbstractBaseController {
   @Resource
-  IMChargingDeviceService mChargingDeviceService;
+  IMChargingDeviceService mChargingDeviceService;//充电桩Service
+  @Resource
+  IMChargingTypeService mChargingTypeService;//充电类型Service
 
   /**
    * @author huanghaohao
@@ -56,4 +60,21 @@ public class ChargingDeviceController extends AbstractBaseController {
     return Result.success().data(list);
   }
 
+  /**
+   * @author huanghaohao
+   * @date 2018-09-11 17:59
+   * @desc 返回所有的充电方式
+   * @return
+   */
+  @PostMapping("/charging/type/list")
+  public Result getChargingType(){
+    List<ChargingType> list=mChargingTypeService.getChargingTypeList();
+    return Result.success().data(list);
+  }
+
+  @PostMapping("/sub/list")
+  public Result getChargingDeviceSubListByDeviceId(@RequestBody @Validated(value = {IMChargingDeviceGroup.subList.class})ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult){
+
+    return Result.success();
+  }
 }

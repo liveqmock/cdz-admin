@@ -18,6 +18,7 @@ public class ChargingDeviceVo {
   /**
    * 充电桩ID
    */
+  @NotNull(groups = {IMChargingDeviceGroup.subList.class},message = "桩Id 不能为空")
   private Integer deviceId;
   /**
    * 充电站ID
