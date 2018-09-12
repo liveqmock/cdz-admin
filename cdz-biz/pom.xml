@@ -21,5 +21,6 @@
         <module>biz-system</module>
         <module>biz-message</module>
         <module>biz-common</module>
+        <module>biz-order</module>
     </modules>
 </project>

@@ -2,17 +2,17 @@ package com.ga.cdz.controller.user;
 
 import com.ga.cdz.annotation.UserState;
 import com.ga.cdz.controller.AbstractBaseController;
+import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.group.api.IMyInfoGroup;
 import com.ga.cdz.domain.vo.api.MyInfoVo;
 import com.ga.cdz.service.IUserService;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -45,6 +45,29 @@ public class MyInfoController extends AbstractBaseController {
         checkParams(bindingResult);
         MyInfoDTO myInfoDTO = userService.getMyInfoDTOById(myInfoVo.getUserId());
         return Result.success().data(myInfoDTO);
+    }
+
+
+    /**
+     * @author:luqi
+     * @description: 更新头像
+     * @date:2018/9/12_10:01
+     * @param: mulpartFile对象
+     * @param: 用户id
+     * @return:
+     */
+    @UserState
+    @PostMapping("/upload/avatar")
+    public Result uploadAvatar(@RequestParam("avatar") MultipartFile file,
+                               @RequestParam("userId") Integer userId) {
+        /***判断文件是否存在*/
+        if (ObjectUtils.isEmpty(file) || file.isEmpty()) {
+            throw new BusinessException("上传头像为空");
+        }
+        if (ObjectUtils.isEmpty(userId)) {
+            throw new BusinessException("userId为空");
+        }
+        return null;
     }
 
 

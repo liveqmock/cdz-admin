@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingOrder">
+        <id column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="station_id" property="stationId"/>
+        <result column="device_id" property="deviceId"/>
+        <result column="device_sub_id" property="deviceSubId"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="total_energy" property="totalEnergy"/>
+        <result column="chargin_begin_dt" property="charginBeginDt"/>
+        <result column="chargin_end_dt" property="charginEndDt"/>
+        <result column="order_state" property="orderState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        order_id, user_id, station_id, device_id, device_sub_id, total_price, total_energy, chargin_begin_dt, chargin_end_dt, order_state, update_dt, insert_dt
+    </sql>
+
+</mapper>

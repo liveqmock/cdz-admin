@@ -50,6 +50,10 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>cdz-push</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-order</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

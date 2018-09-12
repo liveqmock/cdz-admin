@@ -7,12 +7,15 @@ import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.service.IUserService;
+import com.ga.cdz.util.MFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.math.BigDecimal;
 
 
@@ -23,13 +26,19 @@ import java.math.BigDecimal;
  */
 @Slf4j
 @Service("userService")
-public class UserServiceImpl extends ServiceImpl<UserInfoMapper,UserInfo> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserService {
 
     /**
      * 用户头像路径
      */
     @Value("${url.user_avatar}")
     protected String userAvatarFilePath;
+
+    /**
+     * 文件工具类
+     */
+    @Resource
+    MFileUtil mFileUtil;
 
     @Override
     public MyInfoDTO getMyInfoDTOById(Integer id) {
@@ -61,4 +70,31 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper,UserInfo> implem
         //没有冻结
         return false;
     }
+
+    @Override
+    public void uploadAvatar(MultipartFile file, Integer userId) {
+        UserInfo userInfo = baseMapper.selectById(userId);
+        if (ObjectUtils.isEmpty(userInfo)) {
+            throw new BusinessException("用户不存在");
+        }
+        String fileName = file.getOriginalFilename();
+        boolean isImg = mFileUtil.isImgFileName(fileName);
+        if (!isImg) {
+            throw new BusinessException("不是图片文件");
+        }
+        /**生成新的文件名*/
+        String newFileName = mFileUtil.renameFile(fileName);
+        /**生成新的文件目录,假设存储用户id为1的用户头像*/
+        String newFilePath = mFileUtil.getTimePath() + File.separator + userId + File.separator;
+        /**保存在数据库的dbFilePath*/
+        String dbFilePath = newFilePath + newFileName;
+        /**保存文件*/
+        String filePathAndName = userAvatarFilePath + dbFilePath;
+        boolean isSuccess = mFileUtil.saveFile(file, filePathAndName);
+        if (!isSuccess) {
+            throw new BusinessException("文件上传失败");
+        }
+    }
+
+
 }

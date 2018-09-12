@@ -7,34 +7,17 @@
         <groupId>com.ga.cdz</groupId>
         <version>1.0</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <name>biz-user</name>
+    <name>biz-order</name>
     <groupId>com.ga.cdz</groupId>
-    <artifactId>biz-user</artifactId>
+    <artifactId>biz-order</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-sms</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
             <artifactId>biz-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-file</artifactId>
         </dependency>
     </dependencies>
 </project>

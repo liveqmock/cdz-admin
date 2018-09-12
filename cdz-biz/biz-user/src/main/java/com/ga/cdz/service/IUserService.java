@@ -3,6 +3,7 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author:luqi
@@ -28,5 +29,14 @@ public interface IUserService extends IService<UserInfo> {
      * @return: 是否
      */
     boolean isUserFreeze(String tel);
+
+    /**
+     * @author:luqi
+     * @description: 上传头像
+     * @date:2018/9/12_10:06
+     * @param:
+     * @return:
+     */
+    void uploadAvatar(MultipartFile file, Integer userId);
 
 }
