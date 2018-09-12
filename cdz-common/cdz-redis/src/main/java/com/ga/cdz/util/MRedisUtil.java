@@ -1,13 +1,11 @@
 package com.ga.cdz.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -69,17 +67,6 @@ public class MRedisUtil {
      */
     public <K, T> void pushHashAll(String key, Map<K, T> hashValue) {
         redisTemplate.opsForHash().putAll(key, hashValue);
-    }
-
-    /**
-     * @author:luqi
-     * @description: 添加list集合
-     * @date:2018/9/12_15:27
-     * @param:
-     * @return:
-     */
-    public <T> void pushList(String key, List<T> list) {
-        redisTemplate.opsForList().rightPushAll(key, list);
     }
 
 
@@ -184,6 +171,39 @@ public class MRedisUtil {
             return (T) redisTemplate.opsForValue().get(key);
         } catch (Throwable t) {
             log.error("redis get key exec was error " + key + ", detail----" + t);
+        }
+        return null;
+    }
+
+
+    /**
+     * @author:luqi
+     * @description: hash 获取hash对象
+     * @date:2018/9/12_17:38
+     * @param:
+     * @return:
+     */
+    public <T> T getHash(String key) {
+        try {
+            return (T) redisTemplate.opsForHash().entries(key);
+        } catch (Throwable t) {
+            log.error("redis get hash key exec was error " + key + ", detail----" + t);
+        }
+        return null;
+    }
+
+    /**
+     * @author:luqi
+     * @description: 将hash对象转为list
+     * @date:2018/9/12_17:40
+     * @param:
+     * @return:
+     */
+    public <T> T getHashOfList(String key) {
+        try {
+            return (T) redisTemplate.opsForHash().values(key);
+        } catch (Throwable t) {
+            log.error("redis get hash list key exec was error " + key + ", detail----" + t);
         }
         return null;
     }

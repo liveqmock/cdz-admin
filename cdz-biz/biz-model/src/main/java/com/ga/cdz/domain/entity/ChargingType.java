@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -63,12 +64,8 @@ public class ChargingType extends Model<ChargingType> {
     @TableField("insret_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime insretDt;
+    private Date insretDt;
 
-
-    public String getCgtypeIdStr() {
-        return this.cgtypeId + "";
-    }
 
     @Override
     protected Serializable pkVal() {

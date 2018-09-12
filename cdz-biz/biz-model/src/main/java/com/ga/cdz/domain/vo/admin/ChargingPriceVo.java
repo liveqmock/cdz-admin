@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -43,12 +43,12 @@ public class ChargingPriceVo {
      * 低谷开始时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "低谷开始时间不能为空")
-    private LocalTime lowStart;
+    private Date lowStart;
     /**
      * 低谷结束时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "低谷结束时间不能为空")
-    private LocalTime lowEnd;
+    private Date lowEnd;
     /**
      * 低谷充电价格
      */
@@ -77,12 +77,12 @@ public class ChargingPriceVo {
      * 平谷开始时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "平谷开始时间不能为空")
-    private LocalTime middleStart;
+    private Date middleStart;
     /**
      * 平谷结束时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "平谷结束时间不能为空")
-    private LocalTime middleEnd;
+    private Date middleEnd;
     /**
      * 平谷充电价格
      */
@@ -112,12 +112,12 @@ public class ChargingPriceVo {
      * 高峰开始时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "高峰开始时间不能为空")
-    private LocalTime highStart;
+    private Date highStart;
     /**
      * 高峰结束时间
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "高峰结束时间不能为空")
-    private LocalTime highEnd;
+    private Date highEnd;
     /**
      * 高峰充电价格
      */

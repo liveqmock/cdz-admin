@@ -4,13 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.center.DistrictMapper;
+import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.entity.District;
 import com.ga.cdz.service.IDistrictService;
 import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -19,6 +23,7 @@ import java.util.stream.Collectors;
  * @description:
  * @date: 2018/9/10_10:39
  */
+@Slf4j
 @Service("districtService")
 public class DistrictServiceImpl extends ServiceImpl<DistrictMapper, District> implements IDistrictService {
 
@@ -39,10 +44,14 @@ public class DistrictServiceImpl extends ServiceImpl<DistrictMapper, District> i
     public List<District> getListAllProvince() {
         List<District> list;
         if (mRedisUtil.hasKey(RedisConstant.TABLE_DISTRICT)) {
-            list = mRedisUtil.get(RedisConstant.TABLE_DISTRICT);
+            list = mRedisUtil.getHashOfList(RedisConstant.TABLE_DISTRICT);
         } else {
             list = baseMapper.selectList(null);
-            mRedisUtil.pushList(RedisConstant.TABLE_DISTRICT, list);
+            Map<String, District> map = Maps.newHashMap();
+            for (District district : list) {
+                map.put(district.getDistrictCode() + "", district);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_DISTRICT, map);
         }
         List<District> rsList = list.stream().filter(district -> district.getDistrictParentCode().equals(0))
                 .collect(Collectors.toList());

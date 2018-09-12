@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -56,9 +57,9 @@ public class District extends Model<District> {
     public enum DistrictLevel implements IEnum<Integer> {
         SHENG(0, "省"),
         SHI(1, "市"),
-        QU(3, "县"),
-        ZHEN(4, "镇");
-
+        QU(2, "区"),
+        ZHEN(3, "镇"),
+        JD(4, "街道");
         private int value;
         private String desc;
 
@@ -68,6 +69,7 @@ public class District extends Model<District> {
         }
 
         @Override
+        @JsonValue
         public Integer getValue() {
             return this.value;
         }

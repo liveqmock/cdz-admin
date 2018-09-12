@@ -7,9 +7,11 @@ import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingTypeMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.ChargingType;
+import com.ga.cdz.domain.redis.ChargingTypeRD;
 import com.ga.cdz.domain.vo.base.ChargingTypeVo;
 import com.ga.cdz.service.IMChargingTypeService;
 import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,6 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author:wanzhongsu
@@ -84,8 +85,13 @@ public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, Ch
     @Override
     public void getRedisListAll() {
         List<ChargingType> list = baseMapper.selectList(null);
-        Map<String, ChargingType> map = list.stream().collect(Collectors
-                .toMap(ChargingType::getCgtypeIdStr, ChargingType -> ChargingType));
+        Map<String, ChargingTypeRD> map = Maps.newHashMap();
+        for (ChargingType chargingType : list) {
+            ChargingTypeRD chargingTypeRD = new ChargingTypeRD();
+            BeanUtils.copyProperties(chargingType, chargingTypeRD);
+            chargingTypeRD.setCgtypeState(chargingType.getCgtypeState().getValue());
+            map.put(chargingType.getCgtypeId() + "", chargingTypeRD);
+        }
         mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_TYPE, map);
         log.info("TABLE_CHARGING_TYPE缓存成功");
     }

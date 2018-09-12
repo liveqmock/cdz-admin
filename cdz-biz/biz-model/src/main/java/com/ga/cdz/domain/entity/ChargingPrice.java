@@ -1,26 +1,21 @@
 package com.ga.cdz.domain.entity;
 
-import java.math.BigDecimal;
-
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.time.LocalTime;
-import java.time.LocalDateTime;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -61,14 +56,14 @@ public class ChargingPrice extends Model<ChargingPrice> {
     @TableField("price_begin_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalTime priceBeginDt;
+    private Date priceBeginDt;
     /**
      * 结束时间
      */
     @TableField("price_end_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalTime priceEndDt;
+    private Date priceEndDt;
     /**
      * 充电价格
      */
@@ -95,11 +90,8 @@ public class ChargingPrice extends Model<ChargingPrice> {
     @TableField("insert_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
-    public String getStationIdStr() {
-        return this.stationId + "";
-    }
 
 
     @Override
@@ -114,7 +106,7 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     public enum PriceType implements IEnum<Integer> {
         PERSONAL(1, "专场计费"),
-        NONPERSONAL(2, "非专场计费");
+        NONPERSONAL(2, "非专场计费"),;
 
         private int value;
         private String desc;
@@ -128,6 +120,10 @@ public class ChargingPrice extends Model<ChargingPrice> {
         @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
         }
     }
 

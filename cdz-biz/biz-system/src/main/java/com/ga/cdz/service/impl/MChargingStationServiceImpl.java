@@ -10,10 +10,12 @@ import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
+import com.ga.cdz.domain.redis.ChargingStationRD;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
 import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -125,8 +127,14 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     @Override
     public void getRedisListAll() {
         List<ChargingStation> list = baseMapper.selectList(null);
-        Map<String, ChargingStation> stationMap = list.stream()
-                .collect(Collectors.toMap(ChargingStation::getStationIdStr, ChargingStation -> ChargingStation));
+        Map<String, ChargingStationRD> stationMap = Maps.newHashMap();
+        for (ChargingStation station : list) {
+            ChargingStationRD chargingStationRD = new ChargingStationRD();
+            BeanUtils.copyProperties(station, chargingStationRD);
+            chargingStationRD.setStationType(station.getStationType().getValue());
+            chargingStationRD.setStationState(station.getStationState().getValue());
+            stationMap.put(station.getStationId() + "", chargingStationRD);
+        }
         mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_STATION, stationMap);
         log.info("TABLE_CHARGING_STATION缓存成功");
     }

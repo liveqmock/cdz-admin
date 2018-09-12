@@ -15,8 +15,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -92,32 +91,28 @@ public class ChargingStation extends Model<ChargingStation> {
     @TableField("station_opendt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalTime stationOpendt;
+    private Date stationOpendt;
     /**
      * 充电站关闭时间
      */
     @TableField("station_closedt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalTime stationClosedt;
+    private Date stationClosedt;
     /**
      * 更新时间
      */
     @TableField("update_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateDt;
+    private Date updateDt;
     /**
      * 插入时间
      */
     @TableField("insert_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime insertDt;
-
-    public String getStationIdStr() {
-        return this.stationId + "";
-    }
+    private Date insertDt;
 
     @Override
     protected Serializable pkVal() {
