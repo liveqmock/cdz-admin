@@ -19,6 +19,7 @@ import com.ga.cdz.util.MFileUtil;
 import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -54,10 +55,11 @@ public class ChargingStationController extends AbstractBaseController {
     @Resource
     MFileUtil mFileUtil;
     /**
-     * 用户头像路径
+     * 站点图片路径
      */
-    @Value("${file.user_avatar}")
+    @Value("${file.station}")
     protected String userAvatarFilePath;
+
     /**
      * @author:wanzhongsu
      * @description: 分页获取充电站列表信息
@@ -85,12 +87,20 @@ public class ChargingStationController extends AbstractBaseController {
         int result = mChargingStationService.saveStation(vo);
 
         if (result > 0) {
-         return    Result.success().message("保存成功");
+            return Result.success().message("保存成功");
         }
         return Result.fail().message("保存失败");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 充电站文件上传及信息添加
+     * @date: 2018/9/12 18:23
+     * @param: MultipartFile ChargingStationFileVo
+     * @return: Result
+     */
     @PostMapping("/file/upload")
+    @Transactional
     public Result uploadFile(@RequestParam("files") MultipartFile[] multipartFiles, ChargingStationFileVo fileVo) {
         if (ObjectUtils.isEmpty(multipartFiles) || multipartFiles.length == 0) {
             throw new BusinessException("文件不能为空");
@@ -157,7 +167,15 @@ public class ChargingStationController extends AbstractBaseController {
         return Result.success().message("键值数据保存成功，文件上传成功");
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 保存ChargingStationVo对象，只限于本类中调用
+     * @date: 2018/9/12 18:24
+     * @param:
+     * @return:
+     */
     private int saveChargingStation(ChargingStationVo vo) {
+        //充电站信息验证
         Integer shopId = vo.getShopId();
         String stationCode = vo.getStationCode();
         String stationName = vo.getStationName();
@@ -177,9 +195,11 @@ public class ChargingStationController extends AbstractBaseController {
         if (!Pattern.matches(RegexConstant.STATION_CODE, stationCode)) {
             throw new BusinessException("充电站编码格式不对");
         }
+        //保存并返回充电站ID
         int stationId = mChargingStationService.saveStation(vo);
         return stationId;
     }
+
     /**
      * @author:wanzhongsu
      * @description: 删除充电站信息

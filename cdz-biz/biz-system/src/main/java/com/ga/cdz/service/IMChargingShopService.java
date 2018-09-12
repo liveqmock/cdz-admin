@@ -25,6 +25,7 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      */
     IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo);
 
+    List<ChargingShop> getListByName(ChargingShopVo vo);
     /**
      * @author:wanzhongsu
      * @description: 修改商户

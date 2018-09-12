@@ -7,7 +7,7 @@ file:
   #文件基础路径
   base: ${config.base_path}\\img
   #系统消息
-  system: ${config.base_path}\\system
+  system: ${file.base}\\system
   #banner
   banner: ${file.base}\\banner
   #用户头像图片
@@ -17,11 +17,11 @@ file:
 
 #文件请求路径
 url:
-  base: http:\\192.168.2.18:8081
+  base: http:\\192.168.2.18:8018
   #系统消息
-  system: ${url.base}\\system
+  system: ${url.base}\img\system
   #banner
-  banner: ${url.base}\banner
+  banner: ${url.base}\img\banner
   #t头像路径
   user_avatar: ${url.base}\user\avatar
   #站点路径

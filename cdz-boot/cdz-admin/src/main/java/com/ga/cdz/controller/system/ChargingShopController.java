@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
+import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.group.admin.IMChargingShopGroup;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -30,6 +32,20 @@ public class ChargingShopController extends AbstractBaseController {
     //商户管理服务
     @Resource
     IMChargingShopService mChargingShopService;
+
+    /**
+     * @author:wanzhongsu
+     * @description: 根据名字模糊查询，返回商户ID
+     * @date: 2018/9/12 14:51
+     * @param: ChargingShopVo
+     * @return: Result
+     */
+    @PostMapping("/get/id")
+    public Result getListByName(@RequestBody @Validated ChargingShopVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingShop> list = mChargingShopService.getListByName(vo);
+        return Result.success().data(list);
+    }
 
     /**
      * @author:wanzhongsu

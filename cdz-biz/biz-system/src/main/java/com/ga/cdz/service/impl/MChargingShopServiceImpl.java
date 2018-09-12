@@ -41,6 +41,11 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
     }
 
     @Override
+    public List<ChargingShop> getListByName(ChargingShopVo vo) {
+        return baseMapper.selectList(new QueryWrapper<ChargingShop>().lambda().like(ChargingShop::getShopName, vo.getShopName()));
+    }
+
+    @Override
     @Transactional
     public boolean updateShopById(ChargingShopVo vo) {
         ChargingShop chargingShop = new ChargingShop();
