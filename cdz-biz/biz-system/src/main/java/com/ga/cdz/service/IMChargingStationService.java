@@ -47,10 +47,10 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @author:wanzhongsu
      * @description: 保存充电站信息
      * @date: 2018/9/10 16:30
-     * @param:
-     * @return:
+     * @param: ChargingStation的vo对象
+     * @return: 返回保存后的StationId值，否则-1
      */
-    boolean saveStation(ChargingStationVo vo);
+    int saveStation(ChargingStationVo vo);
 
     /**
      * @author:luqi

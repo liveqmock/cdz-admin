@@ -6,12 +6,11 @@ import com.ga.cdz.domain.entity.Operators;
 import com.ga.cdz.domain.group.admin.IMOperatorsGroup;
 import com.ga.cdz.domain.vo.base.OperatorsVo;
 import com.ga.cdz.service.IMOperatorsService;
+
+import org.jboss.logging.Param;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -41,6 +40,20 @@ public class OperatorController extends AbstractBaseController {
     public Result getOperatorList() {
         List<Operators> operators = mOperatorsService.getOperatorList();
         return Result.success().data(operators);
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 根据名字获取运营商信息
+     * @date: 2018/9/12 10:10
+     * @param: OperatorsVo
+     * @return: Result
+     */
+    @PostMapping("/get/id")
+    public Result getOperatorByName(@RequestBody @Validated OperatorsVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<Operators> list = mOperatorsService.getOperatorsListByName(vo);
+        return Result.success().data(list);
     }
 
     /**

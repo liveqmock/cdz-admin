@@ -28,6 +28,12 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
         return operators;
     }
 
+    @Override
+    public List<Operators> getOperatorsListByName(OperatorsVo vo) {
+        List<Operators> operators = baseMapper.selectList(new QueryWrapper<Operators>().lambda().like(Operators::getOperatorsName, vo.getOperatorsName()));
+        return operators;
+    }
+
     @Transactional
     @Override
     public Integer saveOperator(OperatorsVo vo) {

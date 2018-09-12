@@ -29,6 +29,15 @@ public interface IMOperatorsService extends IService<Operators> {
 
     /**
      * @author:wanzhongsu
+     * @description: 根据名称模糊查询运营商ID
+     * @date: 2018/9/12 10:03
+     * @param:
+     * @return:
+     */
+    List<Operators> getOperatorsListByName(OperatorsVo vo);
+
+    /**
+     * @author:wanzhongsu
      * @description: 添加运营商账号及信息
      * @date: 2018/9/10 9:32
      * @param:

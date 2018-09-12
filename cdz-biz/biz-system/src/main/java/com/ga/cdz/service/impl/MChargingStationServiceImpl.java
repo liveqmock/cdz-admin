@@ -47,7 +47,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         //构建分页信息
         Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
         //分页查询
-        List<ChargingStationDTO> list = baseMapper.getStationList();
+        List<ChargingStationDTO> list = baseMapper.getStationList(page);
         page.setRecords(list);
         return page;
     }
@@ -84,7 +84,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
 
     @Override
     @Transactional
-    public boolean saveStation(ChargingStationVo vo) {
+    public int saveStation(ChargingStationVo vo) {
         //属性复制
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
@@ -98,7 +98,11 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         if (!ObjectUtils.isEmpty(hasName)) {
             hasName.setStationState(ChargingStation.StationState.NORMAL);
             boolean result = updateById(hasName);
-            return result;
+            //返回保存后的Stationid值，否则-1
+            if (result) {
+                return hasName.getStationId();
+            }
+            return -1;
         }
         //检查商户编码是否已存在
         ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
@@ -107,9 +111,15 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         }
         //保存商户，商户状态初始化为正常
         chargingStation.setStationState(ChargingStation.StationState.NORMAL);
-        chargingStation.setStationType(ChargingStation.StationType.OUTSIDE);
-        boolean result = save(chargingStation);
-        return result;
+        boolean value = save(chargingStation);
+        //返回保存后的StationId值，否则-1
+        if (value) {
+            ChargingStation obj = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
+            int result = obj.getStationId();
+            return result;
+        } else {
+            return -1;
+        }
     }
 
     @Override

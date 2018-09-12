@@ -29,12 +29,6 @@ public interface IMChargingDeviceService extends IService<ChargingDevice> {
    */
   List<ChargingDeviceDTO> getChargingDeviceList(ChargingDeviceVo chargingDeviceVo);
 
-  /**
-   * @author:luqi
-   * @description: 获取所有的 缓存
-   * @date:2018/9/11_20:07
-   * @param:
-   * @return:
-   */
   void getRedisListAll();
+
 }
