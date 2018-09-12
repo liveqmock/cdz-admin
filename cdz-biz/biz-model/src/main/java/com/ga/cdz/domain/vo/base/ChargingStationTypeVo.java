@@ -1,14 +1,16 @@
 package com.ga.cdz.domain.vo.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingStationType;
 import com.ga.cdz.domain.group.admin.IMChargingStationTypeGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -37,5 +39,7 @@ public class ChargingStationTypeVo {
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date insertDt;
 }

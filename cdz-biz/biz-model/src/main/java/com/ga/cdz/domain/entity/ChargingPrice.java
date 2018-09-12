@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -54,16 +55,18 @@ public class ChargingPrice extends Model<ChargingPrice> {
      * 开始时间
      */
     @TableField("price_begin_dt")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date priceBeginDt;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time priceBeginDt;
+
     /**
      * 结束时间
      */
     @TableField("price_end_dt")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date priceEndDt;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time priceEndDt;
+
     /**
      * 充电价格
      */
@@ -79,11 +82,13 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     @TableField("service_price")
     private BigDecimal servicePrice;
+
     /**
      * 计费状态 1可用 0禁用
      */
     @TableField("price_state")
     private PriceState priceState;
+
     /**
      * 插入时间
      */

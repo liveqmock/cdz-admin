@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author: liuyi
@@ -63,7 +63,7 @@ public class Banner extends Model<Banner> {
     @TableField("update_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateDt;
+    private Date updateDt;
 
     /**
      * 插入时间
@@ -71,7 +71,7 @@ public class Banner extends Model<Banner> {
     @TableField("insert_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
     @Override
     protected Serializable pkVal() {

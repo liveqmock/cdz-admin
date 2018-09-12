@@ -4,7 +4,7 @@ package com.ga.cdz.domain.dto.admin;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 /**
@@ -46,5 +46,5 @@ public class ChargingShopDTO {
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    private Date insertDt;
 }

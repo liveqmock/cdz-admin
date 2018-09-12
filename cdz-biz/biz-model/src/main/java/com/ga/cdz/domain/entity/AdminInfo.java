@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:luqi
@@ -65,7 +65,7 @@ public class AdminInfo extends Model<AdminInfo> {
     @TableField("insert_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 
     @Override

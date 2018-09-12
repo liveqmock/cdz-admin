@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -64,11 +64,11 @@ public class ChargingShopVo {
     /**
      * 更新时间
      */
-    private LocalDateTime updateDt;
+    private Date updateDt;
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 
 }

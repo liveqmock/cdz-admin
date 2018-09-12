@@ -1,17 +1,10 @@
 package com.ga.cdz.domain.vo.admin;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.ga.cdz.constant.RegexConstant;
-import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Time;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -69,18 +62,18 @@ public class ChargingStationFileVo {
     /**
      * 充电站开放时间
      */
-    private LocalTime stationOpendt;
+    private Time stationOpendt;
     /**
      * 充电站关闭时间
      */
-    private LocalTime stationClosedt;
+    private Time stationClosedt;
     /**
      * 更新时间
      */
-    private LocalDateTime updateDt;
+    private Date updateDt;
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 }

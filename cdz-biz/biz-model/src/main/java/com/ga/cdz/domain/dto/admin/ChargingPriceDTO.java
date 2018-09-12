@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.sql.Time;
 
 /**
  * @author:wanzhongsu
@@ -58,11 +58,11 @@ public class ChargingPriceDTO {
     /**
      * 低谷开始时间
      */
-    private LocalTime lowStart;
+    private Time lowStart;
     /**
      * 低谷结束时间
      */
-    private LocalTime lowEnd;
+    private Time lowEnd;
     /**
      * 低谷充电价格
      */
@@ -70,11 +70,11 @@ public class ChargingPriceDTO {
     /**
      * 低谷停车场价格
      */
-    private BigDecimal lowParking;
+    private Time lowParking;
     /**
      * 低谷服务费用
      */
-    private BigDecimal lowService;
+    private Time lowService;
     /**
      * 低谷计费状态 1可用 0禁用
      */
@@ -87,11 +87,11 @@ public class ChargingPriceDTO {
     /**
      * 平谷开始时间
      */
-    private LocalTime middleStart;
+    private Time middleStart;
     /**
      * 平谷结束时间
      */
-    private LocalTime middleEnd;
+    private Time middleEnd;
     /**
      * 平谷充电价格
      */
@@ -117,11 +117,11 @@ public class ChargingPriceDTO {
     /**
      * 高峰开始时间
      */
-    private LocalTime highStart;
+    private Time highStart;
     /**
      * 高峰结束时间
      */
-    private LocalTime highEnd;
+    private Time highEnd;
     /**
      * 高峰充电价格
      */

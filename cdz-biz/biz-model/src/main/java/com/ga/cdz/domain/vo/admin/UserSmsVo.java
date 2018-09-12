@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -45,10 +45,10 @@ public class UserSmsVo {
     /**
      * 更新时间
      */
-    private LocalDateTime updateDt;
+    private Date updateDt;
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 }

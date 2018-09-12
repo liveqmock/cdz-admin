@@ -1,17 +1,19 @@
 package com.ga.cdz.domain.vo.base;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.constant.RegexConstant;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Time;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -77,18 +79,26 @@ public class ChargingStationVo {
     /**
      * 充电站开放时间
      */
-    private LocalTime stationOpendt;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time stationOpendt;
     /**
      * 充电站关闭时间
      */
-    private LocalTime stationClosedt;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time stationClosedt;
     /**
      * 更新时间
      */
-    private LocalDateTime updateDt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updateDt;
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date insertDt;
 
 }

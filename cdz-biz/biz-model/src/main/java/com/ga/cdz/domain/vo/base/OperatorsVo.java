@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -42,6 +42,6 @@ public class OperatorsVo {
     /**
      * 插入时间
      */
-    private LocalDateTime insertDt;
+    private Date insertDt;
 
 }

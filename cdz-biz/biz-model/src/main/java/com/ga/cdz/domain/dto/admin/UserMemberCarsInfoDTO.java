@@ -1,11 +1,9 @@
 package com.ga.cdz.domain.dto.admin;
 
-import com.ga.cdz.domain.entity.UserInfo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Accessors(chain = true)
@@ -47,11 +45,11 @@ public class UserMemberCarsInfoDTO {
    * 更新时间
    */
 
-  private LocalDateTime updateDt;
+  private Date updateDt;
   /**
    * 插入时间
    */
-  private LocalDateTime insertDt;
+  private Date insertDt;
 
 
 }

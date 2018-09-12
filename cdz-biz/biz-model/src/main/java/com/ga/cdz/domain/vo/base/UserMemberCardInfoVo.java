@@ -5,11 +5,10 @@ import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.group.admin.IMUserInfoGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import sun.java2d.windows.GDIRenderer;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author huanghaohao
@@ -65,11 +64,11 @@ public class UserMemberCardInfoVo {
    * 更新时间
    */
 
-  private LocalDateTime updateDt;
+  private Date updateDt;
   /**
    * 插入时间
    */
-  private LocalDateTime insertDt;
+  private Date insertDt;
 
   /**
    * 汽车数量

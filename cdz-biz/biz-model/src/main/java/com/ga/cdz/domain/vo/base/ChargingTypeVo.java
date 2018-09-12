@@ -1,6 +1,5 @@
 package com.ga.cdz.domain.vo.base;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.group.admin.IMChargingTypeGroup;
 import lombok.Data;
@@ -8,7 +7,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author:wanzhongsu
@@ -45,6 +44,6 @@ public class ChargingTypeVo {
     /**
      * 插入时间
      */
-    private LocalDateTime insretDt;
+    private Date insretDt;
 
 }
