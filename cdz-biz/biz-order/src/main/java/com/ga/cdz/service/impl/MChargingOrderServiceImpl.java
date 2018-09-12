@@ -21,12 +21,14 @@ import java.util.List;
 @Service("mChargingOrderService")
 public class MChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, ChargingOrder> implements IMChargingOrderService {
   /**
-   * @author
+   * @author huanghaohao
+   * @date 2018-09-12 18:53
+   * @desc 查询获取订单列表
    * @param pageVo
    * @return
    */
   @Override
-  public Page<ChargingOrderDTO> getChargingListPag(PageVo<ChargingOrderVo> pageVo) {
+  public Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderVo> pageVo) {
     Page<ChargingOrderDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
     ChargingOrderVo vo= pageVo.getData();
     System.err.println(pageVo);

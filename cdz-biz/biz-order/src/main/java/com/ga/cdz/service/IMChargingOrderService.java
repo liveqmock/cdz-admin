@@ -13,5 +13,12 @@ import com.ga.cdz.domain.vo.base.PageVo;
  * @desc 订单Service
  */
 public interface IMChargingOrderService extends IService<ChargingOrder> {
-  Page<ChargingOrderDTO> getChargingListPag(PageVo<ChargingOrderVo> pageVo);
+  /**
+   * @author huanghaohao
+   * @date 2018-09-12 18:52
+   * @desc 获取订单列表
+   * @param pageVo
+   * @return
+   */
+  Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderVo> pageVo);
 }
