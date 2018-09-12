@@ -62,6 +62,11 @@ public class ChargingStation extends Model<ChargingStation> {
     @TableField("sttpe_id")
     private Integer sttpeId;
     /**
+     * 运营商ID
+     */
+    @TableField("operators_id")
+    private Integer operatorsId;
+    /**
      * 设备数
      */
     @TableField("device_num")

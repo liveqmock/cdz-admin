@@ -1,5 +1,6 @@
 package com.ga.cdz.domain.vo.base;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.ga.cdz.constant.RegexConstant;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
@@ -49,8 +50,14 @@ public class ChargingStationVo {
     /**
      * 运营商类型ID
      */
-    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "运营商类型不能为空")
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "运营商类型ID不能为空")
     private Integer sttpeId;
+    /**
+     * 运营商ID
+     */
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "运营商ID不能为空")
+    @TableField("operators_id")
+    private Integer operatorsId;
     /**
      * 设备数
      */

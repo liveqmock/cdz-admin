@@ -41,9 +41,9 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         Page<ChargingPriceDTO> page = new Page<ChargingPriceDTO>(vo.getIndex(), vo.getSize());
         //设置查询条件
         Map<String, Object> map = new HashMap<>();
-        map.put("myPriceType", myPriceType);
+        map.put("type", myPriceType);
         //查询
-        List<ChargingPriceDTO> list = baseMapper.getChargingPricePage(map);
+        List<ChargingPriceDTO> list = baseMapper.getChargingPricePage(page, map);
         page.setRecords(list);
         return page;
     }

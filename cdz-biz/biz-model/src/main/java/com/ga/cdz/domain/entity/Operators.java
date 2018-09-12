@@ -33,17 +33,17 @@ public class Operators extends Model<Operators> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 地区ID
+     * 运营商ID
      */
     @TableId(value = "operators_id", type = IdType.AUTO)
     private Integer operatorsId;
     /**
-     * 地区名称
+     *  运营商名称
      */
     @TableField("operators_name")
     private String operatorsName;
     /**
-     * 地区编码
+     * 运营商编码
      */
     @TableField("operators_code")
     private String operatorsCode;

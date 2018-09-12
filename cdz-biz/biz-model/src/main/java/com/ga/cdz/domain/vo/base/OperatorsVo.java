@@ -20,17 +20,17 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class OperatorsVo {
     /**
-     * 地区ID
+     * 运营商ID
      */
     @NotNull(groups = {IMOperatorsGroup.Delete.class}, message = "运营商ID不能为空")
     private Integer operatorsId;
     /**
-     * 地区名称
+     * 运营商名称
      */
     @NotBlank(groups = {IMOperatorsGroup.Add.class}, message = "运营商名称不能为空")
     private String operatorsName;
     /**
-     * 地区编码
+     * 运营商编码
      */
     @NotBlank(groups = {IMOperatorsGroup.Add.class}, message = "运营商编码不能为空")
     @Pattern(groups = {IMOperatorsGroup.Add.class}, regexp = RegexConstant.REGEX_CODE, message = "运营商编码只能是两位数字")

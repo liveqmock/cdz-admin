@@ -98,9 +98,7 @@
         AND b.price_name = a.price_name
         AND c.station_id = a.station_id
         AND c.price_name = a.price_name
-        <if test="myPriceType !=null">
-            AND a.price_type =#{myPriceType}
-        </if>
+        AND a.price_type =#{param.type}
     </select>
 
 </mapper>
