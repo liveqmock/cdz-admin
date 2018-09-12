@@ -17,10 +17,82 @@
         <result column="update_dt" property="updateDt"/>
         <result column="insert_dt" property="insertDt"/>
     </resultMap>
+    <resultMap id="chargingOrderList" type="com.ga.cdz.domain.dto.admin.ChargingOrderDTO">
+        <result column="order_id" property="orderId"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="station_id" property="stationId"></result>
+        <result column="station_code" property="stationCode"></result>
+        <result column="station_name" property="stationName"></result>
+        <result column="device_code" property="deviceCode"></result>
+        <result column="device_name" property="deviceName"></result>
+        <result column="cgtype_name" property="cgtypeName"></result>
+        <result column="charging_price" property="chargingPrice"></result>
+        <result column="service_price" property="servicePrice"></result>
+        <result column="device_id" property="deviceId"></result>
+        <result column="device_sub_id" property="deviceSubId"></result>
+        <result column="total_price" property="totalPrice"></result>
+        <result column="total_energy" property="totalEnergy"></result>
+        <result column="charin_begin_dt" property="charginBeginDt"></result>
+        <result column="chargin_end_dt" property="charginEndDt"></result>
+        <result column="order_state" property="orderState"></result>
+        <result column="update_dt" property="updateDt"></result>
+        <result column="insert_dt" property="insertDt"></result>
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         order_id, user_id, station_id, device_id, device_sub_id, total_price, total_energy, chargin_begin_dt, chargin_end_dt, order_state, update_dt, insert_dt
     </sql>
+    <select id="getChargingOrderListPage" resultMap="chargingOrderList">
+        SELECT
+        ord.*,
+        price.service_price,
+        price.price_name,
+        price.charging_price,
+        price.price_type,
+        type.cgtype_name ,
+        station.station_code,
+        station.station_name,
+        device.device_code,
+        device.device_name,
+        sub.device_sub_name,
+        sub.device_sub_id,
+        sub.device_sub_state
+        FROM
+        t_charging_order ord
+        LEFT JOIN t_charging_price price ON ord.station_id = price.station_id
+        LEFT JOIN t_charging_station station ON station.station_id = ord.station_id
+        LEFT JOIN t_charging_device device ON ord.device_id = device.device_id
+        LEFT JOIN t_charging_type type ON type.cgtype_id = device.cgtype_id
+        LEFT JOIN t_charging_device_sub  sub on ord.device_sub_id= sub.device_sub_id and ord.device_id=sub.device_id
+        WHERE
+        1 = 1
+        AND price.price_state != 0
+        <if test="order!=null">
+
+
+            <if test="order.deviceName!=null">
+                AND device.device_name like '%#{order.deviceName}%'
+            </if>
+            <if test="order.deviceSubName!=null">
+                AND sub.device_sub_name like '%#{order.deviceSubName}%'
+            </if>
+            <if test="order.charginBeginDt!=null">
+                AND ord.chargin_begin_dt &lt; #{order.chaginBeginDt}
+            </if>
+            <if test="order.charginEndDt!=null">
+                AND ord.chagin_end_dt &gt; #{order.charginEndDt}
+            </if>
+            <if test="order.deviceSubState!=null">
+                AND sub.device_sub_state=#{order.deviceSubState}
+            </if>
+            <if test="order.orderState!=null">
+                AND ord.order_state=#{order.orderState}
+            </if>
+
+        </if>
+
+
+    </select>
 
 </mapper>

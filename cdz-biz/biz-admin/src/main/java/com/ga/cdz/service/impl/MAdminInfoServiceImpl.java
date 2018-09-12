@@ -128,7 +128,6 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInf
     public Page<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo) {
         Page<AdminDemoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
         List<AdminDemoDTO> list = baseMapper.selectAdminDemoDTOPage(page);
-
         page.setRecords(list);
         return page;
     }

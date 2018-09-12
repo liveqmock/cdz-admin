@@ -28,17 +28,17 @@ public class ChargingDeviceVo {
   /**
    * 充电桩编码
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = " 充电桩编码不能为空")
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = " 充电桩编码不能为空")
   private String deviceCode;
   /**
    * 充电桩名称
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "充电桩名称 不能为空")
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = "充电桩名称 不能为空")
   private String deviceName;
   /**
    * 充电桩充电方式
    */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "充电方式 不能为空")
+  @NotNull(groups = {IMChargingDeviceGroup.insert.class,},message = "充电方式 不能为空")
   private Integer cgtypeId;
   /**
    * 设备功率
