@@ -17,11 +17,11 @@ file:
 url:
   base: http:\\192.168.2.18:8081
   #banner
-  banner: ${url.base}\banner\
+  banner: ${url.base}\banner
   #t头像路径
-  user_avatar: ${url.base}\user_avatar\
+  user_avatar: ${url.base}\user\avatar
   #站点路径
-  station: ${url.base}\station\
+  station: ${url.base}\station
 
 #日志路径
 logback:

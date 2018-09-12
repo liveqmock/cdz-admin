@@ -29,10 +29,13 @@ import java.math.BigDecimal;
 public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserService {
 
     /**
-     * 用户头像路径
+     * 用户头像存储路径
      */
-    @Value("${url.user_avatar}")
+    @Value("${file.user_avatar}")
     protected String userAvatarFilePath;
+
+    @Value("${url.user_avatar}")
+    protected String userAvatarUrl;
 
     /**
      * 文件工具类
@@ -72,7 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     }
 
     @Override
-    public void uploadAvatar(MultipartFile file, Integer userId) {
+    public UserInfo uploadAvatar(MultipartFile file, Integer userId) {
         UserInfo userInfo = baseMapper.selectById(userId);
         if (ObjectUtils.isEmpty(userInfo)) {
             throw new BusinessException("用户不存在");
@@ -81,6 +84,10 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
         boolean isImg = mFileUtil.isImgFileName(fileName);
         if (!isImg) {
             throw new BusinessException("不是图片文件");
+        }
+        boolean isOutImgSize = mFileUtil.isImgOutFileSize(file);
+        if (isOutImgSize) {
+            throw new BusinessException("图片不能大于2M");
         }
         /**生成新的文件名*/
         String newFileName = mFileUtil.renameFile(fileName);
@@ -94,6 +101,18 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
         if (!isSuccess) {
             throw new BusinessException("文件上传失败");
         }
+        /**数据库更新**/
+        UserInfo updateAvatarUserInfo = new UserInfo();
+        updateAvatarUserInfo.setUserId(userId).setUserAvatar(dbFilePath);
+        int row = baseMapper.updateById(updateAvatarUserInfo);
+        if (row == 0) {
+            throw new BusinessException("头像上传失败，稍后重试");
+        }
+        /**新的头像路径*/
+        String backUserAvatarUrl = userAvatarUrl + dbFilePath;
+        UserInfo backUserInfo = new UserInfo();
+        backUserInfo.setUserAvatar(backUserAvatarUrl);
+        return backUserInfo;
     }
 
 

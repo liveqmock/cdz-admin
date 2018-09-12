@@ -5,6 +5,7 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
+import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.group.api.IMyInfoGroup;
 import com.ga.cdz.domain.vo.api.MyInfoVo;
 import com.ga.cdz.service.IUserService;
@@ -52,7 +53,7 @@ public class MyInfoController extends AbstractBaseController {
      * @author:luqi
      * @description: 更新头像
      * @date:2018/9/12_10:01
-     * @param: mulpartFile对象
+     * @param: MultipartFile file对象
      * @param: 用户id
      * @return:
      */
@@ -67,8 +68,16 @@ public class MyInfoController extends AbstractBaseController {
         if (ObjectUtils.isEmpty(userId)) {
             throw new BusinessException("userId为空");
         }
+        UserInfo userInfo = userService.uploadAvatar(file, userId);
+        return Result.success().message("头像上传成功").data(userInfo);
+    }
+
+
+    public Result updateTel() {
         return null;
     }
+
+
 
 
 }

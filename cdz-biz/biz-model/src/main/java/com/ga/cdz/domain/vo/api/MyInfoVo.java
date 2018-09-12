@@ -20,4 +20,15 @@ public class MyInfoVo {
      */
     @NotNull(groups = {IMyInfoGroup.Get.class}, message = "用户id不能为空")
     private Integer userId;
+
+    /**
+     * 用户电话
+     */
+    private String userTel;
+
+    /**
+     * 用户昵称
+     */
+    private String userNickName;
+
 }

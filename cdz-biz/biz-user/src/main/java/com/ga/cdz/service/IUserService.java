@@ -37,6 +37,6 @@ public interface IUserService extends IService<UserInfo> {
      * @param:
      * @return:
      */
-    void uploadAvatar(MultipartFile file, Integer userId);
+    UserInfo uploadAvatar(MultipartFile file, Integer userId);
 
 }

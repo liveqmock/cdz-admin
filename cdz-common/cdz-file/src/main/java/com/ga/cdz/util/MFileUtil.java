@@ -98,5 +98,20 @@ public class MFileUtil {
         return false;
     }
 
+    /**
+     * @author:luqi
+     * @description: 图片文件大小判断，是否大于2M
+     * @date:2018/9/12_11:53
+     * @param: 文件对象
+     * @return:
+     */
+    public boolean isImgOutFileSize(MultipartFile multipartFile) {
+        if (multipartFile.getSize() > 2097152) {
+            //大于了
+            return true;
+        }
+        return false;
+    }
+
 
 }
