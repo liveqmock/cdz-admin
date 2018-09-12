@@ -1,15 +1,16 @@
 package com.ga.cdz.constant;
+
 /**
  * @author:luqi
  * @description: redis key 常量类，变量同一大写，且语义化 final static 修饰
  * @date:2018/9/3_14:25
  */
 public class RedisConstant {
-        //客户端前缀
-        public final static String API_ROOT="CDZ-API:";
+    //客户端前缀
+    public final static String API_ROOT = "CDZ-API:";
 
-        //管理后台前缀
-        public final static String ADMIN_ROOT="CDZ-ADMIN:";
+    //管理后台前缀
+    public final static String ADMIN_ROOT = "CDZ-ADMIN:";
 
     //表缓存前缀
     public final static String TABLE_ROOT = "CDZ-TABLE:";
@@ -45,7 +46,10 @@ public class RedisConstant {
     //table缓存t_charging_device
     public final static String TABLE_CHARGING_DEVICE = TABLE_ROOT + "CHARGING-DEVICE";
 
-    //table传出t_charging_device_sub
+    //table缓存t_charging_device_sub
     public final static String TABLE_CHARGING_DEVICE_SUB = TABLE_ROOT + "CHARGING-DEVICE-SUB";
+
+    //table缓存t_district
+    public final static String TABLE_DISTRICT = TABLE_ROOT + "DISTRICT";
 
 }

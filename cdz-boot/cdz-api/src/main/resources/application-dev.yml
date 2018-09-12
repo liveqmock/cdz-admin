@@ -11,6 +11,8 @@ logback:
 file:
   #文件基础路径
   base: ${config.base_path}\\img
+  #系统消息
+  system: ${config.base_path}\\system
   #banner
   banner: ${file.base}\\banner
   #用户头像图片
@@ -21,6 +23,8 @@ file:
 #文件请求路径
 url:
   base: http:\\192.168.2.106:8018\img
+   #系统消息
+  system: ${url.base}\\system
   #banner
   banner: ${url.base}\banner
   #t头像路径

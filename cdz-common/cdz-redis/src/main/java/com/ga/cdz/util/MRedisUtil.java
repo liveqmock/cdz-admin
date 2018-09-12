@@ -71,7 +71,16 @@ public class MRedisUtil {
         redisTemplate.opsForHash().putAll(key, hashValue);
     }
 
-
+    /**
+     * @author:luqi
+     * @description: 添加list集合
+     * @date:2018/9/12_15:27
+     * @param:
+     * @return:
+     */
+    public <T> void pushList(String key, List<T> list) {
+        redisTemplate.opsForList().rightPushAll(key, list);
+    }
 
 
     /**

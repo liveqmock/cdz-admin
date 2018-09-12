@@ -4,12 +4,9 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.entity.District;
 import com.ga.cdz.service.IDistrictService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,6 +32,12 @@ public class DistrictController extends AbstractBaseController {
     public Result getListAllCity() {
         List<District> districts = districtService.getListAllCity();
         return Result.success().data(districts);
+    }
+
+    @PostMapping("/province/list")
+    public Result getListProvince() {
+        List<District> province = districtService.getListAllProvince();
+        return Result.success().data(province);
     }
 
 

@@ -18,4 +18,6 @@ public interface IDistrictService extends IService<District> {
      * @return: 返回包含所有市级地区的list
      */
     List<District> getListAllCity();
+
+    List<District> getListAllProvince();
 }
