@@ -3,25 +3,35 @@ package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingTypeMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.vo.base.ChargingTypeVo;
 import com.ga.cdz.service.IMChargingTypeService;
+import com.ga.cdz.util.MRedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author:wanzhongsu
  * @description: 充电柱充电方式实现类
  * @date:2018/9/10 9:44
  */
+@Slf4j
 @Service("mChargingTypeService")
 public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, ChargingType> implements IMChargingTypeService {
+
+    @Resource
+    MRedisUtil mRedisUtil;
 
     @Override
     public List<ChargingType> getChargingTypeList() {
@@ -69,5 +79,14 @@ public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, Ch
         //添加数据
         Integer integer = baseMapper.insert(chargingType);
         return integer;
+    }
+
+    @Override
+    public void getRedisListAll() {
+        List<ChargingType> list = baseMapper.selectList(null);
+        Map<String, ChargingType> map = list.stream().collect(Collectors
+                .toMap(ChargingType::getCgtypeIdStr, ChargingType -> ChargingType));
+        mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_TYPE, map);
+        log.info("TABLE_CHARGING_TYPE缓存成功");
     }
 }

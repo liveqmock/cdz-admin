@@ -97,6 +97,10 @@ public class ChargingPrice extends Model<ChargingPrice> {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime insertDt;
 
+    public String getStationIdStr() {
+        return this.stationId + "";
+    }
+
 
     @Override
     protected Serializable pkVal() {

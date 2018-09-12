@@ -8,6 +8,8 @@ import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
+import java.util.List;
+
 /**
  * @author:wanzhongsu
  * @description: 充电站列表服务接口
@@ -49,4 +51,13 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @return:
      */
     boolean saveStation(ChargingStationVo vo);
+
+    /**
+     * @author:luqi
+     * @description: 获取所有的表信息到缓存
+     * @date:2018/9/11_19:25
+     * @param:
+     * @return:
+     */
+    void getRedisListAll();
 }

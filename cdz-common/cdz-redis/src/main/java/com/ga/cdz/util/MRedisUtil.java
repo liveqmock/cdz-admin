@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +51,31 @@ public class MRedisUtil {
 
     /**
      * @author:luqi
+     * @description: 添加hash
+     * @date:2018/9/11_18:18
+     * @param:
+     * @return:
+     */
+    public <T> void putHash(String key, String hashKey, T hashValue) {
+        redisTemplate.opsForHash().putIfAbsent(key, hashKey, hashValue);
+    }
+
+    /**
+     * @author:luqi
+     * @description: 添加hash 集合
+     * @date:2018/9/11_18:46
+     * @param:
+     * @return:
+     */
+    public <K, T> void pushHashAll(String key, Map<K, T> hashValue) {
+        redisTemplate.opsForHash().putAll(key, hashValue);
+    }
+
+
+
+
+    /**
+     * @author:luqi
      * @description: 添加—含有超时时间
      * @date:2018/9/3_13:38
      * @param: key
@@ -79,8 +106,26 @@ public class MRedisUtil {
         return false;
     }
 
-     /**
-      * @author:luqi
+    /**
+     * @author:luqi
+     * @description: 删除hash 根据key
+     * @date:2018/9/11_18:47
+     * @param: key
+     * @param: hashObject
+     * @return:
+     */
+    public <T> boolean removeHash(String key, T... hashValue) {
+        try {
+            redisTemplate.opsForHash().delete(key, hashValue);
+            return true;
+        } catch (Throwable t) {
+            log.error("redis hash remove " + key + " has error,detail----" + t);
+        }
+        return false;
+    }
+
+    /**
+     * @author:luqi
       * @description: 批量删除value通过key的表达式
       * @date:2018/9/3_13:44
       * @param: redis表达式

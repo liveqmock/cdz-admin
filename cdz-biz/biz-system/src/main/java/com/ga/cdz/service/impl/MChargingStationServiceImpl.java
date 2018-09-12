@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
@@ -12,6 +13,8 @@ import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
+import com.ga.cdz.util.MRedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,13 +22,25 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * @author:wanzhongsu
  * @description: 充电站列表服务实现类
  * @date:2018/9/10 15:09
  */
+@Slf4j
 @Service("mChargingStationService")
 public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IMChargingStationService {
+
+    /**
+     * 缓存
+     */
+    @Resource
+    MRedisUtil mRedisUtil;
 
     @Override
     public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo) {
@@ -95,5 +110,14 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         chargingStation.setStationType(ChargingStation.StationType.OUTSIDE);
         boolean result = save(chargingStation);
         return result;
+    }
+
+    @Override
+    public void getRedisListAll() {
+        List<ChargingStation> list = baseMapper.selectList(null);
+        Map<String, ChargingStation> stationMap = list.stream()
+                .collect(Collectors.toMap(ChargingStation::getStationIdStr, ChargingStation -> ChargingStation));
+        mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_STATION, stationMap);
+        log.info("TABLE_CHARGING_STATION缓存成功");
     }
 }

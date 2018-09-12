@@ -27,15 +27,15 @@ public class ChargingDeviceSub extends Model<ChargingDeviceSub> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 充电桩ID
-   */
-  @TableId(value = "device_id", type = IdType.AUTO)
-  private Integer deviceId;
-  /**
    * 枪编号
    */
-  @TableField("device_sub_id")
+  @TableId(value = "device_sub_id", type = IdType.NONE)
   private Integer deviceSubId;
+  /**
+   * 充电桩ID
+   */
+  @TableField("device_id")
+  private Integer deviceId;
   /**
    * 枪名称
    */
@@ -57,6 +57,9 @@ public class ChargingDeviceSub extends Model<ChargingDeviceSub> {
   @TableField("insert_dt")
   private Date insertDt;
 
+  public String getDeviceIdStr() {
+    return this.deviceId + "";
+  }
 
   @Override
   protected Serializable pkVal() {

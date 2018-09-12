@@ -4,6 +4,7 @@ package com.ga.cdz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingPriceMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
@@ -13,6 +14,10 @@ import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
+import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -27,8 +32,12 @@ import java.util.Map;
  * @description: 计费标准实现类
  * @date:2018/9/11 10:33
  */
+@Slf4j
 @Service("mChargingPriceService")
 public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, ChargingPrice> implements IMChargingPriceService {
+
+    @Resource
+    MRedisUtil mRedisUtil;
     /**
      * 充电站mapper
      */
@@ -177,5 +186,26 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
             throw new BusinessException("修改失败");
         }
         return true;
+    }
+
+
+    @Override
+    public void getRedisListAll() {
+        List<ChargingPrice> list = baseMapper.selectList(null);
+        Map<String, List<ChargingPrice>> map = Maps.newHashMap();
+        String stationIdStr;
+        for (ChargingPrice chargingPrice : list) {
+            stationIdStr = chargingPrice.getStationIdStr();
+            List<ChargingPrice> mList;
+            if (map.containsKey(stationIdStr)) {
+                mList = map.get(stationIdStr);
+            } else {
+                mList = Lists.newArrayList();
+            }
+            mList.add(chargingPrice);
+            map.put(stationIdStr, mList);
+        }
+        mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_PRICE, map);
+        log.info("TABLE_CHARGING_PRICE缓存成功");
     }
 }

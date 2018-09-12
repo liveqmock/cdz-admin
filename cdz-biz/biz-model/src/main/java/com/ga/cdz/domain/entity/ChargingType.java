@@ -61,6 +61,10 @@ public class ChargingType extends Model<ChargingType> {
     private LocalDateTime insretDt;
 
 
+    public String getCgtypeIdStr() {
+        return this.cgtypeId + "";
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.cgtypeId;

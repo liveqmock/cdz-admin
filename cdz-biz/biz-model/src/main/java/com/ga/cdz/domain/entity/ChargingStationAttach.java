@@ -29,7 +29,7 @@ public class ChargingStationAttach extends Model<ChargingStationAttach> {
   /**
    * 充电站ID
    */
-  @TableId(value = "station_id", type = IdType.AUTO)
+  @TableId(value = "station_id", type = IdType.NONE)
   private Integer stationId;
   /**
    * 附件编号
@@ -61,6 +61,11 @@ public class ChargingStationAttach extends Model<ChargingStationAttach> {
    */
   @TableField("insert_dt")
   private Date insertDt;
+
+    public String getStationIdStr() {
+        return this.stationId + "";
+    }
+
 
   @Override
   protected Serializable pkVal() {

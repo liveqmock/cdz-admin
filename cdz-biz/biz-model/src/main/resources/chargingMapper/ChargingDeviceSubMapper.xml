@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingDeviceSubMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingDeviceSub">
+        <id column="device_sub_id" property="deviceSubId"/>
+        <result column="device_id" property="deviceId"/>
+        <result column="device_sub_name" property="deviceSubName"/>
+        <result column="device_sub_state" property="deviceSubState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        device_sub_id, device_id, device_sub_name, device_sub_state, update_dt, insert_dt
+    </sql>
+
+</mapper>

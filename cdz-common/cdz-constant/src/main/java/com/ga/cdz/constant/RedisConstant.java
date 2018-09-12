@@ -11,6 +11,9 @@ public class RedisConstant {
         //管理后台前缀
         public final static String ADMIN_ROOT="CDZ-ADMIN:";
 
+    //表缓存前缀
+    public final static String TABLE_ROOT = "CDZ-TABLE:";
+
 
     //用户token
     public final static String USER_TOKEN = API_ROOT + "USER-TOKEN:";
@@ -26,5 +29,23 @@ public class RedisConstant {
 
     //管理员权限
     public final static String ADMIN_PERM = ADMIN_ROOT + "ADMIN-PERM:";
+
+    //table缓存t_charging_station
+    public final static String TABLE_CHARGING_STATION = TABLE_ROOT + "CHARGING-STATION";
+
+    //table缓存t_charging_attach
+    public final static String TABLE_CHARGING_ATTACH = TABLE_ROOT + "CHARGING-ATTACH";
+
+    //table缓存t_charging_type
+    public final static String TABLE_CHARGING_TYPE = TABLE_ROOT + "CHARGING-TYPE";
+
+    //table缓存t_charging_price
+    public final static String TABLE_CHARGING_PRICE = TABLE_ROOT + "CHARGING-PRICE";
+
+    //table缓存t_charging_device
+    public final static String TABLE_CHARGING_DEVICE = TABLE_ROOT + "CHARGING-DEVICE";
+
+    //table传出t_charging_device_sub
+    public final static String TABLE_CHARGING_DEVICE_SUB = TABLE_ROOT + "CHARGING-DEVICE-SUB";
 
 }

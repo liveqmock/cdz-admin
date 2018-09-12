@@ -29,6 +29,7 @@ public class ChargingDevice extends Model<ChargingDevice> {
    */
   @TableId(value = "device_id", type = IdType.AUTO)
   private Integer deviceId;
+
   @TableField("station_id")
   private Integer stationId;
   /**
@@ -69,7 +70,9 @@ public class ChargingDevice extends Model<ChargingDevice> {
   @TableField("insert_dt")
   private Date insertDt;
 
-
+    public String getDeviceIdStr() {
+        return this.deviceId + "";
+    }
 
   @Override
   protected Serializable pkVal() {

@@ -1,6 +1,6 @@
 package com.ga.cdz.dao.center;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.entity.District;
 
 /**
@@ -8,6 +8,5 @@ import com.ga.cdz.domain.entity.District;
  * @description: 地区信息表mapper接口
  * @date:2018/9/10 10:28
  */
-public interface DistrictMapper extends BaseMapper<District> {
-
+public interface DistrictMapper extends SuperMapper<District> {
 }
