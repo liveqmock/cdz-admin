@@ -22,7 +22,7 @@ import java.util.List;
 public class DistrictController extends AbstractBaseController {
 
     @Resource
-    private IDistrictService iDistrictService;
+    private IDistrictService districtService;
 
     /**
      * @author: liuyi
@@ -33,7 +33,9 @@ public class DistrictController extends AbstractBaseController {
      */
     @PostMapping("/list")
     public Result getListAllCity() {
-        List<District> districts = iDistrictService.getListAllCity();
+        List<District> districts = districtService.getListAllCity();
         return Result.success().data(districts);
     }
+
+
 }

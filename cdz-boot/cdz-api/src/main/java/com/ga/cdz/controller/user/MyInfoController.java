@@ -72,11 +72,67 @@ public class MyInfoController extends AbstractBaseController {
         return Result.success().message("头像上传成功").data(userInfo);
     }
 
-
-    public Result updateTel() {
-        return null;
+    /**
+     * @author:luqi
+     * @description: 更新电话
+     * @date:2018/9/12_14:14
+     * @param:
+     * @return:
+     */
+    @PostMapping("/update/tel")
+    public Result updateTel(@RequestBody @Validated({IMyInfoGroup.UpdataTel.class}) MyInfoVo myInfoVo,
+                            BindingResult bindingResult) {
+        checkParams(bindingResult);
+        userService.updateTel(myInfoVo);
+        return Result.success().message("更新电话成功");
     }
 
+
+    /**
+     * @author:luqi
+     * @description: 更新真实姓名
+     * @date:2018/9/12_14:47
+     * @param:
+     * @return:
+     */
+    @PostMapping("/update/real/name")
+    public Result updateRealName(@RequestBody @Validated({IMyInfoGroup.UpdateRealName.class}) MyInfoVo myInfoVo,
+                                 BindingResult bindingResult) {
+        checkParams(bindingResult);
+        userService.updateRealName(myInfoVo);
+        return Result.success().message("更新姓名成功");
+    }
+
+
+    /**
+     * @author:luqi
+     * @description: 更新昵称
+     * @date:2018/9/12_14:49
+     * @param:
+     * @return:
+     */
+    @PostMapping("/update/nick/name")
+    public Result updateNickName(@RequestBody @Validated({IMyInfoGroup.UpdateNickName.class}) MyInfoVo myInfoVo,
+                                 BindingResult bindingResult) {
+        checkParams(bindingResult);
+        userService.updateNickName(myInfoVo);
+        return Result.success().message("更新昵称成功");
+    }
+
+    /**
+     * @author:luqi
+     * @description: 更新密码
+     * @date:2018/9/12_14:51
+     * @param:
+     * @return:
+     */
+    @PostMapping("/update/pwd")
+    public Result updatePwd(@RequestBody @Validated({IMyInfoGroup.UpdatePwd.class}) MyInfoVo myInfoVo,
+                            BindingResult bindingResult) {
+        checkParams(bindingResult);
+        userService.updatePwd(myInfoVo);
+        return Result.success().message("更新密码成功");
+    }
 
 
 

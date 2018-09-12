@@ -54,6 +54,10 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-order</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

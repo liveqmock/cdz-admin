@@ -6,12 +6,16 @@ import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.vo.api.MyInfoVo;
 import com.ga.cdz.service.IUserService;
 import com.ga.cdz.util.MFileUtil;
+import com.ga.cdz.util.MUtil;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -42,6 +46,9 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
      */
     @Resource
     MFileUtil mFileUtil;
+
+    @Resource
+    MUtil mUtil;
 
     @Override
     public MyInfoDTO getMyInfoDTOById(Integer id) {
@@ -115,5 +122,64 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
         return backUserInfo;
     }
 
+    @Override
+    public void updateTel(MyInfoVo myInfoVo) {
+        String userTel = myInfoVo.getUserTel();
+        Integer userId = myInfoVo.getUserId();
+        //判断tel是否存在
+        UserInfo dbUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if (!ObjectUtils.isEmpty(dbUserInfo) && !dbUserInfo.getUserId().equals(userId)) {
+            throw new BusinessException("电话号码已注册");
+        }
+        UserInfo updateUserInfo = new UserInfo().setUserTel(userTel).setUserId(userId);
+        int row = baseMapper.updateById(updateUserInfo);
+        if (row == 0) {
+            throw new BusinessException("操作失败，稍后重试");
+        }
+    }
 
+    @Override
+    public void updateRealName(MyInfoVo myInfoVo) {
+        String userRealName = myInfoVo.getUserRealName();
+        Integer userId = myInfoVo.getUserId();
+        /**表情过滤**/
+        userRealName = EmojiParser.removeAllEmojis(userRealName);
+        if (StringUtils.isEmpty(userRealName)) {
+            throw new BusinessException("不能输入全表情字段");
+        }
+        UserInfo updateUserInfo = new UserInfo().setUserId(userId).setUserRealName(userRealName);
+        int row = baseMapper.updateById(updateUserInfo);
+        if (row == 0) {
+            throw new BusinessException("操作失败，稍后重试");
+        }
+    }
+
+    @Override
+    public void updateNickName(MyInfoVo myInfoVo) {
+        String userNickName = myInfoVo.getUserNickName();
+        Integer userId = myInfoVo.getUserId();
+        /**表情过滤**/
+        userNickName = EmojiParser.removeAllEmojis(userNickName);
+        if (StringUtils.isEmpty(userNickName)) {
+            throw new BusinessException("不能输入全表情字段");
+        }
+        UserInfo updateUserInfo = new UserInfo().setUserId(userId).setUserNickName(userNickName);
+        int row = baseMapper.updateById(updateUserInfo);
+        if (row == 0) {
+            throw new BusinessException("操作失败，稍后重试");
+        }
+    }
+
+    @Override
+    public void updatePwd(MyInfoVo myInfoVo) {
+        String userPwd = myInfoVo.getUserPwd();
+        Integer userId = myInfoVo.getUserId();
+        /**md5*/
+        String md5Pwd = mUtil.MD5(userPwd);
+        UserInfo updateUserInfo = new UserInfo().setUserId(userId).setUserPwd(md5Pwd);
+        int row = baseMapper.updateById(updateUserInfo);
+        if (row == 0) {
+            throw new BusinessException("操作失败，稍后重试");
+        }
+    }
 }

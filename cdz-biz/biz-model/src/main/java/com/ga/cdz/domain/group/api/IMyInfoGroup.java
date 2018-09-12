@@ -15,5 +15,41 @@ public interface IMyInfoGroup {
     interface Get {
     }
 
+    /**
+     * @author:luqi
+     * @description: 更新电话
+     * @date:2018/9/12_14:06
+     */
+    interface UpdataTel {
+    }
+
+    /**
+     * @author:luqi
+     * @description: 更新昵称
+     * @date:2018/9/12_14:07
+     */
+    interface UpdateNickName {
+    }
+
+    /**
+     * @author:luqi
+     * @description: 更新真实姓名
+     * @date:2018/9/12_14:12
+     */
+    interface UpdateRealName {
+
+    }
+
+    /**
+     * @author:luqi
+     * @description: 更新密码
+     * @date:2018/9/12_14:30
+     */
+    interface UpdatePwd {
+
+    }
+
+
+
 
 }

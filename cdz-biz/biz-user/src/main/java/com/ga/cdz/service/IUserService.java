@@ -3,6 +3,7 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.vo.api.MyInfoVo;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -38,5 +39,45 @@ public interface IUserService extends IService<UserInfo> {
      * @return:
      */
     UserInfo uploadAvatar(MultipartFile file, Integer userId);
+
+
+    /**
+     * @author:luqi
+     * @description: 更新电话
+     * @date:2018/9/12_14:15
+     * @param:
+     * @return:
+     */
+    void updateTel(MyInfoVo myInfoVo);
+
+
+    /**
+     * @author:luqi
+     * @description: 更新真实姓名
+     * @date:2018/9/12_14:15
+     * @param:
+     * @return:
+     */
+    void updateRealName(MyInfoVo myInfoVo);
+
+    /**
+     * @author:luqi
+     * @description: 更新昵称
+     * @date:2018/9/12_14:15
+     * @param:
+     * @return:
+     */
+    void updateNickName(MyInfoVo myInfoVo);
+
+
+    /**
+     * @author:luqi
+     * @description: 密码更新
+     * @date:2018/9/12_14:32
+     * @param:
+     * @return:
+     */
+    void updatePwd(MyInfoVo myInfoVo);
+
 
 }
