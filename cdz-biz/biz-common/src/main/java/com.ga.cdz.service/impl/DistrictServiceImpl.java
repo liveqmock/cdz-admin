@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @date: 2018/9/10_10:39
  */
 @Service("districtService")
-public class DistrictService extends ServiceImpl<DistrictMapper, District> implements IDistrictService {
+public class DistrictServiceImpl extends ServiceImpl<DistrictMapper, District> implements IDistrictService {
 
 
     @Resource

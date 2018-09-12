@@ -16,7 +16,7 @@ import java.util.List;
  * @date: 2018/9/11_14:05
  */
 @Service("bannerService")
-public class BannerService extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
+public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
 
     @Resource
     private BannerMapper bannerMapper;
