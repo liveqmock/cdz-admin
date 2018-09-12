@@ -31,4 +31,6 @@ public class MyInfoVo {
      */
     private String userNickName;
 
+    /***/
+
 }
