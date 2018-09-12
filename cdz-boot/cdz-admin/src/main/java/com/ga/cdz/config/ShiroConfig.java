@@ -50,6 +50,7 @@ public class ShiroConfig extends BaseShiroConfig {
         list.add("/charging/station/**");
         list.add("/charging/price/**");
         list.add("/user/sms/**");
+        list.add("/charging/suggest/**");
         //暂时通过
         /*  list.Add("/admin/**");*/
         list.add("/roles/**");
