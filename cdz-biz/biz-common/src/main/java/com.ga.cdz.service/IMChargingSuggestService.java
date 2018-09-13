@@ -16,5 +16,12 @@ import java.util.List;
  * @date:2018/9/12 20:46
  */
 public interface IMChargingSuggestService extends IService<ChargingSuggest> {
+    /**
+     * @author:wanzhongsu
+     * @description: 分页获取意见反馈信息
+     * @date: 2018/9/13 10:15
+     * @param:
+     * @return:
+     */
     IPage<ChargingSuggestDTO> getSuggestPage(PageVo<ChargingSuggestVo> vo);
 }
