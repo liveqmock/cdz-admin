@@ -9,12 +9,12 @@
         <result column="cgtype_mode" property="cgtypeMode"/>
         <result column="cgtype_code" property="cgtypeCode"/>
         <result column="cgtype_state" property="cgtypeState"/>
-        <result column="insret_dt" property="insretDt"/>
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        cgtype_id, cgtype_name, cgtype_code, insret_dt
+        cgtype_id, cgtype_name, cgtype_code, insert_dt
     </sql>
 
 </mapper>

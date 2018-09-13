@@ -44,6 +44,6 @@ public class ChargingTypeVo {
     /**
      * 插入时间
      */
-    private Date insretDt;
+    private Date insertDt;
 
 }

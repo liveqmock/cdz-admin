@@ -57,10 +57,10 @@ public class ChargingType extends Model<ChargingType> {
     /**
      * 插入时间
      */
-    @TableField("insret_dt")
+    @TableField("insert_dt")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date insretDt;
+    private Date insertDt;
 
 
     @Override
