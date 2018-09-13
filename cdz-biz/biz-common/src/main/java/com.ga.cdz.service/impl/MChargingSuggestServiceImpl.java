@@ -2,10 +2,14 @@ package com.ga.cdz.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.ChargingSuggestMapper;
 import com.ga.cdz.domain.dto.admin.ChargingSuggestDTO;
 import com.ga.cdz.domain.entity.ChargingSuggest;
+import com.ga.cdz.domain.vo.admin.ChargingSuggestVo;
+import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingSuggestService;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +24,10 @@ import java.util.List;
 public class MChargingSuggestServiceImpl extends ServiceImpl<ChargingSuggestMapper, ChargingSuggest> implements IMChargingSuggestService {
 
     @Override
-    public List<ChargingSuggestDTO> getSuggestPage() {
-        List<ChargingSuggestDTO> list=baseMapper.getSuggestPage();
-        return list;
+    public IPage<ChargingSuggestDTO> getSuggestPage(PageVo<ChargingSuggestVo> vo) {
+        IPage<ChargingSuggestDTO> page = new Page<>(vo.getIndex(), vo.getSize());
+        List<ChargingSuggestDTO> list = baseMapper.getSuggestPage(page);
+        page.setRecords(list);
+        return page;
     }
 }

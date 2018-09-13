@@ -1,10 +1,12 @@
 package com.ga.cdz.controller.system;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.entity.Operators;
 import com.ga.cdz.domain.group.admin.IMOperatorsGroup;
 import com.ga.cdz.domain.vo.base.OperatorsVo;
+import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMOperatorsService;
 
 import org.jboss.logging.Param;
@@ -31,14 +33,14 @@ public class OperatorController extends AbstractBaseController {
 
     /**
      * @author:wanzhongsu
-     * @description: 获取运营商信息列表
+     * @description: 获取运营商信息列表分页
      * @date: 2018/9/10 10:04
      * @param:
      * @return: Result
      */
     @PostMapping("/list")
-    public Result getOperatorList() {
-        List<Operators> operators = mOperatorsService.getOperatorList();
+    public Result getOperatorList(@RequestBody @Validated PageVo<OperatorsVo> vo) {
+        IPage<Operators> operators = mOperatorsService.getOperatorList(vo);
         return Result.success().data(operators);
     }
 

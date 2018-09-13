@@ -1,9 +1,11 @@
 package com.ga.cdz.service;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.entity.Operators;
 import com.ga.cdz.domain.vo.base.OperatorsVo;
+import com.ga.cdz.domain.vo.base.PageVo;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public interface IMOperatorsService extends IService<Operators> {
      * @param:
      * @return:
      */
-    List<Operators> getOperatorList();
+    IPage<Operators> getOperatorList(PageVo<OperatorsVo> vo);
 
     /**
      * @author:wanzhongsu

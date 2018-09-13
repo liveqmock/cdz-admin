@@ -1,11 +1,15 @@
 package com.ga.cdz.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.OperatorsMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.Operators;
 import com.ga.cdz.domain.vo.base.OperatorsVo;
+import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMOperatorsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,9 +27,11 @@ import java.util.List;
 public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operators> implements IMOperatorsService {
 
     @Override
-    public List<Operators> getOperatorList() {
-        List<Operators> operators = baseMapper.selectList(new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsState, Operators.OperatorsState.NORMAL).orderByAsc(Operators::getOperatorsId));
-        return operators;
+    public IPage<Operators> getOperatorList(PageVo<OperatorsVo> vo) {
+        IPage page = new Page(vo.getIndex(), vo.getSize());
+        LambdaQueryWrapper<Operators> wrapper = new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsState, Operators.OperatorsState.NORMAL).orderByAsc(Operators::getOperatorsId);
+        page = baseMapper.selectPage(page, wrapper);
+        return page;
     }
 
     @Override
