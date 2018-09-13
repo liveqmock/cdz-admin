@@ -7,11 +7,9 @@ import com.ga.cdz.dao.charging.UserCarsInfoMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.entity.UserCarsInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCarsInfoVo;
+import com.ga.cdz.domain.vo.admin.UserMemberCarsInfoVo;
 import com.ga.cdz.service.IMAdminUserCarsInfoService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author huanghaohao

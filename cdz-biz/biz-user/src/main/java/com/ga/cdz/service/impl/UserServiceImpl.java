@@ -2,6 +2,7 @@ package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
@@ -9,6 +10,8 @@ import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.api.MyInfoVo;
 import com.ga.cdz.service.IUserService;
 import com.ga.cdz.util.MFileUtil;
+import com.ga.cdz.util.MRedisUtil;
+import com.ga.cdz.util.MSmsUtil;
 import com.ga.cdz.util.MUtil;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -41,6 +45,10 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Value("${url.user_avatar}")
     protected String userAvatarUrl;
 
+
+    @Value("${sms.timeout}")
+    private Long REDIS_TIME_OUT;
+
     /**
      * 文件工具类
      */
@@ -50,10 +58,22 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Resource
     MUtil mUtil;
 
+    /**
+     * redis工具类
+     **/
+    @Resource
+    MRedisUtil mRedisUtil;
+
+    /**
+     * sms工具类
+     **/
+    @Resource
+    MSmsUtil mSmsUtil;
+
     @Override
     public MyInfoDTO getMyInfoDTOById(Integer id) {
         MyInfoDTO myInfoDTO = baseMapper.getMyInfoDTOById(id);
-        String userAvatar = userAvatarFilePath + myInfoDTO.getUserAvatar();
+        String userAvatar = userAvatarUrl + myInfoDTO.getUserAvatar();
         myInfoDTO.setUserAvatar(userAvatar);
         if (ObjectUtils.isEmpty(myInfoDTO.getUserPrice())) {
             myInfoDTO.setUserPrice(new BigDecimal("0"));
@@ -99,7 +119,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
         /**生成新的文件名*/
         String newFileName = mFileUtil.renameFile(fileName);
         /**生成新的文件目录,假设存储用户id为1的用户头像*/
-        String newFilePath = mFileUtil.getTimePath() + File.separator + userId + File.separator;
+        String newFilePath = mFileUtil.getTimePath() + userId + File.separator;
         /**保存在数据库的dbFilePath*/
         String dbFilePath = newFilePath + newFileName;
         /**保存文件*/
@@ -122,20 +142,60 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
         return backUserInfo;
     }
 
+
+    @Override
+    public void uploadTelSms(MyInfoVo myInfoVo) {
+        String userTel = myInfoVo.getUserTel();
+        Integer userId = myInfoVo.getUserId();
+        UserInfo idUserInfo = baseMapper.selectById(userId);
+        if (idUserInfo.getUserTel().equals(userTel)) {
+            throw new BusinessException("新号码不能与原号码一样");
+        }
+        UserInfo dbUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if (!ObjectUtils.isEmpty(dbUserInfo) && !dbUserInfo.getUserId().equals(userId)) {
+            throw new BusinessException("电话号码已注册");
+        }
+        String smsRedisKey = RedisConstant.USER_UPDATE_TEL_SMS + userTel;
+        /**生成验证码*/
+        String code = mSmsUtil.buildCode();
+        String isSend = mSmsUtil.sendCodeDetail(userTel, code);
+        if (StringUtils.isEmpty(isSend)) {
+            mRedisUtil.put(smsRedisKey, code, REDIS_TIME_OUT, TimeUnit.SECONDS);
+        } else {
+            throw new BusinessException(isSend);
+        }
+    }
+
     @Override
     public void updateTel(MyInfoVo myInfoVo) {
         String userTel = myInfoVo.getUserTel();
         Integer userId = myInfoVo.getUserId();
+        String smsCode = myInfoVo.getSmsCode();
+        log.info("userTel=>{}", userTel);
+        String smsRedisKey = RedisConstant.USER_UPDATE_TEL_SMS + userTel;
+        UserInfo idUserInfo = baseMapper.selectById(userId);
+        if (idUserInfo.getUserTel().equals(userTel)) {
+            throw new BusinessException("新号码不能与原号码一样");
+        }
         //判断tel是否存在
         UserInfo dbUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
         if (!ObjectUtils.isEmpty(dbUserInfo) && !dbUserInfo.getUserId().equals(userId)) {
             throw new BusinessException("电话号码已注册");
+        }
+        //判断短信验证码是否超时
+        if (!mRedisUtil.hasKey(smsRedisKey)) {
+            throw new BusinessException("验证码失效，请重新获取");
+        }
+        String cacheCode = mRedisUtil.get(smsRedisKey);
+        if (!cacheCode.equals(smsCode)) {
+            throw new BusinessException("验证码不一致");
         }
         UserInfo updateUserInfo = new UserInfo().setUserTel(userTel).setUserId(userId);
         int row = baseMapper.updateById(updateUserInfo);
         if (row == 0) {
             throw new BusinessException("操作失败，稍后重试");
         }
+        mRedisUtil.remove(smsRedisKey);
     }
 
     @Override
@@ -174,6 +234,15 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     public void updatePwd(MyInfoVo myInfoVo) {
         String userPwd = myInfoVo.getUserPwd();
         Integer userId = myInfoVo.getUserId();
+        String oldUserPwd = myInfoVo.getOldUserPwd();
+        UserInfo hasUserInfo = baseMapper.selectById(userId);
+        if (ObjectUtils.isEmpty(hasUserInfo)) {
+            throw new BusinessException("用户不存在");
+        }
+        String oldUserMd5Pwd = mUtil.MD5(oldUserPwd);
+        if (!oldUserMd5Pwd.equals(hasUserInfo.getUserPwd())) {
+            throw new BusinessException("原始密码错误");
+        }
         /**md5*/
         String md5Pwd = mUtil.MD5(userPwd);
         UserInfo updateUserInfo = new UserInfo().setUserId(userId).setUserPwd(md5Pwd);

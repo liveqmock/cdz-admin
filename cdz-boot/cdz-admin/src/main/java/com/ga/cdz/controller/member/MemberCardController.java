@@ -6,7 +6,7 @@ import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.group.admin.IMUserInfoGroup;
 import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
+import com.ga.cdz.domain.vo.admin.UserMemberCardInfoVo;
 import com.ga.cdz.service.IMAdminUserCardInfoService;
 import com.ga.cdz.service.IMAdminUserService;
 import org.springframework.validation.BindingResult;
@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author huanghaohao

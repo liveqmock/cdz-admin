@@ -17,10 +17,19 @@ public interface IMyInfoGroup {
 
     /**
      * @author:luqi
+     * @description: 更新电话短信
+     * @date:2018/9/13_9:10
+     */
+    interface UpdateTelSms {
+
+    }
+
+    /**
+     * @author:luqi
      * @description: 更新电话
      * @date:2018/9/12_14:06
      */
-    interface UpdataTel {
+    interface UpdateTel {
     }
 
     /**

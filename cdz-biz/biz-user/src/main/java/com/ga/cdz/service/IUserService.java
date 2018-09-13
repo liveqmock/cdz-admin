@@ -43,6 +43,15 @@ public interface IUserService extends IService<UserInfo> {
 
     /**
      * @author:luqi
+     * @description: 更新电话，发送验证码
+     * @date:2018/9/13_9:26
+     * @param:
+     * @return:
+     */
+    void uploadTelSms(MyInfoVo myInfoVo);
+
+    /**
+     * @author:luqi
      * @description: 更新电话
      * @date:2018/9/12_14:15
      * @param:

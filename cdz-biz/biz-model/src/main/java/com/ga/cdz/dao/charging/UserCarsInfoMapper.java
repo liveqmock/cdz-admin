@@ -3,8 +3,6 @@ package com.ga.cdz.dao.charging;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.entity.UserCarsInfo;
-import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCarsInfoVo;
 
 import java.util.List;
 

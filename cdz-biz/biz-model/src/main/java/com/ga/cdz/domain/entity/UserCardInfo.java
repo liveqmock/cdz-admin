@@ -82,17 +82,21 @@ public class UserCardInfo extends Model<UserCardInfo> {
         NORMAL(1, "正常");
 
         private Integer value;
-        private String detail;
+        private String desc;
 
-        CardState(Integer value, String detail) {
+        CardState(Integer value, String desc) {
             this.value = value;
-            this.detail = detail;
+            this.desc = desc;
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 

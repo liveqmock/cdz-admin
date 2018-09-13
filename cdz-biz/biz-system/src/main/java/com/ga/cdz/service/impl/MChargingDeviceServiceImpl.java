@@ -7,7 +7,6 @@ import com.ga.cdz.dao.charging.ChargingDeviceMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceDTO;
 import com.ga.cdz.domain.entity.ChargingDevice;
-import com.ga.cdz.domain.redis.ChargingDeviceRD;
 import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceService;
 import com.ga.cdz.util.MRedisUtil;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author huanghaohao
@@ -70,11 +68,9 @@ public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper
 
     public void getRedisListAll() {
         List<ChargingDevice> list = baseMapper.selectList(null);
-        Map<String, ChargingDeviceRD> map = Maps.newHashMap();
+        Map<String, ChargingDevice> map = Maps.newHashMap();
         for (ChargingDevice chargingDevice : list) {
-            ChargingDeviceRD chargingDeviceRD = new ChargingDeviceRD();
-            BeanUtils.copyProperties(chargingDevice, chargingDeviceRD);
-            map.put(chargingDevice.getDeviceId() + "", chargingDeviceRD);
+            map.put(chargingDevice.getDeviceId() + "", chargingDevice);
         }
         mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE, map);
         log.info("TABLE_CHARGING_DEVICE缓存成功");

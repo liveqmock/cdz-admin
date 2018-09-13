@@ -92,9 +92,13 @@ public class UserSms extends Model<UserSms> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

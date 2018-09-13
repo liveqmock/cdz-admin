@@ -69,9 +69,13 @@ public class District extends Model<District> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

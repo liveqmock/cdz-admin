@@ -25,6 +25,9 @@ public class RedisConstant {
     //用户找回密码发送短信
     public final static String USER_RETRIEVE_SMS = API_ROOT + "USER_RETRIEVER_SMS:";
 
+    //用户重置手机号发送短信
+    public final static String USER_UPDATE_TEL_SMS = API_ROOT + "USER_UPDATE_TEL_SMS:";
+
     //管理员token
     public final static String ADMIN_TOKEN = ADMIN_ROOT + "ADMIN-TOKEN:";
 

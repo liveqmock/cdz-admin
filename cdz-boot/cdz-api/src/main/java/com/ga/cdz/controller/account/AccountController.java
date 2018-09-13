@@ -6,10 +6,7 @@ import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.UserLoginDTO;
 import com.ga.cdz.domain.group.api.IUserInfoGroup;
 import com.ga.cdz.domain.group.api.IUserSmsPushGroup;
-import com.ga.cdz.domain.vo.api.UserInfoLoginVo;
-import com.ga.cdz.domain.vo.api.UserInfoRegisterVo;
-import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
-import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
+import com.ga.cdz.domain.vo.api.*;
 import com.ga.cdz.domain.vo.base.UserSmsPushVo;
 import com.ga.cdz.service.IAccountService;
 import com.ga.cdz.util.MPushUtil;
@@ -152,5 +149,11 @@ public class AccountController extends AbstractBaseController {
         }
 
         return Result.success().message("消息推送成功");
+    }
+
+    @PostMapping("/enum/demo")
+    public Result enumDemo(@RequestBody EnumDemoVo vo) {
+        System.out.println(vo.getMyState());
+        return Result.success().data(vo.getMyState().getValue());
     }
 }

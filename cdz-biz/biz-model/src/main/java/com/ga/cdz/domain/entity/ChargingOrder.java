@@ -14,6 +14,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -125,6 +126,11 @@ public class ChargingOrder extends Model<ChargingOrder> {
         @Override
         public Integer getValue() {
             return this.code;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 

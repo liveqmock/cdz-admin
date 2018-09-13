@@ -108,10 +108,14 @@ public class ChargingShop extends Model<ChargingShop> {
             this.value = value;
         }
 
-        @JsonValue
         @Override
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

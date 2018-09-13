@@ -11,7 +11,6 @@ import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.redis.ChargingPriceRD;
 import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
@@ -19,7 +18,6 @@ import com.ga.cdz.util.MRedisUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -194,22 +192,17 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     public void getRedisListAll() {
         List<ChargingPrice> list = baseMapper.selectList(null);
-        Map<String, List<ChargingPriceRD>> map = Maps.newHashMap();
+        Map<String, List<ChargingPrice>> map = Maps.newHashMap();
         String stationIdStr;
         for (ChargingPrice chargingPrice : list) {
             stationIdStr = chargingPrice.getStationId() + "";
-            List<ChargingPriceRD> mList;
+            List<ChargingPrice> mList;
             if (map.containsKey(stationIdStr)) {
                 mList = map.get(stationIdStr);
             } else {
                 mList = Lists.newArrayList();
             }
-            ChargingPriceRD chargingPriceRD = new ChargingPriceRD();
-            BeanUtils.copyProperties(chargingPrice, chargingPriceRD);
-            chargingPriceRD.setPriceType(chargingPrice.getPriceType().getValue());
-            chargingPriceRD.setPriceIdx(chargingPrice.getPriceIdx().getValue());
-            chargingPriceRD.setPriceState(chargingPrice.getPriceState().getValue());
-            mList.add(chargingPriceRD);
+            mList.add(chargingPrice);
             map.put(stationIdStr, mList);
         }
         mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_PRICE, map);

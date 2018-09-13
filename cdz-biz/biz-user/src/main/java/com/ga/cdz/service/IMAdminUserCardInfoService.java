@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
-
-import java.util.List;
+import com.ga.cdz.domain.vo.admin.UserMemberCardInfoVo;
 
 /**
  * @author huanghaohao

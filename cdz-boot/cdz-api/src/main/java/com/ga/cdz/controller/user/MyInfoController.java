@@ -72,6 +72,24 @@ public class MyInfoController extends AbstractBaseController {
         return Result.success().message("头像上传成功").data(userInfo);
     }
 
+
+    /**
+     * @author:luqi
+     * @description: 更新电话之发送短信
+     * @date:2018/9/13_9:15
+     * @param:
+     * @return:
+     */
+    @UserState
+    @PostMapping("/upload/tel/sms")
+    public Result updateTelSms(@RequestBody @Validated({IMyInfoGroup.UpdateTelSms.class}) MyInfoVo myInfoVo,
+                               BindingResult bindingResult) {
+        /**发送短信*/
+        checkParams(bindingResult);
+        userService.uploadTelSms(myInfoVo);
+        return Result.success().message("短信发送成功，请注意查收");
+    }
+
     /**
      * @author:luqi
      * @description: 更新电话
@@ -79,8 +97,9 @@ public class MyInfoController extends AbstractBaseController {
      * @param:
      * @return:
      */
+    @Deprecated
     @PostMapping("/update/tel")
-    public Result updateTel(@RequestBody @Validated({IMyInfoGroup.UpdataTel.class}) MyInfoVo myInfoVo,
+    public Result updateTel(@RequestBody @Validated({IMyInfoGroup.UpdateTel.class}) MyInfoVo myInfoVo,
                             BindingResult bindingResult) {
         checkParams(bindingResult);
         userService.updateTel(myInfoVo);
@@ -95,6 +114,7 @@ public class MyInfoController extends AbstractBaseController {
      * @param:
      * @return:
      */
+    @UserState
     @PostMapping("/update/real/name")
     public Result updateRealName(@RequestBody @Validated({IMyInfoGroup.UpdateRealName.class}) MyInfoVo myInfoVo,
                                  BindingResult bindingResult) {
@@ -111,6 +131,7 @@ public class MyInfoController extends AbstractBaseController {
      * @param:
      * @return:
      */
+    @UserState
     @PostMapping("/update/nick/name")
     public Result updateNickName(@RequestBody @Validated({IMyInfoGroup.UpdateNickName.class}) MyInfoVo myInfoVo,
                                  BindingResult bindingResult) {
@@ -126,6 +147,7 @@ public class MyInfoController extends AbstractBaseController {
      * @param:
      * @return:
      */
+    @UserState
     @PostMapping("/update/pwd")
     public Result updatePwd(@RequestBody @Validated({IMyInfoGroup.UpdatePwd.class}) MyInfoVo myInfoVo,
                             BindingResult bindingResult) {
@@ -133,7 +155,6 @@ public class MyInfoController extends AbstractBaseController {
         userService.updatePwd(myInfoVo);
         return Result.success().message("更新密码成功");
     }
-
 
 
 }

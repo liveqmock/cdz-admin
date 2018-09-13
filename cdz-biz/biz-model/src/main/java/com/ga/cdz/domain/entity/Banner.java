@@ -92,9 +92,14 @@ public class Banner extends Model<Banner> {
         }
 
 
-        @JsonValue
+        @Override
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

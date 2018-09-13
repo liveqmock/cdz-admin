@@ -80,9 +80,13 @@ public class Operators extends Model<Operators> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

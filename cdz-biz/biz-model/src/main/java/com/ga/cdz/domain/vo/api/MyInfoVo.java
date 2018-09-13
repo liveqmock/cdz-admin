@@ -22,16 +22,16 @@ public class MyInfoVo {
     /**
      * 用户id
      */
-    @NotNull(groups = {IMyInfoGroup.Get.class, IMyInfoGroup.UpdataTel.class,
-            IMyInfoGroup.UpdateRealName.class, IMyInfoGroup.UpdateNickName.class},
+    @NotNull(groups = {IMyInfoGroup.Get.class, IMyInfoGroup.UpdateTel.class,
+            IMyInfoGroup.UpdateRealName.class, IMyInfoGroup.UpdateNickName.class, IMyInfoGroup.UpdateTelSms.class},
             message = "用户id不能为空")
     private Integer userId;
 
     /**
      * 用户电话
      */
-    @NotBlank(groups = {IMyInfoGroup.UpdataTel.class}, message = "用户电话不能为空")
-    @Pattern(groups = {IMyInfoGroup.UpdataTel.class},
+    @NotBlank(groups = {IMyInfoGroup.UpdateTelSms.class, IMyInfoGroup.UpdateTel.class}, message = "用户电话不能为空")
+    @Pattern(groups = {IMyInfoGroup.UpdateTelSms.class, IMyInfoGroup.UpdateTel.class},
             regexp = RegexConstant.REGEX_PHONE, message = "用户电话不能为空")
     private String userTel;
 
@@ -56,4 +56,20 @@ public class MyInfoVo {
     @Pattern(regexp = RegexConstant.REGEX_USERNAME_PASSWORD,
             groups = {IMyInfoGroup.UpdatePwd.class}, message = "密码为大小写字母，数字与下划线组合，6~12位")
     private String userPwd;
+
+    /**
+     * 老密码
+     */
+    @NotBlank(groups = {IMyInfoGroup.UpdatePwd.class}, message = "密码不能为空")
+    @Pattern(regexp = RegexConstant.REGEX_USERNAME_PASSWORD,
+            groups = {IMyInfoGroup.UpdatePwd.class}, message = "密码为大小写字母，数字与下划线组合，6~12位")
+    private String oldUserPwd;
+
+
+    /**
+     * 用户短信
+     */
+    @NotBlank(groups = {IMyInfoGroup.UpdateTel.class}, message = "短信不能为空")
+    @Size(groups = {IMyInfoGroup.UpdateTel.class}, min = 4, max = 4, message = "短信验证码为4位")
+    private String smsCode;
 }

@@ -111,7 +111,7 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     public enum PriceType implements IEnum<Integer> {
         PERSONAL(1, "专场计费"),
-        NONPERSONAL(2, "非专场计费"),;
+        NONPERSONAL(2, "非专场计费");
 
         private int value;
         private String desc;
@@ -122,13 +122,13 @@ public class ChargingPrice extends Model<ChargingPrice> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
         }
 
-        public void setValue(int value) {
-            this.value = value;
+        @JsonValue
+        public String getDesc() {
+            return this.desc;
         }
     }
 
@@ -151,9 +151,13 @@ public class ChargingPrice extends Model<ChargingPrice> {
 
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return this.desc;
         }
     }
 
@@ -176,9 +180,13 @@ public class ChargingPrice extends Model<ChargingPrice> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return this.desc;
         }
     }
 }

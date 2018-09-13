@@ -5,14 +5,13 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCarsInfoVo;
+import com.ga.cdz.domain.vo.admin.UserMemberCarsInfoVo;
 import com.ga.cdz.service.IMAdminUserCarsInfoService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author huanghaohao

@@ -1,9 +1,5 @@
 package com.ga.cdz.domain.entity;
 
-import java.util.Date;
-import java.io.Serializable;
-
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -11,10 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -89,17 +89,22 @@ public class ChargingOrderComment extends Model<ChargingOrderComment> {
         REMOVE(0, "删除"),
         NORMAL(1, "正常");
 
-        private Integer code;
+        private Integer value;
         private String desc;
 
-        CommentState(Integer code, String desc) {
-            this.code = code;
+        CommentState(Integer value, String desc) {
+            this.value = value;
             this.desc = desc;
         }
 
         @Override
         public Integer getValue() {
-            return this.code;
+            return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 

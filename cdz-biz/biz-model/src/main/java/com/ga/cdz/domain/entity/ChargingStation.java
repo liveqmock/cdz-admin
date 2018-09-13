@@ -138,9 +138,13 @@ public class ChargingStation extends Model<ChargingStation> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 
@@ -163,9 +167,13 @@ public class ChargingStation extends Model<ChargingStation> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 }

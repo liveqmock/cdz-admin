@@ -7,12 +7,10 @@ import com.ga.cdz.dao.charging.UserCardInfoMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.entity.UserCardInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
+import com.ga.cdz.domain.vo.admin.UserMemberCardInfoVo;
 import com.ga.cdz.service.IMAdminUserCardInfoService;
 
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author huanghaohao

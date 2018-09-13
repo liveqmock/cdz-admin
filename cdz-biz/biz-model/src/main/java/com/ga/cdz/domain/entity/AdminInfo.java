@@ -93,9 +93,13 @@ public class AdminInfo extends Model<AdminInfo> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 
@@ -117,9 +121,13 @@ public class AdminInfo extends Model<AdminInfo> {
         }
 
         @Override
-        @JsonValue
         public Integer getValue() {
             return this.value;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
         }
     }
 

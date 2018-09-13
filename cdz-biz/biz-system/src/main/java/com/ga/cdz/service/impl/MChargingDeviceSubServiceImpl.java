@@ -5,19 +5,16 @@ import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingDeviceSubMapper;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceSubDTO;
 import com.ga.cdz.domain.entity.ChargingDeviceSub;
-import com.ga.cdz.domain.redis.ChargingDeviceSubRD;
 import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceSubService;
 import com.ga.cdz.util.MRedisUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service("mChargingDeviceSubService")
@@ -30,11 +27,9 @@ public class MChargingDeviceSubServiceImpl extends ServiceImpl<ChargingDeviceSub
     @Override
     public void getRedisListAll() {
         List<ChargingDeviceSub> list = baseMapper.selectList(null);
-        Map<String, ChargingDeviceSubRD> map = Maps.newHashMap();
+        Map<String, ChargingDeviceSub> map = Maps.newHashMap();
         for (ChargingDeviceSub deviceSub : list) {
-            ChargingDeviceSubRD chargingDeviceSubRD = new ChargingDeviceSubRD();
-            BeanUtils.copyProperties(deviceSub, chargingDeviceSubRD);
-            map.put(deviceSub.getDeviceId() + "", chargingDeviceSubRD);
+            map.put(deviceSub.getDeviceId() + "", deviceSub);
         }
         mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE_SUB, map);
         log.info("TABLE_CHARGING_DEVICE_SUB缓存成功");

@@ -1,12 +1,9 @@
 package com.ga.cdz.dao.charging;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
-import com.ga.cdz.domain.vo.base.PageVo;
-import com.ga.cdz.domain.vo.base.UserMemberCardInfoVo;
 
 import java.util.List;
 

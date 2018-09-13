@@ -22,6 +22,7 @@
     <!--我的界面信息map-->
     <resultMap id="MyInfoDTOMap" type="com.ga.cdz.domain.dto.api.MyInfoDTO">
         <id column="user_id" property="userId"/>
+        <result column="user_tel" property="userTel"/>
         <result column="user_code" property="userCode"/>
         <result column="user_avatar" property="userAvatar"/>
         <result column="user_nick_name" property="userNickName"/>
@@ -61,6 +62,7 @@
     <select id="getMyInfoDTOById" parameterType="java.lang.Integer" resultMap="MyInfoDTOMap">
         SELECT
         a.user_id,
+        a.user_tel,
         a.user_code,
         a.user_avatar,
         a.user_nick_name,

@@ -21,6 +21,11 @@ public class MyInfoDTO {
     private Integer userId;
 
     /**
+     * 用户电话
+     */
+    private String userTel;
+
+    /**
      * 用户头像
      */
     private String userAvatar;

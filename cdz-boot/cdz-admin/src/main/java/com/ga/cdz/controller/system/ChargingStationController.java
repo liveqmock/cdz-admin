@@ -85,7 +85,6 @@ public class ChargingStationController extends AbstractBaseController {
     public Result saveStation(@RequestBody @Validated(value = IMChargingStationGroup.Add.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         int result = mChargingStationService.saveStation(vo);
-
         if (result > 0) {
             return Result.success().message("保存成功");
         }
