@@ -51,11 +51,6 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
         ChargingShop chargingShop = new ChargingShop();
         BeanUtils.copyProperties(vo, chargingShop);
         chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
-        //判断登录名是否已存在数据库中且状态为正常
-        ChargingShop hasName = getOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopState, ChargingShop.ShopState.NORMAL).eq(ChargingShop::getShopLogin, vo.getShopLogin()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            throw new BusinessException("登录名在数据库中已存在");
-        }
         boolean result = updateById(chargingShop);
         return result;
     }
