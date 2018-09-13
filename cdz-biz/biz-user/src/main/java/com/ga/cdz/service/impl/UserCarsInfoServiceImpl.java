@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserCarsInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.bean.ValidException;
 import com.ga.cdz.domain.entity.UserCarsInfo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.domain.vo.base.UserCarsInfoVo;
@@ -30,8 +31,16 @@ public class UserCarsInfoServiceImpl extends ServiceImpl<UserCarsInfoMapper, Use
         //查询未删除的车
         Page<UserCarsInfo> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
         page.setDesc("update_dt");
+        UserCarsInfoVo userCarsInfoVo = pageVo.getData();
+        if (ObjectUtils.isEmpty(userCarsInfoVo)) {
+            throw new ValidException("userId为空");
+        }
+        Integer userId = userCarsInfoVo.getUserId();
+        if (ObjectUtils.isEmpty(userId)) {
+            throw new ValidException("userId为空");
+        }
         IPage<UserCarsInfo> rsPage = baseMapper.selectPage(page, new QueryWrapper<UserCarsInfo>().lambda()
-                .eq(UserCarsInfo::getCarState, UserCarsInfo.CarState.NORMAL));
+                .eq(UserCarsInfo::getUserId, userId).eq(UserCarsInfo::getCarState, UserCarsInfo.CarState.NORMAL));
         return rsPage;
     }
 
@@ -53,6 +62,7 @@ public class UserCarsInfoServiceImpl extends ServiceImpl<UserCarsInfoMapper, Use
             //判断状态
             if (dbUserCarsInfo.getCarState().equals(UserCarsInfo.CarState.REMOVE)) {
                 //之前有车 处于删除状态 重置状态
+                BeanUtils.copyProperties(userCarsInfoVo, updateEntity);
                 updateEntity.setCarState(UserCarsInfo.CarState.NORMAL);
                 int row = baseMapper.update(updateEntity, new QueryWrapper<UserCarsInfo>()
                         .lambda().eq(UserCarsInfo::getUserId, userId).eq(UserCarsInfo::getCarNo, carNo));

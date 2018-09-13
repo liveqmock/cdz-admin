@@ -121,7 +121,6 @@ public class UserInfo extends Model<UserInfo> {
      * @date:2018/9/5_9:45
      */
     public enum UserSex implements IEnum<Integer> {
-
         WOMEN(0,"女"),
         MAN(1,"男");
 

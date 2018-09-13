@@ -72,7 +72,7 @@ public class CarInfoController extends AbstractBaseController {
                                 BindingResult bindingResult) {
         checkParams(bindingResult);
         userCarsInfoService.removeUserCarsInfoByCarNo(userCarsInfoVo);
-        return Result.success().message("添加车辆成功");
+        return Result.success().message("删除车辆成功");
     }
 
 }
