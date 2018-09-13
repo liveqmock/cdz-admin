@@ -44,6 +44,7 @@ public class ShiroConfig extends BaseShiroConfig {
         list.add("/account/**");
         list.add("/district/**");
         list.add("/banner/**");
+        list.add("/charging/**");
         return list;
     }
 }

@@ -4,7 +4,9 @@ import com.ga.cdz.domain.group.api.ICharginStationGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author:luqi
@@ -20,6 +22,18 @@ public class ChargingStationPageVo {
 
     @NotNull(groups = {ICharginStationGroup.MainPage.class}, message = "size不能为空")
     private Integer size;
+
+    /**
+     * deviceNo
+     */
+    @NotBlank(groups = {ICharginStationGroup.MainPage.class}, message = "设备编号不能为空")
+    private String deviceNo;
+
+    /**
+     * 城市编码
+     */
+    @NotNull(groups = {ICharginStationGroup.MainPage.class}, message = "城市编码")
+    private Integer cityCode;
 
     /**
      * 经度

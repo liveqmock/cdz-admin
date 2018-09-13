@@ -1,10 +1,11 @@
 package com.ga.cdz.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.vo.base.ChargingStationVo;
-import com.ga.cdz.domain.vo.base.PageVo;
+import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
+
+import java.util.List;
 
 /**
  * @author: liuyi
@@ -20,6 +21,6 @@ public interface IChargingStationService extends IService<ChargingStation> {
      * @param:
      * @return:
      */
-    IPage<ChargingStation> getStationPage(PageVo<ChargingStationVo> vo);
+    List<ChargingStationPageDTO> getStationPage(ChargingStationPageVo vo);
 
 }

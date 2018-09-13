@@ -100,6 +100,31 @@ public class ChargingStation extends Model<ChargingStation> {
     @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time stationClosedt;
+
+    /**
+     * 充电桩详细地址
+     */
+    @TableField("station_addr")
+    private String stationAddr;
+
+    /**
+     * 充电桩省编码
+     */
+    @TableField("province")
+    private Integer province;
+
+    /**
+     * 充电桩市编码
+     */
+    @TableField("city")
+    private Integer city;
+
+    /**
+     * 充电桩区编码
+     */
+    @TableField("county")
+    private Integer county;
+
     /**
      * 更新时间
      */

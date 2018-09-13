@@ -21,21 +21,21 @@ public class MDistanceUtil {
      *
      * @param longitudeUser 用户位置经度
      * @param latitudeUser  用户纬度
-     * @param longitudeBook 书柜经度
-     * @param latitudeBook  书柜纬度
+     * @param longitudeStation 站点经度
+     * @param latitudeStation  站点纬度
      * @return 返回距离单位为千米
      */
-    public double GetDistance(double longitudeUser, double latitudeUser, double longitudeBook, double latitudeBook) {
+    public double getDistance(double longitudeUser, double latitudeUser, double longitudeStation, double latitudeStation) {
         double a, b, d, sa2, sb2;
         latitudeUser = rad(latitudeUser);
-        latitudeBook = rad(latitudeBook);
-        a = latitudeUser - latitudeBook;
-        b = rad(longitudeUser - longitudeBook);
+        latitudeStation = rad(latitudeStation);
+        a = latitudeUser - latitudeStation;
+        b = rad(longitudeUser - longitudeStation);
         sa2 = Math.sin(a / 2.0);
         sb2 = Math.sin(b / 2.0);
         d = 2 * EARTH_RADIUS
                 * Math.asin(Math.sqrt(sa2 * sa2 + Math.cos(latitudeUser)
-                * Math.cos(latitudeBook) * sb2 * sb2));
+                * Math.cos(latitudeStation) * sb2 * sb2));
         return d;
     }
 
