@@ -21,7 +21,11 @@
         </dependency>
         <dependency>
             <groupId>com.ga.cdz</groupId>
-            <artifactId>cdz-redis</artifactId>
+            <artifactId>biz-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-util</artifactId>
         </dependency>
     </dependencies>
 

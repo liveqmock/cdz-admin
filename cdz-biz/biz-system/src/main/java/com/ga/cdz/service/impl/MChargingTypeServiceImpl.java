@@ -3,23 +3,18 @@ package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingTypeMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.ChargingType;
 import com.ga.cdz.domain.vo.base.ChargingTypeVo;
 import com.ga.cdz.service.IMChargingTypeService;
-import com.ga.cdz.util.MRedisUtil;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -30,8 +25,6 @@ import java.util.Map;
 @Service("mChargingTypeService")
 public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, ChargingType> implements IMChargingTypeService {
 
-    @Resource
-    MRedisUtil mRedisUtil;
 
     @Override
     public List<ChargingType> getChargingTypeList() {
@@ -81,14 +74,4 @@ public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, Ch
         return integer;
     }
 
-    @Override
-    public void getRedisListAll() {
-        List<ChargingType> list = baseMapper.selectList(null);
-        Map<String, ChargingType> map = Maps.newHashMap();
-        for (ChargingType chargingType : list) {
-            map.put(chargingType.getCgtypeId() + "", chargingType);
-        }
-        mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_TYPE, map);
-        log.info("TABLE_CHARGING_TYPE缓存成功");
-    }
 }

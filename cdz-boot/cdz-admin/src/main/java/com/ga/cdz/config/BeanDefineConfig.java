@@ -1,25 +1,16 @@
 package com.ga.cdz.config;
 
-import com.ga.cdz.constant.RedisConstant;
-import com.ga.cdz.domain.entity.*;
-import com.ga.cdz.service.*;
-import com.ga.cdz.util.MRedisUtil;
+import com.ga.cdz.domain.entity.AdminPermission;
+import com.ga.cdz.service.IMAdminPermissionService;
+import com.ga.cdz.service.IMAdminRolePermissionService;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.function.BinaryOperator;
-import java.util.stream.Collectors;
 
 
 /**
@@ -31,10 +22,6 @@ import java.util.stream.Collectors;
 @Component
 public class BeanDefineConfig implements ApplicationListener<ApplicationContextEvent> {
 
-    /**
-     * 启动线程
-     **/
-    ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     @Resource
     IMAdminPermissionService mAdminPermissionService;
@@ -42,33 +29,13 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
     @Resource
     IMAdminRolePermissionService mAdminRolePermissionService;
 
-    @Resource
-    IMChargingStationService mChargingStationService;
 
-    @Resource
-    IMChargingStationAttachService mChargingStationAttachService;
-
-    @Resource
-    IMChargingTypeService mChargingTypeService;
-
-    @Resource
-    IMChargingPriceService mChargingPriceService;
-
-    @Resource
-    IMChargingDeviceService mChargingDeviceService;
-
-    @Resource
-    IMChargingDeviceSubService mChargingDeviceSubService;
-
-    @Resource
-    MRedisUtil mRedisUtil;
 
     @Override
     public void onApplicationEvent(ApplicationContextEvent applicationContextEvent) {
         if (applicationContextEvent.getApplicationContext().getParent() == null) {
             initAdmin();
             superAdminPermission();
-            redisCacheTable();
         }
     }
 
@@ -117,20 +84,5 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
         mAdminRolePermissionService.initSuperAdminRolePermission();
     }
 
-    /**
-     * @author:luqi
-     * @description: 执行cache任务
-     * @date:2018/9/11_19:22
-     * @param:
-     * @return:
-     */
-    private void redisCacheTable() {
-        executorService.execute(() -> mChargingStationService.getRedisListAll());
-        executorService.execute(() -> mChargingStationAttachService.getRedisListAll());
-        executorService.execute(() -> mChargingTypeService.getRedisListAll());
-        executorService.execute(() -> mChargingPriceService.getRedisListAll());
-        executorService.execute(() -> mChargingDeviceService.getRedisListAll());
-        executorService.execute(() -> mChargingDeviceSubService.getRedisListAll());
-    }
 
 }

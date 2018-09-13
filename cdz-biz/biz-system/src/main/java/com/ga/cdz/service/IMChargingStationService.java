@@ -4,11 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
-
-import java.util.List;
 
 /**
  * @author:wanzhongsu
@@ -52,12 +49,5 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      */
     int saveStation(ChargingStationVo vo);
 
-    /**
-     * @author:luqi
-     * @description: 获取所有的表信息到缓存
-     * @date:2018/9/11_19:25
-     * @param:
-     * @return:
-     */
-    void getRedisListAll();
+
 }

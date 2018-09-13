@@ -2,22 +2,17 @@ package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingDeviceMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceDTO;
 import com.ga.cdz.domain.entity.ChargingDevice;
 import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceService;
-import com.ga.cdz.util.MRedisUtil;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author huanghaohao
@@ -28,8 +23,6 @@ import java.util.Map;
 @Service("mChargingDeviceService")
 public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper, ChargingDevice> implements IMChargingDeviceService {
 
-    @Resource
-    MRedisUtil mRedisUtil;
 
     /**
      * @author huanghaohao
@@ -65,14 +58,4 @@ public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper
 //    return this.baseMapper.selectList(new QueryWrapper<ChargingDevice>().lambda().eq(ChargingDevice::getStationId,stationId));
     }
 
-
-    public void getRedisListAll() {
-        List<ChargingDevice> list = baseMapper.selectList(null);
-        Map<String, ChargingDevice> map = Maps.newHashMap();
-        for (ChargingDevice chargingDevice : list) {
-            map.put(chargingDevice.getDeviceId() + "", chargingDevice);
-        }
-        mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE, map);
-        log.info("TABLE_CHARGING_DEVICE缓存成功");
-    }
 }

@@ -29,6 +29,4 @@ public interface IMChargingDeviceService extends IService<ChargingDevice> {
    */
   List<ChargingDeviceDTO> getChargingDeviceList(ChargingDeviceVo chargingDeviceVo);
 
-  void getRedisListAll();
-
 }

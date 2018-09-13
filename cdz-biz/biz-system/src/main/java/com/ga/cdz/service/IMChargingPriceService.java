@@ -8,8 +8,6 @@ import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
-import java.util.List;
-
 /**
  * @author:wanzhongsu
  * @description: 计费标准服务接口
@@ -43,12 +41,5 @@ public interface IMChargingPriceService extends IService<ChargingPrice> {
      */
     boolean updateChargingPriceByKeys(ChargingPriceVo vo);
 
-    /**
-     * @author:luqi
-     * @description: 获取所有列表
-     * @date:2018/9/11_20:06
-     * @param:
-     * @return:
-     */
-    void getRedisListAll();
+
 }

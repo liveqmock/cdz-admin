@@ -40,13 +40,5 @@ public interface IMChargingTypeService extends IService<ChargingType> {
      */
     Integer saveChargingTypeObj(ChargingTypeVo vo);
 
-    /**
-     * @author:luqi
-     * @description: 获取所有的列表 缓存
-     * @date:2018/9/11_20:05
-     * @param:
-     * @return:
-     */
-    void getRedisListAll();
 
 }

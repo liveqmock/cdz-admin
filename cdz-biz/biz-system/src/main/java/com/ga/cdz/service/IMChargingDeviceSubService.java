@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface IMChargingDeviceSubService extends IService<ChargingDeviceSub> {
 
-    void getRedisListAll();
 
 
 
