@@ -42,6 +42,11 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
      */
     private Double distance;
 
+    /**
+     * 评分
+     */
+    private Integer score;
+
 
     @Override
     public int compareTo(ChargingStationPageDTO dto) {

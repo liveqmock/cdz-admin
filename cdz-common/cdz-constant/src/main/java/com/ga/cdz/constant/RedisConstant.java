@@ -15,6 +15,8 @@ public class RedisConstant {
     //表缓存前缀
     public final static String TABLE_ROOT = "CDZ-TABLE:";
 
+    //列表缓存前缀
+    public final static String LIST_ROOT = "CDZ-LIST:";
 
     //用户token
     public final static String USER_TOKEN = API_ROOT + "USER-TOKEN:";
@@ -52,7 +54,14 @@ public class RedisConstant {
     //table缓存t_charging_device_sub
     public final static String TABLE_CHARGING_DEVICE_SUB = TABLE_ROOT + "CHARGING-DEVICE-SUB";
 
+    //table缓存t_charging_station_type
+    public final static String TABLE_CHARGING_STATION_TYPE = TABLE_ROOT + "CHARGING-STATION-TYPE";
+
+
     //table缓存t_district
     public final static String TABLE_DISTRICT = TABLE_ROOT + "DISTRICT";
+
+    //list缓存站点评分
+    public final static String LIST_CHARGING_STATION_SCORE = LIST_ROOT + "CHARGING-STATION-SCORE";
 
 }

@@ -48,7 +48,7 @@ public class ChargingOrderComment extends Model<ChargingOrderComment> {
     @TableField("user_id")
     private Integer userId;
     /**
-     * 评分
+     * 评分 1,2,3,4,5
      */
     @TableField("comment_code")
     private Integer commentCode;

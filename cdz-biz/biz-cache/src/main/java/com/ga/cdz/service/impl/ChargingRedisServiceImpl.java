@@ -7,12 +7,15 @@ import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @Service("chargingRedisService")
@@ -34,6 +37,19 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     ChargingDeviceMapper chargingDeviceMapper;
 
     @Resource
+    ChargingDeviceSubMapper chargingDeviceSubMapper;
+
+    @Resource
+    ChargingStationTypeMapper chargingStationTypeMapper;
+
+    @Resource
+    ChargingOrderMapper chargingOrderMapper;
+
+    @Resource
+    ChargingOrderCommentMapper chargingOrderCommentMapper;
+
+
+    @Resource
     MRedisUtil mRedisUtil;
 
     @Override
@@ -43,6 +59,9 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingType();
         cacheChargingPrice();
         cacheChargingDevice();
+        cacheChargingDeviceSub();
+        cacheChargingStationType();
+        cacheChargingOrderCommentList();
     }
 
     private void cacheChargingStation() {
@@ -120,6 +139,94 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
             }
             mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE, map);
             log.info("TABLE_CHARGING_DEVICE缓存成功");
+        }
+    }
+
+    /**
+     * @author:luqi
+     * @description: 充电桩枪 表缓存
+     * @date:2018/9/14_13:39
+     * @param:
+     * @return:
+     */
+    public void cacheChargingDeviceSub() {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE_SUB)) {
+            List<ChargingDeviceSub> list = chargingDeviceSubMapper.selectList(null);
+            Map<String, ChargingDeviceSub> map = Maps.newHashMap();
+            for (ChargingDeviceSub chargingDeviceSub : list) {
+                map.put(chargingDeviceSub.getDeviceSubId() + "", chargingDeviceSub);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE_SUB, map);
+            log.info("TABLE_CHARGING_DEVICE_SUB缓存成功");
+        }
+    }
+
+    public void cacheChargingStationType() {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_STATION_TYPE)) {
+            List<ChargingStationType> list = chargingStationTypeMapper.selectList(null);
+            Map<String, ChargingStationType> map = Maps.newHashMap();
+            for (ChargingStationType chargingStationType : list) {
+                map.put(chargingStationType.getSttpeId() + "", chargingStationType);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_STATION_TYPE, map);
+            log.info("TABLE_CHARGING_STATION_TYPE缓存成功");
+        }
+    }
+
+    /**
+     * 缓存站点的评论列表
+     */
+    public void cacheChargingOrderCommentList() {
+        if (!mRedisUtil.hasKey(RedisConstant.LIST_CHARGING_STATION_SCORE)) {
+            /**站点*/
+            List<ChargingStation> stationList = chargingStationMapper.selectList(null);
+            /**订单*/
+            List<ChargingOrder> orderList = chargingOrderMapper.selectList(null);
+            /**订单评论*/
+            List<ChargingOrderComment> orderCommentList = chargingOrderCommentMapper.selectList(null);
+            /**生成评论的分组map<orderId,评论类>**/
+            Map<String, Integer> orderCommentMap = Maps.newHashMap();
+            for (ChargingOrderComment chargingOrderComment : orderCommentList) {
+                /**只需要根评论**/
+                if (chargingOrderComment.getCommentPid().intValue() == 0) {
+                    orderCommentMap.put(chargingOrderComment.getOrderId(), chargingOrderComment.getCommentCode());
+                }
+            }
+
+            /**分组 站有哪些订单 map<stationId，订单id>*/
+            Map<Integer, Set<String>> stationOrderGroup = Maps.newHashMap();
+            for (ChargingOrder chargingOrder : orderList) {
+                String orderId = chargingOrder.getOrderId();
+                Set<String> set;
+                if (stationOrderGroup.containsKey(orderId)) {
+                    set = stationOrderGroup.get(orderId);
+                } else {
+                    set = Sets.newHashSet();
+                }
+                set.add(orderId);
+                stationOrderGroup.put(chargingOrder.getStationId(), set);
+            }
+            /**生成评分map*/
+            Map<String, Integer> rsMap = Maps.newHashMap();
+            for (ChargingStation chargingStation : stationList) {
+                //初始化5星评论
+                rsMap.put(chargingStation.getStationId() + "", 5);
+            }
+            /**计算充电站下订单的评论的平均分*/
+            for (Integer stationId : stationOrderGroup.keySet()) {
+                Set<String> orderIds = stationOrderGroup.get(stationId);
+                int size = orderIds.size();
+                /**站点下订单分数的总和 为了保险起见 使用BigDecimal**/
+                BigDecimal totalCount = orderIds.stream().map(orderId -> BigDecimal.valueOf(orderCommentMap.get(orderId)))
+                        .reduce(BigDecimal.ZERO, BigDecimal::add);
+                /**获取到平均分*/
+                int score = totalCount.divideToIntegralValue(BigDecimal.valueOf(size)).intValue();
+                if (score > 5) {
+                    score = 5;
+                }
+                rsMap.put(stationId + "", score);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.LIST_CHARGING_STATION_SCORE, rsMap);
         }
     }
 

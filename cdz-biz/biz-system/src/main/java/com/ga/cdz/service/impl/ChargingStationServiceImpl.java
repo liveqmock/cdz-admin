@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -63,6 +64,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
             chargingStationPageDTO.setStationName(chargingStation.getStationName());
             chargingStationPageDTO.setLat(chargingStation.getLat());
             chargingStationPageDTO.setLng(chargingStation.getLng());
+            chargingStationPageDTO.setDeviceNum(chargingStation.getDeviceNum());
             double distance = mDistanceUtil.getDistance(voLng, voLat, chargingStation.getLng(), chargingStation.getLat());
             chargingStationPageDTO.setDistance(Double.parseDouble(df.format(distance)));
             /**计算距离**/
@@ -75,7 +77,18 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         /**得到分页后的数据*/
         List<ChargingStationPageDTO> pageList = mPage.getList();
         /**补全站点的信息*/
-        return pageList;
+        /**获取站的评分缓存列表**/
+        Map<String, Integer> scoreMap = mRedisUtil.getHash(RedisConstant.LIST_CHARGING_STATION_SCORE);
+        List<ChargingStationPageDTO> rsList = pageList.stream().map(chargingStationPageDTO -> {
+            Integer score = scoreMap.get(chargingStationPageDTO.getStationId() + "");
+            if (score == null) {
+                chargingStationPageDTO.setScore(5);
+            } else {
+                chargingStationPageDTO.setScore(score);
+            }
+            return chargingStationPageDTO;
+        }).collect(Collectors.toList());
+        return rsList;
     }
 
 }
