@@ -30,21 +30,34 @@
     <sql id="Base_Column_List">
         shop_id, shop_code, shop_name, shop_contact, shop_tel, shop_state, update_dt, insert_dt
     </sql>
-    <select id="getShopList" resultMap="chargingShopDTO">
+    <select id="getShopList" resultMap="chargingShopDTO"
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingShopSelectVo">
         SELECT
-	shop.shop_id,
-	shop.shop_code,
-	shop.shop_name,
-	shop.shop_login,
-	shop.shop_tel,
-	shop.shop_contact,
-	shop.insert_dt,
-	station.station_name
-FROM
-	t_charging_shop shop
-	LEFT JOIN t_charging_station station ON shop.shop_id = station.shop_id
-	WHERE
-	shop.shop_state =1
+        shop.shop_id,
+        shop.shop_code,
+        shop.shop_name,
+        shop.shop_login,
+        shop.shop_tel,
+        shop.shop_contact,
+        shop.insert_dt,
+        station.station_name
+        FROM
+        t_charging_shop shop
+        LEFT JOIN t_charging_station station ON shop.shop_id = station.shop_id
+        WHERE
+        shop.shop_state =1
+        <if test="param.shopCode!=null">
+            AND shop.shop_code like '%${param.shopCode}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND shop.shop_name like '%${param.shopName}%'
+        </if>
+        <if test="param.stationName!=null">
+            AND station.station_name like '%${param.stationName}%'
+        </if>
+        <if test="param.shopContact!=null">
+            AND shop.shop_contact like '%${param.shopContact}%'
+        </if>
     </select>
 
 </mapper>

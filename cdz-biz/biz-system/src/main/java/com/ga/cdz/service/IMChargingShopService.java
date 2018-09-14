@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
+import com.ga.cdz.domain.vo.admin.ChargingShopSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
@@ -23,7 +24,7 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @param: PageVo
      * @return: List
      */
-    IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo);
+    IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopSelectVo> vo);
 
     /**
      * @author:wanzhongsu

@@ -9,8 +9,8 @@ import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
+import com.ga.cdz.domain.vo.admin.ChargingShopSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
-import com.ga.cdz.domain.vo.base.ChargingTypeVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingShopService;
 import org.springframework.beans.BeanUtils;
@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -32,10 +30,12 @@ import java.util.Map;
 public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, ChargingShop> implements IMChargingShopService {
 
     @Override
-    public IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo) {
+    public IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopSelectVo> vo) {
         //分页获取商户
         Page<ChargingShopDTO> page = new Page<>(vo.getIndex(), vo.getSize());
-        List<ChargingShopDTO> list = baseMapper.getShopList(page);
+        ChargingShopSelectVo param = new ChargingShopSelectVo();
+        BeanUtils.copyProperties(vo.getData(), param);
+        List<ChargingShopDTO> list = baseMapper.getShopList(page, param);
         page.setRecords(list);
         return page;
     }

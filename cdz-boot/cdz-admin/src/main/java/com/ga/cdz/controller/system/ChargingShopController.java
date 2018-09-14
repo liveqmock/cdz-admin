@@ -7,6 +7,7 @@ import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.group.admin.IMChargingShopGroup;
+import com.ga.cdz.domain.vo.admin.ChargingShopSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingShopService;
@@ -55,7 +56,7 @@ public class ChargingShopController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list")
-    public Result getShopList(@RequestBody @Validated PageVo<ChargingShopVo> vo, BindingResult bindingResult) {
+    public Result getShopList(@RequestBody @Validated PageVo<ChargingShopSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         IPage<ChargingShopDTO> iPage = mChargingShopService.getChargingShopPage(vo);
         return Result.success().data(iPage);

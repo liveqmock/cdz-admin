@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
 import com.ga.cdz.domain.entity.ChargingShop;
+import com.ga.cdz.domain.vo.admin.ChargingShopSelectVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +23,5 @@ public interface ChargingShopMapper extends BaseMapper<ChargingShop> {
      * @param: Page
      * @return: List
      */
-    List<ChargingShopDTO> getShopList(Page<ChargingShopDTO> page);
+    List<ChargingShopDTO> getShopList(Page<ChargingShopDTO> page, @Param("param") ChargingShopSelectVo vo);
 }
