@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ChargingSuggestVo {
+public class ChargingSuggestSelectVo {
     /**
      * 站编码
      */

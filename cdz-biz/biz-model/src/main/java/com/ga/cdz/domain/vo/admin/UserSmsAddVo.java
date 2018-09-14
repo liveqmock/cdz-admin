@@ -21,7 +21,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Accessors(chain = true)
-public class UserSmsVo {
+public class UserSmsAddVo {
 
     /**
      * 消息ID

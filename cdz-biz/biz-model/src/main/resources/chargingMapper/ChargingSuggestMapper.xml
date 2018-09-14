@@ -25,7 +25,7 @@
         suggest_id, suggest_content, station_id, device_id, insert_dt
     </sql>
     <select id="getSuggestPage" resultMap="chargingSuggestDTO"
-            parameterType="com.ga.cdz.domain.vo.admin.ChargingSuggestVo">
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingSuggestSelectVo">
         SELECT
         a.station_code,
         a.station_name,

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
-import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
 /**
@@ -21,25 +21,25 @@ public interface IMChargingPriceService extends IService<ChargingPrice> {
      * @param: myPriceType 1 专场 2 非专场
      * @return: 分页数据
      */
-    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceVo> vo, Integer myPriceType);
+    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceAddVo> vo, Integer myPriceType);
 
     /**
      * @author:wanzhongsu
      * @description: 保存添加计费
      * @date: 2018/9/11 17:05
-     * @param: ChargingPriceVo
+     * @param: ChargingPriceAddVo
      * @return: 是否成功
      */
-    boolean saveChargingPriceByKeys(ChargingPriceVo vo);
+    boolean saveChargingPriceByKeys(ChargingPriceAddVo vo);
 
     /**
      * @author:wanzhongsu
      * @description: 编辑修改计费信息
      * @date: 2018/9/11 17:06
-     * @param: ChargingPriceVo
+     * @param: ChargingPriceAddVo
      * @return: 是否成功
      */
-    boolean updateChargingPriceByKeys(ChargingPriceVo vo);
+    boolean updateChargingPriceByKeys(ChargingPriceAddVo vo);
 
 
 }

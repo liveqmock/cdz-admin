@@ -4,7 +4,7 @@ package com.ga.cdz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.entity.UserSms;
-import com.ga.cdz.domain.vo.admin.UserSmsVo;
+import com.ga.cdz.domain.vo.admin.UserSmsAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
 
@@ -22,14 +22,14 @@ public interface IMUserSmsService extends IService<UserSms> {
      * @param: PageVo
      * @return: Result
      */
-    IPage<UserSms> getSmsPage(PageVo<UserSmsVo> vo);
+    IPage<UserSms> getSmsPage(PageVo<UserSmsAddVo> vo);
 
     /**
      * @author:wanzhongsu
      * @description: 保存消息
      * @date: 2018/9/12 18:08
-     * @param: UserSmsVo
+     * @param: UserSmsAddVo
      * @return: 消息ID
      */
-    int saveSms(UserSmsVo vo);
+    int saveSms(UserSmsAddVo vo);
 }

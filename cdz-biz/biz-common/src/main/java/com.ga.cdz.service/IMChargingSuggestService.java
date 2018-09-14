@@ -5,10 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingSuggestDTO;
 import com.ga.cdz.domain.entity.ChargingSuggest;
-import com.ga.cdz.domain.vo.admin.ChargingSuggestVo;
+import com.ga.cdz.domain.vo.admin.ChargingSuggestSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
-
-import java.util.List;
 
 /**
  * @author:wanzhongsu
@@ -23,5 +21,5 @@ public interface IMChargingSuggestService extends IService<ChargingSuggest> {
      * @param:
      * @return:
      */
-    IPage<ChargingSuggestDTO> getSuggestPage(PageVo<ChargingSuggestVo> vo);
+    IPage<ChargingSuggestDTO> getSuggestPage(PageVo<ChargingSuggestSelectVo> vo);
 }

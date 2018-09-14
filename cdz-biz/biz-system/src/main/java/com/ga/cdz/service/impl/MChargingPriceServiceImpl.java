@@ -10,7 +10,7 @@ import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     private ChargingStationMapper chargingStationMapper;
 
     @Override
-    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceVo> vo, Integer myPriceType) {
+    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceAddVo> vo, Integer myPriceType) {
         //获取分页信息
         Page<ChargingPriceDTO> page = new Page<ChargingPriceDTO>(vo.getIndex(), vo.getSize());
         //设置查询条件
@@ -54,8 +53,8 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
 
     @Override
     @Transactional
-    public boolean saveChargingPriceByKeys(ChargingPriceVo chargingPriceVo) {
-        boolean check = checkPriceTime(chargingPriceVo);
+    public boolean saveChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
+        boolean check = checkPriceTime(chargingPriceAddVo);
         if (!check) {
             throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
         }
@@ -66,37 +65,37 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         //高峰时间段计费信息
         ChargingPrice high = new ChargingPrice();
         //获取低谷时间段信息
-        low.setStationId(chargingPriceVo.getStationId());
-        low.setPriceName(chargingPriceVo.getPriceName());
-        low.setPriceType(chargingPriceVo.getPriceType());
+        low.setStationId(chargingPriceAddVo.getStationId());
+        low.setPriceName(chargingPriceAddVo.getPriceName());
+        low.setPriceType(chargingPriceAddVo.getPriceType());
         low.setPriceIdx(ChargingPrice.PriceIdx.LOW);
-        low.setPriceBeginDt(chargingPriceVo.getLowStart());
-        low.setPriceEndDt(chargingPriceVo.getLowEnd());
-        low.setChargingPrice(chargingPriceVo.getLowPrice());
-        low.setPriceParking(chargingPriceVo.getLowParking());
-        low.setServicePrice(chargingPriceVo.getLowService());
+        low.setPriceBeginDt(chargingPriceAddVo.getLowStart());
+        low.setPriceEndDt(chargingPriceAddVo.getLowEnd());
+        low.setChargingPrice(chargingPriceAddVo.getLowPrice());
+        low.setPriceParking(chargingPriceAddVo.getLowParking());
+        low.setServicePrice(chargingPriceAddVo.getLowService());
         //获取平谷时间段信息
-        middle.setStationId(chargingPriceVo.getStationId());
-        middle.setPriceName(chargingPriceVo.getPriceName());
-        middle.setPriceType(chargingPriceVo.getPriceType());
+        middle.setStationId(chargingPriceAddVo.getStationId());
+        middle.setPriceName(chargingPriceAddVo.getPriceName());
+        middle.setPriceType(chargingPriceAddVo.getPriceType());
         middle.setPriceIdx(ChargingPrice.PriceIdx.MIDDLE);
-        middle.setPriceBeginDt(chargingPriceVo.getMiddleStart());
-        middle.setPriceEndDt(chargingPriceVo.getMiddleEnd());
-        middle.setChargingPrice(chargingPriceVo.getMiddlePrice());
-        middle.setPriceParking(chargingPriceVo.getMiddleParking());
-        middle.setServicePrice(chargingPriceVo.getMiddleService());
+        middle.setPriceBeginDt(chargingPriceAddVo.getMiddleStart());
+        middle.setPriceEndDt(chargingPriceAddVo.getMiddleEnd());
+        middle.setChargingPrice(chargingPriceAddVo.getMiddlePrice());
+        middle.setPriceParking(chargingPriceAddVo.getMiddleParking());
+        middle.setServicePrice(chargingPriceAddVo.getMiddleService());
         //获取高峰时间段信息
-        high.setStationId(chargingPriceVo.getStationId());
-        high.setPriceName(chargingPriceVo.getPriceName());
-        high.setPriceType(chargingPriceVo.getPriceType());
+        high.setStationId(chargingPriceAddVo.getStationId());
+        high.setPriceName(chargingPriceAddVo.getPriceName());
+        high.setPriceType(chargingPriceAddVo.getPriceType());
         high.setPriceIdx(ChargingPrice.PriceIdx.HIGH);
-        high.setPriceBeginDt(chargingPriceVo.getHighStart());
-        high.setPriceEndDt(chargingPriceVo.getHighEnd());
-        high.setChargingPrice(chargingPriceVo.getHighPrice());
-        high.setPriceParking(chargingPriceVo.getHighParking());
-        high.setServicePrice(chargingPriceVo.getHighService());
+        high.setPriceBeginDt(chargingPriceAddVo.getHighStart());
+        high.setPriceEndDt(chargingPriceAddVo.getHighEnd());
+        high.setChargingPrice(chargingPriceAddVo.getHighPrice());
+        high.setPriceParking(chargingPriceAddVo.getHighParking());
+        high.setServicePrice(chargingPriceAddVo.getHighService());
         //判断充电站ID是否存在
-        ChargingStation station = chargingStationMapper.selectById(chargingPriceVo.getStationId());
+        ChargingStation station = chargingStationMapper.selectById(chargingPriceAddVo.getStationId());
         if (ObjectUtils.isEmpty(station)) {
             throw new BusinessException("充电站ID不存在");
         }
@@ -113,8 +112,8 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
 
     @Override
     @Transactional
-    public boolean updateChargingPriceByKeys(ChargingPriceVo chargingPriceVo) {
-        boolean check = checkPriceTime(chargingPriceVo);
+    public boolean updateChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
+        boolean check = checkPriceTime(chargingPriceAddVo);
         if (!check) {
             throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
         }
@@ -125,37 +124,37 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         //高峰时间段计费
         ChargingPrice high = new ChargingPrice();
         //低谷时间段计费信息获取
-        low.setStationId(chargingPriceVo.getStationId());
-        low.setPriceName(chargingPriceVo.getPriceName());
-        low.setPriceType(chargingPriceVo.getPriceType());
+        low.setStationId(chargingPriceAddVo.getStationId());
+        low.setPriceName(chargingPriceAddVo.getPriceName());
+        low.setPriceType(chargingPriceAddVo.getPriceType());
         low.setPriceIdx(ChargingPrice.PriceIdx.LOW);
-        low.setPriceBeginDt(chargingPriceVo.getLowStart());
-        low.setPriceEndDt(chargingPriceVo.getLowEnd());
-        low.setChargingPrice(chargingPriceVo.getLowPrice());
-        low.setPriceParking(chargingPriceVo.getLowParking());
-        low.setServicePrice(chargingPriceVo.getLowService());
+        low.setPriceBeginDt(chargingPriceAddVo.getLowStart());
+        low.setPriceEndDt(chargingPriceAddVo.getLowEnd());
+        low.setChargingPrice(chargingPriceAddVo.getLowPrice());
+        low.setPriceParking(chargingPriceAddVo.getLowParking());
+        low.setServicePrice(chargingPriceAddVo.getLowService());
         //平谷时间段计费信息获取
-        middle.setStationId(chargingPriceVo.getStationId());
-        middle.setPriceName(chargingPriceVo.getPriceName());
-        middle.setPriceType(chargingPriceVo.getPriceType());
+        middle.setStationId(chargingPriceAddVo.getStationId());
+        middle.setPriceName(chargingPriceAddVo.getPriceName());
+        middle.setPriceType(chargingPriceAddVo.getPriceType());
         middle.setPriceIdx(ChargingPrice.PriceIdx.MIDDLE);
-        middle.setPriceBeginDt(chargingPriceVo.getMiddleStart());
-        middle.setPriceEndDt(chargingPriceVo.getMiddleEnd());
-        middle.setChargingPrice(chargingPriceVo.getMiddlePrice());
-        middle.setPriceParking(chargingPriceVo.getMiddleParking());
-        middle.setServicePrice(chargingPriceVo.getMiddleService());
+        middle.setPriceBeginDt(chargingPriceAddVo.getMiddleStart());
+        middle.setPriceEndDt(chargingPriceAddVo.getMiddleEnd());
+        middle.setChargingPrice(chargingPriceAddVo.getMiddlePrice());
+        middle.setPriceParking(chargingPriceAddVo.getMiddleParking());
+        middle.setServicePrice(chargingPriceAddVo.getMiddleService());
         //高峰时间段计费信息获取
-        high.setStationId(chargingPriceVo.getStationId());
-        high.setPriceName(chargingPriceVo.getPriceName());
-        high.setPriceType(chargingPriceVo.getPriceType());
+        high.setStationId(chargingPriceAddVo.getStationId());
+        high.setPriceName(chargingPriceAddVo.getPriceName());
+        high.setPriceType(chargingPriceAddVo.getPriceType());
         high.setPriceIdx(ChargingPrice.PriceIdx.HIGH);
-        high.setPriceBeginDt(chargingPriceVo.getHighStart());
-        high.setPriceEndDt(chargingPriceVo.getHighEnd());
-        high.setChargingPrice(chargingPriceVo.getHighPrice());
-        high.setPriceParking(chargingPriceVo.getHighParking());
-        high.setServicePrice(chargingPriceVo.getHighService());
+        high.setPriceBeginDt(chargingPriceAddVo.getHighStart());
+        high.setPriceEndDt(chargingPriceAddVo.getHighEnd());
+        high.setChargingPrice(chargingPriceAddVo.getHighPrice());
+        high.setPriceParking(chargingPriceAddVo.getHighParking());
+        high.setServicePrice(chargingPriceAddVo.getHighService());
         //充电站id是否存在
-        ChargingStation station = chargingStationMapper.selectById(chargingPriceVo.getStationId());
+        ChargingStation station = chargingStationMapper.selectById(chargingPriceAddVo.getStationId());
         if (ObjectUtils.isEmpty(station)) {
             throw new BusinessException("充电站ID不存在");
         }
@@ -189,10 +188,10 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
      * @author:wanzhongsu
      * @description: 验证输入充电类型时间是否连续以及封闭
      * @date: 2018/9/14 14:37
-     * @param: ChargingPriceVo
+     * @param: ChargingPriceAddVo
      * @return: 是否连续以及封闭
      */
-    private boolean checkPriceTime(ChargingPriceVo vo) {
+    private boolean checkPriceTime(ChargingPriceAddVo vo) {
         long lowStart = vo.getLowStart().getTime();
         long lowEnd = vo.getLowEnd().getTime();
         long middleStart = vo.getMiddleStart().getTime();

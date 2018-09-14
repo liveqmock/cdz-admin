@@ -6,7 +6,7 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.group.admin.IMChargingPriceGroup;
-import com.ga.cdz.domain.vo.admin.ChargingPriceVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
 import org.springframework.validation.BindingResult;
@@ -37,7 +37,7 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/private")
-    public Result getPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceVo> vo, BindingResult bindingResult) {
+    public Result getPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceAddVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer myPriceType = 1;
         Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, myPriceType);
@@ -52,7 +52,7 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/noprivate")
-    public Result getNonPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceVo> vo, BindingResult bindingResult) {
+    public Result getNonPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceAddVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer myPriceType = 2;
         Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, myPriceType);
@@ -63,11 +63,11 @@ public class ChargingPriceController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 添加计费保存
      * @date: 2018/9/11 17:15
-     * @param: ChargingPriceVo
+     * @param: ChargingPriceAddVo
      * @return: Result
      */
     @PostMapping("/list/save")
-    public Result saveChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Add.class) ChargingPriceVo vo, BindingResult bindingResult) {
+    public Result saveChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Add.class) ChargingPriceAddVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingPriceService.saveChargingPriceByKeys(vo);
         if (result) {
@@ -80,11 +80,11 @@ public class ChargingPriceController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 修改计费
      * @date: 2018/9/11 17:16
-     * @param: ChargingPriceVo
+     * @param: ChargingPriceAddVo
      * @return: Result
      */
     @PostMapping("/list/update")
-    public Result updateChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Update.class) ChargingPriceVo vo, BindingResult bindingResult) {
+    public Result updateChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Update.class) ChargingPriceAddVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         boolean result = mChargingPriceService.updateChargingPriceByKeys(vo);
         if (result) {

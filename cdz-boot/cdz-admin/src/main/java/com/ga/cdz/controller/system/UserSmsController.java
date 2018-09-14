@@ -7,13 +7,12 @@ import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.entity.UserSms;
 import com.ga.cdz.domain.group.admin.IMUserSmsGroup;
-import com.ga.cdz.domain.vo.admin.UserSmsVo;
+import com.ga.cdz.domain.vo.admin.UserSmsAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMUserSmsService;
 import com.ga.cdz.util.MFileUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -67,11 +66,11 @@ public class UserSmsController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 根据消息ID删除消息
      * @date: 2018/9/12 18:22
-     * @param: UserSmsVo
+     * @param: UserSmsAddVo
      * @return: Result
      */
     @PostMapping("/delete")
-    public Result deleteSmsById(@RequestBody @Validated(value = IMUserSmsGroup.Delete.class) UserSmsVo vo, BindingResult bindingResult) {
+    public Result deleteSmsById(@RequestBody @Validated(value = IMUserSmsGroup.Delete.class) UserSmsAddVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         try {
             mUserSmsService.removeById(vo.getSmsId());
@@ -85,11 +84,11 @@ public class UserSmsController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 添加消息
      * @date: 2018/9/12 18:06
-     * @param: MultipartFile  UserSmsVo
+     * @param: MultipartFile  UserSmsAddVo
      * @return: Result
      */
     @PostMapping("/add")
-    public Result saveSms(@RequestParam("file") MultipartFile file, UserSmsVo vo) {
+    public Result saveSms(@RequestParam("file") MultipartFile file, UserSmsAddVo vo) {
         //初步检查文件是否为空
         if (ObjectUtils.isEmpty(file)) {
             throw new BusinessException("上传文件为空");
@@ -145,10 +144,10 @@ public class UserSmsController extends AbstractBaseController {
      * @return:
      */
     @PostMapping("/system/list")
-    public Result getSystemPage(@RequestBody @Validated PageVo<UserSmsVo> vo, BindingResult bindingResult) {
+    public Result getSystemPage(@RequestBody @Validated PageVo<UserSmsAddVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         if (ObjectUtils.isEmpty(vo.getData())) {
-            vo.setData(new UserSmsVo());
+            vo.setData(new UserSmsAddVo());
         }
         //设置获取消息类型为系统消息
         vo.getData().setSmsType(UserSms.SmsType.SYSTEM);
@@ -175,11 +174,11 @@ public class UserSmsController extends AbstractBaseController {
      * @return:
      */
     @PostMapping("/banner/list")
-    public Result getBannerPage(@RequestBody @Validated PageVo<UserSmsVo> vo, BindingResult bindingResult) {
+    public Result getBannerPage(@RequestBody @Validated PageVo<UserSmsAddVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         //对vo进行初始化，保证传进服务里的对象不为空
         if (ObjectUtils.isEmpty(vo.getData())) {
-            vo.setData(new UserSmsVo());
+            vo.setData(new UserSmsAddVo());
         }
         //设置消息类型为banner
         vo.getData().setSmsType(UserSms.SmsType.BANNER);

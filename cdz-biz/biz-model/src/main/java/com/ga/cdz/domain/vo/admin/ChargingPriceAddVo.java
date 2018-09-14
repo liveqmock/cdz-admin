@@ -21,7 +21,7 @@ import java.sql.Time;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Accessors(chain = true)
-public class ChargingPriceVo {
+public class ChargingPriceAddVo {
     /**
      * 充电站ID
      */

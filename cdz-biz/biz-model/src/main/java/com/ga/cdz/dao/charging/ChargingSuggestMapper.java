@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ga.cdz.domain.dto.admin.ChargingSuggestDTO;
 import com.ga.cdz.domain.entity.ChargingSuggest;
-import com.ga.cdz.domain.vo.admin.ChargingSuggestVo;
+import com.ga.cdz.domain.vo.admin.ChargingSuggestSelectVo;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -24,5 +24,5 @@ public interface ChargingSuggestMapper extends BaseMapper<ChargingSuggest> {
      * @param: IPage
      * @return: List
      */
-    List<ChargingSuggestDTO> getSuggestPage(IPage<ChargingSuggestDTO> page, @Param("suggest") ChargingSuggestVo vo);
+    List<ChargingSuggestDTO> getSuggestPage(IPage<ChargingSuggestDTO> page, @Param("suggest") ChargingSuggestSelectVo vo);
 }

@@ -9,18 +9,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserSmsMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.entity.UserSms;
-import com.ga.cdz.domain.vo.admin.UserSmsVo;
+import com.ga.cdz.domain.vo.admin.UserSmsAddVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMUserSmsService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-
-import javax.annotation.Resource;
-import java.io.File;
-import java.util.List;
 
 /**
  * @author:wanzhongsu
@@ -32,7 +27,7 @@ public class MUserSmsServiceImpl extends ServiceImpl<UserSmsMapper, UserSms> imp
 
 
     @Override
-    public IPage<UserSms> getSmsPage(PageVo<UserSmsVo> vo) {
+    public IPage<UserSms> getSmsPage(PageVo<UserSmsAddVo> vo) {
         //获取分页信息
         Page<UserSms> page = new Page<>(vo.getIndex(), vo.getSize());
         //设置查询条件
@@ -46,7 +41,7 @@ public class MUserSmsServiceImpl extends ServiceImpl<UserSmsMapper, UserSms> imp
 
     @Override
     @Transactional
-    public int saveSms(UserSmsVo vo) {
+    public int saveSms(UserSmsAddVo vo) {
         //获取消息信息进行验证
         String title = vo.getSmsTitle();
         String url = vo.getSmsUrl();
