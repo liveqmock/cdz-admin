@@ -65,7 +65,7 @@ public class MRedisUtil {
      * @param:
      * @return:
      */
-    public <T> T getHash(String key, String hashKey, T hashValue) {
+    public <T> T getHash(String key, String hashKey) {
         return (T) redisTemplate.opsForHash().get(key, hashKey);
     }
 
