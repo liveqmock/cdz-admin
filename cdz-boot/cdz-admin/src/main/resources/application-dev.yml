@@ -32,7 +32,7 @@ logback:
   logdir: ${config.base_path}\\logs\\cdz-admin
   appname: cdz-admin
   ##打印输出等级
-  level: info
+  level: debug
 
 #分布式事务日志记录
 atomikos:

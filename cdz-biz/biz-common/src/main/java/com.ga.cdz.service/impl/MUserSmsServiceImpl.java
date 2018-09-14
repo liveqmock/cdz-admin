@@ -1,6 +1,7 @@
 package com.ga.cdz.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -36,8 +37,8 @@ public class MUserSmsServiceImpl extends ServiceImpl<UserSmsMapper, UserSms> imp
         Page<UserSms> page = new Page<>(vo.getIndex(), vo.getSize());
         //设置查询条件
         UserSms userSms = new UserSms();
-        userSms.setSmsType(vo.getData().getSmsType());
-        QueryWrapper<UserSms> wrapper = new QueryWrapper<UserSms>().setEntity(userSms);
+        BeanUtils.copyProperties(vo.getData(), userSms);
+        LambdaQueryWrapper<UserSms> wrapper = new QueryWrapper<UserSms>().lambda().eq(UserSms::getSmsType, userSms.getSmsType()).like(UserSms::getSmsTitle, userSms.getSmsTitle());
         //根据条件获取查询后的分页对象
         IPage<UserSms> userSmsIPage = page(page, wrapper);
         return userSmsIPage;

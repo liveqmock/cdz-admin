@@ -11,6 +11,7 @@ import com.ga.cdz.domain.entity.ChargingSuggest;
 import com.ga.cdz.domain.vo.admin.ChargingSuggestVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingSuggestService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,9 @@ public class MChargingSuggestServiceImpl extends ServiceImpl<ChargingSuggestMapp
     @Override
     public IPage<ChargingSuggestDTO> getSuggestPage(PageVo<ChargingSuggestVo> vo) {
         IPage<ChargingSuggestDTO> page = new Page<>(vo.getIndex(), vo.getSize());
-        List<ChargingSuggestDTO> list = baseMapper.getSuggestPage(page);
+        ChargingSuggestVo suggest = new ChargingSuggestVo();
+        BeanUtils.copyProperties(vo.getData(), suggest);
+        List<ChargingSuggestDTO> list = baseMapper.getSuggestPage(page, suggest);
         page.setRecords(list);
         return page;
     }

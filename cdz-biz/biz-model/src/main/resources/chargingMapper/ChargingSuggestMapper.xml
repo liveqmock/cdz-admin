@@ -4,43 +4,52 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingSuggest">
-        <id column="suggest_id" property="suggestId" />
-        <result column="suggest_content" property="suggestContent" />
-        <result column="station_id" property="stationId" />
-        <result column="device_id" property="deviceId" />
-        <result column="insert_dt" property="insertDt" />
+        <id column="suggest_id" property="suggestId"/>
+        <result column="suggest_content" property="suggestContent"/>
+        <result column="station_id" property="stationId"/>
+        <result column="device_id" property="deviceId"/>
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
     <resultMap id="chargingSuggestDTO" type="com.ga.cdz.domain.dto.admin.ChargingSuggestDTO">
-        <result column="station_code" property="stationCode" />
-        <result column="station_name" property="stationName" />
-        <result column="device_code" property="deviceCode" />
-        <result column="device_name" property="deviceName" />
+        <result column="station_code" property="stationCode"/>
+        <result column="station_name" property="stationName"/>
+        <result column="device_code" property="deviceCode"/>
+        <result column="device_name" property="deviceName"/>
         <result column="cgtype_name" property="cgtypeName"/>
-        <result column="device_power" property="devicePower" />
-        <result column="suggest_content" property="suggestContent" />
-        <result column="suggest_path" property="suggestPath" />
+        <result column="device_power" property="devicePower"/>
+        <result column="suggest_content" property="suggestContent"/>
+        <result column="suggest_path" property="suggestPath"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         suggest_id, suggest_content, station_id, device_id, insert_dt
     </sql>
-    <select id="getSuggestPage" resultMap="chargingSuggestDTO">
-          SELECT
-	a.station_code,
-	a.station_name,
-	b.device_code,
-	b.device_name,
-	d.cgtype_name,
-	b.device_power,
-	e.suggest_content,
-	f.suggest_path
-FROM
-	t_charging_station a
-	LEFT JOIN t_charging_device b ON a.station_id = b.station_id
-	LEFT JOIN t_charging_type d ON d.cgtype_id = b.cgtype_id
-	LEFT JOIN t_charging_suggest e ON e.station_id = a.station_id
-	AND e.device_id = b.device_id
-	LEFT JOIN t_charging_suggest_attach f ON f.suggest_id = e.suggest_id
+    <select id="getSuggestPage" resultMap="chargingSuggestDTO"
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingSuggestVo">
+        SELECT
+        a.station_code,
+        a.station_name,
+        b.device_code,
+        b.device_name,
+        d.cgtype_name,
+        b.device_power,
+        e.suggest_content,
+        f.suggest_path
+        FROM
+        t_charging_station a
+        LEFT JOIN t_charging_device b ON a.station_id = b.station_id
+        LEFT JOIN t_charging_type d ON d.cgtype_id = b.cgtype_id
+        LEFT JOIN t_charging_suggest e ON e.station_id = a.station_id
+        AND e.device_id = b.device_id
+        LEFT JOIN t_charging_suggest_attach f ON f.suggest_id = e.suggest_id
+        <where>
+            <if test="suggest.stationCode !=null">
+                AND a.station_code like '%${suggest.stationCode}%'
+            </if>
+            <if test="suggest.stationName !=null">
+                AND a.station_name like '%${suggest.stationName}%'
+            </if>
+        </where>
     </select>
 
 </mapper>
