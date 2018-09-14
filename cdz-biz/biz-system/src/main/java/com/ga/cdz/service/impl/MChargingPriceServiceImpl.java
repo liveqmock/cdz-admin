@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,10 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     @Transactional
     public boolean saveChargingPriceByKeys(ChargingPriceVo chargingPriceVo) {
+        boolean check = checkPriceTime(chargingPriceVo);
+        if (!check) {
+            throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
+        }
         //低谷时间段计费信息
         ChargingPrice low = new ChargingPrice();
         //平谷时间段计费信息
@@ -70,7 +75,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         low.setChargingPrice(chargingPriceVo.getLowPrice());
         low.setPriceParking(chargingPriceVo.getLowParking());
         low.setServicePrice(chargingPriceVo.getLowService());
-        low.setPriceState(ChargingPrice.PriceState.ABLE);
         //获取平谷时间段信息
         middle.setStationId(chargingPriceVo.getStationId());
         middle.setPriceName(chargingPriceVo.getPriceName());
@@ -81,7 +85,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         middle.setChargingPrice(chargingPriceVo.getMiddlePrice());
         middle.setPriceParking(chargingPriceVo.getMiddleParking());
         middle.setServicePrice(chargingPriceVo.getMiddleService());
-        middle.setPriceState(ChargingPrice.PriceState.ABLE);
         //获取高峰时间段信息
         high.setStationId(chargingPriceVo.getStationId());
         high.setPriceName(chargingPriceVo.getPriceName());
@@ -92,7 +95,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         high.setChargingPrice(chargingPriceVo.getHighPrice());
         high.setPriceParking(chargingPriceVo.getHighParking());
         high.setServicePrice(chargingPriceVo.getHighService());
-        high.setPriceState(ChargingPrice.PriceState.ABLE);
         //判断充电站ID是否存在
         ChargingStation station = chargingStationMapper.selectById(chargingPriceVo.getStationId());
         if (ObjectUtils.isEmpty(station)) {
@@ -112,6 +114,10 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     @Transactional
     public boolean updateChargingPriceByKeys(ChargingPriceVo chargingPriceVo) {
+        boolean check = checkPriceTime(chargingPriceVo);
+        if (!check) {
+            throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
+        }
         //低谷时间段计费
         ChargingPrice low = new ChargingPrice();
         //平谷时间段计费
@@ -128,7 +134,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         low.setChargingPrice(chargingPriceVo.getLowPrice());
         low.setPriceParking(chargingPriceVo.getLowParking());
         low.setServicePrice(chargingPriceVo.getLowService());
-        low.setPriceState(ChargingPrice.PriceState.ABLE);
         //平谷时间段计费信息获取
         middle.setStationId(chargingPriceVo.getStationId());
         middle.setPriceName(chargingPriceVo.getPriceName());
@@ -139,7 +144,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         middle.setChargingPrice(chargingPriceVo.getMiddlePrice());
         middle.setPriceParking(chargingPriceVo.getMiddleParking());
         middle.setServicePrice(chargingPriceVo.getMiddleService());
-        middle.setPriceState(ChargingPrice.PriceState.ABLE);
         //高峰时间段计费信息获取
         high.setStationId(chargingPriceVo.getStationId());
         high.setPriceName(chargingPriceVo.getPriceName());
@@ -150,7 +154,6 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         high.setChargingPrice(chargingPriceVo.getHighPrice());
         high.setPriceParking(chargingPriceVo.getHighParking());
         high.setServicePrice(chargingPriceVo.getHighService());
-        high.setPriceState(ChargingPrice.PriceState.ABLE);
         //充电站id是否存在
         ChargingStation station = chargingStationMapper.selectById(chargingPriceVo.getStationId());
         if (ObjectUtils.isEmpty(station)) {
@@ -160,21 +163,21 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         try {
             //持久化低谷
             QueryWrapper<ChargingPrice> wrapper = new QueryWrapper();
-            wrapper.lambda().eq(ChargingPrice::getStationId, low.getStationId()).eq(ChargingPrice::getPriceState, low.getPriceState())
-                    .eq(ChargingPrice::getPriceType, low.getPriceType());
-            low.setPriceState(null).setPriceType(null).setStationId(null).setPriceIdx(null);
+            wrapper.lambda().eq(ChargingPrice::getStationId, low.getStationId())
+                    .eq(ChargingPrice::getPriceIdx, low.getPriceIdx());
+            low.setStationId(null).setPriceIdx(null);
             update(low, wrapper);
             //持久化平谷
             QueryWrapper<ChargingPrice> wrapper1 = new QueryWrapper();
-            wrapper1.lambda().eq(ChargingPrice::getStationId, middle.getStationId()).eq(ChargingPrice::getPriceState, middle.getPriceState())
-                    .eq(ChargingPrice::getPriceType, middle.getPriceType());
-            middle.setPriceState(null).setPriceType(null).setStationId(null).setPriceIdx(null);
+            wrapper1.lambda().eq(ChargingPrice::getStationId, middle.getStationId())
+                    .eq(ChargingPrice::getPriceIdx, middle.getPriceIdx());
+            middle.setStationId(null).setPriceIdx(null);
             update(middle, wrapper1);
             //持久化高峰
             QueryWrapper<ChargingPrice> wrapper2 = new QueryWrapper<>();
-            wrapper2.lambda().eq(ChargingPrice::getStationId, high.getStationId()).eq(ChargingPrice::getPriceState, high.getPriceState())
-                    .eq(ChargingPrice::getPriceType, high.getPriceType());
-            high.setPriceState(null).setPriceType(null).setStationId(null).setPriceIdx(null);
+            wrapper2.lambda().eq(ChargingPrice::getStationId, high.getStationId())
+                    .eq(ChargingPrice::getPriceIdx, high.getPriceIdx());
+            high.setStationId(null).setPriceIdx(null);
             update(high, wrapper2);
         } catch (Exception e) {
             throw new BusinessException("修改失败");
@@ -182,5 +185,29 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         return true;
     }
 
-
+    /**
+     * @author:wanzhongsu
+     * @description: 验证输入充电类型时间是否连续以及封闭
+     * @date: 2018/9/14 14:37
+     * @param: ChargingPriceVo
+     * @return: 是否连续以及封闭
+     */
+    private boolean checkPriceTime(ChargingPriceVo vo) {
+        long lowStart = vo.getLowStart().getTime();
+        long lowEnd = vo.getLowEnd().getTime();
+        long middleStart = vo.getMiddleStart().getTime();
+        long middleEnd = vo.getMiddleEnd().getTime();
+        long highStart = vo.getHighStart().getTime();
+        long highEnd = vo.getHighEnd().getTime();
+        long ml = middleStart - lowEnd;
+        long hm = highStart - middleEnd;
+        long lh = highEnd - lowStart;
+        boolean a = (ml >= 0 && ml <= 1000);
+        boolean b = (hm >= 0 && hm <= 1000);
+        boolean c = (lh >= -1000 && lh <= 0) || (lh >= 86399000 && lh <= 86400000);
+        if (a && b && c) {
+            return true;
+        }
+        return false;
+    }
 }

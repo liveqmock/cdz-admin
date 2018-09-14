@@ -82,13 +82,6 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     @TableField("service_price")
     private BigDecimal servicePrice;
-
-    /**
-     * 计费状态 1可用 0禁用
-     */
-    @TableField("price_state")
-    private PriceState priceState;
-
     /**
      * 插入时间
      */
@@ -131,36 +124,6 @@ public class ChargingPrice extends Model<ChargingPrice> {
             return this.desc;
         }
     }
-
-    /**
-     * @author:wanzhongsu
-     * @description: 计费状态枚举
-     * @date:2018/9/11 10:48
-     */
-    public enum PriceState implements IEnum<Integer> {
-        ABLE(1, "可用"),
-        DISABLE(0, "禁用");
-
-        private int value;
-        private String desc;
-
-        PriceState(int value, String desc) {
-            this.value = value;
-            this.desc = desc;
-        }
-
-
-        @Override
-        public Integer getValue() {
-            return this.value;
-        }
-
-        @JsonValue
-        public String getDesc() {
-            return this.desc;
-        }
-    }
-
     /**
      * @author:wanzhongsu
      * @description: 顺序枚举

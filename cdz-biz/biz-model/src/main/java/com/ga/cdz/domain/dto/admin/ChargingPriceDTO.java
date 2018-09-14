@@ -81,10 +81,6 @@ public class ChargingPriceDTO {
      * 低谷服务费用
      */
     private BigDecimal lowService;
-    /**
-     * 低谷计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState lowState;
 
     /**
      * 平谷
@@ -114,10 +110,6 @@ public class ChargingPriceDTO {
      * 平谷服务费用
      */
     private BigDecimal middleService;
-    /**
-     * 平谷计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState middleState;
 
     /**
      * 高峰
@@ -147,8 +139,4 @@ public class ChargingPriceDTO {
      * 高峰服务费用
      */
     private BigDecimal highService;
-    /**
-     * 高峰计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState highState;
 }

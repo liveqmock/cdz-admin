@@ -72,12 +72,6 @@ public class ChargingPriceVo {
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "低谷服务费用不能为空")
     private BigDecimal lowService;
-
-    /**
-     * 低谷计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState lowState;
-
     /**
      * 平谷
      */
@@ -118,11 +112,6 @@ public class ChargingPriceVo {
     private BigDecimal middleService;
 
     /**
-     * 平谷计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState middleState;
-
-    /**
      * 高峰
      */
     private ChargingPrice.PriceIdx high;
@@ -156,8 +145,4 @@ public class ChargingPriceVo {
      */
     @NotNull(groups = {IMChargingPriceGroup.Add.class, IMChargingPriceGroup.Update.class}, message = "高峰服务费用不能为空")
     private BigDecimal highService;
-    /**
-     * 高峰计费状态 1可用 0禁用
-     */
-    private ChargingPrice.PriceState highState;
 }

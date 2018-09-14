@@ -128,8 +128,8 @@ public class ChargingStationController extends AbstractBaseController {
             vo.setStationType(ChargingStation.StationType.OUTSIDE);
         } else if (fileVo.getStationType() == 2) {
             vo.setStationType(ChargingStation.StationType.INSIDE);
-        } else if (fileVo.getStationType() == 3) {
-            vo.setStationType(ChargingStation.StationType.PERSON);
+        } else {
+            throw new BusinessException("充电桩类型不存在");
         }
         int stationId = saveChargingStation(vo);
         /**最后保存到数据库的文件路径集合*/

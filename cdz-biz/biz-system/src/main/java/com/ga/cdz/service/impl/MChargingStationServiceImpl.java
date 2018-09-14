@@ -107,7 +107,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         //检查商户编码是否已存在
         ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
         if (!ObjectUtils.isEmpty(hasCode)) {
-            throw new BusinessException("该商户编码已存在");
+            throw new BusinessException("该充电站编码已存在");
         }
         //保存商户，商户状态初始化为正常
         chargingStation.setStationState(ChargingStation.StationState.NORMAL);

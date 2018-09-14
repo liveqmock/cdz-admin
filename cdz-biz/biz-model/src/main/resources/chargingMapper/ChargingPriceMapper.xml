@@ -13,7 +13,6 @@
         <result column="charging_price" property="chargingPrice"/>
         <result column="price_parking" property="priceParking"/>
         <result column="service_price" property="servicePrice"/>
-        <result column="price_state" property="priceState"/>
         <result column="insert_dt" property="insertDt"/>
     </resultMap>
     <resultMap id="chargingPriceDTO" type="com.ga.cdz.domain.dto.admin.ChargingPriceDTO">
@@ -31,27 +30,24 @@
         <result column="low_price" property="lowPrice"/>
         <result column="low_parking" property="lowParking"/>
         <result column="low_service" property="lowService"/>
-        <result column="low_state" property="lowState"/>
         <result column="middle" property="middle"/>
         <result column="middle_start" property="middleStart"/>
         <result column="middle_end" property="middleEnd"/>
         <result column="middle_price" property="middlePrice"/>
         <result column="middle_parking" property="middleParking"/>
         <result column="middle_service" property="middleService"/>
-        <result column="middle_state" property="middleState"/>
         <result column="high" property="high"/>
         <result column="high_start" property="highStart"/>
         <result column="high_end" property="highEnd"/>
         <result column="high_price" property="highPrice"/>
         <result column="high_parking" property="highParking"/>
         <result column="high_service" property="highService"/>
-        <result column="high_state" property="highState"/>
 
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        station_id, price_name, price_type, price_idx, price_begin_dt, price_end_dt, charging_price, price_parking, service_price, price_state, insert_dt
+        station_id, price_name, price_type, price_idx, price_begin_dt, price_end_dt, charging_price, price_parking, service_price, insert_dt
     </sql>
     <select id="getChargingPricePage" resultMap="chargingPriceDTO" parameterType="java.util.Map">
         SELECT
@@ -69,21 +65,21 @@
         a.charging_price low_price,
         a.price_parking low_parking,
         a.service_price low_service,
-        a.price_state low_state,
+
         b.price_idx middle,
         b.price_begin_dt middle_start,
         b.price_end_dt middle_end,
         b.charging_price middle_price,
         b.price_parking middle_parking,
         b.service_price middle_service,
-        b.price_state middle_state,
+
         b.price_idx high,
         b.price_begin_dt high_start,
         b.price_end_dt high_end,
         b.charging_price high_price,
         b.price_parking high_parking,
-        b.service_price high_service,
-        b.price_state high_state
+        b.service_price high_service
+
         FROM
         t_charging_price a
         LEFT JOIN t_charging_station station ON a.station_id = station.station_id

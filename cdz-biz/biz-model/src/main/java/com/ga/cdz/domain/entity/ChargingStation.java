@@ -184,8 +184,7 @@ public class ChargingStation extends Model<ChargingStation> {
      */
     public enum StationType implements IEnum<Integer> {
         OUTSIDE(1, "对外开放"),
-        INSIDE(2, "不对外开放"),
-        PERSON(3,"个人桩");
+        INSIDE(2, "不对外开放");
 
         private int value;
         private String desc;
