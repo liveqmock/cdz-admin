@@ -9,6 +9,7 @@ import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
+import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
@@ -38,11 +39,14 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     MRedisUtil mRedisUtil;
 
     @Override
-    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo) {
+    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo) {
         //构建分页信息
         Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
+        //复制
+        ChargingStationSelectVo param = new ChargingStationSelectVo();
+        BeanUtils.copyProperties(vo.getData(), param);
         //分页查询
-        List<ChargingStationDTO> list = baseMapper.getStationList(page);
+        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
         page.setRecords(list);
         return page;
     }

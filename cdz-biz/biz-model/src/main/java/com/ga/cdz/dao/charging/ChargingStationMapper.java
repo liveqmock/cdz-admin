@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
+import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +23,5 @@ public interface ChargingStationMapper extends SuperMapper<ChargingStation> {
      * @param: Page
      * @return: List
      */
-    List<ChargingStationDTO> getStationList(Page<ChargingStationDTO> page);
+    List<ChargingStationDTO> getStationList(Page<ChargingStationDTO> page, @Param("param") ChargingStationSelectVo vo);
 }

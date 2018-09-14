@@ -11,6 +11,7 @@ import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.entity.ChargingStationAttach;
 import com.ga.cdz.domain.group.admin.IMChargingStationGroup;
 import com.ga.cdz.domain.vo.admin.ChargingStationFileVo;
+import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationAttachService;
@@ -69,7 +70,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list")
-    public Result getStationList(@RequestBody @Validated PageVo<ChargingStationVo> vo, BindingResult bindingResult) {
+    public Result getStationList(@RequestBody @Validated PageVo<ChargingStationSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo);
         return Result.success().data(iPage);
