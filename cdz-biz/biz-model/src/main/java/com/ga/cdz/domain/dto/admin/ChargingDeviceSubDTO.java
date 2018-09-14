@@ -1,6 +1,7 @@
 package com.ga.cdz.domain.dto.admin;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ga.cdz.domain.entity.ChargingDeviceSub;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +33,7 @@ public class ChargingDeviceSubDTO {
     /**
      * 0故障，1空闲，2占用
      */
-    private Integer deviceSubState;
+    private ChargingDeviceSub.DeviceSubState deviceSubState;
 
     /**
      * 订单Id

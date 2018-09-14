@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,21 +35,25 @@ public class ChargingDeviceSub extends Model<ChargingDeviceSub> {
    */
   @TableId(value = "device_sub_id", type = IdType.NONE)
   private Integer deviceSubId;
+
   /**
    * 充电桩ID
    */
   @TableField("device_id")
   private Integer deviceId;
+
   /**
    * 枪名称
    */
   @TableField("device_sub_name")
   private String deviceSubName;
+
   /**
    * 0故障，1空闲，2占用
    */
   @TableField("device_sub_state")
-  private Integer deviceSubState;
+  private DeviceSubState deviceSubState;
+
   /**
    * 更新时间
    */
@@ -55,6 +61,7 @@ public class ChargingDeviceSub extends Model<ChargingDeviceSub> {
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date updateDt;
+
   /**
    * 插入时间
    */
@@ -63,10 +70,33 @@ public class ChargingDeviceSub extends Model<ChargingDeviceSub> {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date insertDt;
 
-
   @Override
   protected Serializable pkVal() {
     return this.deviceId;
+  }
+
+  public enum DeviceSubState implements IEnum<Integer> {
+    ERROR(0, "故障"),
+    IDLE(1, "空闲"),
+    USING(2, "使用中");
+
+    private Integer code;
+    private String desc;
+
+    DeviceSubState(int code, String desc) {
+      this.code = code;
+      this.desc = desc;
+    }
+
+    @Override
+    public Integer getValue() {
+      return code;
+    }
+
+    @JsonValue
+    public String getDesc() {
+      return desc;
+    }
   }
 
   @Override
