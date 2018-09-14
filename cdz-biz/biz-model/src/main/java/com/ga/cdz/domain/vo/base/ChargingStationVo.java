@@ -59,7 +59,6 @@ public class ChargingStationVo {
      * 运营商ID
      */
     @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "运营商ID不能为空")
-    @TableField("operators_id")
     private Integer operatorsId;
 
     /**
