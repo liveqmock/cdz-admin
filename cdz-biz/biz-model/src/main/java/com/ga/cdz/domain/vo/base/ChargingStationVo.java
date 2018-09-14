@@ -85,12 +85,14 @@ public class ChargingStationVo {
      */
     @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩开放时间不能为空")
     private Time stationOpendt;
     /**
      * 充电站关闭时间
      */
     @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩关闭时间不能为空")
     private Time stationClosedt;
 
     /**
