@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -59,8 +61,9 @@ public class ChargingDevice extends Model<ChargingDevice> {
    */
   @TableField("device_subnum")
   private Integer deviceSubnum;
+
   @TableField("device_state")
-  private Integer deviceState;
+  private DeviceState deviceState;
   /**
    * 更新时间
    */
@@ -80,6 +83,30 @@ public class ChargingDevice extends Model<ChargingDevice> {
   @Override
   protected Serializable pkVal() {
     return this.deviceId;
+  }
+
+  public enum DeviceState implements IEnum<Integer> {
+    ERROR(0, "故障"),
+    IDLE(1, "空闲"),
+    USING(2, "使用中");
+
+    private Integer code;
+    private String desc;
+
+    DeviceState(int code, String desc) {
+      this.code = code;
+      this.desc = desc;
+    }
+
+    @Override
+    public Integer getValue() {
+      return code;
+    }
+
+    @JsonValue
+    public String getDesc() {
+      return desc;
+    }
   }
 
   @Override
