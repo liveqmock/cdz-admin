@@ -11,7 +11,6 @@ import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingStationService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
-import com.ga.cdz.util.MUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +30,6 @@ import java.util.stream.Collectors;
 @Service("chargingStationService")
 public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IChargingStationService {
 
-    @Resource
-    MUtil mUtil;
 
     @Resource
     MRedisUtil mRedisUtil;
@@ -77,6 +74,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         /**得到分页后的数据*/
         List<ChargingStationPageDTO> pageList = mPage.getList();
         /**补全站点的信息*/
+
         /**获取站的评分缓存列表**/
         Map<String, Integer> scoreMap = mRedisUtil.getHash(RedisConstant.LIST_CHARGING_STATION_SCORE);
         List<ChargingStationPageDTO> rsList = pageList.stream().map(chargingStationPageDTO -> {

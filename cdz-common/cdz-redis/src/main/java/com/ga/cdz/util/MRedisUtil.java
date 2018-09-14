@@ -60,6 +60,17 @@ public class MRedisUtil {
 
     /**
      * @author:luqi
+     * @description: 根据hashkey 获取
+     * @date:2018/9/14_13:56
+     * @param:
+     * @return:
+     */
+    public <T> T getHash(String key, String hashKey, T hashValue) {
+        return (T) redisTemplate.opsForHash().get(key, hashKey);
+    }
+
+    /**
+     * @author:luqi
      * @description: 添加hash 集合
      * @date:2018/9/11_18:46
      * @param:

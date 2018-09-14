@@ -47,6 +47,11 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
      */
     private Integer score;
 
+    /**
+     * 当前价格
+     */
+    private Double nowPrice;
+
 
     @Override
     public int compareTo(ChargingStationPageDTO dto) {
