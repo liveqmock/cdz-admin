@@ -23,11 +23,6 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
     private String stationName;
 
     /**
-     * 设备数
-     */
-    private Integer deviceNum;
-
-    /**
      * 维度
      */
     private Double lat;
@@ -51,6 +46,41 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
      * 当前价格
      */
     private Double nowPrice;
+
+    /**
+     * 图片
+     */
+    private String picUrl;
+
+    /**
+     * 标签
+     */
+    private String tags;
+
+    /**
+     * 正在使用的快充
+     */
+    private Integer fastNum;
+
+    /**
+     * 正在使用的慢充
+     */
+    Integer slowNum;
+
+    /**
+     * 快充总数
+     */
+    Integer fastTotal;
+
+    /**
+     * 慢冲总数
+     */
+    Integer slowTotal;
+
+    /**
+     * sttpeId
+     */
+    private Integer sttpeId;
 
 
     @Override

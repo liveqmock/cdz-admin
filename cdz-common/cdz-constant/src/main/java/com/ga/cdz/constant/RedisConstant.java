@@ -51,6 +51,9 @@ public class RedisConstant {
     //table缓存t_charging_device
     public final static String TABLE_CHARGING_DEVICE = TABLE_ROOT + "CHARGING-DEVICE";
 
+    //table缓存t_charging_device 按照站点的形式
+    public final static String TABLE_CHARGING_DEVICE_STATION = TABLE_ROOT + "CHARGING-DEVICE-STATION";
+
     //table缓存t_charging_device_sub
     public final static String TABLE_CHARGING_DEVICE_SUB = TABLE_ROOT + "CHARGING-DEVICE-SUB";
 
@@ -63,5 +66,11 @@ public class RedisConstant {
 
     //list缓存站点评分
     public final static String LIST_CHARGING_STATION_SCORE = LIST_ROOT + "CHARGING-STATION-SCORE";
+
+    //list缓存城市的站点列表
+    public final static String LIST_CITY_STATION = LIST_ROOT + "CITY:";
+
+    //list缓存首页分页根据设备
+    public final static String LIST_MAIN_DEVICE = LIST_ROOT + "MAIN-DEVICE:";
 
 }

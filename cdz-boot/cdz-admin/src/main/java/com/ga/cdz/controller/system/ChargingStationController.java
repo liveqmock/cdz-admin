@@ -200,7 +200,6 @@ public class ChargingStationController extends AbstractBaseController {
         Integer city = vo.getCity();
         Integer county = vo.getCounty();
         Integer country = vo.getCountry();
-        Integer deviceNum = vo.getDeviceNum();
         Double lat = vo.getLat();
         Double lng = vo.getLng();
         Time stationOpendt = vo.getStationOpendt();
@@ -228,8 +227,6 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("区县编码不能为空");
         } else if (ObjectUtils.isEmpty(country)) {
             throw new BusinessException("乡镇街道编码不能为空");
-        } else if (ObjectUtils.isEmpty(deviceNum)) {
-            throw new BusinessException("充电桩设备数不能为空");
         } else if (ObjectUtils.isEmpty(lat)) {
             throw new BusinessException("经度不能为空");
         } else if (ObjectUtils.isEmpty(lng)) {

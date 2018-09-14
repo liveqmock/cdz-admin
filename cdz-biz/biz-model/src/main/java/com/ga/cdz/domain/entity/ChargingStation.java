@@ -66,11 +66,7 @@ public class ChargingStation extends Model<ChargingStation> {
      */
     @TableField("operators_id")
     private Integer operatorsId;
-    /**
-     * 设备数
-     */
-    @TableField("device_num")
-    private Integer deviceNum;
+
     /**
      * 维度
      */

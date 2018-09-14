@@ -59,6 +59,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingType();
         cacheChargingPrice();
         cacheChargingDevice();
+        cacheChargingDeviceGroupByStation();
         cacheChargingDeviceSub();
         cacheChargingStationType();
         cacheChargingOrderCommentList();
@@ -130,6 +131,13 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         }
     }
 
+    /**
+     * @author:luqi
+     * @description: 缓存设备
+     * @date:2018/9/14_15:52
+     * @param:
+     * @return:
+     */
     public void cacheChargingDevice() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE)) {
             List<ChargingDevice> list = chargingDeviceMapper.selectList(null);
@@ -139,6 +147,34 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
             }
             mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE, map);
             log.info("TABLE_CHARGING_DEVICE缓存成功");
+        }
+    }
+
+    /**
+     * @author:luqi
+     * @description: 缓存设备按照 充电站分组
+     * @date:2018/9/14_15:52
+     * @param:
+     * @return:
+     */
+    public void cacheChargingDeviceGroupByStation() {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE_STATION)) {
+            List<ChargingDevice> list = chargingDeviceMapper.selectList(null);
+            Map<String, List<ChargingDevice>> map = Maps.newHashMap();
+            String stationIdStr;
+            for (ChargingDevice chargingDevice : list) {
+                stationIdStr = chargingDevice.getStationId() + "";
+                List<ChargingDevice> mList;
+                if (map.containsKey(stationIdStr)) {
+                    mList = map.get(stationIdStr);
+                } else {
+                    mList = Lists.newArrayList();
+                }
+                mList.add(chargingDevice);
+                map.put(stationIdStr, mList);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_DEVICE_STATION, map);
+            log.info("TABLE_CHARGING_DEVICE_STATION缓存成功");
         }
     }
 

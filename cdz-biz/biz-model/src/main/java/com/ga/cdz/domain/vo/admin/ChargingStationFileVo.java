@@ -69,10 +69,6 @@ public class ChargingStationFileVo {
      */
     private Integer operatorsId;
     /**
-     * 设备数
-     */
-    private Integer deviceNum;
-    /**
      * 维度
      */
     private Double lat;
