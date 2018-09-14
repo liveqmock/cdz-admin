@@ -1,16 +1,23 @@
 package com.ga.cdz.domain.vo.admin;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.UserSms;
 import com.ga.cdz.domain.group.admin.IMUserSmsGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * @author:wanzhongsu
+ * @description: 消息表
+ * @date:2018/9/14 14:01
+ */
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Accessors(chain = true)
@@ -45,10 +52,14 @@ public class UserSmsVo {
     /**
      * 更新时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDt;
     /**
      * 插入时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date insertDt;
 
 }

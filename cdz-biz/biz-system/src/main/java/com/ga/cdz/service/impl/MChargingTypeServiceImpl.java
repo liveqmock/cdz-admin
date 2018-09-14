@@ -43,7 +43,6 @@ public class MChargingTypeServiceImpl extends ServiceImpl<ChargingTypeMapper, Ch
             throw new BusinessException("充电方式ID不存在");
         }
         //删除充电方式
-//        Integer integer = baseMapper.deleteById(chargingType.getCgtypeId());
         ChargingType chargingType1 = getById(chargingType.getCgtypeId());
         chargingType1.setCgtypeState(ChargingType.CgtypeState.DELETE);
         updateById(chargingType1);

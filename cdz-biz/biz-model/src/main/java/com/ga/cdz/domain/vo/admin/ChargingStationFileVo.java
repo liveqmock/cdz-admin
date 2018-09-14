@@ -1,7 +1,9 @@
 package com.ga.cdz.domain.vo.admin;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Time;
 import java.util.Date;
@@ -85,18 +87,27 @@ public class ChargingStationFileVo {
     /**
      * 充电站开放时间
      */
+
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time stationOpendt;
     /**
      * 充电站关闭时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time stationClosedt;
     /**
      * 更新时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDt;
     /**
      * 插入时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date insertDt;
 
 }

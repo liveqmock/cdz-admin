@@ -27,7 +27,7 @@ import java.util.List;
 public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operators> implements IMOperatorsService {
 
     @Override
-    public IPage<Operators> getOperatorList(PageVo<OperatorsVo> vo) {
+    public IPage<Operators> getOperatorPage(PageVo<OperatorsVo> vo) {
         IPage page = new Page(vo.getIndex(), vo.getSize());
         LambdaQueryWrapper<Operators> wrapper = new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsState, Operators.OperatorsState.NORMAL).orderByAsc(Operators::getOperatorsId);
         page = baseMapper.selectPage(page, wrapper);
@@ -72,7 +72,6 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
     @Transactional
     @Override
     public Integer removeOperator(OperatorsVo vo) {
-//        int result = baseMapper.deleteById(vo.getOperatorsId());
         Operators delete = getById(vo.getOperatorsId());
         delete.setOperatorsState(Operators.OperatorsState.DELETE);
         updateById(delete);

@@ -1,8 +1,10 @@
 package com.ga.cdz.domain.dto.admin;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingPrice;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.sql.Time;
@@ -58,10 +60,14 @@ public class ChargingPriceDTO {
     /**
      * 低谷开始时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time lowStart;
     /**
      * 低谷结束时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time lowEnd;
     /**
      * 低谷充电价格
@@ -70,11 +76,11 @@ public class ChargingPriceDTO {
     /**
      * 低谷停车场价格
      */
-    private Time lowParking;
+    private BigDecimal lowParking;
     /**
      * 低谷服务费用
      */
-    private Time lowService;
+    private BigDecimal lowService;
     /**
      * 低谷计费状态 1可用 0禁用
      */
@@ -87,10 +93,14 @@ public class ChargingPriceDTO {
     /**
      * 平谷开始时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time middleStart;
     /**
      * 平谷结束时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time middleEnd;
     /**
      * 平谷充电价格
@@ -109,7 +119,6 @@ public class ChargingPriceDTO {
      */
     private ChargingPrice.PriceState middleState;
 
-
     /**
      * 高峰
      */
@@ -117,10 +126,14 @@ public class ChargingPriceDTO {
     /**
      * 高峰开始时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time highStart;
     /**
      * 高峰结束时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time highEnd;
     /**
      * 高峰充电价格

@@ -9,7 +9,6 @@ import com.ga.cdz.domain.vo.base.OperatorsVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMOperatorsService;
 
-import org.jboss.logging.Param;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,7 @@ public class OperatorController extends AbstractBaseController {
      */
     @PostMapping("/list")
     public Result getOperatorList(@RequestBody @Validated PageVo<OperatorsVo> vo) {
-        IPage<Operators> operators = mOperatorsService.getOperatorList(vo);
+        IPage<Operators> operators = mOperatorsService.getOperatorPage(vo);
         return Result.success().data(operators);
     }
 

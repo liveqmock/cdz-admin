@@ -17,8 +17,7 @@ public interface IMChargingTypeService extends IService<ChargingType> {
      * @author:wanzhongsu
      * @description: 获取充电桩充电方式列表
      * @date: 2018/9/10 9:42
-     * @param:
-     * @return:
+     * @return: List
      */
     List<ChargingType> getChargingTypeList();
 
@@ -26,8 +25,8 @@ public interface IMChargingTypeService extends IService<ChargingType> {
      * @author:wanzhongsu
      * @description: 逻辑删除充电柱充电方式
      * @date: 2018/9/10 9:43
-     * @param:
-     * @return:
+     * @param: ChargingTypeVo
+     * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
     Integer removeChargingTypeById(ChargingTypeVo vo);
 
@@ -35,8 +34,8 @@ public interface IMChargingTypeService extends IService<ChargingType> {
      * @author:wanzhongsu
      * @description: 保存充电柱充电方式
      * @date: 2018/9/10 9:43
-     * @param:
-     * @return:
+     * @param: ChargingTypeVo
+     * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
     Integer saveChargingTypeObj(ChargingTypeVo vo);
 

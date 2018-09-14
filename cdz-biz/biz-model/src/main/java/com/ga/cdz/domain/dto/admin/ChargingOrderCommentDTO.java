@@ -8,6 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * @author:hanghaohao
+ * @description: 订单评论DTO
+ * @date:2018/9/14 14:04
+ */
 @Data
 @Accessors
 public class ChargingOrderCommentDTO {

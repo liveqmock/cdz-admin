@@ -19,8 +19,8 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @author:wanzhongsu
      * @description: 分页获取充电站信息
      * @date: 2018/9/10 16:29
-     * @param:
-     * @return:
+     * @param: PageVo
+     * @return: IPage<ChargingStationDTO>
      */
     IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo);
 
@@ -28,8 +28,8 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @author:wanzhongsu
      * @description: 根据名字模糊查询station的id
      * @date: 2018/9/14 10:36
-     * @param:
-     * @return:
+     * @param: ChargingStationVo
+     * @return: List
      */
     List<ChargingStation> getStationList(ChargingStationVo vo);
 
@@ -37,8 +37,8 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @author:wanzhongsu
      * @description: 修改充电站信息
      * @date: 2018/9/10 16:29
-     * @param:
-     * @return:
+     * @param: ChargingStationVo
+     * @return: 是否修改成功
      */
     boolean updateStationById(ChargingStationVo vo);
 
@@ -46,8 +46,8 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @author:wanzhongsu
      * @description: 删除充电站信息
      * @date: 2018/9/10 16:29
-     * @param:
-     * @return:
+     * @param: ChargingStationVo
+     * @return: 是否删除成功
      */
     boolean deleteStationById(ChargingStationVo vo);
 

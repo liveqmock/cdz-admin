@@ -20,18 +20,26 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @author:wanzhongsu
      * @description: 获取商户列表
      * @date: 2018/9/10 14:42
-     * @param:
-     * @return:
+     * @param: PageVo
+     * @return: List
      */
     IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopVo> vo);
 
+    /**
+     * @author:wanzhongsu
+     * @description: 根据名字模糊查询充电桩列表
+     * @date: 2018/9/14 13:37
+     * @param: ChargingShopVo
+     * @return: List
+     */
     List<ChargingShop> getListByName(ChargingShopVo vo);
+
     /**
      * @author:wanzhongsu
      * @description: 修改商户
      * @date: 2018/9/10 14:42
-     * @param:
-     * @return:
+     * @param: ChargingShopVo
+     * @return: 是否成功
      */
     boolean updateShopById(ChargingShopVo vo);
 

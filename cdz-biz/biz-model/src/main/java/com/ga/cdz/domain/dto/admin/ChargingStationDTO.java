@@ -1,8 +1,10 @@
 package com.ga.cdz.domain.dto.admin;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingStation;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -59,5 +61,7 @@ public class ChargingStationDTO {
     /**
      * 插入时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date insertDt;
 }

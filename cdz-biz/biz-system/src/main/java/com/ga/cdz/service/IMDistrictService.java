@@ -25,8 +25,8 @@ public interface IMDistrictService extends IService<District> {
      * @author:wanzhongsu
      * @description: 根据区域名字查询区域编码
      * @date: 2018/9/14 10:55
-     * @param:
-     * @return:
+     * @param: DistrictVo
+     * @return: List
      */
     List<District> getCodeByName(DistrictVo vo);
 }

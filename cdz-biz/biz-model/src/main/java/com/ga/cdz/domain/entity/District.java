@@ -53,7 +53,11 @@ public class District extends Model<District> {
         return this.districtCode;
     }
 
-
+    /**
+     * @author:wanzhongsu
+     * @description: 区域等级枚举
+     * @date:2018/9/14 14:14
+     */
     public enum DistrictLevel implements IEnum<Integer> {
         SHENG(0, "省"),
         SHI(1, "市"),
