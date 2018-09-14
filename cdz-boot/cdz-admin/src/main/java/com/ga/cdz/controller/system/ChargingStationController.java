@@ -144,7 +144,7 @@ public class ChargingStationController extends AbstractBaseController {
             /**生成新的文件名*/
             String newFileName = mFileUtil.renameFile(fileName);
             /**生成新的文件目录*/
-            String newFilePath = mFileUtil.getTimePath() + File.separator + stationId + File.separator;
+            String newFilePath = mFileUtil.getTimePath() + stationId + File.separator;
             /**保存在数据库的dbFilePath*/
             String dbFilePath = newFilePath + newFileName;
             /**保存文件*/
@@ -161,7 +161,6 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("键值数据保存成功，但是上传文件失败");
         }
 //        /***字符串我们全部用分号拼接,且不要最后一份分号*/
-//        String dbFilePathStr = String.join(";", dbFilePaths);
         //创建充电站附件对象
         ChargingStationAttach chargingStationAttach = new ChargingStationAttach();
         chargingStationAttach.setStationId(stationId);

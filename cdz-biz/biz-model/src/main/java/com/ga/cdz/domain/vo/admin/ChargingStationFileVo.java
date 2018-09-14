@@ -87,14 +87,11 @@ public class ChargingStationFileVo {
     /**
      * 充电站开放时间
      */
-
-    @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time stationOpendt;
     /**
      * 充电站关闭时间
      */
-    @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
     private Time stationClosedt;
     /**

@@ -119,7 +119,7 @@ public class UserSmsController extends AbstractBaseController {
         /**生成新的文件名*/
         String newFileName = mFileUtil.renameFile(fileName);
         /**生成新的文件目录*/
-        String newFilePath = mFileUtil.getTimePath() + File.separator + smsId + File.separator;
+        String newFilePath = mFileUtil.getTimePath() + smsId;
         /**保存在数据库的dbFilePath*/
         String dbFilePath = newFilePath + File.separator + newFileName;
         //保存文件
@@ -158,7 +158,7 @@ public class UserSmsController extends AbstractBaseController {
         //将消息中的图片路径进行规范化
         list.forEach(item -> {
             String uri = item.getSmsPic();
-            uri = system + File.separator + uri;
+            uri = system + uri;
             uri = uri.replaceAll("\\\\", "/");
             uri.replaceAll("//", "/").replaceFirst("/", "//");
             item.setSmsPic(uri);
@@ -189,7 +189,7 @@ public class UserSmsController extends AbstractBaseController {
         List<UserSms> list = page.getRecords();
         list.forEach(item -> {
             String uri = item.getSmsPic();
-            uri = banner + File.separator + uri;
+            uri = banner + uri;
             uri = uri.replaceAll("\\\\", "/");
             uri.replaceAll("//", "/").replaceFirst("/", "//");
             item.setSmsPic(uri);
