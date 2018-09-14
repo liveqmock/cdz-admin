@@ -1,5 +1,7 @@
 package com.ga.cdz.constant;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 /**
  * @author:luqi
  * @description:  正则常量类，变量同一大写，且语义化 final static 修饰
@@ -24,4 +26,16 @@ public class RegexConstant {
      * 充电站编码
      */
     public final static String STATION_CODE="^\\d{4}$";
+    /**
+     * 省编码
+     */
+    public final static String PROVINCE_CODE = "^\\d{8}$";
+    /**
+     * 市编码
+     */
+    public final static String CITY_CODE = "^\\d{9}$";
+    /**
+     * 县区编码
+     */
+    public final static String COUNTY_CODE = "^\\d{9}$";
 }

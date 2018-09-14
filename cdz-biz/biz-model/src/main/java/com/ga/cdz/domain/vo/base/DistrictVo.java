@@ -1,8 +1,5 @@
 package com.ga.cdz.domain.vo.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.ga.cdz.domain.entity.District;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

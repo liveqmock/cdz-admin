@@ -10,6 +10,12 @@
         <result column="station_name" property="stationName" />
         <result column="station_type" property="stationType" />
         <result column="sttpe_id" property="sttpeId" />
+        <result column="operators_id" property="operatorsId"/>
+        <result column="station_addr" property="stationAddr"/>
+        <result column="country" property="country"/>
+        <result column="county" property="county"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
         <result column="device_num" property="deviceNum" />
         <result column="lat" property="lat" />
         <result column="lng" property="lng" />
@@ -34,7 +40,7 @@
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        station_id, shop_id, station_code, station_name, station_type, sttpe_id, device_num, lat, lng, station_state, update_dt, insert_dt
+         station_id, shop_id, station_code, station_name, station_type, sttpe_id, operators_id, station_addr, country, county, city, province, device_num, lat, lng, station_state, station_opendt, station_closedt, update_dt, insert_dt
     </sql>
     <select id="getStationList" resultMap="chargingStationDTO">
         SELECT

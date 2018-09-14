@@ -32,6 +32,29 @@ public class ChargingStationFileVo {
      */
     private String stationName;
     /**
+     * 充电桩详细地址
+     */
+    private String stationAddr;
+
+    /**
+     * 充电桩省编码
+     */
+    private Integer province;
+
+    /**
+     * 充电桩市编码
+     */
+    private Integer city;
+
+    /**
+     * 充电桩区编码
+     */
+    private Integer county;
+    /**
+     * 乡镇（街道）编码
+     */
+    private Integer country;
+    /**
      * 充电站类型 1对外开放 2不对外开放
      */
     private Integer stationType;

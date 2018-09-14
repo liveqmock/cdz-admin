@@ -7,6 +7,8 @@ import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
+import java.util.List;
+
 /**
  * @author:wanzhongsu
  * @description: 充电站列表服务接口
@@ -21,6 +23,15 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @return:
      */
     IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationVo> vo);
+
+    /**
+     * @author:wanzhongsu
+     * @description: 根据名字模糊查询station的id
+     * @date: 2018/9/14 10:36
+     * @param:
+     * @return:
+     */
+    List<ChargingStation> getStationList(ChargingStationVo vo);
 
     /**
      * @author:wanzhongsu

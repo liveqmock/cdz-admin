@@ -124,7 +124,11 @@ public class ChargingStation extends Model<ChargingStation> {
      */
     @TableField("county")
     private Integer county;
-
+    /**
+     * 乡镇（街道）编码
+     */
+    @TableField("country")
+    private Integer country;
     /**
      * 更新时间
      */

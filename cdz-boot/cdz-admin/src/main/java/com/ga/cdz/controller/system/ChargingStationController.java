@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.sql.Time;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -72,6 +73,20 @@ public class ChargingStationController extends AbstractBaseController {
         checkParams(bindingResult);
         IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo);
         return Result.success().data(iPage);
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 根据名字模糊查询获取stationID
+     * @date: 2018/9/14 10:38
+     * @param: ChargingStationVo
+     * @return: Result
+     */
+    @PostMapping("/get/id")
+    public Result getStationIdList(@RequestBody @Validated ChargingStationVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingStation> chargingStations = mChargingStationService.getStationList(vo);
+        return Result.success().data(chargingStations);
     }
 
     /**
@@ -180,6 +195,18 @@ public class ChargingStationController extends AbstractBaseController {
         String stationName = vo.getStationName();
         Integer sttpeId = vo.getSttpeId();
         Integer operatorsId = vo.getOperatorsId();
+        ChargingStation.StationType stationType = vo.getStationType();
+        String stationAddr = vo.getStationAddr();
+        Integer province = vo.getProvince();
+        Integer city = vo.getCity();
+        Integer county = vo.getCounty();
+        Integer country = vo.getCountry();
+        Integer deviceNum = vo.getDeviceNum();
+        Double lat = vo.getLat();
+        Double lng = vo.getLng();
+        Time stationOpendt = vo.getStationOpendt();
+        Time stationClosedt = vo.getStationClosedt();
+
         if (ObjectUtils.isEmpty(shopId)) {
             throw new BusinessException("商户ID不能为空");
         } else if (ObjectUtils.isEmpty(stationCode)) {
@@ -190,8 +217,40 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("运营商类型ID不能为空");
         } else if (ObjectUtils.isEmpty(operatorsId)) {
             throw new BusinessException("运营商ID不能为空");
+        } else if (ObjectUtils.isEmpty(stationType)) {
+            throw new BusinessException("充电站类型不能为空");
+        } else if (ObjectUtils.isEmpty(stationAddr)) {
+            throw new BusinessException("充电站地址不能为空");
+        } else if (ObjectUtils.isEmpty(province)) {
+            throw new BusinessException("省编码不能为空");
+        } else if (ObjectUtils.isEmpty(city)) {
+            throw new BusinessException("市编码不能为空");
+        } else if (ObjectUtils.isEmpty(county)) {
+            throw new BusinessException("区县编码不能为空");
+        } else if (ObjectUtils.isEmpty(country)) {
+            throw new BusinessException("乡镇街道编码不能为空");
+        } else if (ObjectUtils.isEmpty(deviceNum)) {
+            throw new BusinessException("充电桩设备数不能为空");
+        } else if (ObjectUtils.isEmpty(lat)) {
+            throw new BusinessException("经度不能为空");
+        } else if (ObjectUtils.isEmpty(lng)) {
+            throw new BusinessException("纬度不能为空");
+        } else if (ObjectUtils.isEmpty(stationOpendt)) {
+            throw new BusinessException("开放时间不能为空");
+        } else if (ObjectUtils.isEmpty(stationClosedt)) {
+            throw new BusinessException("关闭时间不能为空");
         }
+        //格式验证
         if (!Pattern.matches(RegexConstant.STATION_CODE, stationCode)) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.PROVINCE_CODE, province.toString())) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.CITY_CODE, city.toString())) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.COUNTY_CODE, county.toString())) {
             throw new BusinessException("充电站编码格式不对");
         }
         //保存并返回充电站ID
@@ -226,6 +285,20 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/update")
     public Result updateStation(@RequestBody @Validated(value = IMChargingStationGroup.Update.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
+        //对整型的省、市、县编码进行验证
+        Integer province = vo.getProvince();
+        Integer city = vo.getCity();
+        Integer county = vo.getCounty();
+        if (!Pattern.matches(RegexConstant.PROVINCE_CODE, province.toString())) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.CITY_CODE, city.toString())) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.COUNTY_CODE, county.toString())) {
+            throw new BusinessException("充电站编码格式不对");
+        }
+        //修改信息
         boolean result = mChargingStationService.updateStationById(vo);
         if (result) {
             return Result.success().message("修改成功");

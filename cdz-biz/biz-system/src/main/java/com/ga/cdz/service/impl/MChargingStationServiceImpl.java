@@ -48,12 +48,17 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
+    public List<ChargingStation> getStationList(ChargingStationVo vo) {
+        List<ChargingStation> chargingStations = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().like(ChargingStation::getStationName, vo.getStationName()));
+        return chargingStations;
+    }
+
+    @Override
     @Transactional
     public boolean updateStationById(ChargingStationVo vo) {
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //保存修改信息
-        System.out.println(vo);
         int result = this.baseMapper.updateById(chargingStation);
         if(result!=0){
             return true;
