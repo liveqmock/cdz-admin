@@ -94,7 +94,19 @@
         AND b.price_name = a.price_name
         AND c.station_id = a.station_id
         AND c.price_name = a.price_name
-        AND a.price_type =#{param.type}
+        AND a.price_type =#{param.priceType}
+        <if test="param.shopCode !=null">
+            AND shop.shop_code like '%${param.shopCode}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND shop.shop_name like '%${param.shopName}%'
+        </if>
+        <if test="param.stationCode!=null">
+            AND station.station_code like '%${param.stationCode}%'
+        </if>
+        <if test="param.stationName!=null">
+            AND station.station_name like '%${param.stationName}%'
+        </if>
     </select>
 
 </mapper>

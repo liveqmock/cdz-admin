@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
+import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -23,5 +23,5 @@ public interface ChargingPriceMapper extends BaseMapper<ChargingPrice> {
      * @param: Map
      * @return: List
      */
-    List<ChargingPriceDTO> getChargingPricePage(Page<ChargingPriceDTO> page, @Param("param") Map<String, Object> type);
+    List<ChargingPriceDTO> getChargingPricePage(Page<ChargingPriceDTO> page, @Param("param") ChargingPriceSelectVo vo);
 }

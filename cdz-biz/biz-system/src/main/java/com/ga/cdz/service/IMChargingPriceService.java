@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
 /**
@@ -21,7 +22,7 @@ public interface IMChargingPriceService extends IService<ChargingPrice> {
      * @param: myPriceType 1 专场 2 非专场
      * @return: 分页数据
      */
-    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceAddVo> vo, Integer myPriceType);
+    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo);
 
     /**
      * @author:wanzhongsu

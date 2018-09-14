@@ -5,13 +5,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
+import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.group.admin.IMChargingPriceGroup;
 import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -37,10 +43,13 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/private")
-    public Result getPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceAddVo> vo, BindingResult bindingResult) {
+    public Result getPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer myPriceType = 1;
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, myPriceType);
+        if (ObjectUtils.isEmpty(vo.getData())) {
+            vo.setData(new ChargingPriceSelectVo());
+        }
+        vo.getData().setPriceType(ChargingPrice.PriceType.PERSONAL);
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo);
         return Result.success().data(page);
     }
 
@@ -52,10 +61,13 @@ public class ChargingPriceController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/list/noprivate")
-    public Result getNonPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceAddVo> vo, BindingResult bindingResult) {
+    public Result getNonPrivateChargingPage(@RequestBody @Validated PageVo<ChargingPriceSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer myPriceType = 2;
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, myPriceType);
+        if (ObjectUtils.isEmpty(vo.getData())) {
+            vo.setData(new ChargingPriceSelectVo());
+        }
+        vo.getData().setPriceType(ChargingPrice.PriceType.NONPERSONAL);
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo);
         return Result.success().data(page);
     }
 

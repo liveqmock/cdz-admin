@@ -11,17 +11,17 @@ import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
 import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
+import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author:wanzhongsu
@@ -39,14 +39,13 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     private ChargingStationMapper chargingStationMapper;
 
     @Override
-    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceAddVo> vo, Integer myPriceType) {
+    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo) {
+        ChargingPriceSelectVo param = new ChargingPriceSelectVo();
+        BeanUtils.copyProperties(vo.getData(), param);
         //获取分页信息
         Page<ChargingPriceDTO> page = new Page<ChargingPriceDTO>(vo.getIndex(), vo.getSize());
-        //设置查询条件
-        Map<String, Object> map = new HashMap<>();
-        map.put("type", myPriceType);
         //查询
-        List<ChargingPriceDTO> list = baseMapper.getChargingPricePage(page, map);
+        List<ChargingPriceDTO> list = baseMapper.getChargingPricePage(page, param);
         page.setRecords(list);
         return page;
     }
