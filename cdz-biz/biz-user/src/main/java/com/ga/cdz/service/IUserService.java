@@ -13,6 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface IUserService extends IService<UserInfo> {
 
+    /**
+     * @Author: liuyi
+     * @Description: 判断用户信息是否存在
+     * @Date: 2018/9/14_14:38
+     * @Param:
+     * @return:
+     */
+    boolean isUserExist(String tel);
+
      /**
       * @author:luqi
       * @description: 获取我的信息

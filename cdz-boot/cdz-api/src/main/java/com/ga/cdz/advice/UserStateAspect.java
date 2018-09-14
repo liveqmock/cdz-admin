@@ -1,6 +1,7 @@
 package com.ga.cdz.advice;
 
 
+import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.UserFreezeException;
 import com.ga.cdz.service.IUserService;
 import org.apache.shiro.SecurityUtils;
@@ -28,6 +29,12 @@ public class UserStateAspect {
     @Before("access()")
     public void deBefore(JoinPoint joinPoint) throws Throwable {
         String tel = (String) SecurityUtils.getSubject().getPrincipal();
+        boolean isExist = userService.isUserExist(tel);
+        if (isExist) {
+            //用户不存在，抛出异常
+            throw new BusinessException("用户不存在");
+        }
+        //用户存在继续执行
         boolean isFreeze = userService.isUserFreeze(tel);
         if (isFreeze) {
             //被冻结了，抛出异常

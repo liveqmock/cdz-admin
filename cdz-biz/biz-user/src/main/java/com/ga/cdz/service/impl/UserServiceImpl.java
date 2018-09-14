@@ -71,6 +71,16 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     MSmsUtil mSmsUtil;
 
     @Override
+    public boolean isUserExist(String tel) {
+        UserInfo hasUserInfo = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda()
+                .eq(UserInfo::getUserTel, tel));
+        if (!ObjectUtils.isEmpty(hasUserInfo)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public MyInfoDTO getMyInfoDTOById(Integer id) {
         MyInfoDTO myInfoDTO = baseMapper.getMyInfoDTOById(id);
         String userAvatar = userAvatarUrl + myInfoDTO.getUserAvatar();
