@@ -245,13 +245,16 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("充电站编码格式不对");
         }
         if (!Pattern.matches(RegexConstant.PROVINCE_CODE, province.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("省编码格式不对");
         }
         if (!Pattern.matches(RegexConstant.CITY_CODE, city.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("市编码格式不对");
         }
         if (!Pattern.matches(RegexConstant.COUNTY_CODE, county.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("县区编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.COUNTRY_CODE, country.toString())) {
+            throw new BusinessException("乡镇街道编码格式不对");
         }
         //保存并返回充电站ID
         int stationId = mChargingStationService.saveStation(vo);
@@ -289,14 +292,18 @@ public class ChargingStationController extends AbstractBaseController {
         Integer province = vo.getProvince();
         Integer city = vo.getCity();
         Integer county = vo.getCounty();
+        Integer country = vo.getCountry();
         if (!Pattern.matches(RegexConstant.PROVINCE_CODE, province.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("省编码格式不对");
         }
         if (!Pattern.matches(RegexConstant.CITY_CODE, city.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("市编码格式不对");
         }
         if (!Pattern.matches(RegexConstant.COUNTY_CODE, county.toString())) {
-            throw new BusinessException("充电站编码格式不对");
+            throw new BusinessException("县区编码格式不对");
+        }
+        if (!Pattern.matches(RegexConstant.COUNTRY_CODE, country.toString())) {
+            throw new BusinessException("乡镇街道编码格式不对");
         }
         //修改信息
         boolean result = mChargingStationService.updateStationById(vo);

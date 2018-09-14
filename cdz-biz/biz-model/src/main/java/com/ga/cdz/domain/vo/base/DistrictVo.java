@@ -1,6 +1,7 @@
 package com.ga.cdz.domain.vo.base;
 
 import com.ga.cdz.domain.entity.District;
+import com.ga.cdz.domain.group.admin.IMDistrictGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -19,7 +20,7 @@ public class DistrictVo {
     /**
      * 区域编码
      */
-    @NotNull(message = "区域编码不能为空")
+    @NotNull(groups = IMDistrictGroup.Query.class, message = "区域编码不能为空")
     private Integer districtCode;
     /**
      * 地区名称

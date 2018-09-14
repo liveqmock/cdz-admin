@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.center.DistrictMapper;
 import com.ga.cdz.domain.entity.District;
+import com.ga.cdz.domain.vo.base.DistrictVo;
 import com.ga.cdz.service.IMDistrictService;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,16 @@ import java.util.List;
  */
 @Service("mDistrictService")
 public class MDistrictServiceImpl extends ServiceImpl<DistrictMapper, District> implements IMDistrictService {
-    //地区信息mapper
-    @Resource
-    private DistrictMapper districtMapper;
 
     @Override
-    public List<District> getListByParentId(int parId) {
-        List<District> districts = districtMapper.selectList(new QueryWrapper<District>().lambda().eq(District::getDistrictParentCode, parId));
+    public List<District> getListByParentId(DistrictVo vo) {
+        List<District> districts = baseMapper.selectList(new QueryWrapper<District>().lambda().eq(District::getDistrictParentCode, vo.getDistrictCode()));
+        return districts;
+    }
+
+    @Override
+    public List<District> getCodeByName(DistrictVo vo) {
+        List<District> districts = baseMapper.selectList(new QueryWrapper<District>().lambda().like(District::getDistrictName, vo.getDistrictName()));
         return districts;
     }
 }

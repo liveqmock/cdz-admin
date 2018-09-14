@@ -19,5 +19,14 @@ public interface IMDistrictService extends IService<District> {
      * @param:par_id 上一级编码
      * @return:地区信息列表
      */
-    List<District> getListByParentId(int parId);
+    List<District> getListByParentId(DistrictVo vo);
+
+    /**
+     * @author:wanzhongsu
+     * @description: 根据区域名字查询区域编码
+     * @date: 2018/9/14 10:55
+     * @param:
+     * @return:
+     */
+    List<District> getCodeByName(DistrictVo vo);
 }
