@@ -15,4 +15,12 @@ public interface ICharginStationGroup {
     interface MainPage {
     }
 
+    /**
+     * @author:luqi
+     * @description: APP附近站列表获取
+     * @date:2018/9/16_15:31
+     */
+    interface NearPage {
+    }
+
 }

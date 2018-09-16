@@ -39,7 +39,22 @@ public class ChargingInfoController extends AbstractBaseController {
     public Result getMainChargingPageList(@RequestBody @Validated({ICharginStationGroup.MainPage.class})
                                                   ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        List<ChargingStationPageDTO> list = chargingStationService.getStationPage(chargingStationPageVo);
+        List<ChargingStationPageDTO> list = chargingStationService.getMainStationPage(chargingStationPageVo);
+        return Result.success().data(list);
+    }
+
+    /**
+     * @author:luqi
+     * @description: 获取附近
+     * @date:2018/9/13_17:46
+     * @param:
+     * @return:
+     */
+    @PostMapping("/near/list")
+    public Result getNearChargingPageList(@RequestBody @Validated({ICharginStationGroup.NearPage.class})
+                                                  ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingStationPageDTO> list = chargingStationService.getNearStationPage(chargingStationPageVo);
         return Result.success().data(list);
     }
 

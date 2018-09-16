@@ -11,7 +11,6 @@ import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingStationService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
-import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +54,28 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
 
 
     @Override
-    public List<ChargingStationPageDTO> getStationPage(ChargingStationPageVo vo) {
+    public List<ChargingStationPageDTO> getMainStationPage(ChargingStationPageVo vo) {
+        /**默认按照离我最近*/
+        vo.setDistanceType(ChargingStationPageVo.DistanceType.NEAREST);
+        /**默认按照价格最低**/
+        vo.setPriceType(ChargingStationPageVo.PriceType.MIN);
+        return getStationPageBySort(vo);
+    }
+
+    @Override
+    public List<ChargingStationPageDTO> getNearStationPage(ChargingStationPageVo vo) {
+        return getStationPageBySort(vo);
+    }
+
+
+    /**
+     * @author:luqi
+     * @description: 获取电站的分页列表，根据条件排序
+     * @date:2018/9/16 09:38
+     * @param:
+     * @return:
+     */
+    private List<ChargingStationPageDTO> getStationPageBySort(ChargingStationPageVo vo) {
         /**检测缓存*/
         chargingRedisService.cacheChargingPageList();
         Integer pageIndex = vo.getIndex();
@@ -99,8 +119,33 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
                 /**计算距离**/
                 return chargingStationPageDTO;
             }).collect(Collectors.toList());
-            /**排序*/
-            Collections.sort(page);
+            /**距离排序**/
+            ChargingStationPageVo.DistanceType distanceType = vo.getDistanceType();
+            switch (distanceType) {
+                case KM_10:
+                    page = page.stream().filter(chargingStationPageDTO ->
+                            Double.doubleToRawLongBits(chargingStationPageDTO.getDistance())
+                                    <= Double.doubleToRawLongBits(ChargingStationPageVo.DistanceType.KM_10.getValue()))
+                            .collect(Collectors.toList());
+                    break;
+                case KM_20:
+                    page = page.stream().filter(chargingStationPageDTO ->
+                            Double.doubleToRawLongBits(chargingStationPageDTO.getDistance())
+                                    <= Double.doubleToRawLongBits(ChargingStationPageVo.DistanceType.KM_20.getValue()))
+                            .collect(Collectors.toList());
+                    break;
+                case KM_40:
+                    page = page.stream().filter(chargingStationPageDTO ->
+                            Double.doubleToRawLongBits(chargingStationPageDTO.getDistance())
+                                    <= Double.doubleToRawLongBits(ChargingStationPageVo.DistanceType.KM_40.getValue()))
+                            .collect(Collectors.toList());
+                    break;
+                default:
+                    /**默认离我最近，不需要条件过滤*/
+                    break;
+            }
+            /**距离升序排列*/
+            page.sort(Comparator.comparing(ChargingStationPageDTO::getDistance));
             /**缓存5分钟*/
             mRedisUtil.put(mainDeviceKey, page, 5L, TimeUnit.MINUTES);
         } else {
@@ -201,8 +246,19 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
             chargingStationPageDTO.setSlowTotal(slowTotal);
             return chargingStationPageDTO;
         }).collect(Collectors.toList());
+        /**价格排序**/
+        ChargingStationPageVo.PriceType priceType = vo.getPriceType();
+        switch (priceType) {
+            case MIN:
+                rsList.sort(Comparator.comparing(ChargingStationPageDTO::getNowPrice));
+                break;
+            case MAX:
+                rsList.sort(Comparator.comparing(ChargingStationPageDTO::getNowPrice).reversed());
+                break;
+        }
         return rsList;
     }
+
 
     /**
      * @author:luqi

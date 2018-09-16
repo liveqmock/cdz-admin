@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO> {
+public class ChargingStationPageDTO {
 
     /**
      * 充电站ID
@@ -83,7 +83,7 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
     private Integer sttpeId;
 
 
-    @Override
+   /* @Override
     public int compareTo(ChargingStationPageDTO dto) {
         if (Double.compare(this.distance, dto.getDistance()) == 1) {
             return 1;
@@ -92,5 +92,5 @@ public class ChargingStationPageDTO implements Comparable<ChargingStationPageDTO
         } else {
             return 0;
         }
-    }
+    }*/
 }

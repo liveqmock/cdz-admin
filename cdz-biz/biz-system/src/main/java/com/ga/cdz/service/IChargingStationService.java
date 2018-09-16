@@ -16,11 +16,20 @@ public interface IChargingStationService extends IService<ChargingStation> {
 
     /**
      * @author: liuyi
-     * @description: 分页获取充电站信息
+     * @description: 获取首页的充电站信息
      * @date: 2018/9/11_15:51
      * @param:
      * @return:
      */
-    List<ChargingStationPageDTO> getStationPage(ChargingStationPageVo vo);
+    List<ChargingStationPageDTO> getMainStationPage(ChargingStationPageVo vo);
+
+    /**
+     * @author: liuyi
+     * @description: 获取附近的充电站信息
+     * @date: 2018/9/16_09:40
+     * @param:
+     * @return:
+     */
+    List<ChargingStationPageDTO> getNearStationPage(ChargingStationPageVo vo);
 
 }
