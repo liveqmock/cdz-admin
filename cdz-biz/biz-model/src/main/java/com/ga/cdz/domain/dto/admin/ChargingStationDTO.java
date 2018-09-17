@@ -61,6 +61,22 @@ public class ChargingStationDTO {
      */
     private Integer city;
     /**
+     * 充电站市名称
+     */
+    private String scity;
+    /**
+     * 充电站乡街道名称
+     */
+    private String scountry;
+    /**
+     * 充电柱省名称
+     */
+    private String sprovince;
+    /**
+     * 充电桩县名称
+     */
+    private String scounty;
+    /**
      * 充电桩区编码
      */
     private Integer county;

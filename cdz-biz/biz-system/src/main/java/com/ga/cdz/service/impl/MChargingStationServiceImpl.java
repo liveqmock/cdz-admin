@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.dao.center.DistrictMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
@@ -31,7 +32,11 @@ import java.util.List;
 @Slf4j
 @Service("mChargingStationService")
 public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IMChargingStationService {
-
+    /**
+     * 区域mapper
+     */
+    @Resource
+    DistrictMapper districtMapper;
     /**
      * 缓存
      */
@@ -47,6 +52,13 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         BeanUtils.copyProperties(vo.getData(), param);
         //分页查询
         List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
+        //查询后跨库查询区域名称
+        list.forEach(item -> {
+            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
+            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
+        });
         page.setRecords(list);
         return page;
     }

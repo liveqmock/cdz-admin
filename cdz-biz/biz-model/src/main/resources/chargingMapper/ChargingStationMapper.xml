@@ -65,12 +65,11 @@
         b.shop_code,
         b.shop_name,
         a.insert_dt,
-        count(1) device_nums
+        (select count(1) from t_charging_device device where device.station_id=a.station_id) device_nums
         FROM
         t_charging_station a
         LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
         LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
-        LEFT JOIN t_charging_device device ON a.station_id = device.station_id
         where a.station_state=1
         <if test="param.stationName!=null">
             AND a.station_name like '%${param.stationName}%'
