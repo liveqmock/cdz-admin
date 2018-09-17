@@ -23,6 +23,10 @@ public class ChargingStationDTO {
      */
     private Integer stationId;
     /**
+     * 商户ID
+     */
+    private Integer shopId;
+    /**
      * 商户编码
      */
     private String shopCode;
