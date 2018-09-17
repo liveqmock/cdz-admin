@@ -7,6 +7,7 @@ import com.ga.cdz.domain.bean.Paging;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
+import com.ga.cdz.domain.vo.api.ChargingStationVo;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingStationService;
 import com.ga.cdz.util.MDistanceUtil;
@@ -259,6 +260,19 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         return rsList;
     }
 
+
+    /**
+     * @Author: liuyi
+     * @Description:
+     * @Date: 2018/9/17_14:53
+     * @param
+     * @return ChargingStationDTO
+     */
+    public ChargingStation getChargingStationDetail(ChargingStationVo vo) {
+        chargingRedisService.cacheChargingPageList();
+        ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, vo.getStationId().toString());
+        return chargingStation;
+    }
 
     /**
      * @author:luqi

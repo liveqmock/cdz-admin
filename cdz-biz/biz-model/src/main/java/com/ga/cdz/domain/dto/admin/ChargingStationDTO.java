@@ -23,6 +23,10 @@ public class ChargingStationDTO {
      */
     private Integer stationId;
     /**
+     * 商户ID
+     */
+    private Integer shopId;
+    /**
      * 商户编码
      */
     private String shopCode;
@@ -47,9 +51,51 @@ public class ChargingStationDTO {
      */
     private ChargingStation.StationType stationType;
     /**
+     * 充电桩详细地址
+     */
+    private String stationAddr;
+
+    /**
+     * 充电桩省编码
+     */
+    private Integer province;
+
+    /**
+     * 充电桩市编码
+     */
+    private Integer city;
+    /**
+     * 充电站市名称
+     */
+    private String scity;
+    /**
+     * 充电站乡街道名称
+     */
+    private String scountry;
+    /**
+     * 充电柱省名称
+     */
+    private String sprovince;
+    /**
+     * 充电桩县名称
+     */
+    private String scounty;
+    /**
+     * 充电桩区编码
+     */
+    private Integer county;
+    /**
+     * 乡镇（街道）编码
+     */
+    private Integer country;
+    /**
      * 维度
      */
     private Double lat;
+    /**
+     * 设备桩数
+     */
+    private Integer deviceNums;
     /**
      * 经度
      */

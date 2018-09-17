@@ -11,5 +11,5 @@ import com.ga.cdz.domain.vo.api.ChargingOrderVo;
  */
 public interface IChargingOrderService extends IService<ChargingOrder> {
 
-    Object placeOrderByPrice(ChargingOrderVo vo);
+    Integer placeOrderByPrice(ChargingOrderVo vo);
 }

@@ -29,7 +29,11 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
     @Override
     public IPage<Operators> getOperatorPage(PageVo<OperatorsVo> vo) {
         IPage page = new Page(vo.getIndex(), vo.getSize());
-        LambdaQueryWrapper<Operators> wrapper = new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsState, Operators.OperatorsState.NORMAL).orderByAsc(Operators::getOperatorsId);
+        Operators operators = new Operators();
+        BeanUtils.copyProperties(vo.getData(), operators);
+        LambdaQueryWrapper<Operators> wrapper = new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsState, Operators.OperatorsState.NORMAL)
+                .like(Operators::getOperatorsName, operators.getOperatorsName()).like(Operators::getOperatorsCode, operators.getOperatorsCode())
+                .orderByAsc(Operators::getOperatorsId);
         page = baseMapper.selectPage(page, wrapper);
         return page;
     }

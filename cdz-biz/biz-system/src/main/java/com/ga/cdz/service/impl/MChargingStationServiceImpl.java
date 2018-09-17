@@ -37,7 +37,11 @@ import java.util.List;
 @Slf4j
 @Service("mChargingStationService")
 public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IMChargingStationService {
-
+    /**
+     * 区域mapper
+     */
+    @Resource
+    DistrictMapper districtMapper;
     /**
      * 缓存
      */
@@ -72,6 +76,15 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
           lists = baseMapper.getStationList(page,param,chargingShop);
         }
         page.setRecords(lists);
+        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
+        //查询后跨库查询区域名称
+        list.forEach(item -> {
+            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
+            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
+        });
+        page.setRecords(list);
         return page;
     }
 

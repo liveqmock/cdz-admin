@@ -29,8 +29,15 @@
         <result column="station_code" property="stationCode"/>
         <result column="station_name" property="stationName"/>
         <result column="station_type" property="stationType"/>
+        <result column="station_addr" property="stationAddr"/>
+        <result column="device_nums" property="deviceNums"/>
+        <result column="country" property="country"/>
+        <result column="county" property="county"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
         <result column="lat" property="lat"/>
         <result column="lng" property="lng"/>
+        <result column="shop_id" property="shopId"/>
         <result column="insert_dt" property="insertDt"/>
         <result column="shop_code" property="shopCode"/>
         <result column="shop_name" property="shopName"/>
@@ -47,13 +54,20 @@
         a.station_id,
         a.station_code,
         a.station_type,
+        a.country,
+        a.county,
+        a.city,
+        a.province,
+        a.station_addr,
         c.sttpe_name,
         a.station_name,
         a.lat,
         a.lng,
         b.shop_code,
+        b.shop_id,
         b.shop_name,
-        a.insert_dt
+        a.insert_dt,
+        (select count(1) from t_charging_device device where device.station_id=a.station_id) device_nums
         FROM
         t_charging_station a
         LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id

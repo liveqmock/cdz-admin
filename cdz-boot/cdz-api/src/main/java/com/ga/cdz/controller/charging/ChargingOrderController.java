@@ -29,8 +29,11 @@ public class ChargingOrderController extends AbstractBaseController {
     @PostMapping("/price")
     public Result placeOrderByPrice(@RequestBody ChargingOrderVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Object object = chargingOrderService.placeOrderByPrice(vo);
-        return Result.success().data(object);
+        Integer result = chargingOrderService.placeOrderByPrice(vo);
+        if (result > 0) {
+            return Result.success().message("下单成功");
+        }
+        return Result.fail().message("下单失败");
     }
 
 }

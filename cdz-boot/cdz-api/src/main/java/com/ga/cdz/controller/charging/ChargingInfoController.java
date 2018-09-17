@@ -3,7 +3,7 @@ package com.ga.cdz.controller.charging;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
-import com.ga.cdz.domain.group.api.ICharginStationGroup;
+import com.ga.cdz.domain.group.api.IChargingStationGroup;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
 import com.ga.cdz.service.IChargingStationService;
 import org.springframework.validation.BindingResult;
@@ -36,7 +36,7 @@ public class ChargingInfoController extends AbstractBaseController {
      * @return:
      */
     @PostMapping("/main/list")
-    public Result getMainChargingPageList(@RequestBody @Validated({ICharginStationGroup.MainPage.class})
+    public Result getMainChargingPageList(@RequestBody @Validated({IChargingStationGroup.MainPage.class})
                                                   ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
         checkParams(bindingResult);
         List<ChargingStationPageDTO> list = chargingStationService.getMainStationPage(chargingStationPageVo);
@@ -51,7 +51,7 @@ public class ChargingInfoController extends AbstractBaseController {
      * @return:
      */
     @PostMapping("/near/list")
-    public Result getNearChargingPageList(@RequestBody @Validated({ICharginStationGroup.NearPage.class})
+    public Result getNearChargingPageList(@RequestBody @Validated({IChargingStationGroup.NearPage.class})
                                                   ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
         checkParams(bindingResult);
         List<ChargingStationPageDTO> list = chargingStationService.getNearStationPage(chargingStationPageVo);
