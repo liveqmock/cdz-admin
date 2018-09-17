@@ -2,7 +2,7 @@ package com.ga.cdz.domain.vo.api;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.ga.cdz.domain.group.api.ICharginStationGroup;
+import com.ga.cdz.domain.group.api.IChargingStationGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,47 +18,47 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 public class ChargingStationPageVo {
 
-    @NotNull(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "index不能为空")
+    @NotNull(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "index不能为空")
     private Integer index;
 
-    @NotNull(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "size不能为空")
+    @NotNull(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "size不能为空")
     private Integer size;
 
     /**
      * deviceNo
      */
-    @NotBlank(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "设备编号不能为空")
+    @NotBlank(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "设备编号不能为空")
     private String deviceNo;
 
     /**
      * 城市编码
      */
-    @NotNull(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "城市编码")
+    @NotNull(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "城市编码")
     private Integer cityCode;
 
     /**
      * 经度
      */
-    @NotNull(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "经度不能为空")
+    @NotNull(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "经度不能为空")
     private Double lng;
 
     /**
      * 纬度
      */
-    @NotNull(groups = {ICharginStationGroup.MainPage.class, ICharginStationGroup.NearPage.class}, message = "纬度不能为空")
+    @NotNull(groups = {IChargingStationGroup.MainPage.class, IChargingStationGroup.NearPage.class}, message = "纬度不能为空")
     private Double lat;
 
     /**
      * 距离类型
      **/
-    @NotNull(groups = {ICharginStationGroup.NearPage.class}, message = "距离类型不能为空")
+    @NotNull(groups = {IChargingStationGroup.NearPage.class}, message = "距离类型不能为空")
     private DistanceType distanceType;
 
 
     /**
      * 价格类型
      **/
-    @NotNull(groups = {ICharginStationGroup.NearPage.class}, message = "价格类型不能为空")
+    @NotNull(groups = {IChargingStationGroup.NearPage.class}, message = "价格类型不能为空")
     private PriceType priceType;
 
     /**

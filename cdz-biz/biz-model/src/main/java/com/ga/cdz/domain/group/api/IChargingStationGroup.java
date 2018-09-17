@@ -5,7 +5,7 @@ package com.ga.cdz.domain.group.api;
  * @description: 充电站相关验证
  * @date:2018/9/13_15:30
  */
-public interface ICharginStationGroup {
+public interface IChargingStationGroup {
 
     /**
      * @author:luqi
@@ -21,6 +21,14 @@ public interface ICharginStationGroup {
      * @date:2018/9/16_15:31
      */
     interface NearPage {
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 充电站详情
+     * @Date: 2018/9/17_15:22
+     */
+    interface Detail {
     }
 
 }

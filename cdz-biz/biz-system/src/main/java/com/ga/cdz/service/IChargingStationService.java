@@ -1,9 +1,11 @@
 package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
+import com.ga.cdz.domain.vo.api.ChargingStationVo;
 
 import java.util.List;
 
@@ -31,5 +33,14 @@ public interface IChargingStationService extends IService<ChargingStation> {
      * @return:
      */
     List<ChargingStationPageDTO> getNearStationPage(ChargingStationPageVo vo);
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取充电站信息
+     * @Date: 2018/9/17_14:53
+     * @param
+     * @return ChargingStationDTO
+     */
+     ChargingStation getChargingStationDetail(ChargingStationVo vo);
 
 }
