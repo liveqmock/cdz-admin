@@ -29,6 +29,12 @@
         <result column="station_code" property="stationCode"/>
         <result column="station_name" property="stationName"/>
         <result column="station_type" property="stationType"/>
+        <result column="station_addr" property="stationAddr"/>
+        <result column="device_nums" property="deviceNums"/>
+        <result column="country" property="country"/>
+        <result column="county" property="county"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
         <result column="lat" property="lat"/>
         <result column="lng" property="lng"/>
         <result column="insert_dt" property="insertDt"/>
@@ -47,17 +53,24 @@
         a.station_id,
         a.station_code,
         a.station_type,
+        a.country,
+        a.county,
+        a.city,
+        a.province,
+        a.station_addr,
         c.sttpe_name,
         a.station_name,
         a.lat,
         a.lng,
         b.shop_code,
         b.shop_name,
-        a.insert_dt
+        a.insert_dt,
+        count(1) device_nums
         FROM
         t_charging_station a
         LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
         LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
+        LEFT JOIN t_charging_device device ON a.station_id = device.station_id
         where a.station_state=1
         <if test="param.stationName!=null">
             AND a.station_name like '%${param.stationName}%'
@@ -71,6 +84,7 @@
         <if test="param.shopName!=null">
             AND b.shop_name like '%${param.shopName}%'
         </if>
+        GROUP BY a.station_id
     </select>
 
 </mapper>
