@@ -60,6 +60,9 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
         if (chargingStation.getStationType() == ChargingStation.StationType.INSIDE) {
             throw new BusinessException("该充电站不对外提供服务");
         }
+        if (chargingStation.getStationState() == ChargingStation.StationState.DELETE) {
+            throw new BusinessException("该充电站已删除");
+        }
 
         //检测充电桩是否存在，是否空闲
         ChargingDevice chargingDevice = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE, vo.getDeviceId().toString());
