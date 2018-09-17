@@ -1,11 +1,9 @@
 package com.ga.cdz.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingOrderMapper;
-import com.ga.cdz.dao.charging.ChargingPriceMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.UserFreezeException;
@@ -15,14 +13,13 @@ import com.ga.cdz.service.IChargingOrderService;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.xml.stream.events.DTD;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +33,13 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     UserInfoMapper userInfoMapper;
 
     @Resource
+    ChargingOrderMapper chargingOrderMapper;
+
+    @Resource
     IChargingRedisService chargingRedisService;
 
     @Override
-    public Object placeOrderByPrice(ChargingOrderVo vo) {
+    public Integer placeOrderByPrice(ChargingOrderVo vo) {
         /**检测缓存*/
         chargingRedisService.cacheChargingPageList();
 
@@ -65,6 +65,9 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
         ChargingDevice chargingDevice = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE, vo.getDeviceId().toString());
         if (ObjectUtils.isEmpty(chargingDevice)) {
             throw new BusinessException("充电桩不存在");
+        }
+        if (chargingDevice.getStationId() != vo.getStationId()) {
+            throw new BusinessException("充电桩与充电站不匹配");
         }
         switch (chargingDevice.getDeviceState()) {
             case ERROR:
@@ -94,33 +97,77 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
         Date date = new Date();
         ChargingPrice chargingPrice = null;
         for (ChargingPrice chargingPriceTmp : chargingPriceList) {
-            long nowData = date.getTime();
+            long nowDate = date.getTime();
             long beginDt = timeToNowDateTimeLong(chargingPriceTmp.getPriceBeginDt(), date);
             long endDt = timeToNowDateTimeLong(chargingPriceTmp.getPriceEndDt(), date);
-            if ((nowData - beginDt > 0) && (nowData - endDt < 0)) {
+            if ((nowDate - beginDt > 0) && (nowDate - endDt < 0)) {
                 chargingPrice = chargingPriceTmp;
                 break;
             }
         }
 
         //计算钱是否合适
+        if (chargingPrice.getChargingPrice().compareTo(new BigDecimal(0)) == -1
+                || chargingPrice.getChargingPrice().equals(0)) {
+            throw new BusinessException("充电金额错误");
+        }
         BigDecimal price = vo.getTotalPrice().subtract(chargingPrice.getPriceParking()).subtract(chargingPrice.getServicePrice());
-        if (price.compareTo(new BigDecimal(0.0)) == -1 || price.equals(0.0)) {
+        if (price.compareTo(new BigDecimal(0)) == -1 || price.equals(0)) {
             throw new BusinessException("金额不足");
         }
 
         //计算时间
+        double amount = price.divide(chargingPrice.getChargingPrice(), 2).doubleValue();
+        long time = (long) (((amount * 3600) / chargingDevice.getDevicePower()) * 1000);
+        Date finalDate = new Date(time + date.getTime());
 
-        return price;
+        //先获得数据库中订单最后一份的ID
+        String orderId = generateOrderId(userInfo.getUserId(), date.getTime());
+        ChargingOrder chargingOrder = new ChargingOrder();
+        chargingOrder.setOrderId(orderId).setUserId(userInfo.getUserId())
+                .setStationId(vo.getStationId())
+                .setDeviceId(vo.getDeviceId())
+                .setDeviceSubId(vo.getDeviceSubId())
+                .setTotalPrice(vo.getTotalPrice())
+                .setTotalEnergy(amount)
+                .setCharginBeginDt(date)
+                .setCharginEndDt(finalDate)
+                .setOrderState(ChargingOrder.OrderState.INIT);
+        return insertAnOrder(chargingOrder);
     }
 
+    /**
+     * @Author: liuyi
+     * @Description: 插入数据库
+     * @Date: 2018/9/17_14:02
+     * @param chargingOrder 订单信息
+     * @return 返回状态
+     */
+    @Transactional
+    Integer insertAnOrder(ChargingOrder chargingOrder) {
+        Integer result = chargingOrderMapper.insert(chargingOrder);
+        return result;
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 生成OrderId
+     * @Date: 2018/9/17_13:35
+     * @param userId 用户id
+     * @param date   下单时间
+     * @return 生成的OrderId
+     */
+    private String generateOrderId(int userId, long date) {
+        return String.valueOf(userId) + String.valueOf(date / 1000000);
+    }
 
     /**
      * @author:luqi
      * @description: Time类型转换为当天的时间戳
      * @date:2018/9/14_14:19
-     * @param:
-     * @return:
+     * @param time
+     * @param nowDate
+     * @return
      */
     private Long timeToNowDateTimeLong(Time time, Date nowDate) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
