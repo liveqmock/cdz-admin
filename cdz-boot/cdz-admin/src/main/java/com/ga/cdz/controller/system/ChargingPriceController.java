@@ -11,6 +11,7 @@ import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
 import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingPriceService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -49,7 +50,9 @@ public class ChargingPriceController extends AbstractBaseController {
             vo.setData(new ChargingPriceSelectVo());
         }
         vo.getData().setPriceType(ChargingPrice.PriceType.PERSONAL);
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo);
+        String name =(String) SecurityUtils.getSubject().getPrincipal();
+
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo,name);
         return Result.success().data(page);
     }
 
@@ -67,7 +70,8 @@ public class ChargingPriceController extends AbstractBaseController {
             vo.setData(new ChargingPriceSelectVo());
         }
         vo.getData().setPriceType(ChargingPrice.PriceType.NONPERSONAL);
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo);
+        String name = (String)SecurityUtils.getSubject().getPrincipal();
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo,name);
         return Result.success().data(page);
     }
 

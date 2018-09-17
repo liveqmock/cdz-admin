@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.dto.admin.ChargingOrderCommentDTO;
 import com.ga.cdz.domain.entity.ChargingOrderComment;
+import com.ga.cdz.domain.entity.ChargingShop;
+import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.admin.ChargingOrderVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,6 +29,6 @@ public interface ChargingOrderCommentMapper extends SuperMapper<ChargingOrderCom
    * @param
    * @return
    */
-  List<ChargingOrderCommentDTO> getChargingOrderListPage(Page<ChargingOrderCommentDTO> page );
+  List<ChargingOrderCommentDTO> getChargingCommentOrderListPage(@Param("shop") ChargingShop chargingShop, Page<ChargingOrderCommentDTO> page );
 //  List<ChargingOrderCommentDTO> getChargingOrderListPage(Page<ChargingOrderCommentDTO> page , @Param("comment")ChargingOrderVo chargingOrderVo);
 }

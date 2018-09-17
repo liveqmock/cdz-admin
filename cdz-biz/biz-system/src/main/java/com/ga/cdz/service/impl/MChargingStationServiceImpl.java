@@ -5,10 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.dao.center.AdminInfoMapper;
+import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
+import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
+import com.ga.cdz.domain.entity.AdminInfo;
+import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.entity.ChargingStation;
+import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -38,21 +44,39 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     @Resource
     MRedisUtil mRedisUtil;
 
+    /**
+     *
+     */
+    @Resource
+    AdminInfoMapper adminInfoMapper;
+    @Resource
+    ChargingShopMapper chargingShopMapper;
+
+
     @Override
-    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo) {
+    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo,String name) {
         //构建分页信息
         Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
         //复制
         ChargingStationSelectVo param = new ChargingStationSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
         //分页查询
-        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
-        page.setRecords(list);
+
+        List<AdminInfo> list=adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName,name));
+        List<ChargingStationDTO> lists=null;
+        if(list.size()>0){
+         //为管理员帐号
+           lists = baseMapper.getStationList(page, param,new ChargingShop() );
+        }else{
+          ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+          lists = baseMapper.getStationList(page,param,chargingShop);
+        }
+        page.setRecords(lists);
         return page;
     }
 
     @Override
-    public List<ChargingStation> getStationList(ChargingStationVo vo) {
+    public List<ChargingStation> getStationList(ChargingStationVo vo ) {
         List<ChargingStation> chargingStations = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().like(ChargingStation::getStationName, vo.getStationName()));
         return chargingStations;
     }

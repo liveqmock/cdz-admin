@@ -42,21 +42,7 @@ public class ShiroConfig extends BaseShiroConfig {
         List<String> list = new ArrayList<>();
         //认证相关的接口不需要过滤
         list.add("/account/**");
-        list.add("/district/**");
-        list.add("/operator/**");
-        list.add("/sttpe/**");
-        list.add("/charging/type/**");
-        list.add("/charging/shop/**");
-        list.add("/charging/station/**");
-        list.add("/charging/price/**");
-        list.add("/user/sms/**");
-        list.add("/charging/suggest/**");
         //暂时通过
-        /*  list.Add("/admin/**");*/
-        list.add("/roles/**");
-        list.add("/demo/file/**");
-        list.add("/member/**");
-        list.add("/charging/**");
         return list;
     }
 }

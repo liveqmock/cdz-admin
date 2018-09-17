@@ -20,5 +20,5 @@ public interface IMChargingOrderCommentService extends IService<ChargingOrderCom
    * @param pageVo
    * @return
    */
-  Page<ChargingOrderCommentDTO> getChargingOrderComentListPage(PageVo<ChargingOrderCommentVo> pageVo);
+  Page<ChargingOrderCommentDTO> getChargingOrderCommentListPage(PageVo<ChargingOrderCommentVo> pageVo,String name);
 }

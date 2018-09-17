@@ -7,6 +7,8 @@ import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.domain.vo.admin.UserMemberCarsInfoVo;
 import com.ga.cdz.service.IMAdminUserCarsInfoService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,10 @@ public class MemberCarController extends AbstractBaseController {
   @PostMapping("/list")
   public Result getCarListPage(@RequestBody @Validated PageVo<UserMemberCarsInfoVo> pageVo, BindingResult bindingResult){
     checkParams(bindingResult);
+//    Session session=SecurityUtils.getSubject().getSession();
+    Object name=SecurityUtils.getSubject().getPrincipals();
+//    Object ut=SecurityUtils.getSecurityManager();
+    System.err.println(name.toString());
     IPage<UserMemberCarsInfoDTO> page = mAdminUserCarsInfoService.getUserCarsListPage(pageVo);
     return Result.success().data(page);
   }

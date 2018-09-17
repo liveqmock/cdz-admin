@@ -34,7 +34,6 @@ public class AdminController extends AbstractBaseController {
     @Resource
     IMAdminInfoService mAdminInfoService;
 
-
     /**
      * @author:luqi
      * @description: 添加管理员

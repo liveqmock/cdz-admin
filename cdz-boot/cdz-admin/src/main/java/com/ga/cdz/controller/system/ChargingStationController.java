@@ -18,6 +18,7 @@ import com.ga.cdz.service.IMChargingStationAttachService;
 import com.ga.cdz.service.IMChargingStationService;
 import com.ga.cdz.util.MFileUtil;
 import com.google.common.collect.Lists;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,7 +73,9 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getStationList(@RequestBody @Validated PageVo<ChargingStationSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo);
+        String username=(String)SecurityUtils.getSubject().getPrincipal();
+
+        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo,username);
         return Result.success().data(iPage);
     }
 

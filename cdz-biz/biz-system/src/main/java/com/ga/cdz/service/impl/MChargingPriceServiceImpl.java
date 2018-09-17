@@ -4,12 +4,14 @@ package com.ga.cdz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.dao.charging.ChargingPriceMapper;
+import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
+import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingPriceDTO;
-import com.ga.cdz.domain.entity.ChargingPrice;
-import com.ga.cdz.domain.entity.ChargingStation;
+import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.admin.ChargingPriceAddVo;
 import com.ga.cdz.domain.vo.admin.ChargingPriceSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -31,7 +33,10 @@ import java.util.List;
 @Slf4j
 @Service("mChargingPriceService")
 public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, ChargingPrice> implements IMChargingPriceService {
-
+    @Resource
+    AdminInfoMapper adminInfoMapper;
+    @Resource
+    ChargingShopMapper chargingShopMapper;
     /**
      * 充电站mapper
      */
@@ -39,14 +44,22 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     private ChargingStationMapper chargingStationMapper;
 
     @Override
-    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo) {
+    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo,String name) {
         ChargingPriceSelectVo param = new ChargingPriceSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
         //获取分页信息
         Page<ChargingPriceDTO> page = new Page<ChargingPriceDTO>(vo.getIndex(), vo.getSize());
         //查询
-        List<ChargingPriceDTO> list = baseMapper.getChargingPricePage(page, param);
-        page.setRecords(list);
+        List<ChargingPriceDTO> lists=null;
+        List<AdminInfo> list=adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName,name));
+        if(list.size()>0){
+           lists= baseMapper.getChargingPricePage(page, param,new ChargingShop());
+        }else{
+            ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+
+            lists=baseMapper.getChargingPricePage(page,param,chargingShop);
+        }
+        page.setRecords(lists);
         return page;
     }
 

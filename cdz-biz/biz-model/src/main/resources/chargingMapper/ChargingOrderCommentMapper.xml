@@ -41,7 +41,7 @@
         comment_id, order_id, user_id, comment_code, comment_content, comment_pid, comment_type, comment_state,
         update_dt, insert_dt
     </sql>
-    <select id="getChargingOrderListPage" resultMap="chargingCommentDetail" >
+    <select id="getChargingCommentOrderListPage" resultMap="chargingCommentDetail" >
         SELECT
         cms.*,
         usr.user_real_name,
@@ -61,6 +61,12 @@
         LEFT JOIN t_charging_station sta ON ord.station_id = sta.station_id
         LEFT JOIN t_charging_device dev ON dev.device_id = ord.device_id
         LEFT JOIN t_charging_type type ON dev.cgtype_id = type.cgtype_id
+        WHERE 1=1
+        <if test="shop!=null">
+            <if test="shop.shopId!=null">
+                AND sta.shop_id='#{shop.shopId}'
+            </if>
+        </if>
     </select>
 
 </mapper>

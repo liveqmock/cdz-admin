@@ -107,6 +107,10 @@
         <if test="param.stationName!=null">
             AND station.station_name like '%${param.stationName}%'
         </if>
+        <if test="shop!=null" >
+            <if test="shop.shopId!=null">
+                AND station.shop_id='#{shop.shopId}'
+            </if>
+        </if>
     </select>
-
 </mapper>

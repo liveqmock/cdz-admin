@@ -11,6 +11,7 @@ import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.service.IMChargingDeviceService;
 import com.ga.cdz.service.IMChargingDeviceSubService;
 import com.ga.cdz.service.IMChargingTypeService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

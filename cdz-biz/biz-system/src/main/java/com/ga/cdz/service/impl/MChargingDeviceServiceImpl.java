@@ -2,7 +2,9 @@ package com.ga.cdz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.dao.charging.ChargingDeviceMapper;
+import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingDeviceDTO;
 import com.ga.cdz.domain.entity.ChargingDevice;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,15 +25,17 @@ import java.util.List;
 @Slf4j
 @Service("mChargingDeviceService")
 public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper, ChargingDevice> implements IMChargingDeviceService {
-
-
+    @Resource
+    AdminInfoMapper adminInfoMapper;
+    @Resource
+    UserInfoMapper userInfoMapper;
     /**
      * @author huanghaohao
      * @date 2018-09-11 15:10
      * @desc 插入新的充电桩
      */
     @Override
-    public Integer insertNewChargingDevice(ChargingDeviceVo chargingDeviceVo) {
+    public Integer insertNewChargingDevice(ChargingDeviceVo chargingDeviceVo ) {
         ChargingDevice chargingDevice = new ChargingDevice();
         BeanUtils.copyProperties(chargingDeviceVo, chargingDevice);
         /**

@@ -13,6 +13,7 @@ import com.ga.cdz.domain.vo.admin.ChargingOrderVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingOrderCommentService;
 import com.ga.cdz.service.IMChargingOrderService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,8 @@ public class OrderController extends AbstractBaseController {
 
   @PostMapping("/list")
   public Result getOrderListByConditionPage(@RequestBody PageVo<ChargingOrderVo> pageVo){
-    Page<ChargingOrderDTO> page=mChargingOrderService.getChargingOrderListPag(pageVo);
+    String name = (String)SecurityUtils.getSubject().getPrincipal();
+    Page<ChargingOrderDTO> page=mChargingOrderService.getChargingOrderListPag(pageVo,name);
     return Result.success().data(page);
   }
 
@@ -56,7 +58,8 @@ public class OrderController extends AbstractBaseController {
    */
   @PostMapping("/comment/list")
   public Result getChargingOrderList(@RequestBody PageVo<ChargingOrderCommentVo> pageVo){
-    Page<ChargingOrderCommentDTO> page= mChargingOrderCommentService.getChargingOrderComentListPage(pageVo);
+    String name = (String)SecurityUtils.getSubject().getPrincipal();
+    Page<ChargingOrderCommentDTO> page= mChargingOrderCommentService.getChargingOrderCommentListPage(pageVo,name);
     return Result.success().data(page);
   }
 }

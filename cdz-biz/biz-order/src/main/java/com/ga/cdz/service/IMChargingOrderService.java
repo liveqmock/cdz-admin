@@ -20,5 +20,5 @@ public interface IMChargingOrderService extends IService<ChargingOrder> {
    * @param pageVo
    * @return
    */
-  Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderVo> pageVo);
+  Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderVo> pageVo,String name);
 }

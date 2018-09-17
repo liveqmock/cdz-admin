@@ -71,6 +71,12 @@
         <if test="param.shopName!=null">
             AND b.shop_name like '%${param.shopName}%'
         </if>
+
+        <if test="shop!=null">
+            <if test="shop.shopId!=null">
+                AND a.shop_id='#{shop.shopId}'
+            </if>
+        </if>
     </select>
 
 </mapper>

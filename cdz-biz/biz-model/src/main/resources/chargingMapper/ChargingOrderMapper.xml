@@ -86,13 +86,14 @@
             <if test="order.deviceSubState!=null">
                 AND sub.device_sub_state=#{order.deviceSubState}
             </if>
-            <if test="order.orderState!=null">
-                AND ord.order_state=#{order.orderState}
-            </if>
+
 
         </if>
-
-
+        <if test="shop!= null">
+            <if test="shop.shopId!=null">
+                AND station.shop_id='#{shop.shopId}'
+            </if>
+        </if>
     </select>
 
 </mapper>
