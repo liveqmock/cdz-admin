@@ -158,7 +158,7 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
      * @return 生成的OrderId
      */
     private String generateOrderId(int userId, long date) {
-        return String.valueOf(userId) + String.valueOf(date / 1000000);
+        return String.valueOf(userId) + String.valueOf(date / 1000);
     }
 
     /**
