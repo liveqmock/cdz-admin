@@ -36,7 +36,7 @@ public class ChargingShopRedisServiceImpl implements IChargingShopRedisService {
                 stationMap.put(shop.getShopId() + "", shop);
             }
             mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_SHOP, stationMap);
-            log.info("CHARGING-SHOP缓存成功");
+            log.info("TABLE_CHARGING_SHOP缓存成功");
         }
     }
 

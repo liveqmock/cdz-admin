@@ -15,6 +15,12 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 public class ChargingStationVo {
 
+    @NotNull(groups = {IChargingStationGroup.Comment.class}, message = "pageIndex不能为空")
+    private Integer pageIndex;
+
+    @NotNull(groups = {IChargingStationGroup.Comment.class}, message = "pageSize不能为空")
+    private Integer pageSize;
+
     /**
      * 用户ID
      */

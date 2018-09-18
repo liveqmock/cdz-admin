@@ -278,10 +278,10 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
             List<ChargingOrder> list = chargingOrderMapper.selectList(null);
             Map<String, ChargingOrder> map = Maps.newHashMap();
             for (ChargingOrder chargingOrder : list) {
-                map.put(chargingOrder.getStationId() + "", chargingOrder);
+                map.put(chargingOrder.getOrderId() + "", chargingOrder);
             }
             mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_ORDER, map);
-            log.info("TABLE_CHARGING_STATION_TYPE缓存成功");
+            log.info("TABLE_CHARGING_ORDER缓存成功");
         }
     }
 
@@ -297,8 +297,8 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER)) {
             cacheChargingOrder();
         } else {
-            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER, chargingOrder.getStationId() + "", chargingOrder);
-            log.info("TABLE_CHARGING_STATION_TYPE缓存一条数据成功");
+            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER, chargingOrder.getOrderId() + "", chargingOrder);
+            log.info("TABLE_CHARGING_ORDER缓存一条数据成功");
         }
     }
 
@@ -312,10 +312,10 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
             List<ChargingOrderComment> list = chargingOrderCommentMapper.selectList(null);
             Map<String, ChargingOrderComment> map = Maps.newHashMap();
             for (ChargingOrderComment chargingOrderComment : list) {
-                map.put(chargingOrderComment.getOrderId() + "", chargingOrderComment);
+                map.put(chargingOrderComment.getCommentId() + "", chargingOrderComment);
             }
             mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_ORDER_COMMENT, map);
-            log.info("TABLE_CHARGING_STATION_TYPE缓存成功");
+            log.info("TABLE_CHARGING_ORDER_COMMENT缓存成功");
         }
     }
 
@@ -331,8 +331,8 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER_COMMENT)) {
             cacheChargingOrderComment();
         } else {
-            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER_COMMENT, chargingOrderComment.getOrderId() + "", chargingOrderComment);
-            log.info("TABLE_CHARGING_STATION_TYPE缓存一条数据成功");
+            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER_COMMENT, chargingOrderComment.getCommentId() + "", chargingOrderComment);
+            log.info("TABLE_CHARGING_ORDER_COMMENT缓存一条数据成功");
         }
     }
 }

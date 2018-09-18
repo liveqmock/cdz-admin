@@ -1,6 +1,7 @@
 package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ga.cdz.domain.dto.api.ChargingStationCommentDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
@@ -60,6 +61,6 @@ public interface IChargingStationService extends IService<ChargingStation> {
       * @param vo ChargingStationVo
       * @return List<ChargingStationCommentDTO>
       */
-      Object getChargingStationComment(ChargingStationVo vo);
+     List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo);
 
 }

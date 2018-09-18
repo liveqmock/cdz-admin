@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.Paging;
+import com.ga.cdz.domain.dto.api.ChargingStationCommentDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
@@ -13,6 +14,7 @@ import com.ga.cdz.domain.vo.api.ChargingStationVo;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingShopRedisService;
 import com.ga.cdz.service.IChargingStationService;
+import com.ga.cdz.service.IUserRedisService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +48,9 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
 
     @Resource
     MDistanceUtil mDistanceUtil;
+
+    @Resource
+    IUserRedisService userRedisService;
 
     @Resource
     IChargingRedisService chargingRedisService;
@@ -264,11 +269,11 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
+     * @param vo ChargingStationVo
+     * @return ChargingStationDetailDTO
      * @Author: liuyi
      * @Description: 获取充电站信息
      * @Date: 2018/9/17_14:53
-     * @param vo ChargingStationVo
-     * @return ChargingStationDetailDTO
      */
     @Override
     public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
@@ -302,11 +307,11 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
+     * @param vo ChargingStationVo
+     * @return List<ChargingStationTerminalDTO>
      * @Author: liuyi
      * @Description: 获取充电站终端
      * @Date: 2018/9/17_15:44
-     * @param vo ChargingStationVo
-     * @return List<ChargingStationTerminalDTO>
      */
     @Override
     public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
@@ -333,16 +338,39 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     @Override
-    public Object getChargingStationComment(ChargingStationVo vo) {
+    public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo) {
+        userRedisService.cacheUserList();
         chargingRedisService.cacheChargingPageList();
+        //获取所有缓存的用户信息
+        Map<String, UserInfo> userInfoMap = mRedisUtil.getHash(RedisConstant.TABLE_USER_INFO);
         //获取所有缓存的订单
-        Map<String, List<ChargingOrder>> chargingOrderMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ORDER);
+        List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
         //获取所有缓存的评论
-        Map<String, List<ChargingOrderComment>> chargingOrderCommentMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ORDER_COMMENT);
+        List<ChargingOrderComment> chargingOrderCommentList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER_COMMENT);
+        //根据stationId得到符合的订单
+        List<String> orderIdList = chargingOrderList.stream()
+                .filter(chargingOrder -> chargingOrder.getStationId().equals(vo.getStationId()))
+                .map(chargingOrder -> chargingOrder.getOrderId())
+                .collect(Collectors.toList());
 
-        //
+        //根据orderId得到评论
+        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().map(chargingOrderComment -> {
+            ChargingStationCommentDTO chargingStationComment = new ChargingStationCommentDTO();
+            if (!orderIdList.isEmpty() && orderIdList.size() > 0) {
+                for (String orderId : orderIdList) {
+                    if (chargingOrderComment.getOrderId().equals(orderId)) {
+                        chargingStationComment.setChargingOrderComment(chargingOrderComment);
+                        chargingStationComment.setUserRealName(userInfoMap.get(chargingStationComment.getUserId() + "").getUserRealName());
+                    }
+                }
+            }
+            return chargingStationComment;
+        }).collect(Collectors.toList());
 
-        return chargingOrderMap;
+        //分页
+        Paging<ChargingStationCommentDTO> mPage = new Paging<>(chargingStationCommentList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingStationCommentDTO> cscList = mPage.getList();
+        return cscList;
     }
 
     /**

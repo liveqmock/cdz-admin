@@ -17,6 +17,7 @@ import com.ga.cdz.domain.vo.api.UserInfoRetrieverVo;
 import com.ga.cdz.domain.vo.api.UserInfoSendSmsVo;
 import com.ga.cdz.domain.vo.base.UserSmsPushVo;
 import com.ga.cdz.service.IAccountService;
+import com.ga.cdz.service.IUserRedisService;
 import com.ga.cdz.util.MRedisUtil;
 import com.ga.cdz.util.MSmsUtil;
 import com.ga.cdz.util.MUtil;
@@ -75,6 +76,8 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
     @Resource
     MUtil mUtil;
 
+    @Resource
+    IUserRedisService userRedisService;
 
     @Value("${sms.timeout}")
     private Long REDIS_TIME_OUT;
@@ -178,6 +181,8 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         }
         /**注册成功后删除redis的短信键值对**/
         mRedisUtil.remove(smsRedisKey);
+        /**注册成功后插入redis**/
+        userRedisService.cacheOneUserInfo(userInfo);
     }
 
     @Override

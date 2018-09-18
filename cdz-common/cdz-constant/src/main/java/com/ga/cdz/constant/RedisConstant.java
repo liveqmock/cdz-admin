@@ -36,6 +36,9 @@ public class RedisConstant {
     //管理员权限
     public final static String ADMIN_PERM = ADMIN_ROOT + "ADMIN-PERM:";
 
+    //table缓存t_user_info
+    public final static String TABLE_USER_INFO = TABLE_ROOT + "USER-INFO";
+
     //table缓存t_charging_station
     public final static String TABLE_CHARGING_STATION = TABLE_ROOT + "CHARGING-STATION";
 

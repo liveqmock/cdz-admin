@@ -2,6 +2,7 @@ package com.ga.cdz.controller.charging;
 
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
+import com.ga.cdz.domain.dto.api.ChargingStationCommentDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.group.api.IChargingStationGroup;
@@ -65,7 +66,7 @@ public class ChargingStationController extends AbstractBaseController {
     public Result getChargingStationComment(@RequestBody @Validated(value = {IChargingStationGroup.Comment.class}) ChargingStationVo vo,
                                              BindingResult bindingResult) {
         checkParams(bindingResult);
-        Object chargingStationComment = iChargingStationService.getChargingStationComment(vo);
+        List<ChargingStationCommentDTO> chargingStationComment = iChargingStationService.getChargingStationComment(vo);
         return Result.success().data(chargingStationComment);
     }
 
