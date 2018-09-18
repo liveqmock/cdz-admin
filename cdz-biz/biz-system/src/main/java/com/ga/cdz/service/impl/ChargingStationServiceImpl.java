@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.domain.bean.Paging;
+import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
+import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
 import com.ga.cdz.domain.vo.api.ChargingStationVo;
 import com.ga.cdz.service.IChargingRedisService;
+import com.ga.cdz.service.IChargingShopRedisService;
 import com.ga.cdz.service.IChargingStationService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
@@ -22,10 +25,7 @@ import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -49,6 +49,9 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
 
     @Resource
     IChargingRedisService chargingRedisService;
+
+    @Resource
+    IChargingShopRedisService chargingShopRedisService;
 
     @Value("${url.station}")
     private String stationUrl;
@@ -260,18 +263,61 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         return rsList;
     }
 
+    /**
+     * @Author: liuyi
+     * @Description: 获取充电站信息
+     * @Date: 2018/9/17_14:53
+     * @param vo ChargingStationVo
+     * @return ChargingStationDetailDTO
+     */
+    @Override
+    public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
+        chargingRedisService.cacheChargingPageList();
+        chargingShopRedisService.cacheChargingShopList();
+        ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
+        ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, vo.getStationId().toString());
+        ChargingShop chargingShop = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_SHOP, chargingStation.getShopId().toString());
+        chargingStationDetailDTO.setChargingStation(chargingStation);
+        chargingStationDetailDTO.setChargingShop(chargingShop);
+        return chargingStationDetailDTO;
+    }
 
     /**
      * @Author: liuyi
-     * @Description:
-     * @Date: 2018/9/17_14:53
-     * @param
-     * @return ChargingStationDTO
+     * @Description: 获取充电站终端
+     * @Date: 2018/9/17_15:44
+     * @param vo ChargingStationVo
+     * @return List<ChargingStationTerminalDTO>
      */
-    public ChargingStation getChargingStationDetail(ChargingStationVo vo) {
+    @Override
+    public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
         chargingRedisService.cacheChargingPageList();
-        ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, vo.getStationId().toString());
-        return chargingStation;
+        Map<String, List<ChargingDevice>> chargingDeviceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE_STATION);
+        Map<String, ChargingType> chargingTypeMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_TYPE);
+
+        /**获取当前站点的所有设备*/
+        List<ChargingStationTerminalDTO> chargingStationTerminalList = new ArrayList<>();
+        List<ChargingDevice> chargingDeviceList = chargingDeviceMap.get(vo.getStationId() + "");
+        if (!ObjectUtils.isEmpty(chargingDeviceList) && chargingDeviceList.size() > 0) {
+            for (ChargingDevice chargingDevice : chargingDeviceList) {
+                Integer cgtypeId = chargingDevice.getCgtypeId();
+                ChargingType chargingType = chargingTypeMap.get(cgtypeId + "");
+                ChargingStationTerminalDTO chargingStationTerminal = new ChargingStationTerminalDTO();
+                chargingStationTerminal.setChargingDevice(chargingDevice);
+                if (!ObjectUtils.isEmpty(chargingType)) {
+                    chargingStationTerminal.setChargingType(chargingType);
+                }
+                chargingStationTerminalList.add(chargingStationTerminal);
+            }
+        }
+        return chargingStationTerminalList;
+    }
+
+    @Override
+    public Object getChargingStationComment(ChargingStationVo vo) {
+        //chargingRedisService.cacheChargingPageList();
+        //Map<String, List<ChargingOrderComment>> ChargingOrderCommentMap = mRedisUtil.getHash(RedisConstant.LIST_CHARGING_STATION_SCORE);
+        return null;
     }
 
     /**

@@ -18,13 +18,13 @@ public class ChargingStationVo {
     /**
      * 用户ID
      */
-    @NotNull(groups = {IChargingStationGroup.Detail.class}, message = "用户Id不能为空")
+    @NotNull(groups = {IChargingStationGroup.Detail.class, IChargingStationGroup.Terminal.class, IChargingStationGroup.Comment.class}, message = "用户Id不能为空")
     private Integer userId;
 
     /**
      * 充电站ID
      */
-    @NotNull(groups = {IChargingStationGroup.Detail.class}, message = "充电站Id不能为空")
+    @NotNull(groups = {IChargingStationGroup.Detail.class, IChargingStationGroup.Terminal.class, IChargingStationGroup.Comment.class}, message = "充电站Id不能为空")
     private Integer stationId;
 
 }

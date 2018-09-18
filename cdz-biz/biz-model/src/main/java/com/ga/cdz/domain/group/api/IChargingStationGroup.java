@@ -31,4 +31,20 @@ public interface IChargingStationGroup {
     interface Detail {
     }
 
+    /**
+     * @Author: liuyi
+     * @Description: 充电站终端
+     * @Date: 2018/9/17_15:40
+     */
+    interface Terminal {
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 充电站评论
+     * @Date: 2018/9/17_16:56
+     */
+    interface Comment {
+
+    }
 }
