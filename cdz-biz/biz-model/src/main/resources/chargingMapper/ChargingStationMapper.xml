@@ -30,6 +30,7 @@
         <result column="station_name" property="stationName"/>
         <result column="station_type" property="stationType"/>
         <result column="station_addr" property="stationAddr"/>
+        <result column="sttpe_id" property="sttpeId"/>
         <result column="device_nums" property="deviceNums"/>
         <result column="country" property="country"/>
         <result column="county" property="county"/>
@@ -103,6 +104,7 @@
         a.city,
         a.province,
         a.station_addr,
+        c.sttpe_id,
         c.sttpe_name,
         a.station_name,
         a.lat,

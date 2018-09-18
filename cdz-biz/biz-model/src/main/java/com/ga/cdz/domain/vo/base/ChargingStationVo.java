@@ -64,12 +64,12 @@ public class ChargingStationVo {
     /**
      * 维度
      */
-    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩纬度不能为空")
+//    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩纬度不能为空")
     private Double lat;
     /**
      * 经度
      */
-    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩经度不能为空")
+//    @NotNull(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "充电桩经度不能为空")
     private Double lng;
     /**
      * 充电站状态 0 删除 1 正常

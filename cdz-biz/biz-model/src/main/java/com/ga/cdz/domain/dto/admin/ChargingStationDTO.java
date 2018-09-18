@@ -35,6 +35,14 @@ public class ChargingStationDTO {
      */
     private String shopName;
     /**
+     * 运营商类型ID
+     */
+    private Integer sttpeId;
+    /**
+     * 运营商ID
+     */
+    private Integer operatorsId;
+    /**
      * 运营商类型名称
      */
     private String sttpeName;

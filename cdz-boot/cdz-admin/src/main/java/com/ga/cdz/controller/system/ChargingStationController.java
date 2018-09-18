@@ -206,7 +206,16 @@ public class ChargingStationController extends AbstractBaseController {
         Double lng = vo.getLng();
         Time stationOpendt = vo.getStationOpendt();
         Time stationClosedt = vo.getStationClosedt();
-
+        //为空默认
+        if (ObjectUtils.isEmpty(lat)) {
+//            throw new BusinessException("经度不能为空");
+            vo.setLat(26.37753);
+        }
+        if (ObjectUtils.isEmpty(lng)) {
+//            throw new BusinessException("纬度不能为空");
+            vo.setLng(106.632442);
+        }
+        //为空验证
         if (ObjectUtils.isEmpty(shopId)) {
             throw new BusinessException("商户ID不能为空");
         } else if (ObjectUtils.isEmpty(stationCode)) {
@@ -229,10 +238,6 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("区县编码不能为空");
         } else if (ObjectUtils.isEmpty(country)) {
             throw new BusinessException("乡镇街道编码不能为空");
-        } else if (ObjectUtils.isEmpty(lat)) {
-            throw new BusinessException("经度不能为空");
-        } else if (ObjectUtils.isEmpty(lng)) {
-            throw new BusinessException("纬度不能为空");
         } else if (ObjectUtils.isEmpty(stationOpendt)) {
             throw new BusinessException("开放时间不能为空");
         } else if (ObjectUtils.isEmpty(stationClosedt)) {
@@ -286,6 +291,14 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/update")
     public Result updateStation(@RequestBody @Validated(value = IMChargingStationGroup.Update.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
+        Double lat = vo.getLat();
+        Double lng = vo.getLng();
+        if (ObjectUtils.isEmpty(lat)) {
+            vo.setLat(26.37753);
+        }
+        if (ObjectUtils.isEmpty(lng)) {
+            vo.setLng(106.632442);
+        }
         //对整型的省、市、县编码进行验证
         Integer province = vo.getProvince();
         Integer city = vo.getCity();
