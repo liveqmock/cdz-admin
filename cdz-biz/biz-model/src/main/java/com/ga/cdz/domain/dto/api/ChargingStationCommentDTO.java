@@ -51,14 +51,14 @@ public class ChargingStationCommentDTO {
     /**
      * 用户名称
      */
-    private String  userRealName;
+    private String userRealName;
 
     /**
+     * @param chargingOrderComment
+     * @return
      * @Author: liuyi
      * @Description: 赋值ChargingOrderComment
      * @Date: 2018/9/17_16:48
-     * @param chargingOrderComment
-     * @return
      */
     public void setChargingOrderComment(ChargingOrderComment chargingOrderComment) {
         this.commentId = chargingOrderComment.getCommentId();

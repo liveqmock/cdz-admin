@@ -275,8 +275,27 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         chargingRedisService.cacheChargingPageList();
         chargingShopRedisService.cacheChargingShopList();
         ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
+        //获得充电站缓存列表
         ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, vo.getStationId().toString());
+        //获得充电站商户缓存列表
         ChargingShop chargingShop = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_SHOP, chargingStation.getShopId().toString());
+        //获得充电站价格缓存列表
+        Date nowTime = new Date();
+        long nowTimeLong = nowTime.getTime();
+        Map<String, List<ChargingPrice>> priceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_PRICE);
+        //当前价格
+        List<ChargingPrice> priceList = priceMap.get(vo.getStationId() + "");
+        if (priceList != null) {
+            for (ChargingPrice chargingPrice : priceList) {
+                long beginDt = timeToNowDateTimeLong(chargingPrice.getPriceBeginDt(), nowTime);
+                long endDt = timeToNowDateTimeLong(chargingPrice.getPriceEndDt(), nowTime);
+                //判断是否在当前时间段
+                if (nowTimeLong >= beginDt && nowTimeLong <= endDt) {
+                    chargingStationDetailDTO.setChargingPrice(chargingPrice);
+                    break;
+                }
+            }
+        }
         chargingStationDetailDTO.setChargingStation(chargingStation);
         chargingStationDetailDTO.setChargingShop(chargingShop);
         return chargingStationDetailDTO;
@@ -315,9 +334,15 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
 
     @Override
     public Object getChargingStationComment(ChargingStationVo vo) {
-        //chargingRedisService.cacheChargingPageList();
-        //Map<String, List<ChargingOrderComment>> ChargingOrderCommentMap = mRedisUtil.getHash(RedisConstant.LIST_CHARGING_STATION_SCORE);
-        return null;
+        chargingRedisService.cacheChargingPageList();
+        //获取所有缓存的订单
+        Map<String, List<ChargingOrder>> chargingOrderMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ORDER);
+        //获取所有缓存的评论
+        Map<String, List<ChargingOrderComment>> chargingOrderCommentMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ORDER_COMMENT);
+
+        //
+
+        return chargingOrderMap;
     }
 
     /**

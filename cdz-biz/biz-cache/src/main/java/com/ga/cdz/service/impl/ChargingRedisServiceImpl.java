@@ -63,6 +63,8 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingDeviceSub();
         cacheChargingStationType();
         cacheChargingOrderCommentList();
+        cacheChargingOrder();
+        cacheChargingOrderComment();
     }
 
     private void cacheChargingStation() {
@@ -266,5 +268,72 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         }
     }
 
+    /**
+     * @Author: liuyi
+     * @Description: 缓存订单信息
+     * @Date: 2018/9/18_11:02
+     */
+    private void cacheChargingOrder() {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER)) {
+            List<ChargingOrder> list = chargingOrderMapper.selectList(null);
+            Map<String, ChargingOrder> map = Maps.newHashMap();
+            for (ChargingOrder chargingOrder : list) {
+                map.put(chargingOrder.getStationId() + "", chargingOrder);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_ORDER, map);
+            log.info("TABLE_CHARGING_STATION_TYPE缓存成功");
+        }
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 缓存一条订单信息
+     * @Date: 2018/9/18_11:03
+     * @param chargingOrder 订单实体
+     * @return
+     */
+    @Override
+    public void cacheOneChargingOrder(ChargingOrder chargingOrder) {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER)) {
+            cacheChargingOrder();
+        } else {
+            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER, chargingOrder.getStationId() + "", chargingOrder);
+            log.info("TABLE_CHARGING_STATION_TYPE缓存一条数据成功");
+        }
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 缓存订单评论
+     * @Date: 2018/9/18_11:02
+     */
+    private void cacheChargingOrderComment() {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER_COMMENT)) {
+            List<ChargingOrderComment> list = chargingOrderCommentMapper.selectList(null);
+            Map<String, ChargingOrderComment> map = Maps.newHashMap();
+            for (ChargingOrderComment chargingOrderComment : list) {
+                map.put(chargingOrderComment.getOrderId() + "", chargingOrderComment);
+            }
+            mRedisUtil.pushHashAll(RedisConstant.TABLE_CHARGING_ORDER_COMMENT, map);
+            log.info("TABLE_CHARGING_STATION_TYPE缓存成功");
+        }
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 缓存一条订单评论
+     * @Date: 2018/9/18_11:03
+     * @param chargingOrderComment 订单评论实体
+     * @return
+     */
+    @Override
+    public void cacheOneChargingOrderComment(ChargingOrderComment chargingOrderComment) {
+        if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_ORDER_COMMENT)) {
+            cacheChargingOrderComment();
+        } else {
+            mRedisUtil.putHash(RedisConstant.TABLE_CHARGING_ORDER_COMMENT, chargingOrderComment.getOrderId() + "", chargingOrderComment);
+            log.info("TABLE_CHARGING_STATION_TYPE缓存一条数据成功");
+        }
+    }
 }
 

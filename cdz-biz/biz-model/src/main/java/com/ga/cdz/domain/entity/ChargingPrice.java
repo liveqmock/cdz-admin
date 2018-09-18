@@ -36,21 +36,25 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     @TableId(value = "station_id", type = IdType.NONE)
     private Integer stationId;
+
     /**
      * 价格名称
      */
     @TableField("price_name")
     private String priceName;
+
     /**
      * 价格类型 1 专场计费 2 非专场计费
      */
     @TableField("price_type")
     private PriceType priceType;
+
     /**
      * 顺序
      */
     @TableField("price_idx")
     private PriceIdx priceIdx;
+
     /**
      * 开始时间
      */
@@ -72,16 +76,19 @@ public class ChargingPrice extends Model<ChargingPrice> {
      */
     @TableField("charging_price")
     private BigDecimal chargingPrice;
+
     /**
      * 停车场价格
      */
     @TableField("price_parking")
     private BigDecimal priceParking;
+
     /**
      * 服务费用
      */
     @TableField("service_price")
     private BigDecimal servicePrice;
+
     /**
      * 插入时间
      */

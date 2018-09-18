@@ -60,6 +60,12 @@ public class RedisConstant {
     //table缓存t_charging_station_type
     public final static String TABLE_CHARGING_STATION_TYPE = TABLE_ROOT + "CHARGING-STATION-TYPE";
 
+    //table缓存t_charging_order
+    public final static String TABLE_CHARGING_ORDER = TABLE_ROOT + "CHARGING-ORDER";
+
+    //table缓存t_charging_order_comment
+    public final static String TABLE_CHARGING_ORDER_COMMENT = TABLE_ROOT + "CHARGING-ORDER-COMMENT";
+
     //table缓存t_charging_shop
     public final static String TABLE_CHARGING_SHOP = TABLE_ROOT + "CHARGING-SHOP";
 

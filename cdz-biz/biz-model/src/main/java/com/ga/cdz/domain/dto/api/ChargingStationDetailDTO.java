@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ga.cdz.domain.entity.ChargingPrice;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.entity.ChargingStation;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 
 /**
@@ -143,6 +145,50 @@ public class ChargingStationDetailDTO {
     private ChargingShop.ShopState shopState;
 
     /**
+     * 价格名称
+     */
+    private String priceName;
+
+    /**
+     * 价格类型 1 专场计费 2 非专场计费
+     */
+    private ChargingPrice.PriceType priceType;
+
+    /**
+     * 顺序
+     */
+    private ChargingPrice.PriceIdx priceIdx;
+
+    /**
+     * 开始时间
+     */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time priceBeginDt;
+
+    /**
+     * 结束时间
+     */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "GMT+8")
+    private Time priceEndDt;
+
+    /**
+     * 充电价格
+     */
+    private Double chargingPrice;
+
+    /**
+     * 停车场价格
+     */
+    private Double priceParking;
+
+    /**
+     * 服务费用
+     */
+    private Double servicePrice;
+
+    /**
      * @Author: liuyi
      * @Description: 赋值ChargingStation
      * @Date: 2018/9/18_9:25
@@ -183,6 +229,17 @@ public class ChargingStationDetailDTO {
         this.shopContact = chargingShop.getShopContact();
         this.shopTel = chargingShop.getShopTel();
         this.shopState = chargingShop.getShopState();
+    }
+
+    public void setChargingPrice(ChargingPrice chargingPrice) {
+        this.priceName = chargingPrice.getPriceName();
+        this.priceType = chargingPrice.getPriceType();
+        this.priceIdx = chargingPrice.getPriceIdx();
+        this.priceBeginDt = chargingPrice.getPriceBeginDt();
+        this.priceEndDt = chargingPrice.getPriceEndDt();
+        this.chargingPrice = chargingPrice.getChargingPrice().doubleValue();
+        this.priceParking = chargingPrice.getPriceParking().doubleValue();
+        this.servicePrice = chargingPrice.getServicePrice().doubleValue();
     }
 
 }
