@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.center.AdminInfoMapper;
+import com.ga.cdz.dao.center.DistrictMapper;
 import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
@@ -76,7 +77,27 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
           lists = baseMapper.getStationList(page,param,chargingShop);
         }
         page.setRecords(lists);
-        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
+//        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
+//        //查询后跨库查询区域名称
+//        list.forEach(item -> {
+//            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
+//            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
+//            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
+//            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
+//        });
+//        page.setRecords(list);
+        return page;
+    }
+
+    @Override
+    public IPage<ChargingStationDTO> getStationPageByCon(PageVo<ChargingStationSelectVo> vo) {
+        //构建分页信息
+        Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
+        //复制
+        ChargingStationSelectVo param = new ChargingStationSelectVo();
+        BeanUtils.copyProperties(vo.getData(), param);
+        //分页查询
+        List<ChargingStationDTO> list = baseMapper.getStationListByCon(page, param);
         //查询后跨库查询区域名称
         list.forEach(item -> {
             item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());

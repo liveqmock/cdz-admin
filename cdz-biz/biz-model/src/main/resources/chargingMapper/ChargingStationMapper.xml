@@ -92,5 +92,43 @@
             </if>
         </if>
     </select>
+    <select id="getStationListByCon" resultMap="chargingStationDTO"
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingStationSelectVo">
+        SELECT
+        a.station_id,
+        a.station_code,
+        a.station_type,
+        a.country,
+        a.county,
+        a.city,
+        a.province,
+        a.station_addr,
+        c.sttpe_name,
+        a.station_name,
+        a.lat,
+        a.lng,
+        b.shop_code,
+        b.shop_id,
+        b.shop_name,
+        a.insert_dt,
+        (select count(1) from t_charging_device device where device.station_id=a.station_id) device_nums
+        FROM
+        t_charging_station a
+        LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
+        LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
+        where a.station_state=1
+        <if test="param.stationName!=null">
+            AND a.station_name like '%${param.stationName}%'
+        </if>
+        <if test="param.stationType!=null">
+            AND a.station_type like '%${param.stationType}%'
+        </if>
+        <if test="param.sttpeName!=null">
+            AND c.sttpe_name like '%${param.sttpeName}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND b.shop_name like '%${param.shopName}%'
+        </if>
+    </select>
 
 </mapper>

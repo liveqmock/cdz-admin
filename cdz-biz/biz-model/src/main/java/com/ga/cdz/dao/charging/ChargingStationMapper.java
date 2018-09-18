@@ -20,10 +20,19 @@ import java.util.List;
 public interface ChargingStationMapper extends SuperMapper<ChargingStation> {
     /**
      * @author:wanzhongsu
-     * @description: 分页获取充电站分页
+     * @description: 分页获取充电站
      * @date: 2018/9/14 14:11
      * @param: Page
      * @return: List
      */
     List<ChargingStationDTO> getStationList(Page<ChargingStationDTO> page, @Param("param") ChargingStationSelectVo vo, @Param("shop") ChargingShop chargingShop);
+
+    /**
+     * @author:wanzhongsu
+     * @description: 分页获取充电站列表
+     * @date: 2018/9/18 9:08
+     * @param: ChargingStationSelectVo
+     * @return: List
+     */
+    List<ChargingStationDTO> getStationListByCon(Page<ChargingStationDTO> page, @Param("param") ChargingStationSelectVo vo);
 }

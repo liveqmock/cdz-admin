@@ -23,7 +23,16 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param: PageVo
      * @return: IPage<ChargingStationDTO>
      */
-    IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo,String name);
+    IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo, String name);
+
+    /**
+     * @author:wanzhongsu
+     * @description: 分页获取充电站列表
+     * @date: 2018/9/18 9:12
+     * @param: PageVo
+     * @return: IPage<ChargingStationDTO>
+     */
+    IPage<ChargingStationDTO> getStationPageByCon(PageVo<ChargingStationSelectVo> vo);
 
     /**
      * @author:wanzhongsu
@@ -32,7 +41,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param: ChargingStationVo
      * @return: List
      */
-    List<ChargingStation> getStationList(ChargingStationVo vo );
+    List<ChargingStation> getStationList(ChargingStationVo vo);
 
     /**
      * @author:wanzhongsu

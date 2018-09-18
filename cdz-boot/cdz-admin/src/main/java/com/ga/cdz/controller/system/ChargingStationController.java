@@ -73,9 +73,7 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getStationList(@RequestBody @Validated PageVo<ChargingStationSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        String username=(String)SecurityUtils.getSubject().getPrincipal();
-
-        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo,username);
+        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPageByCon(vo);
         return Result.success().data(iPage);
     }
 
