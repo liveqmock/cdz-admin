@@ -43,20 +43,49 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     IChargingRedisService chargingRedisService;
 
     @Override
-    public List<ChargingOrderListDTO> getChargingOrderPageList(ChargingOrderPageListVo vo) {
-        //检测缓存
-        chargingRedisService.cacheChargingStationDetail();
-        //获取缓存的订单信息
-        List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
-        List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().map(chargingOrder -> {
-            ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
-            if (chargingOrder.getUserId() == vo.getUserId()) {
-                chargingOrderListDTO.setChargingOrder(chargingOrder);
-                return chargingOrderListDTO;
-            }
-            return null;
-        }).collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(ChargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+    public List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo) {
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId());
+        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingOrderListDTO> colList = page.getList();
+        return colList;
+    }
+
+    @Override
+    public List<ChargingOrderListDTO> getChargingOrderOfInitPageList(ChargingOrderPageListVo vo) {
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.INIT)
+                .collect(Collectors.toList());
+        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingOrderListDTO> colList = page.getList();
+        return colList;
+    }
+
+    @Override
+    public List<ChargingOrderListDTO> getOrderListOfPayingPageList(ChargingOrderPageListVo vo) {
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYING)
+                .collect(Collectors.toList());
+        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingOrderListDTO> colList = page.getList();
+        return colList;
+    }
+
+    @Override
+    public List<ChargingOrderListDTO> getOrderListOfPayedPageList(ChargingOrderPageListVo vo) {
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYED)
+                .collect(Collectors.toList());
+        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingOrderListDTO> colList = page.getList();
+        return colList;
+    }
+
+    @Override
+    public List<ChargingOrderListDTO> getOrderListOfRefundingPageList(ChargingOrderPageListVo vo) {
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.REFUNDING)
+                .collect(Collectors.toList());
+        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
         List<ChargingOrderListDTO> colList = page.getList();
         return colList;
     }
@@ -160,6 +189,29 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
                 .setCharginEndDt(finalDate)
                 .setOrderState(ChargingOrder.OrderState.INIT);
         return insertAnOrder(chargingOrder);
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 搜索出该用户的全部订单
+     * @Date: 2018/9/19_14:36
+     * @param userId 用户id
+     * @return
+     */
+    private List<ChargingOrderListDTO> getChargingOrderList(int userId) {
+        //检测缓存
+        chargingRedisService.cacheChargingStationDetail();
+        //获取缓存的订单信息
+        List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
+        List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().map(chargingOrder -> {
+            ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
+            if (chargingOrder.getUserId() == userId) {
+                chargingOrderListDTO.setChargingOrder(chargingOrder);
+                return chargingOrderListDTO;
+            }
+            return null;
+        }).collect(Collectors.toList());
+        return ChargingOrderListDTOList;
     }
 
     /**

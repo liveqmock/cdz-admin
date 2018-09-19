@@ -17,12 +17,48 @@ public interface IChargingOrderService extends IService<ChargingOrder> {
 
     /**
      * @Author: liuyi
-     * @Description: 获取订单的分页信息
+     * @Description: 获取全部订单的分页信息
      * @Date: 2018/9/19_11:32
      * @param vo ChargingOrderPageListVo
      * @return List<ChargingOrderListDTO>
      */
-    List<ChargingOrderListDTO> getChargingOrderPageList(ChargingOrderPageListVo vo);
+    List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo);
+
+    /**
+     * @Author: liuyi
+     * @Description:  获取待使用订单的分页信息
+     * @Date: 2018/9/19_14:53
+     * @param vo ChargingOrderPageListVo
+     * @return List<ChargingOrderListDTO>
+     */
+    List<ChargingOrderListDTO> getChargingOrderOfInitPageList(ChargingOrderPageListVo vo);
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取待支付订单的分页信息
+     * @Date: 2018/9/19_14:54
+     * @param vo ChargingOrderPageListVo
+     * @return List<ChargingOrderListDTO>
+     */
+    List<ChargingOrderListDTO> getOrderListOfPayingPageList(ChargingOrderPageListVo vo);
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取待评价订单的分页信息
+     * @Date: 2018/9/19_14:56
+     * @param vo ChargingOrderPageListVo
+     * @return List<ChargingOrderListDTO>
+     */
+    List<ChargingOrderListDTO> getOrderListOfPayedPageList(ChargingOrderPageListVo vo);
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取退款/售后订单的分页信息
+     * @Date: 2018/9/19_14:59
+     * @param vo ChargingOrderPageListVo
+     * @return List<ChargingOrderListDTO>
+     */
+    List<ChargingOrderListDTO> getOrderListOfRefundingPageList(ChargingOrderPageListVo vo);
 
     /**
      * @Author: liuyi

@@ -1,13 +1,11 @@
 package com.ga.cdz.domain.dto.api;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingOrder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -61,7 +59,6 @@ public class ChargingOrderListDTO {
     /**
      * 订单状态
      */
-    @TableField("order_state")
     private ChargingOrder.OrderState orderState;
 
     public void setChargingOrder(ChargingOrder chargingOrder) {

@@ -28,14 +28,83 @@ public class ChargingOrderController extends AbstractBaseController {
     @Resource
     IChargingOrderService chargingOrderService;
 
-    @PostMapping("/list")
-    public Result getOrderListPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
+    /**
+     * @Author: liuyi
+     * @Description: 获取全部订单的分页信息
+     * @Date: 2018/9/19_13:43
+     * @param vo ChargingOrderPageListVo
+     * @return
+     */
+    @PostMapping("/all/list")
+    public Result getOrderListOfAllPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getChargingOrderPageList(vo);
+        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getChargingOrderOfAllPageList(vo);
         return Result.success().data(chargingOrderListDTOList);
     }
 
-    @UserState
+    /**
+     * @Author: liuyi
+     * @Description: 获取待使用订单的分页信息
+     * @Date: 2018/9/19_14:55
+     * @param vo ChargingOrderPageListVo
+     * @return
+     */
+    @PostMapping("/init/list")
+    public Result getOrderListOfInitPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getChargingOrderOfInitPageList(vo);
+        return Result.success().data(chargingOrderListDTOList);
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取待支付订单的分页信息
+     * @Date: 2018/9/19_14:55
+     * @param vo ChargingOrderPageListVo
+     * @return
+     */
+    @PostMapping("/paying/list")
+    public Result getOrderListOfPayingPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getOrderListOfPayingPageList(vo);
+        return Result.success().data(chargingOrderListDTOList);
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取待评价订单的分页信息
+     * @Date: 2018/9/19_14:57
+     * @param vo ChargingOrderPageListVo
+     * @return
+     */
+    @PostMapping("/payed/list")
+    public Result getOrderListOfPayedPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getOrderListOfPayedPageList(vo);
+        return Result.success().data(chargingOrderListDTOList);
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 获取退款/售后订单的分页信息
+     * @Date: 2018/9/19_15:00
+     * @param vo ChargingOrderPageListVo
+     * @return
+     */
+    @PostMapping("/refunding/list")
+    public Result getOrderListOfRefundingPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderService.getOrderListOfRefundingPageList(vo);
+        return Result.success().data(chargingOrderListDTOList);
+    }
+
+    /**
+     * @Author: liuyi
+     * @Description: 下单
+     * @Date: 2018/9/19_13:44
+     * @param vo ChargingOrderInitVo
+     * @return
+     */
     @PostMapping("/price")
     public Result placeOrderByPrice(@RequestBody ChargingOrderInitVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
