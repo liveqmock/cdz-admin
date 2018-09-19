@@ -245,7 +245,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
                 } else {
                     set = Sets.newHashSet();
                 }
-                if (chargingOrder.getOrderState().equals(ChargingOrder.OrderState.COMMENTED)) {
+                if (chargingOrder.getOrderState().equals(ChargingOrder.OrderState.FINISH)) {
                     set.add(chargingOrder.getOrderId());
                 }
                 stationOrderGroup.put(chargingOrder.getStationId(), set);

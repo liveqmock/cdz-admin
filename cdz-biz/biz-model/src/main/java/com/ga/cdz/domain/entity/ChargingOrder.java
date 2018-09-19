@@ -108,13 +108,13 @@ public class ChargingOrder extends Model<ChargingOrder> {
      */
     public enum OrderState implements IEnum<Integer> {
         ERROR(-2, "异常"),
-        REFUND(-1, "退款"),
+        REFUNDING(-1, "申请退款"),
         REMOVE(0, "删除"),
         INIT(1, "下单"),
-        USEING(2, "使用中"),
-        PAYING(3, "待支付"),
-        PAYED(4, "支付"),
-        COMMENTED(5, "评论");
+        PAYING(2, "待支付"),
+        PAYED(3, "支付，待评价"),
+        FINISH(4, "完成"),
+        REFUNDED(5, "退款已处理");
 
         private Integer code;
         private String desc;

@@ -9,13 +9,11 @@ import com.ga.cdz.dao.center.AdminInfoMapper;
 import com.ga.cdz.dao.center.DistrictMapper;
 import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.dao.charging.ChargingStationMapper;
-import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.dto.admin.ChargingStationDTO;
 import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.entity.ChargingStation;
-import com.ga.cdz.domain.entity.UserInfo;
 import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
@@ -119,13 +117,16 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //验证充电站名称和编码是否已经存在
-        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            throw new BusinessException("该充电站名称已存在");
-        }
-        hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            throw new BusinessException("该充电站编码已存在");
+        List<ChargingStation> hasName = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
+        List<ChargingStation> hasCode = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, chargingStation.getStationCode()));
+        if (hasName.size() > 1 || hasCode.size() > 1) {
+            throw new BusinessException("充电站名称或编码已存在");
+        } else if ((hasName.size() == 1 && hasCode.size() == 1) && (hasCode.get(0).getStationId() != chargingStation.getStationId()) && (hasName.get(0).getStationId() != chargingStation.getStationId())) {
+            throw new BusinessException("充电站名称或编码已存在");
+        } else if (hasCode.size() == 1 && (hasCode.get(0).getStationId() != chargingStation.getStationId())) {
+            throw new BusinessException("充电站编码已存在");
+        } else if (hasName.size() == 1 && (hasName.get(0).getStationId() != chargingStation.getStationId())) {
+            throw new BusinessException("充电站名称已存在");
         }
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
@@ -159,12 +160,20 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         BeanUtils.copyProperties(vo, chargingStation);
         //根据名字查询该名称是否存在
         ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
-        if (!ObjectUtils.isEmpty(hasName)) {
+        if (!ObjectUtils.isEmpty(hasName) && hasName.getStationState() == ChargingStation.StationState.NORMAL) {
             throw new BusinessException("该充电站名称已存在");
         }
-        //充电站存在，只是状态删除则修改状态保存
-        hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()));
-        if (!ObjectUtils.isEmpty(hasName)) {
+        ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
+        if (!ObjectUtils.isEmpty(hasCode) && hasCode.getStationState() == ChargingStation.StationState.NORMAL) {
+            throw new BusinessException("充电站编码已存在");
+        }
+        boolean allExists = !ObjectUtils.isEmpty(hasName) && !ObjectUtils.isEmpty(hasCode);
+        boolean notEq = allExists && (hasName.getStationId() != hasCode.getStationId());
+        if (notEq) {
+            throw new BusinessException("充电站名称或编码已存在");
+        }
+        if (allExists || !ObjectUtils.isEmpty(hasName)) {
+            //充电站存在，只是状态删除则修改状态保存
             hasName.setStationState(ChargingStation.StationState.NORMAL);
             boolean result = updateById(hasName);
             //返回保存后的Stationid值，否则-1
@@ -173,11 +182,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
             }
             return -1;
         }
-        //检查商户编码是否已存在
-        ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
-        if (!ObjectUtils.isEmpty(hasCode)) {
-            throw new BusinessException("该充电站编码已存在");
-        }
+
         //充电站存在，只是状态删除则修改状态保存
         hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
         if (!ObjectUtils.isEmpty(hasName)) {
