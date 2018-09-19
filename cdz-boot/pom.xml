@@ -17,6 +17,7 @@
     <modules>
         <module>cdz-admin</module>
         <module>cdz-api</module>
+        <module>cdz-shop</module>
         <module>cdz-base</module>
     </modules>
 
