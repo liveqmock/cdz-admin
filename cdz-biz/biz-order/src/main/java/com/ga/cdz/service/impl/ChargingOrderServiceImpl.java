@@ -26,7 +26,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("chargingOrderService")
@@ -50,7 +49,9 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
 
     @Override
     public List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId());
+        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() != ChargingOrder.OrderState.REMOVE)
+                .collect(Collectors.toList());
         Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
         List<ChargingOrderListDTO> colList = page.getList();
         return colList;
