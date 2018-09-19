@@ -26,7 +26,7 @@ public class ChargingOrderListDTO {
     /**
      * 附件图片路径
      */
-    private List<String> attachPath;
+    private String attachPath;
 
     /**
      * 总价格
