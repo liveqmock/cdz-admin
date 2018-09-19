@@ -66,8 +66,11 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     @Transactional
     public boolean saveChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
-        boolean check = checkPriceTime(chargingPriceAddVo);
-        if (!check) {
+        boolean check1 = checkPriceTime1(chargingPriceAddVo);
+        boolean check2 = checkPriceTime2(chargingPriceAddVo);
+        boolean check3 = checkPriceTime3(chargingPriceAddVo);
+        boolean wrong = check1 || check2 || check3;
+        if (!wrong) {
             throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
         }
         //低谷时间段计费信息
@@ -117,7 +120,7 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
             save(middle);
             save(high);
         } catch (Exception e) {
-            throw new BusinessException("复合主键重复");
+            throw new BusinessException("复合主键重复,请检查充电站是否被占用，选择其他充电站或联系管理员");
         }
         return true;
     }
@@ -125,8 +128,11 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     @Transactional
     public boolean updateChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
-        boolean check = checkPriceTime(chargingPriceAddVo);
-        if (!check) {
+        boolean check1 = checkPriceTime1(chargingPriceAddVo);
+        boolean check2 = checkPriceTime2(chargingPriceAddVo);
+        boolean check3 = checkPriceTime3(chargingPriceAddVo);
+        boolean wrong = check1 || check2 || check3;
+        if (!wrong) {
             throw new BusinessException("请检查输入的时间段是否连续以及时间是否闭合");
         }
         //低谷时间段计费
@@ -203,11 +209,63 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
      * @param: ChargingPriceAddVo
      * @return: 是否连续以及封闭
      */
-    private boolean checkPriceTime(ChargingPriceAddVo vo) {
+    private boolean checkPriceTime1(ChargingPriceAddVo vo) {
         long lowStart = vo.getLowStart().getTime();
         long lowEnd = vo.getLowEnd().getTime();
         long middleStart = vo.getMiddleStart().getTime();
         long middleEnd = vo.getMiddleEnd().getTime();
+        long highStart = vo.getHighStart().getTime();
+        long highEnd = vo.getHighEnd().getTime();
+        long ml = middleStart - lowEnd;
+        long hm = highStart - middleEnd;
+        long lh = highEnd - lowStart;
+        boolean a = (ml >= 0 && ml <= 1000);
+        boolean b = (hm >= 0 && hm <= 1000);
+        boolean c = (lh >= -1000 && lh <= 0) || (lh >= 86399000 && lh <= 86400000);
+        if (a && b && c) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 验证输入充电类型时间是否连续以及封闭
+     * @date: 2018/9/14 14:37
+     * @param: ChargingPriceAddVo
+     * @return: 是否连续以及封闭
+     */
+    private boolean checkPriceTime2(ChargingPriceAddVo vo) {
+        long lowStart = vo.getLowStart().getTime();
+        long lowEnd = vo.getLowEnd().getTime();
+        long middleStart = vo.getHighStart().getTime();
+        long middleEnd = vo.getHighEnd().getTime();
+        long highStart = vo.getMiddleStart().getTime();
+        long highEnd = vo.getMiddleEnd().getTime();
+        long ml = middleStart - lowEnd;
+        long hm = highStart - middleEnd;
+        long lh = highEnd - lowStart;
+        boolean a = (ml >= 0 && ml <= 1000);
+        boolean b = (hm >= 0 && hm <= 1000);
+        boolean c = (lh >= -1000 && lh <= 0) || (lh >= 86399000 && lh <= 86400000);
+        if (a && b && c) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 验证输入充电类型时间是否连续以及封闭
+     * @date: 2018/9/14 14:37
+     * @param: ChargingPriceAddVo
+     * @return: 是否连续以及封闭
+     */
+    private boolean checkPriceTime3(ChargingPriceAddVo vo) {
+        long lowStart = vo.getMiddleStart().getTime();
+        long lowEnd = vo.getMiddleEnd().getTime();
+        long middleStart = vo.getLowStart().getTime();
+        long middleEnd = vo.getLowEnd().getTime();
         long highStart = vo.getHighStart().getTime();
         long highEnd = vo.getHighEnd().getTime();
         long ml = middleStart - lowEnd;
