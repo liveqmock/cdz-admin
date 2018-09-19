@@ -23,5 +23,9 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>biz-cache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-util</artifactId>
+        </dependency>
     </dependencies>
 </project>
