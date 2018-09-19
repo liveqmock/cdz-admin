@@ -6,9 +6,12 @@ import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingOrderMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.bean.Paging;
 import com.ga.cdz.domain.bean.UserFreezeException;
+import com.ga.cdz.domain.dto.api.ChargingOrderListDTO;
 import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.api.ChargingOrderInitVo;
+import com.ga.cdz.domain.vo.api.ChargingOrderPageListVo;
 import com.ga.cdz.service.IChargingOrderService;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
@@ -22,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("chargingOrderService")
 public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, ChargingOrder> implements IChargingOrderService {
@@ -39,9 +43,28 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     IChargingRedisService chargingRedisService;
 
     @Override
+    public List<ChargingOrderListDTO> getChargingOrderPageList(ChargingOrderPageListVo vo) {
+        //检测缓存
+        chargingRedisService.cacheChargingStationDetail();
+        //获取缓存的订单信息
+        List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
+        List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().map(chargingOrder -> {
+            ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
+            if (chargingOrder.getUserId() == vo.getUserId()) {
+                chargingOrderListDTO.setChargingOrder(chargingOrder);
+                return chargingOrderListDTO;
+            }
+            return null;
+        }).collect(Collectors.toList());
+        Paging<ChargingOrderListDTO> page = new Paging<>(ChargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+        List<ChargingOrderListDTO> colList = page.getList();
+        return colList;
+    }
+
+    @Override
     public Integer placeOrderByPrice(ChargingOrderInitVo vo) {
         /**检测缓存*/
-        //chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheChargingStationDetail();
 
         //检测用户是否存在，是否被冻结
         UserInfo userInfo = userInfoMapper.selectById(vo.getUserId());
