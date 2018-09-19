@@ -4,8 +4,10 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.ChargingStationCommentDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
+import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.group.api.IChargingStationGroup;
+import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
 import com.ga.cdz.domain.vo.api.ChargingStationVo;
 import com.ga.cdz.service.IChargingStationService;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,38 @@ import java.util.List;
 public class ChargingStationController extends AbstractBaseController {
 
     @Resource
-    IChargingStationService iChargingStationService;
+    IChargingStationService chargingStationService;
+
+
+    /**
+     * @author:luqi
+     * @description: 获取主页的充电桩数据
+     * @date:2018/9/13_17:46
+     * @param:
+     * @return:
+     */
+    @PostMapping("/main/list")
+    public Result getMainChargingPageList(@RequestBody @Validated({IChargingStationGroup.MainPage.class})
+                                                  ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingStationPageDTO> list = chargingStationService.getMainStationPage(chargingStationPageVo);
+        return Result.success().data(list);
+    }
+
+    /**
+     * @author:luqi
+     * @description: 获取附近
+     * @date:2018/9/13_17:46
+     * @param:
+     * @return:
+     */
+    @PostMapping("/near/list")
+    public Result getNearChargingPageList(@RequestBody @Validated({IChargingStationGroup.NearPage.class})
+                                                  ChargingStationPageVo chargingStationPageVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingStationPageDTO> list = chargingStationService.getNearStationPage(chargingStationPageVo);
+        return Result.success().data(list);
+    }
 
     /**
      * @Author: liuyi
@@ -36,7 +69,7 @@ public class ChargingStationController extends AbstractBaseController {
     public Result getChargingStationDetail(@RequestBody @Validated(value = {IChargingStationGroup.Detail.class}) ChargingStationVo vo,
                                            BindingResult bindingResult) {
         checkParams(bindingResult);
-        ChargingStationDetailDTO chargingStationDetailDTO = iChargingStationService.getChargingStationDetail(vo);
+        ChargingStationDetailDTO chargingStationDetailDTO = chargingStationService.getChargingStationDetail(vo);
         return Result.success().data(chargingStationDetailDTO);
     }
 
@@ -51,7 +84,7 @@ public class ChargingStationController extends AbstractBaseController {
     public Result getChargingStationTerminal(@RequestBody @Validated(value = {IChargingStationGroup.Terminal.class}) ChargingStationVo vo,
                                            BindingResult bindingResult) {
         checkParams(bindingResult);
-        List<ChargingStationTerminalDTO> ChargingStationTerminal = iChargingStationService.getChargingStationTerminal(vo);
+        List<ChargingStationTerminalDTO> ChargingStationTerminal = chargingStationService.getChargingStationTerminal(vo);
         return Result.success().data(ChargingStationTerminal);
     }
 
@@ -66,7 +99,7 @@ public class ChargingStationController extends AbstractBaseController {
     public Result getChargingStationComment(@RequestBody @Validated(value = {IChargingStationGroup.Comment.class}) ChargingStationVo vo,
                                              BindingResult bindingResult) {
         checkParams(bindingResult);
-        List<ChargingStationCommentDTO> chargingStationComment = iChargingStationService.getChargingStationComment(vo);
+        List<ChargingStationCommentDTO> chargingStationComment = chargingStationService.getChargingStationComment(vo);
         return Result.success().data(chargingStationComment);
     }
 

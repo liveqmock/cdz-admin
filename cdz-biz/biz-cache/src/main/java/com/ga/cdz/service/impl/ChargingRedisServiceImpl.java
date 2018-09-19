@@ -53,7 +53,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     MRedisUtil mRedisUtil;
 
     @Override
-    public void cacheChargingPageList() {
+    public void cacheMainAndNearChargingPageList() {
         cacheChargingStation();
         cacheChargingStationAttach();
         cacheChargingType();
@@ -63,8 +63,8 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingDeviceSub();
         cacheChargingStationType();
         cacheChargingOrderCommentList();
-        cacheChargingOrder();
-        cacheChargingOrderComment();
+/*        cacheChargingOrder();
+        cacheChargingOrderComment();*/
     }
 
     private void cacheChargingStation() {
@@ -100,7 +100,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         }
     }
 
-    public void cacheChargingType() {
+    private void cacheChargingType() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_TYPE)) {
             List<ChargingType> list = chargingTypeMapper.selectList(null);
             Map<String, ChargingType> map = Maps.newHashMap();
@@ -112,7 +112,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         }
     }
 
-    public void cacheChargingPrice() {
+    private void cacheChargingPrice() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_PRICE)) {
             List<ChargingPrice> list = chargingPriceMapper.selectList(null);
             Map<String, List<ChargingPrice>> map = Maps.newHashMap();
@@ -140,7 +140,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
      * @param:
      * @return:
      */
-    public void cacheChargingDevice() {
+    private void cacheChargingDevice() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE)) {
             List<ChargingDevice> list = chargingDeviceMapper.selectList(null);
             Map<String, ChargingDevice> map = Maps.newHashMap();
@@ -159,7 +159,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
      * @param:
      * @return:
      */
-    public void cacheChargingDeviceGroupByStation() {
+    private void cacheChargingDeviceGroupByStation() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE_STATION)) {
             List<ChargingDevice> list = chargingDeviceMapper.selectList(null);
             Map<String, List<ChargingDevice>> map = Maps.newHashMap();
@@ -187,7 +187,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
      * @param:
      * @return:
      */
-    public void cacheChargingDeviceSub() {
+    private void cacheChargingDeviceSub() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_DEVICE_SUB)) {
             List<ChargingDeviceSub> list = chargingDeviceSubMapper.selectList(null);
             Map<String, ChargingDeviceSub> map = Maps.newHashMap();
@@ -199,7 +199,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         }
     }
 
-    public void cacheChargingStationType() {
+    private void cacheChargingStationType() {
         if (!mRedisUtil.hasKey(RedisConstant.TABLE_CHARGING_STATION_TYPE)) {
             List<ChargingStationType> list = chargingStationTypeMapper.selectList(null);
             Map<String, ChargingStationType> map = Maps.newHashMap();
@@ -214,7 +214,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     /**
      * 缓存站点的评论列表
      */
-    public void cacheChargingOrderCommentList() {
+    private void cacheChargingOrderCommentList() {
         if (!mRedisUtil.hasKey(RedisConstant.LIST_CHARGING_STATION_SCORE)) {
             /**站点*/
             List<ChargingStation> stationList = chargingStationMapper.selectList(null);
@@ -231,17 +231,19 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
                 }
             }
 
-            /**分组 站有哪些订单 map<stationId，订单id>*/
+            /**分组 站有哪些订单 map<stationId，订单id> 判断订单是否为评论*/
             Map<Integer, Set<String>> stationOrderGroup = Maps.newHashMap();
             for (ChargingOrder chargingOrder : orderList) {
-                String orderId = chargingOrder.getOrderId();
+                Integer stationIdStr = chargingOrder.getStationId();
                 Set<String> set;
-                if (stationOrderGroup.containsKey(orderId)) {
-                    set = stationOrderGroup.get(orderId);
+                if (stationOrderGroup.containsKey(stationIdStr)) {
+                    set = stationOrderGroup.get(stationIdStr);
                 } else {
                     set = Sets.newHashSet();
                 }
-                set.add(orderId);
+                if (chargingOrder.getOrderState().equals(ChargingOrder.OrderState.COMMENTED)) {
+                    set.add(chargingOrder.getOrderId());
+                }
                 stationOrderGroup.put(chargingOrder.getStationId(), set);
             }
             /**生成评分map*/
@@ -286,11 +288,11 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     }
 
     /**
+     * @param chargingOrder 订单实体
+     * @return
      * @Author: liuyi
      * @Description: 缓存一条订单信息
      * @Date: 2018/9/18_11:03
-     * @param chargingOrder 订单实体
-     * @return
      */
     @Override
     public void cacheOneChargingOrder(ChargingOrder chargingOrder) {
@@ -320,11 +322,11 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     }
 
     /**
+     * @param chargingOrderComment 订单评论实体
+     * @return
      * @Author: liuyi
      * @Description: 缓存一条订单评论
      * @Date: 2018/9/18_11:03
-     * @param chargingOrderComment 订单评论实体
-     * @return
      */
     @Override
     public void cacheOneChargingOrderComment(ChargingOrderComment chargingOrderComment) {
