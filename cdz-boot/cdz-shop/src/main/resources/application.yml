@@ -1,0 +1,63 @@
+server:
+  port: 8012
+
+spring:
+  profiles:
+    active: dev
+  #atomic配置
+  jta:
+    atomikos:
+      properties:
+        log-base-dir: ${atomikos.logdir}
+        log-base-name: ${atomikos.logname}
+  redis:
+      prot: 6379
+      host: ${redis.url}
+      password: ${redis.password}
+      database: 1
+      lettuce:
+          pool:
+             max-active: 8
+             max-wait: -1ms
+             max-idle: 500
+             min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 20Mb
+      max-request-size: 20Mb
+
+#多数据源配置
+mysql:
+  datasource:
+    center:
+      url: jdbc:mysql://${jdbc.center.url}:3306/DB_CENTER?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.center.username}
+      password: ${jdbc.center.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
+    charging:
+      url: jdbc:mysql://${jdbc.charging.url}:3306/DB_CHARGING?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${jdbc.charging.username}
+      password: ${jdbc.charging.password}
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      testQuery: select 1
+
+sms:
+    id: LTAIWsKjeek9LEWo
+    secret: l7QBI83XV18P6GFnrGFfTGSxpvPT8R
+    signName: 贵安行
+    templateCode: SMS_142946785
+    #短信有效时间 5分钟=300秒
+    timeout: 300
