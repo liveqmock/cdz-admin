@@ -73,19 +73,17 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
          //为管理员帐号
            lists = baseMapper.getStationList(page, param,new ChargingShop() );
         }else{
-          ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+            ChargingShop chargingShop = chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, name));
           lists = baseMapper.getStationList(page,param,chargingShop);
         }
+        //查询后跨库查询区域名称
+        lists.forEach(item -> {
+            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
+            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
+        });
         page.setRecords(lists);
-//        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
-//        //查询后跨库查询区域名称
-//        list.forEach(item -> {
-//            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
-//            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
-//            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
-//            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
-//        });
-//        page.setRecords(list);
         return page;
     }
 
