@@ -86,7 +86,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     private List<ChargingStationPageDTO> getStationPageBySort(ChargingStationPageVo vo) {
         /**检测缓存*/
-        chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheMainAndNearChargingPageList();
         Integer pageIndex = vo.getIndex();
         Integer pageSize = vo.getSize();
         double voLat = vo.getLat();
@@ -106,7 +106,10 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         /**将城市站点列表缓存，5分钟**/
         if (!mRedisUtil.hasKey(cityRedisKey)) {
             listCity = chargingStationList.stream()
-                    .filter(chargingStation -> cityCode == chargingStation.getCity().intValue())
+                    .filter(chargingStation ->
+                            cityCode == chargingStation.getCity().intValue()
+                                    && chargingStation.getStationState().equals(ChargingStation.StationState.NORMAL)
+                    )
                     .collect(Collectors.toList());
             mRedisUtil.put(cityRedisKey, listCity, 5L, TimeUnit.MINUTES);
         } else {
@@ -277,7 +280,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     @Override
     public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
-        chargingRedisService.cacheChargingPageList();
+        //chargingRedisService.cacheChargingPageList();
         chargingShopRedisService.cacheChargingShopList();
         ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
         //获得充电站缓存列表
@@ -315,7 +318,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     @Override
     public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
-        chargingRedisService.cacheChargingPageList();
+        //chargingRedisService.cacheChargingPageList();
         Map<String, List<ChargingDevice>> chargingDeviceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE_STATION);
         Map<String, ChargingType> chargingTypeMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_TYPE);
 
@@ -340,7 +343,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     @Override
     public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo) {
         userRedisService.cacheUserList();
-        chargingRedisService.cacheChargingPageList();
+        // chargingRedisService.cacheChargingPageList();
         //获取所有缓存的用户信息
         Map<String, UserInfo> userInfoMap = mRedisUtil.getHash(RedisConstant.TABLE_USER_INFO);
         //获取所有缓存的订单

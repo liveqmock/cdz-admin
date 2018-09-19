@@ -30,7 +30,7 @@ public class UserStateAspect {
     public void deBefore(JoinPoint joinPoint) throws Throwable {
         String tel = (String) SecurityUtils.getSubject().getPrincipal();
         boolean isExist = userService.isUserExist(tel);
-        if (isExist) {
+        if (!isExist) {
             //用户不存在，抛出异常
             throw new BusinessException("用户不存在");
         }

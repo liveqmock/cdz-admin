@@ -41,7 +41,7 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     @Override
     public Integer placeOrderByPrice(ChargingOrderVo vo) {
         /**检测缓存*/
-        chargingRedisService.cacheChargingPageList();
+        //chargingRedisService.cacheChargingPageList();
 
         //检测用户是否存在，是否被冻结
         UserInfo userInfo = userInfoMapper.selectById(vo.getUserId());

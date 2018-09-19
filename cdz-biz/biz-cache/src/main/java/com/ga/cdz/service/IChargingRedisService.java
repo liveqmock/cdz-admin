@@ -12,9 +12,9 @@ public interface IChargingRedisService {
 
 
     /**
-     * 缓冲充电站列表相关
+     * 缓冲首页与附近充电站列表相关
      */
-    void cacheChargingPageList();
+    void cacheMainAndNearChargingPageList();
 
     /**
      * @Author: liuyi
