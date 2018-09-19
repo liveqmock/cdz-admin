@@ -1,6 +1,5 @@
 package com.ga.cdz.controller.charging;
 
-import com.ga.cdz.annotation.UserState;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.api.ChargingOrderListDTO;

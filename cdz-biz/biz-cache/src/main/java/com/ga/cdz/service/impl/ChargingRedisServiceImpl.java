@@ -69,7 +69,6 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingStation();
         cacheChargingOrder();
         cacheChargingOrderComment();
-        cacheChargingOrderCommentList();
     }
 
     private void cacheChargingStation() {

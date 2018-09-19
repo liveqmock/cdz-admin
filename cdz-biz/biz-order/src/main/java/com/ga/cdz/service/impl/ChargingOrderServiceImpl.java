@@ -15,6 +15,7 @@ import com.ga.cdz.domain.vo.api.ChargingOrderPageListVo;
 import com.ga.cdz.service.IChargingOrderService;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.math.BigDecimal;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,70 +53,70 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     public List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo) {
         List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
         if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
-            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+            List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderListTmp.stream()
                     .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() != ChargingOrder.OrderState.REMOVE)
                     .collect(Collectors.toList());
             Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
             List<ChargingOrderListDTO> colList = page.getList();
             return colList;
         }
-        return null;
+        return Lists.newArrayList();
     }
 
     @Override
     public List<ChargingOrderListDTO> getChargingOrderOfInitPageList(ChargingOrderPageListVo vo) {
         List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
         if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
-            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+            List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderListTmp.stream()
                     .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.INIT)
                     .collect(Collectors.toList());
             Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
             List<ChargingOrderListDTO> colList = page.getList();
             return colList;
         }
-        return null;
+        return Lists.newArrayList();
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfPayingPageList(ChargingOrderPageListVo vo) {
         List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
         if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
-            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+            List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderListTmp.stream()
                     .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYING)
                     .collect(Collectors.toList());
             Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
             List<ChargingOrderListDTO> colList = page.getList();
             return colList;
         }
-        return null;
+        return Lists.newArrayList();
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfPayedPageList(ChargingOrderPageListVo vo) {
         List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
         if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
-            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+            List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderListTmp.stream()
                     .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYED)
                     .collect(Collectors.toList());
             Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
             List<ChargingOrderListDTO> colList = page.getList();
             return colList;
         }
-        return null;
+        return Lists.newArrayList();
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfRefundingPageList(ChargingOrderPageListVo vo) {
         List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
         if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
-            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+            List<ChargingOrderListDTO> chargingOrderListDTOList = chargingOrderListTmp.stream()
                     .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.REFUNDING)
                     .collect(Collectors.toList());
             Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
             List<ChargingOrderListDTO> colList = page.getList();
             return colList;
         }
-        return null;
+        return Lists.newArrayList();
     }
 
     @Override
@@ -225,14 +227,14 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
      * @param userId 用户id
      * @return
      */
-    private List<ChargingOrderListDTO> getChargingOrderList(int userId) {
+    private List<ChargingOrderListDTO> getChargingOrderList(Integer userId) {
         //检测缓存
         chargingRedisService.cacheChargingStationDetail();
         //获取缓存的订单信息
         List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
-        List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().map(chargingOrder -> {
+        //List<ChargingOrder> userOrderList=chargingOrderList.stream().filter(chargingOrder ->chargingOrder.getUserId().equals(userId)).collect(Collectors.toList());
+        List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().filter(chargingOrder -> chargingOrder.getUserId().equals(userId)).map(chargingOrder -> {
             ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
-            if (chargingOrder.getUserId() == userId) {
                 chargingOrderListDTO.setChargingOrder(chargingOrder);
                 ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, chargingOrder.getStationId().toString());
                 List<ChargingStationAttach> chargingStationAttach = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ATTACH, chargingOrder.getStationId().toString());
@@ -241,8 +243,6 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
                     chargingOrderListDTO.setAttachPath(stationUrl + chargingStationAttach.get(0).getAttachPath());
                 }
                 return chargingOrderListDTO;
-            }
-            return null;
         }).collect(Collectors.toList());
         return ChargingOrderListDTOList;
     }

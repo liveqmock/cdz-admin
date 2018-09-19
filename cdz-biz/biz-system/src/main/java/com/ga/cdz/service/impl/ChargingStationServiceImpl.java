@@ -9,8 +9,8 @@ import com.ga.cdz.domain.dto.api.ChargingStationDetailDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.entity.*;
-import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
 import com.ga.cdz.domain.vo.api.ChargingStationDetailVo;
+import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingShopRedisService;
 import com.ga.cdz.service.IChargingStationService;
@@ -18,6 +18,9 @@ import com.ga.cdz.service.IUserRedisService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -25,7 +28,6 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.sql.Time;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -40,8 +42,7 @@ import java.util.stream.Collectors;
 @Service("chargingStationService")
 public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMapper, ChargingStation> implements IChargingStationService {
 
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+    private DateTimeFormatter jodaTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-ddHH:mm:ss");
 
     @Resource
     MRedisUtil mRedisUtil;
@@ -172,6 +173,8 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         /**补全站点的信息*/
         /**获取站的价格缓存列表*/
         Date nowTime = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDateStr = timeFormat.format(nowTime);
         long nowTimeLong = nowTime.getTime();
         Map<String, List<ChargingPrice>> priceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_PRICE);
         /**获取站的评分缓存列表**/
@@ -199,8 +202,8 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
             List<ChargingPrice> priceList = priceMap.get(stationKey);
             if (priceList != null && pageList.size() > 0) {
                 for (ChargingPrice chargingPrice : priceList) {
-                    long beginDt = timeToNowDateTimeLong(chargingPrice.getPriceBeginDt(), nowTime);
-                    long endDt = timeToNowDateTimeLong(chargingPrice.getPriceEndDt(), nowTime);
+                    long beginDt = timeToNowDateTimeLong(chargingPrice.getPriceBeginDt(), nowDateStr);
+                    long endDt = timeToNowDateTimeLong(chargingPrice.getPriceEndDt(), nowDateStr);
                     /**判断是否在当前时间段**/
                     if (nowTimeLong >= beginDt && nowTimeLong <= endDt) {
                         /**赋值价格，转为Double类*/
@@ -291,14 +294,16 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         ChargingShop chargingShop = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_SHOP, chargingStation.getShopId().toString());
         //获得充电站价格缓存列表
         Date nowTime = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDateStr = timeFormat.format(nowTime);
         long nowTimeLong = nowTime.getTime();
         Map<String, List<ChargingPrice>> priceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_PRICE);
         //当前价格
         List<ChargingPrice> priceList = priceMap.get(vo.getStationId() + "");
         if (priceList != null) {
             for (ChargingPrice chargingPrice : priceList) {
-                long beginDt = timeToNowDateTimeLong(chargingPrice.getPriceBeginDt(), nowTime);
-                long endDt = timeToNowDateTimeLong(chargingPrice.getPriceEndDt(), nowTime);
+                long beginDt = timeToNowDateTimeLong(chargingPrice.getPriceBeginDt(), nowDateStr);
+                long endDt = timeToNowDateTimeLong(chargingPrice.getPriceEndDt(), nowDateStr);
                 //判断是否在当前时间段
                 if (nowTimeLong >= beginDt && nowTimeLong <= endDt) {
                     chargingStationDetailDTO.setChargingPrice(chargingPrice);
@@ -387,15 +392,9 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      * @param:
      * @return:
      */
-    private long timeToNowDateTimeLong(Time time, Date nowDate) {
-        String nowDateStr = timeFormat.format(nowDate);
-        try {
-            Date nowDateTime = dateFormat.parse(nowDateStr + time.toString());
-            return nowDateTime.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0L;
+    private long timeToNowDateTimeLong(Time time, String nowDateStr) {
+        DateTime dateTime = DateTime.parse(nowDateStr + time.toString(), jodaTimeFormatter);
+        return dateTime.toDate().getTime();
     }
 
 }
