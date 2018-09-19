@@ -25,6 +25,10 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>cdz-base</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>biz-system</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

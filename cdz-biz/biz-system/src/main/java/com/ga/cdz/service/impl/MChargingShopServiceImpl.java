@@ -5,21 +5,28 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.constant.RedisConstant;
 import com.ga.cdz.dao.charging.ChargingShopMapper;
 import com.ga.cdz.domain.bean.BusinessException;
+import com.ga.cdz.domain.dto.admin.AdminLoginDTO;
 import com.ga.cdz.domain.dto.admin.ChargingShopDTO;
+import com.ga.cdz.domain.entity.AdminInfo;
 import com.ga.cdz.domain.entity.ChargingShop;
 import com.ga.cdz.domain.vo.admin.ChargingShopSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingShopVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingShopService;
+import com.ga.cdz.util.MRedisUtil;
+import com.ga.cdz.util.MUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author:wanzhongsu
@@ -28,6 +35,20 @@ import java.util.List;
  */
 @Service("mChargingShopService")
 public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, ChargingShop> implements IMChargingShopService {
+    /**
+     * @author huanghaohao
+     * @date 2018年9月19日 14点16分
+     * @desc 工具类
+     * @param vo
+     * @return
+     */
+    @Resource
+    MUtil mUtil;
+
+
+    /***redis工具类**/
+    @Resource
+    MRedisUtil mRedisUtil;
 
     @Override
     public IPage<ChargingShopDTO> getChargingShopPage(PageVo<ChargingShopSelectVo> vo) {
@@ -91,5 +112,42 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
         chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
         boolean result = save(chargingShop);
         return result;
+    }
+
+    /**
+     * @auhtor huanghaohao
+     * @date 2018年9月19日 14点30分
+     * @param chargingShopVo
+     * @desc  登陆
+     * @return
+     */
+    @Override
+    public ChargingShopDTO login(ChargingShopVo chargingShopVo) {
+        ChargingShop chargingShop= new ChargingShop();
+        BeanUtils.copyProperties(chargingShopVo,chargingShop);
+        String md5Pwd= mUtil.MD5(chargingShop.getShopPwd());
+        ChargingShop hasChargingShop = baseMapper.selectOne(new QueryWrapper<ChargingShop>().lambda()
+                .eq(ChargingShop::getShopLogin, chargingShop.getShopLogin()).eq(ChargingShop::getShopPwd, md5Pwd));
+        if(ObjectUtils.isEmpty(hasChargingShop)){
+            throw new BusinessException("账号或密码错误");
+        }
+
+        //token 生成 uuid 在md5
+        String token=mUtil.MD5(mUtil.UUID16());
+        //redisTokenKey
+        String redisTokenKey = RedisConstant.SHOP_TOKEN + hasChargingShop.getShopLogin();
+        ChargingShopDTO chargingShopDTO=new ChargingShopDTO();
+        chargingShopDTO.setShopCode(hasChargingShop.getShopCode());
+        chargingShopDTO.setShopContact(hasChargingShop.getShopContact());
+        chargingShopDTO.setShopId(hasChargingShop.getShopId());
+        chargingShopDTO.setShopName(hasChargingShop.getShopName());
+        chargingShopDTO.setShopTel(hasChargingShop.getShopTel());
+        chargingShopDTO.setShopLogin(hasChargingShop.getShopLogin());
+        chargingShopDTO.setToken(token);
+        chargingShopDTO.setInsertDt(hasChargingShop.getInsertDt());
+        //token加入redis,7天过期
+        mRedisUtil.put(redisTokenKey, token, 7L, TimeUnit.DAYS);
+
+        return chargingShopDTO;
     }
 }

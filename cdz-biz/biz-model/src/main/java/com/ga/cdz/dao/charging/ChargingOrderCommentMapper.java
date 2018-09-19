@@ -6,8 +6,6 @@ import com.ga.cdz.SuperMapper;
 import com.ga.cdz.domain.dto.admin.ChargingOrderCommentDTO;
 import com.ga.cdz.domain.entity.ChargingOrderComment;
 import com.ga.cdz.domain.entity.ChargingShop;
-import com.ga.cdz.domain.entity.UserInfo;
-import com.ga.cdz.domain.vo.admin.ChargingOrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
