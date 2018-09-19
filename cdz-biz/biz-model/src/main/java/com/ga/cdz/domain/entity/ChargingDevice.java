@@ -57,6 +57,11 @@ public class ChargingDevice extends Model<ChargingDevice> {
   @TableField("device_power")
   private Integer devicePower;
   /**
+   * 设备最大电压
+   */
+  @TableField("device_voltage")
+  private Integer deviceVoltage;
+  /**
    * 设备枪个数
    */
   @TableField("device_subnum")
