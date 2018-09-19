@@ -37,7 +37,7 @@ public class ChargingOrderListDTO {
     /**
      * 总价格
      */
-    private BigDecimal totalPrice;
+    private Double totalPrice;
 
     /**
      * 总能量
@@ -69,7 +69,7 @@ public class ChargingOrderListDTO {
         this.stationId = chargingOrder.getStationId();
         this.deviceId = chargingOrder.getDeviceId();
         this.deviceSubId = chargingOrder.getDeviceSubId();
-        this.totalPrice = chargingOrder.getTotalPrice();
+        this.totalPrice = chargingOrder.getTotalPrice().doubleValue();
         this.totalEnergy = chargingOrder.getTotalEnergy();
         this.chargingBeginDt = chargingOrder.getCharginBeginDt();
         this.chargingEndDt = chargingOrder.getCharginEndDt();
