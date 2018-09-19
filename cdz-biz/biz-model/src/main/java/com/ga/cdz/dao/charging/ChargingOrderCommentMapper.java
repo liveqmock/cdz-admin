@@ -30,5 +30,5 @@ public interface ChargingOrderCommentMapper extends SuperMapper<ChargingOrderCom
    * @return
    */
   List<ChargingOrderCommentDTO> getChargingCommentOrderListPage(@Param("shop") ChargingShop chargingShop, Page<ChargingOrderCommentDTO> page );
-//  List<ChargingOrderCommentDTO> getChargingOrderListPage(Page<ChargingOrderCommentDTO> page , @Param("comment")ChargingOrderVo chargingOrderVo);
+//  List<ChargingOrderCommentDTO> getChargingOrderListPage(Page<ChargingOrderCommentDTO> page , @Param("comment")ChargingOrderInitVo chargingOrderVo);
 }

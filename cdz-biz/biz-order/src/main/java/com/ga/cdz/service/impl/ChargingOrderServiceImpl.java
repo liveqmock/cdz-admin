@@ -8,7 +8,7 @@ import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.bean.BusinessException;
 import com.ga.cdz.domain.bean.UserFreezeException;
 import com.ga.cdz.domain.entity.*;
-import com.ga.cdz.domain.vo.api.ChargingOrderVo;
+import com.ga.cdz.domain.vo.api.ChargingOrderInitVo;
 import com.ga.cdz.service.IChargingOrderService;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
@@ -39,7 +39,7 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     IChargingRedisService chargingRedisService;
 
     @Override
-    public Integer placeOrderByPrice(ChargingOrderVo vo) {
+    public Integer placeOrderByPrice(ChargingOrderInitVo vo) {
         /**检测缓存*/
         //chargingRedisService.cacheChargingPageList();
 

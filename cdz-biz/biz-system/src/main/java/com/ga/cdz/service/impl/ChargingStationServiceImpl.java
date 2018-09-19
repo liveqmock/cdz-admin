@@ -10,7 +10,7 @@ import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
-import com.ga.cdz.domain.vo.api.ChargingStationVo;
+import com.ga.cdz.domain.vo.api.ChargingStationDetailVo;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingShopRedisService;
 import com.ga.cdz.service.IChargingStationService;
@@ -274,14 +274,14 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
-     * @param vo ChargingStationVo
+     * @param vo ChargingStationDetailVo
      * @return ChargingStationDetailDTO
      * @Author: liuyi
      * @Description: 获取充电站信息
      * @Date: 2018/9/17_14:53
      */
     @Override
-    public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
+    public ChargingStationDetailDTO getChargingStationDetail(ChargingStationDetailVo vo) {
         chargingRedisService.cacheChargingStationDetail();
         chargingShopRedisService.cacheChargingShopList();
         ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
@@ -312,14 +312,14 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
-     * @param vo ChargingStationVo
+     * @param vo ChargingStationDetailVo
      * @return List<ChargingStationTerminalDTO>
      * @Author: liuyi
      * @Description: 获取充电站终端
      * @Date: 2018/9/17_15:44
      */
     @Override
-    public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
+    public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationDetailVo vo) {
         chargingRedisService.cacheChargingStationDetail();
         Map<String, List<ChargingDevice>> chargingDeviceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE_STATION);
         Map<String, ChargingType> chargingTypeMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_TYPE);
@@ -343,7 +343,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     @Override
-    public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo) {
+    public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationDetailVo vo) {
         userRedisService.cacheUserList();
         chargingRedisService.cacheChargingStationDetail();
         //获取所有缓存的用户信息

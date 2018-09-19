@@ -2,7 +2,7 @@ package com.ga.cdz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.entity.ChargingOrder;
-import com.ga.cdz.domain.vo.api.ChargingOrderVo;
+import com.ga.cdz.domain.vo.api.ChargingOrderInitVo;
 
 /**
  * @Author: liuyi
@@ -11,5 +11,5 @@ import com.ga.cdz.domain.vo.api.ChargingOrderVo;
  */
 public interface IChargingOrderService extends IService<ChargingOrder> {
 
-    Integer placeOrderByPrice(ChargingOrderVo vo);
+    Integer placeOrderByPrice(ChargingOrderInitVo vo);
 }

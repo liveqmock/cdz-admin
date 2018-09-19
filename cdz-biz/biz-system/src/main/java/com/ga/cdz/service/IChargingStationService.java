@@ -7,7 +7,7 @@ import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.entity.ChargingStation;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
-import com.ga.cdz.domain.vo.api.ChargingStationVo;
+import com.ga.cdz.domain.vo.api.ChargingStationDetailVo;
 
 import java.util.List;
 
@@ -40,27 +40,27 @@ public interface IChargingStationService extends IService<ChargingStation> {
      * @Author: liuyi
      * @Description: 获取充电站信息
      * @Date: 2018/9/17_14:53
-     * @param vo ChargingStationVo
+     * @param vo ChargingStationDetailVo
      * @return ChargingStationDTO
      */
-    ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo);
+    ChargingStationDetailDTO getChargingStationDetail(ChargingStationDetailVo vo);
 
      /**
       * @Author: liuyi
       * @Description: 获取充电站终端
       * @Date: 2018/9/17_15:44
-      * @param vo ChargingStationVo
+      * @param vo ChargingStationDetailVo
       * @return List<ChargingStationTerminalDTO>
       */
-     List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo);
+     List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationDetailVo vo);
 
      /**
       * @Author: liuyi
       * @Description: 获取充电站评论
       * @Date: 2018/9/17_16:55
-      * @param vo ChargingStationVo
+      * @param vo ChargingStationDetailVo
       * @return List<ChargingStationCommentDTO>
       */
-     List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo);
+     List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationDetailVo vo);
 
 }

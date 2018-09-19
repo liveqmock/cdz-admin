@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @Accessors(chain = true)
-public class ChargingStationVo {
+public class ChargingStationDetailVo {
 
     @NotNull(groups = {IChargingStationGroup.Comment.class}, message = "pageIndex不能为空")
     private Integer pageIndex;

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-public class ChargingOrderVo {
+public class ChargingOrderInitVo {
 
     /**
      * 用户ID
