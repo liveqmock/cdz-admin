@@ -10,12 +10,17 @@ import com.ga.cdz.domain.entity.ChargingOrderComment;
  */
 public interface IChargingRedisService {
 
-
     /**
      * 缓冲首页与附近充电站列表相关
      */
     void cacheMainAndNearChargingPageList();
 
+    /**
+     * @Author: liuyi
+     * @Description: 缓存充电站详情信息
+     * @Date: 2018/9/19_9:50
+     */
+    void cacheChargingStationDetail();
     /**
      * @Author: liuyi
      * @Description: 缓存一条订单信息

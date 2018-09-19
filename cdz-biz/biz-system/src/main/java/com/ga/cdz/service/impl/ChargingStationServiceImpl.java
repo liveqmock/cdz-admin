@@ -280,7 +280,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     @Override
     public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
-        //chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheChargingStationDetail();
         chargingShopRedisService.cacheChargingShopList();
         ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
         //获得充电站缓存列表
@@ -318,7 +318,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     @Override
     public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
-        //chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheChargingStationDetail();
         Map<String, List<ChargingDevice>> chargingDeviceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE_STATION);
         Map<String, ChargingType> chargingTypeMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_TYPE);
 
@@ -343,7 +343,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     @Override
     public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo) {
         userRedisService.cacheUserList();
-        // chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheChargingStationDetail();
         //获取所有缓存的用户信息
         Map<String, UserInfo> userInfoMap = mRedisUtil.getHash(RedisConstant.TABLE_USER_INFO);
         //获取所有缓存的订单
@@ -357,13 +357,14 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
                 .collect(Collectors.toList());
 
         //根据orderId得到评论
-        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().map(chargingOrderComment -> {
+        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().filter(chargingOrderComment -> chargingOrderComment.getCommentPid() == 0).map(chargingOrderComment -> {
             ChargingStationCommentDTO chargingStationComment = new ChargingStationCommentDTO();
             if (!orderIdList.isEmpty() && orderIdList.size() > 0) {
                 for (String orderId : orderIdList) {
                     if (chargingOrderComment.getOrderId().equals(orderId)) {
                         chargingStationComment.setChargingOrderComment(chargingOrderComment);
-                        chargingStationComment.setUserRealName(userInfoMap.get(chargingStationComment.getUserId() + "").getUserRealName());
+                        UserInfo userInfo = userInfoMap.get(chargingOrderComment.getUserId().toString());
+                        chargingStationComment.setUserInfo(userInfo);
                     }
                 }
             }
@@ -393,6 +394,5 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         }
         return 0L;
     }
-
 
 }

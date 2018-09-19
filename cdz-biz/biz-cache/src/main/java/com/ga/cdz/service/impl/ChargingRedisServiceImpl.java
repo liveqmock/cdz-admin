@@ -48,7 +48,6 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
     @Resource
     ChargingOrderCommentMapper chargingOrderCommentMapper;
 
-
     @Resource
     MRedisUtil mRedisUtil;
 
@@ -63,8 +62,13 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
         cacheChargingDeviceSub();
         cacheChargingStationType();
         cacheChargingOrderCommentList();
-/*        cacheChargingOrder();
-        cacheChargingOrderComment();*/
+    }
+
+    @Override
+    public void cacheChargingStationDetail() {
+        cacheChargingOrder();
+        cacheChargingOrderComment();
+        cacheChargingOrderCommentList();
     }
 
     private void cacheChargingStation() {
