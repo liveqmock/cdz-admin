@@ -215,8 +215,10 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
                 chargingOrderListDTO.setChargingOrder(chargingOrder);
                 ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, chargingOrder.getStationId().toString());
                 List<ChargingStationAttach> chargingStationAttach = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ATTACH, chargingOrder.getStationId().toString());
-                chargingOrderListDTO.setStationName(chargingStation.getStationName())
-                        .setAttachPath(stationUrl + chargingStationAttach.get(0).getAttachPath());
+                chargingOrderListDTO.setStationName(chargingStation.getStationName());
+                if (!chargingStationAttach.isEmpty() && chargingStationAttach.size() > 0) {
+                    chargingOrderListDTO.setAttachPath(stationUrl + chargingStationAttach.get(0).getAttachPath());
+                }
                 return chargingOrderListDTO;
             }
             return null;

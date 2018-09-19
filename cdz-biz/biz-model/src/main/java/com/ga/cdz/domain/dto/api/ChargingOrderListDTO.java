@@ -39,20 +39,6 @@ public class ChargingOrderListDTO {
     private Double totalEnergy;
 
     /**
-     * 开始充电时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date chargingBeginDt;
-
-    /**
-     * 结束充电时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date chargingEndDt;
-
-    /**
      * 订单状态
      */
     private ChargingOrder.OrderState orderState;
@@ -61,8 +47,6 @@ public class ChargingOrderListDTO {
         this.orderId = chargingOrder.getOrderId();
         this.totalPrice = chargingOrder.getTotalPrice().doubleValue();
         this.totalEnergy = chargingOrder.getTotalEnergy();
-        this.chargingBeginDt = chargingOrder.getCharginBeginDt();
-        this.chargingEndDt = chargingOrder.getCharginEndDt();
         this.orderState = chargingOrder.getOrderState();
     }
 
