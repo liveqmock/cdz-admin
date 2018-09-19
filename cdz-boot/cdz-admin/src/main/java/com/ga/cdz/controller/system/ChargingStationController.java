@@ -73,7 +73,8 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/list")
     public Result getStationList(@RequestBody @Validated PageVo<ChargingStationSelectVo> vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPageByCon(vo);
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        IPage<ChargingStationDTO> iPage = mChargingStationService.getStationPage(vo, username);
         return Result.success().data(iPage);
     }
 
@@ -81,7 +82,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 根据名字模糊查询获取stationID
      * @date: 2018/9/14 10:38
-     * @param: ChargingStationVo
+     * @param: ChargingStationDetailVo
      * @return: Result
      */
     @PostMapping("/get/id")
@@ -95,7 +96,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 添加充电站信息
      * @date: 2018/9/10 16:27
-     * @param: ChargingStationVo
+     * @param: ChargingStationDetailVo
      * @return: Result
      */
     @PostMapping("/add")
@@ -268,7 +269,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 删除充电站信息
      * @date: 2018/9/10 16:27
-     * @param: ChargingStationVo
+     * @param: ChargingStationDetailVo
      * @return: Result
      */
     @PostMapping("/delete")
@@ -285,7 +286,7 @@ public class ChargingStationController extends AbstractBaseController {
      * @author:wanzhongsu
      * @description: 修改充电站信息
      * @date: 2018/9/10 16:28
-     * @param: ChargingStationVo
+     * @param: ChargingStationDetailVo
      * @return: Result
      */
     @PostMapping("/update")

@@ -3,7 +3,7 @@ package com.ga.cdz.controller.charging;
 import com.ga.cdz.annotation.UserState;
 import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
-import com.ga.cdz.domain.vo.api.ChargingOrderVo;
+import com.ga.cdz.domain.vo.api.ChargingOrderInitVo;
 import com.ga.cdz.service.IChargingOrderService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +27,7 @@ public class ChargingOrderController extends AbstractBaseController {
 
     @UserState
     @PostMapping("/price")
-    public Result placeOrderByPrice(@RequestBody ChargingOrderVo vo, BindingResult bindingResult) {
+    public Result placeOrderByPrice(@RequestBody ChargingOrderInitVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
         Integer result = chargingOrderService.placeOrderByPrice(vo);
         if (result > 0) {

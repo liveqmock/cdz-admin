@@ -112,8 +112,9 @@ public class ChargingOrder extends Model<ChargingOrder> {
         REMOVE(0, "删除"),
         INIT(1, "下单"),
         USEING(2, "使用中"),
-        PAYING(3, "带支付"),
-        FINISH(4, "完成");
+        PAYING(3, "待支付"),
+        PAYED(4, "支付"),
+        COMMENTED(5, "评论");
 
         private Integer code;
         private String desc;

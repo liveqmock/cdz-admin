@@ -10,7 +10,7 @@ import com.ga.cdz.domain.dto.api.ChargingStationPageDTO;
 import com.ga.cdz.domain.dto.api.ChargingStationTerminalDTO;
 import com.ga.cdz.domain.entity.*;
 import com.ga.cdz.domain.vo.api.ChargingStationPageVo;
-import com.ga.cdz.domain.vo.api.ChargingStationVo;
+import com.ga.cdz.domain.vo.api.ChargingStationDetailVo;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.service.IChargingShopRedisService;
 import com.ga.cdz.service.IChargingStationService;
@@ -61,6 +61,8 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     @Value("${url.station}")
     private String stationUrl;
 
+    @Value("${url.user_avatar}")
+    private String userAvatarUrl;
 
     @Override
     public List<ChargingStationPageDTO> getMainStationPage(ChargingStationPageVo vo) {
@@ -86,7 +88,7 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
      */
     private List<ChargingStationPageDTO> getStationPageBySort(ChargingStationPageVo vo) {
         /**检测缓存*/
-        chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheMainAndNearChargingPageList();
         Integer pageIndex = vo.getIndex();
         Integer pageSize = vo.getSize();
         double voLat = vo.getLat();
@@ -106,7 +108,10 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         /**将城市站点列表缓存，5分钟**/
         if (!mRedisUtil.hasKey(cityRedisKey)) {
             listCity = chargingStationList.stream()
-                    .filter(chargingStation -> cityCode == chargingStation.getCity().intValue())
+                    .filter(chargingStation ->
+                            cityCode == chargingStation.getCity().intValue()
+                                    && chargingStation.getStationState().equals(ChargingStation.StationState.NORMAL)
+                    )
                     .collect(Collectors.toList());
             mRedisUtil.put(cityRedisKey, listCity, 5L, TimeUnit.MINUTES);
         } else {
@@ -269,15 +274,15 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
-     * @param vo ChargingStationVo
+     * @param vo ChargingStationDetailVo
      * @return ChargingStationDetailDTO
      * @Author: liuyi
      * @Description: 获取充电站信息
      * @Date: 2018/9/17_14:53
      */
     @Override
-    public ChargingStationDetailDTO getChargingStationDetail(ChargingStationVo vo) {
-        chargingRedisService.cacheChargingPageList();
+    public ChargingStationDetailDTO getChargingStationDetail(ChargingStationDetailVo vo) {
+        chargingRedisService.cacheChargingStationDetail();
         chargingShopRedisService.cacheChargingShopList();
         ChargingStationDetailDTO chargingStationDetailDTO = new ChargingStationDetailDTO();
         //获得充电站缓存列表
@@ -307,15 +312,15 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     /**
-     * @param vo ChargingStationVo
+     * @param vo ChargingStationDetailVo
      * @return List<ChargingStationTerminalDTO>
      * @Author: liuyi
      * @Description: 获取充电站终端
      * @Date: 2018/9/17_15:44
      */
     @Override
-    public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationVo vo) {
-        chargingRedisService.cacheChargingPageList();
+    public List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationDetailVo vo) {
+        chargingRedisService.cacheChargingStationDetail();
         Map<String, List<ChargingDevice>> chargingDeviceMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_DEVICE_STATION);
         Map<String, ChargingType> chargingTypeMap = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_TYPE);
 
@@ -338,9 +343,9 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     }
 
     @Override
-    public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationVo vo) {
+    public List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationDetailVo vo) {
         userRedisService.cacheUserList();
-        chargingRedisService.cacheChargingPageList();
+        chargingRedisService.cacheChargingStationDetail();
         //获取所有缓存的用户信息
         Map<String, UserInfo> userInfoMap = mRedisUtil.getHash(RedisConstant.TABLE_USER_INFO);
         //获取所有缓存的订单
@@ -354,13 +359,15 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
                 .collect(Collectors.toList());
 
         //根据orderId得到评论
-        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().map(chargingOrderComment -> {
+        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().filter(chargingOrderComment -> chargingOrderComment.getCommentPid() == 0).map(chargingOrderComment -> {
             ChargingStationCommentDTO chargingStationComment = new ChargingStationCommentDTO();
             if (!orderIdList.isEmpty() && orderIdList.size() > 0) {
                 for (String orderId : orderIdList) {
                     if (chargingOrderComment.getOrderId().equals(orderId)) {
                         chargingStationComment.setChargingOrderComment(chargingOrderComment);
-                        chargingStationComment.setUserRealName(userInfoMap.get(chargingStationComment.getUserId() + "").getUserRealName());
+                        UserInfo userInfo = userInfoMap.get(chargingOrderComment.getUserId().toString());
+                        chargingStationComment.setUserRealName(userInfo.getUserRealName())
+                                .setUserAvatar(userAvatarUrl + userInfo.getUserAvatar());
                     }
                 }
             }
@@ -390,6 +397,5 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         }
         return 0L;
     }
-
 
 }

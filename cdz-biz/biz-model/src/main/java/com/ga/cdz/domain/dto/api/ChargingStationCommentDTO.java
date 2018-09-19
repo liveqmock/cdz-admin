@@ -1,8 +1,13 @@
 package com.ga.cdz.domain.dto.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ga.cdz.domain.entity.ChargingOrderComment;
+import com.ga.cdz.domain.entity.UserInfo;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * @Author: liuyi
@@ -10,7 +15,7 @@ import lombok.experimental.Accessors;
  * @Date: 2018/9/17_16:46
  */
 @Data
-@Accessors
+@Accessors(chain = true)
 public class ChargingStationCommentDTO {
 
     /**
@@ -19,14 +24,9 @@ public class ChargingStationCommentDTO {
     private Integer commentId;
 
     /**
-     * 用户ID
-     */
-    private Integer userId;
-
-    /**
      * 评分
      */
-    private Integer commentCode;
+    private Integer commentScore;
 
     /**
      * 评论内容
@@ -49,9 +49,21 @@ public class ChargingStationCommentDTO {
     private Integer commentState;
 
     /**
+     * 评论时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date commentDt;
+
+    /**
      * 用户名称
      */
     private String userRealName;
+
+    /**
+     * 用户头像
+     */
+    private String userAvatar;
 
     /**
      * @param chargingOrderComment
@@ -62,12 +74,12 @@ public class ChargingStationCommentDTO {
      */
     public void setChargingOrderComment(ChargingOrderComment chargingOrderComment) {
         this.commentId = chargingOrderComment.getCommentId();
-        this.userId = chargingOrderComment.getUserId();
-        this.commentCode = chargingOrderComment.getCommentCode();
+        this.commentScore = chargingOrderComment.getCommentCode();
         this.commentContent = chargingOrderComment.getCommentContent();
         this.commentPid = chargingOrderComment.getCommentPid();
         this.commentType = chargingOrderComment.getCommentType();
         this.commentState = chargingOrderComment.getCommentCode();
+        this.commentDt = chargingOrderComment.getInsertDt();
     }
 
 }

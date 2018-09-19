@@ -73,18 +73,16 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
          //为管理员帐号
            lists = baseMapper.getStationList(page, param,new ChargingShop() );
         }else{
-          ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+            ChargingShop chargingShop = chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, name));
           lists = baseMapper.getStationList(page,param,chargingShop);
         }
-//        page.setRecords(lists);
-//        List<ChargingStationDTO> lists = baseMapper.getStationList(page, param);
-//        //查询后跨库查询区域名称
-//        list.forEach(item -> {
-//            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
-//            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
-//            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
-//            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
-//        });
+        //查询后跨库查询区域名称
+        lists.forEach(item -> {
+            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
+            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
+        });
         page.setRecords(lists);
         return page;
     }
@@ -120,6 +118,15 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     public boolean updateStationById(ChargingStationVo vo) {
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
+        //验证充电站名称和编码是否已经存在
+        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()));
+        if (!ObjectUtils.isEmpty(hasName)) {
+            throw new BusinessException("该充电站名称已存在");
+        }
+        hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
+        if (!ObjectUtils.isEmpty(hasName)) {
+            throw new BusinessException("该充电站编码已存在");
+        }
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
         if(result!=0){
@@ -170,6 +177,17 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
         if (!ObjectUtils.isEmpty(hasCode)) {
             throw new BusinessException("该充电站编码已存在");
+        }
+        //充电站存在，只是状态删除则修改状态保存
+        hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
+        if (!ObjectUtils.isEmpty(hasName)) {
+            hasName.setStationState(ChargingStation.StationState.NORMAL);
+            boolean result = updateById(hasName);
+            //返回保存后的Stationid值，否则-1
+            if (result) {
+                return hasName.getStationId();
+            }
+            return -1;
         }
         //保存商户，商户状态初始化为正常
         chargingStation.setStationState(ChargingStation.StationState.NORMAL);

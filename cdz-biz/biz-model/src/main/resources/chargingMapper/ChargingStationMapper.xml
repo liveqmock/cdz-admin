@@ -49,8 +49,7 @@
         station_id, shop_id, station_code, station_name, station_type, sttpe_id, operators_id, station_addr, country,
         county, city, province, lat, lng, station_state, station_opendt, station_closedt, update_dt, insert_dt
     </sql>
-    <select id="getStationList" resultMap="chargingStationDTO"
-            parameterType="com.ga.cdz.domain.vo.admin.ChargingStationSelectVo">
+    <select id="getStationList" resultMap="chargingStationDTO">
         SELECT
         a.station_id,
         a.station_code,
@@ -60,6 +59,7 @@
         a.city,
         a.province,
         a.station_addr,
+        c.sttpe_id,
         c.sttpe_name,
         a.station_name,
         a.lat,
@@ -89,7 +89,7 @@
 
         <if test="shop!=null">
             <if test="shop.shopId!=null">
-                AND a.shop_id='#{shop.shopId}'
+                AND a.shop_id=#{shop.shopId}
             </if>
         </if>
     </select>
