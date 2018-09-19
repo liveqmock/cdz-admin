@@ -22,7 +22,7 @@ import java.util.List;
  * @Date: 2018/9/14_14:09
  */
 @RestController
-@RequestMapping("/charging/order")
+@RequestMapping("/order")
 public class ChargingOrderController extends AbstractBaseController {
 
     @Resource
