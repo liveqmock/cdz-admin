@@ -66,6 +66,7 @@ public class ChargingRedisServiceImpl implements IChargingRedisService {
 
     @Override
     public void cacheChargingStationDetail() {
+        cacheChargingStation();
         cacheChargingOrder();
         cacheChargingOrderComment();
         cacheChargingOrderCommentList();

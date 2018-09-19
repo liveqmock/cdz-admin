@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Accessors(chain = true)
@@ -18,19 +19,14 @@ public class ChargingOrderListDTO {
     private String orderId;
 
     /**
-     * 充电站ID
+     * 充电站名字
      */
-    private Integer stationId;
+    private String stationName;
 
     /**
-     * 充电桩ID
+     * 附件图片路径
      */
-    private Integer deviceId;
-
-    /**
-     * 枪编号
-     */
-    private Integer deviceSubId;
+    private List<String> attachPath;
 
     /**
      * 总价格
@@ -63,9 +59,6 @@ public class ChargingOrderListDTO {
 
     public void setChargingOrder(ChargingOrder chargingOrder) {
         this.orderId = chargingOrder.getOrderId();
-        this.stationId = chargingOrder.getStationId();
-        this.deviceId = chargingOrder.getDeviceId();
-        this.deviceSubId = chargingOrder.getDeviceSubId();
         this.totalPrice = chargingOrder.getTotalPrice().doubleValue();
         this.totalEnergy = chargingOrder.getTotalEnergy();
         this.chargingBeginDt = chargingOrder.getCharginBeginDt();

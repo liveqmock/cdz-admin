@@ -15,6 +15,7 @@ import com.ga.cdz.domain.vo.api.ChargingOrderPageListVo;
 import com.ga.cdz.service.IChargingOrderService;
 import com.ga.cdz.service.IChargingRedisService;
 import com.ga.cdz.util.MRedisUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("chargingOrderService")
@@ -41,6 +43,10 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
 
     @Resource
     IChargingRedisService chargingRedisService;
+
+    //获得充电站信息路径
+    @Value("${url.station}")
+    private String stationUrl;
 
     @Override
     public List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo) {
@@ -207,6 +213,13 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
             ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
             if (chargingOrder.getUserId() == userId) {
                 chargingOrderListDTO.setChargingOrder(chargingOrder);
+                ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, chargingOrder.getStationId().toString());
+                List<ChargingStationAttach> chargingStationAttach = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ATTACH, chargingOrder.getStationId().toString());
+                List<String> attachPath = chargingStationAttach.stream()
+                        .map(cs -> (stationUrl + cs.getAttachPath()))
+                        .collect(Collectors.toList());
+                chargingOrderListDTO.setStationName(chargingStation.getStationName())
+                        .setAttachPath(attachPath);
                 return chargingOrderListDTO;
             }
             return null;
