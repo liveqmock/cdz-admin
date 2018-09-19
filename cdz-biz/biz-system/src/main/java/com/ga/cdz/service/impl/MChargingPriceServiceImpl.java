@@ -55,7 +55,7 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         if(list.size()>0){
            lists= baseMapper.getChargingPricePage(page, param,new ChargingShop());
         }else{
-            ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+            ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin,name));
 
             lists=baseMapper.getChargingPricePage(page,param,chargingShop);
         }

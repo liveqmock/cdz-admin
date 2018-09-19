@@ -44,7 +44,7 @@ public class MChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, 
     if(list.size()>0){
       lists =this.baseMapper.getChargingOrderListPage(page,vo,new ChargingShop());
     }else{
-      ChargingShop chargingShop=this.chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+      ChargingShop chargingShop=this.chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin,name));
       lists=this.baseMapper.getChargingOrderListPage(page,vo,chargingShop);
     }
 

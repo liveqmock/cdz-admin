@@ -44,7 +44,7 @@ public class MChargingOrderCommentServiceImpl extends ServiceImpl<ChargingOrderC
     if(list.size()>0){
         lists=this.baseMapper.getChargingCommentOrderListPage(new ChargingShop(),page);
     }else{
-      ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
+      ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin,name));
       lists=this.baseMapper.getChargingCommentOrderListPage(chargingShop,page);
     }
     page.setRecords(lists);
