@@ -76,8 +76,8 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
           ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopName,name));
           lists = baseMapper.getStationList(page,param,chargingShop);
         }
-        page.setRecords(lists);
-//        List<ChargingStationDTO> list = baseMapper.getStationList(page, param);
+//        page.setRecords(lists);
+//        List<ChargingStationDTO> lists = baseMapper.getStationList(page, param);
 //        //查询后跨库查询区域名称
 //        list.forEach(item -> {
 //            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
@@ -85,7 +85,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
 //            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
 //            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
 //        });
-//        page.setRecords(list);
+        page.setRecords(lists);
         return page;
     }
 

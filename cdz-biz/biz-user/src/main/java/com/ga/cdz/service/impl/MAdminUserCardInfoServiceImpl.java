@@ -1,6 +1,5 @@
 package com.ga.cdz.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.UserCardInfoMapper;
@@ -41,10 +40,10 @@ public class MAdminUserCardInfoServiceImpl extends ServiceImpl<UserCardInfoMappe
    * @param pageVo
    * @return
    */
-  public IPage<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
+  public Page<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
     Page<UserMemberCardInfoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
-    return page.setRecords(this.baseMapper.getMemberCardInfoListByPage(page));
+    page.setRecords(this.baseMapper.getMemberCardInfoListByPage(page,pageVo.getData()));
+    return page;
 
   }
-
 }

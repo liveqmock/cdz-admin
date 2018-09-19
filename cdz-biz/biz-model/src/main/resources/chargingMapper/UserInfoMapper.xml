@@ -104,6 +104,14 @@
         a.user_id
         ) d ON u.user_id = d.user_id
         where 1=1 and u.user_type=1
+        <if test="user!=null">
+            <if test="user.userRealName!=null">
+                and u.user_real_name like '%#{user.userRealName}%'
+            </if>
+            <if test="user.userTel!=null">
+                and u.user_tel like '%#{user.userTel}%'
+            </if>
+        </if>
     </select>
 
     <select id="getCompanyMemberListPage" resultMap="userMemberResultBase">
@@ -136,6 +144,14 @@
         a.user_id
         ) d ON u.user_id = d.user_id
         where 1=1 and u.user_type=2
+        <if test="user!=null">
+            <if test="user.userRealName!=null">
+                and u.user_real_name like '%#{user.userRealName}%'
+            </if>
+            <if test="user.userTel!=null">
+                and u.user_tel like '%#{user.userTel}%'
+            </if>
+        </if>
     </select>
 
 

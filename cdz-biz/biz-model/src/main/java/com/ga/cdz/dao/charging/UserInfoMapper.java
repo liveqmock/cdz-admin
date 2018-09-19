@@ -1,9 +1,12 @@
 package com.ga.cdz.dao.charging;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
 import com.ga.cdz.domain.dto.api.MyInfoDTO;
 import com.ga.cdz.domain.entity.UserInfo;
+import com.ga.cdz.domain.vo.base.UserInfoVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,7 +42,7 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
    * @date 2018年9月7日 18点05分
    * @return
    */
-    List<UserMemberDTO> getUserMemberListPage( );
+    List<UserMemberDTO> getUserMemberListPage( Page<UserMemberDTO> page,@Param("user")UserInfoVo userInfoVo);
 
   /**
    * @author huanghaohao
@@ -48,7 +51,7 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
    * @param
    * @return
    */
-  List<UserMemberDTO> getCompanyMemberListPage();
+  List<UserMemberDTO> getCompanyMemberListPage(Page<UserMemberDTO> page, @Param("user")UserInfoVo userInfoVo);
 
 
 }

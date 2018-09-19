@@ -26,7 +26,7 @@ public class MAdminUserCarsInfoServiceImpl extends ServiceImpl<UserCarsInfoMappe
    * @return
    */
   public IPage<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo>pageVo){
-    IPage<UserMemberCarsInfoDTO> page=new Page<>(pageVo.getIndex(),pageVo.getSize());
-    return page.setRecords(this.baseMapper.getUserCarListPage());
+    Page<UserMemberCarsInfoDTO> page=new Page<>(pageVo.getIndex(),pageVo.getSize());
+    return page.setRecords(this.baseMapper.getUserCarListPage(page));
   }
 }

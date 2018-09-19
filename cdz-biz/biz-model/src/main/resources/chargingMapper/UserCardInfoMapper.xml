@@ -60,6 +60,23 @@
         GROUP BY
         a.user_id
         ) d ON u.user_id = d.user_id
+        where 1=1
+        <if test="card!=null">
+            <if test="card.cardCode!=null">
+                and c.card_code like '%#{card.cardCode}%'
+            </if>
+            <if test="card.userRealName!=null">
+                and u.user_real_name like '%#{card.userRealName}%'
+            </if>
+            <if test="card.userTel!=null">
+                and u.user_tel like '%#{card.userTel}%'
+            </if>
+
+
+        </if>
+
+
+
     </select>
     <!--获取最新的cardCode-->
     <select id="getCardCodeLast" resultType="java.lang.String">

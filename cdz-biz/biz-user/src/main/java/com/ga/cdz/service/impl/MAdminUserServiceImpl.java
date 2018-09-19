@@ -29,8 +29,8 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
    */
   @Override
   public IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo) {
-    IPage<UserMemberDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
-    return page.setRecords(this.baseMapper.getCompanyMemberListPage());
+    Page<UserMemberDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
+    return page.setRecords(this.baseMapper.getCompanyMemberListPage(page,pageVo.getData()));
   }
 
   /**
@@ -42,8 +42,8 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
    */
   @Override
   public IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo) {
-    IPage<UserMemberDTO> page = new Page<>(pageVo.getIndex(),pageVo.getSize());
-   return  page.setRecords(this.baseMapper.getUserMemberListPage());
+    Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(),pageVo.getSize());
+   return  page.setRecords(this.baseMapper.getUserMemberListPage(page,pageVo.getData()));
   }
 
   /**

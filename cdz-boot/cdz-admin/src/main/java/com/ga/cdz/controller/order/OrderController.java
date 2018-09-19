@@ -6,10 +6,8 @@ import com.ga.cdz.controller.AbstractBaseController;
 import com.ga.cdz.domain.bean.Result;
 import com.ga.cdz.domain.dto.admin.ChargingOrderCommentDTO;
 import com.ga.cdz.domain.dto.admin.ChargingOrderDTO;
-import com.ga.cdz.domain.entity.ChargingOrderComment;
-import com.ga.cdz.domain.vo.admin.ChargingDeviceVo;
 import com.ga.cdz.domain.vo.admin.ChargingOrderCommentVo;
-import com.ga.cdz.domain.vo.admin.ChargingOrderVo;
+import com.ga.cdz.domain.vo.admin.ChargingOrderSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingOrderCommentService;
 import com.ga.cdz.service.IMChargingOrderService;
@@ -43,7 +41,7 @@ public class OrderController extends AbstractBaseController {
    */
 
   @PostMapping("/list")
-  public Result getOrderListByConditionPage(@RequestBody PageVo<ChargingOrderVo> pageVo){
+  public Result getOrderListByConditionPage(@RequestBody PageVo<ChargingOrderSelectVo> pageVo){
     String name = (String)SecurityUtils.getSubject().getPrincipal();
     Page<ChargingOrderDTO> page=mChargingOrderService.getChargingOrderListPag(pageVo,name);
     return Result.success().data(page);

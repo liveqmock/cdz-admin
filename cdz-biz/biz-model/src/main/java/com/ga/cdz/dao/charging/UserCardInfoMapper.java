@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.entity.UserCardInfo;
+import com.ga.cdz.domain.vo.admin.UserMemberCardInfoVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public interface UserCardInfoMapper extends BaseMapper<UserCardInfo> {
    * @param Page
    * @return
    */
-  List<UserMemberCardInfoDTO> getMemberCardInfoListByPage(Page<UserMemberCardInfoDTO> page);
+  List<UserMemberCardInfoDTO> getMemberCardInfoListByPage(Page<UserMemberCardInfoDTO> page, @Param("card")UserMemberCardInfoVo userMemberCardInfoVo);
 
     /**
      * @author:luqi

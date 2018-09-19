@@ -1,6 +1,7 @@
 package com.ga.cdz.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO;
 import com.ga.cdz.domain.entity.UserCardInfo;
@@ -28,6 +29,6 @@ public interface IMAdminUserCardInfoService extends IService<UserCardInfo> {
    * @param pageVo
    * @return
    */
-  IPage<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo);
+  Page<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo);
 
 }

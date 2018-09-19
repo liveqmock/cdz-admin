@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ga.cdz.domain.dto.admin.ChargingOrderDTO;
 import com.ga.cdz.domain.entity.ChargingOrder;
-import com.ga.cdz.domain.vo.admin.ChargingOrderVo;
+import com.ga.cdz.domain.vo.admin.ChargingOrderSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 
 /**
@@ -20,5 +20,5 @@ public interface IMChargingOrderService extends IService<ChargingOrder> {
    * @param pageVo
    * @return
    */
-  Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderVo> pageVo,String name);
+  Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderSelectVo> pageVo, String name);
 }

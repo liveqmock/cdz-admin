@@ -1,6 +1,7 @@
 package com.ga.cdz.dao.charging;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO;
 import com.ga.cdz.domain.entity.UserCarsInfo;
 
@@ -19,6 +20,6 @@ public interface UserCarsInfoMapper extends BaseMapper<UserCarsInfo> {
    * @param pageVo
    * @return
    */
-    List<UserMemberCarsInfoDTO> getUserCarListPage();
+    List<UserMemberCarsInfoDTO> getUserCarListPage(Page<UserMemberCarsInfoDTO> page);
 }
 

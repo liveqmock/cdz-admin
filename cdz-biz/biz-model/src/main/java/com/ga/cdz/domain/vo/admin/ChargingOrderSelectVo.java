@@ -1,6 +1,5 @@
 package com.ga.cdz.domain.vo.admin;
 
-import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -17,7 +16,7 @@ import java.util.Date;
 
 @Data
 @Accessors(chain = true)
-public class ChargingOrderVo {
+public class ChargingOrderSelectVo {
 
   private String orderId;
   /**
