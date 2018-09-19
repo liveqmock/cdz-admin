@@ -49,52 +49,72 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
 
     @Override
     public List<ChargingOrderListDTO> getChargingOrderOfAllPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
-                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() != ChargingOrder.OrderState.REMOVE)
-                .collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
-        List<ChargingOrderListDTO> colList = page.getList();
-        return colList;
+        List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
+        if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
+            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                    .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() != ChargingOrder.OrderState.REMOVE)
+                    .collect(Collectors.toList());
+            Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+            List<ChargingOrderListDTO> colList = page.getList();
+            return colList;
+        }
+        return null;
     }
 
     @Override
     public List<ChargingOrderListDTO> getChargingOrderOfInitPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
-                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.INIT)
-                .collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
-        List<ChargingOrderListDTO> colList = page.getList();
-        return colList;
+        List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
+        if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
+            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                    .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.INIT)
+                    .collect(Collectors.toList());
+            Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+            List<ChargingOrderListDTO> colList = page.getList();
+            return colList;
+        }
+        return null;
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfPayingPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
-                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYING)
-                .collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
-        List<ChargingOrderListDTO> colList = page.getList();
-        return colList;
+        List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
+        if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
+            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                    .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYING)
+                    .collect(Collectors.toList());
+            Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+            List<ChargingOrderListDTO> colList = page.getList();
+            return colList;
+        }
+        return null;
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfPayedPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
-                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYED)
-                .collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
-        List<ChargingOrderListDTO> colList = page.getList();
-        return colList;
+        List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
+        if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
+            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                    .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.PAYED)
+                    .collect(Collectors.toList());
+            Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+            List<ChargingOrderListDTO> colList = page.getList();
+            return colList;
+        }
+        return null;
     }
 
     @Override
     public List<ChargingOrderListDTO> getOrderListOfRefundingPageList(ChargingOrderPageListVo vo) {
-        List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
-                .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.REFUNDING)
-                .collect(Collectors.toList());
-        Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
-        List<ChargingOrderListDTO> colList = page.getList();
-        return colList;
+        List<ChargingOrderListDTO> chargingOrderListTmp = getChargingOrderList(vo.getUserId());
+        if (!chargingOrderListTmp.isEmpty() && chargingOrderListTmp.size() > 0) {
+            List<ChargingOrderListDTO> chargingOrderListDTOList = getChargingOrderList(vo.getUserId()).stream()
+                    .filter(chargingOrderListDTO -> chargingOrderListDTO.getOrderState() == ChargingOrder.OrderState.REFUNDING)
+                    .collect(Collectors.toList());
+            Paging<ChargingOrderListDTO> page = new Paging<>(chargingOrderListDTOList, vo.getPageIndex(), vo.getPageSize());
+            List<ChargingOrderListDTO> colList = page.getList();
+            return colList;
+        }
+        return null;
     }
 
     @Override
