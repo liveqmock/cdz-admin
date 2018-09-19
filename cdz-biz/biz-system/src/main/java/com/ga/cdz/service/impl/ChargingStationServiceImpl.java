@@ -61,6 +61,8 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
     @Value("${url.station}")
     private String stationUrl;
 
+    @Value("${url.user_avatar}")
+    private String userAvatarUrl;
 
     @Override
     public List<ChargingStationPageDTO> getMainStationPage(ChargingStationPageVo vo) {
@@ -364,7 +366,8 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
                     if (chargingOrderComment.getOrderId().equals(orderId)) {
                         chargingStationComment.setChargingOrderComment(chargingOrderComment);
                         UserInfo userInfo = userInfoMap.get(chargingOrderComment.getUserId().toString());
-                        chargingStationComment.setUserInfo(userInfo);
+                        chargingStationComment.setUserRealName(userInfo.getUserRealName())
+                                .setUserAvatar(userAvatarUrl + userInfo.getUserAvatar());
                     }
                 }
             }

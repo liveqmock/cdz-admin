@@ -15,7 +15,7 @@ import java.util.Date;
  * @Date: 2018/9/17_16:46
  */
 @Data
-@Accessors
+@Accessors(chain = true)
 public class ChargingStationCommentDTO {
 
     /**
@@ -80,11 +80,6 @@ public class ChargingStationCommentDTO {
         this.commentType = chargingOrderComment.getCommentType();
         this.commentState = chargingOrderComment.getCommentCode();
         this.commentDt = chargingOrderComment.getInsertDt();
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userRealName = userInfo.getUserRealName();
-        this.userAvatar = userInfo.getUserAvatar();
     }
 
 }
