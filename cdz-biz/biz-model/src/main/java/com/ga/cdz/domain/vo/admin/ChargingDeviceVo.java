@@ -1,5 +1,6 @@
 package com.ga.cdz.domain.vo.admin;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.ga.cdz.domain.entity.ChargingDevice;
 import com.ga.cdz.domain.group.admin.IMChargingDeviceGroup;
 import lombok.Data;
@@ -51,7 +52,10 @@ public class ChargingDeviceVo {
    * 设备功率
    */
   private Integer devicePower;
-
+  /**
+   * 设备最大电压
+   */
+  private Integer deviceVoltage;
   /**
    * 设备枪个数
    */

@@ -10,6 +10,7 @@
         <result column="device_name" property="deviceName" />
         <result column="cgtype_id" property="cgtypeId" />
         <result column="device_power" property="devicePower" />
+        <result column="device_voltage" property="deviceVoltage"/>
         <result column="device_subnum" property="deviceSubnum" />
         <result column="device_state" property="deviceState" />
         <result column="update_dt" property="updateDt" />
@@ -18,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        device_id, station_id, device_code, device_name, cgtype_id, device_power, device_subnum, device_state, update_dt, insert_dt
+        device_id, station_id, device_code, device_name, cgtype_id, device_power, device_voltage, device_subnum, device_state, update_dt, insert_dt
     </sql>
 
     <select id="getChargingDeviceListDetail" resultType="com.ga.cdz.domain.dto.admin.ChargingDeviceDTO">

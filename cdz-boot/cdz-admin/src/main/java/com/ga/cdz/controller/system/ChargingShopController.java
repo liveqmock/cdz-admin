@@ -1,4 +1,4 @@
-package com.ga.cdz.controller;
+package com.ga.cdz.controller.system;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
