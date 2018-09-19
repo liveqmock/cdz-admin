@@ -12,6 +12,12 @@ public class RedisConstant {
     //管理后台前缀
     public final static String ADMIN_ROOT = "CDZ-ADMIN:";
 
+    //商家端后台前缀
+    public final static String SHOP_ROOT = "CDZ-SHOP:";
+
+    //商家端token
+    public final static String SHOP_TOKEN = SHOP_ROOT + "SHOP-TOKEN:";
+
     //表缓存前缀
     public final static String TABLE_ROOT = "CDZ-TABLE:";
 

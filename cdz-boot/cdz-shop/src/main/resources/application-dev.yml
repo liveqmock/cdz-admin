@@ -1,0 +1,63 @@
+#应用根路径
+config:
+  base_path: D:\\cdz
+
+#文件存储路径
+file:
+  #文件基础路径
+  base: ${config.base_path}\\img
+  #系统消息
+  system: ${file.base}\\system
+  #banner
+  banner: ${file.base}\\banner
+  #用户头像图片
+  user_avatar: ${file.base}\\user\\avatar
+  #站点图片
+  station: ${file.base}\\station
+
+#文件请求路径
+url:
+  base: http:\\192.168.2.18:8018
+  #系统消息
+  system: ${url.base}\img\system
+  #banner
+  banner: ${url.base}\img\banner
+  #t头像路径
+  user_avatar: ${url.base}\user\avatar
+  #站点路径
+  station: ${url.base}\station
+
+#日志路径
+logback:
+  logdir: ${config.base_path}\\logs\\cdz-shop
+  appname: cdz-shop
+  ##打印输出等级
+  level: info
+
+#分布式事务日志记录
+atomikos:
+  logdir: ${config.base_path}\\logs\\cdz-shop\\transaction-logs
+  logname: cdz-shop-transaction
+
+
+#数据库
+jdbc:
+  center:
+      url: 192.168.2.123
+      username: root
+      password: 123456
+  charging:
+      url: 192.168.2.123
+      username: root
+      password: 123456
+
+#redis
+redis:
+  url: 192.168.2.123
+  password:
+
+
+#激光推送
+jpush:
+  app_key: d67c63d217d62dc1c16a6a7c
+  master_secret: f16eb1d9e0080ff33e1ff71b
