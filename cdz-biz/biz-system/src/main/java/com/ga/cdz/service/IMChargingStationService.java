@@ -25,16 +25,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      */
     IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo, String name);
 
-    /**
-     * @author:wanzhongsu
-     * @description: 分页获取充电站列表
-     * @date: 2018/9/18 9:12
-     * @param: PageVo
-     * @return: IPage<ChargingStationDTO>
-     */
-    //todo Cedar 此接口没有使用请删除
-    IPage<ChargingStationDTO> getStationPageByCon(PageVo<ChargingStationSelectVo> vo);
-
+    //todo-ok Cedar 此接口没有使用请删除
     /**
      * @author:wanzhongsu
      * @description: 根据名字模糊查询station的id
@@ -51,7 +42,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param: ChargingStationDetailVo
      * @return: 是否修改成功
      */
-    boolean updateStationById(ChargingStationVo vo);
+    void updateStationById(ChargingStationVo vo);
 
     /**
      * @author:wanzhongsu
@@ -60,7 +51,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param: ChargingStationDetailVo
      * @return: 是否删除成功
      */
-    boolean deleteStationById(ChargingStationVo vo);
+    void deleteStationById(ChargingStationVo vo);
 
     /**
      * @author:wanzhongsu

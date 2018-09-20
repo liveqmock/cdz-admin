@@ -37,8 +37,8 @@ public class ChargingStationVo {
     /**
      * 站编码
      */
-    @NotBlank(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, message = "站编码不能为空")
-    @Pattern(groups = {IMChargingStationGroup.Add.class, IMChargingStationGroup.Update.class}, regexp = RegexConstant.STATION_CODE, message = "站编码格式不对")
+    @NotBlank(groups = {IMChargingStationGroup.Update.class}, message = "站编码不能为空")
+    @Pattern(groups = {IMChargingStationGroup.Update.class}, regexp = RegexConstant.STATION_CODE, message = "站编码格式不对")
     private String stationCode;
     /**
      * 站名称

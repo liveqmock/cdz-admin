@@ -67,11 +67,8 @@ public class OperatorController extends AbstractBaseController {
     @PostMapping("/save")
     public Result saveOperators(@RequestBody @Validated(value = {IMOperatorsGroup.Add.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        int integer = mOperatorsService.saveOperator(vo);
-        if (integer > 0) {
-            return Result.success().message("保存成功");
-        }
-        return Result.fail().message("保存失败");
+        mOperatorsService.saveOperator(vo);
+        return Result.success().message("保存成功");
     }
 
     /**
@@ -84,23 +81,7 @@ public class OperatorController extends AbstractBaseController {
     @PostMapping("/delete")
     public Result delete(@RequestBody @Validated(value = {IMOperatorsGroup.Delete.class}) OperatorsVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        int integer = mOperatorsService.removeOperator(vo);
-        if (integer > 0) {
-            return Result.success().message("删除成功");
-        }
-        return Result.fail().message("删除失败");
-    }
-
-    /**
-     * @author:wanzhongsu
-     * @description: 获取运营商下一个编码
-     * @date: 2018/9/10 10:06
-     * @param:
-     * @return: Result
-     */
-    @PostMapping("/nextcode")
-    public Result nextCode() {
-        String nextCode = mOperatorsService.nextOperatorCode();
-        return Result.success().data(nextCode);
+        mOperatorsService.removeOperator(vo);
+        return Result.success().message("删除成功");
     }
 }

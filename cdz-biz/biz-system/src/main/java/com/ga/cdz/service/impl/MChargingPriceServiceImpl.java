@@ -128,6 +128,10 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     @Override
     @Transactional
     public boolean updateChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
+//        低谷平谷高峰
+//        低谷高峰平谷
+//        平谷低谷高峰
+
         boolean check1 = checkPriceTime1(chargingPriceAddVo);
         boolean check2 = checkPriceTime2(chargingPriceAddVo);
         boolean check3 = checkPriceTime3(chargingPriceAddVo);

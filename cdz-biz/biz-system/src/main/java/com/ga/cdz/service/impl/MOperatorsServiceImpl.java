@@ -46,7 +46,7 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
 
     @Transactional
     @Override
-    public Integer saveOperator(OperatorsVo vo) {
+    public void saveOperator(OperatorsVo vo) {
         Operators operators = new Operators();
         BeanUtils.copyProperties(vo, operators);
         //运营商名字是否已存在与数据库中
@@ -54,35 +54,26 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
         if (!ObjectUtils.isEmpty(hasName)) {
             throw new BusinessException("运营商名称已存在");
         }
-        //已存在，修改状态后保存
-        hasName = baseMapper.selectOne(new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsName, operators.getOperatorsName()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            hasName.setOperatorsState(Operators.OperatorsState.NORMAL);
-            updateById(hasName);
-            return 1;
-        }
-        //运营商编码是否已存在与数据库中
-        Operators hasCode = baseMapper.selectOne(new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsCode, operators.getOperatorsCode()));
-        if (!ObjectUtils.isEmpty(hasCode) && hasName.getOperatorsState() == Operators.OperatorsState.NORMAL) {
-            throw new BusinessException("运营商编码已存在");
-        }
+        //产生运营商编码并设置
+        String operatorCode = nextOperatorCode();
+        operators.setOperatorsCode(operatorCode);
         /**初始化运营商状态为可用*/
         operators.setOperatorsState(Operators.OperatorsState.NORMAL);
         //保存运营商信息
         int result = baseMapper.insert(operators);
-        return result;
+        if (result <= 0) {
+            throw new BusinessException("保存失败");
+        }
     }
 
     @Transactional
     @Override
-    public Integer removeOperator(OperatorsVo vo) {
+    public void removeOperator(OperatorsVo vo) {
         Operators delete = getById(vo.getOperatorsId());
         delete.setOperatorsState(Operators.OperatorsState.DELETE);
         updateById(delete);
-        return 1;
     }
 
-    @Override
     public String nextOperatorCode() {
         //查询当前最大的运营商编码
         Operators operators = baseMapper.selectOne(new QueryWrapper<Operators>().lambda().orderByDesc(Operators::getOperatorsCode).last("limit 1"));
@@ -93,10 +84,9 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
         } else {
             nextCode = operators.getOperatorsCode();
             int value = Integer.parseInt(nextCode) + 1;
-            if (value < 10) {
-                nextCode = "0" + String.valueOf(value);
-            } else {
-                nextCode = String.valueOf(value);
+            nextCode = String.format("%02d", value);
+            if (nextCode.equals("99")) {
+                throw new BusinessException("运营商编号已用完");
             }
         }
         return nextCode;

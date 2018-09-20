@@ -40,7 +40,7 @@ public interface IMOperatorsService extends IService<Operators> {
      * @param: OperatorsVo
      * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
-    Integer saveOperator(OperatorsVo vo);
+    void saveOperator(OperatorsVo vo);
 
     /**
      * @author:wanzhongsu
@@ -49,13 +49,5 @@ public interface IMOperatorsService extends IService<Operators> {
      * @param: OperatorsVo
      * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
-    Integer removeOperator(OperatorsVo vo);
-
-    /**
-     * @author:wanzhongsu
-     * @description: 下一个运营商编码
-     * @date: 2018/9/10 9:32
-     * @return: 运营商编码
-     */
-    String nextOperatorCode();
+    void removeOperator(OperatorsVo vo);
 }

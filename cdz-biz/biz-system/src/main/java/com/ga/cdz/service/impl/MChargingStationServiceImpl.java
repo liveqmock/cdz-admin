@@ -18,7 +18,6 @@ import com.ga.cdz.domain.vo.admin.ChargingStationSelectVo;
 import com.ga.cdz.domain.vo.base.ChargingStationVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingStationService;
-import com.ga.cdz.util.MRedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -42,13 +41,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     @Resource
     DistrictMapper districtMapper;
 
-    //todo Cedar 不需要的依赖请删除
-    /**
-     * 缓存
-     */
-    @Resource
-    MRedisUtil mRedisUtil;
-
+    //todo-ok Cedar 不需要的依赖请删除
     /**
      *
      */
@@ -65,12 +58,12 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         //复制
         ChargingStationSelectVo param = new ChargingStationSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
-        //todo huanghaohao 根据Admin的 adminAccount来判断，adminName判断不可行，此处应返回 一个AdminInfo对象 而不是 List集合
-        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
-        //todo Cedar 此次不需要初始化 来自IDEA的提示
-        List<ChargingStationDTO> lists = null;
-        //todo huanghaohao 判断修改
-        if (list.size() > 0) {
+        //todo-ok huanghaohao 根据Admin的 adminAccount来判断，adminName判断不可行，此处应返回 一个AdminInfo对象 而不是 List集合
+        AdminInfo adminInfo = adminInfoMapper.selectOne(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        //todo-ok Cedar 此次不需要初始化 来自IDEA的提示
+        List<ChargingStationDTO> lists;
+        //todo-ok huanghaohao 判断修改
+        if (!ObjectUtils.isEmpty(adminInfo)) {
             //为管理员帐号
             lists = baseMapper.getStationList(page, param, new ChargingShop());
         } else {
@@ -89,64 +82,41 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
-    public IPage<ChargingStationDTO> getStationPageByCon(PageVo<ChargingStationSelectVo> vo) {
-        //构建分页信息
-        Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
-        //复制
-        ChargingStationSelectVo param = new ChargingStationSelectVo();
-        BeanUtils.copyProperties(vo.getData(), param);
-        //分页查询
-        List<ChargingStationDTO> list = baseMapper.getStationListByCon(page, param);
-        //查询后跨库查询区域名称
-        list.forEach(item -> {
-            item.setScity(districtMapper.selectById(item.getCity()).getDistrictName());
-            item.setSprovince(districtMapper.selectById(item.getProvince()).getDistrictName());
-            item.setScountry(districtMapper.selectById(item.getCountry()).getDistrictName());
-            item.setScounty(districtMapper.selectById(item.getCounty()).getDistrictName());
-        });
-        page.setRecords(list);
-        return page;
-    }
-
-    @Override
     public List<ChargingStation> getStationList(ChargingStationVo vo) {
         List<ChargingStation> chargingStations = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().like(ChargingStation::getStationName, vo.getStationName()));
         return chargingStations;
     }
 
 
-    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
+    //todo-ok Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
     @Override
     @Transactional
-    public boolean updateStationById(ChargingStationVo vo) {
-        //todo Cendar 站点名称和站点编号不能修改 请做条件判断
+    public void updateStationById(ChargingStationVo vo) {
+        //todo-ok Cendar 站点名称和站点编号不能修改 请做条件判断
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //验证充电站名称和编码是否已经存在
-        List<ChargingStation> hasName = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
-        List<ChargingStation> hasCode = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, chargingStation.getStationCode()));
-        if (hasName.size() > 1 || hasCode.size() > 1) {
-            throw new BusinessException("充电站名称或编码已存在");
-        } else if ((hasName.size() == 1 && hasCode.size() == 1) && (hasCode.get(0).getStationId() != chargingStation.getStationId()) && (hasName.get(0).getStationId() != chargingStation.getStationId())) {
-            throw new BusinessException("充电站名称或编码已存在");
-        } else if (hasCode.size() == 1 && (hasCode.get(0).getStationId() != chargingStation.getStationId())) {
-            throw new BusinessException("充电站编码已存在");
-        } else if (hasName.size() == 1 && (hasName.get(0).getStationId() != chargingStation.getStationId())) {
+        ChargingStation hasName = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
+        ChargingStation hasCode = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, chargingStation.getStationCode()));
+        if (!ObjectUtils.isEmpty(hasName) && hasName.getStationId() != chargingStation.getStationId()) {
             throw new BusinessException("充电站名称已存在");
+        }
+        if (!ObjectUtils.isEmpty(hasCode) && hasCode.getStationId() != chargingStation.getStationId()) {
+            throw new BusinessException("充电站编码已存在");
         }
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
         if (result != 0) {
-            return true;
+            return;
         } else {
-            return false;
+            throw new BusinessException("保存失败");
         }
     }
 
-    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
+    //todo-ok Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
     @Override
     @Transactional
-    public boolean deleteStationById(ChargingStationVo vo) {
+    public void deleteStationById(ChargingStationVo vo) {
         //根据传入的id判断该充电站是否存在
         ChargingStation hasAccount = getById(vo.getStationId());
         if (ObjectUtils.isEmpty(hasAccount)) {
@@ -156,12 +126,36 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStation chargingStation = getById(vo.getStationId());
         chargingStation.setStationState(ChargingStation.StationState.DELETE);
         boolean result = updateById(chargingStation);
-        return result;
+        if (!result) {
+            throw new BusinessException("删除失败");
+        }
     }
 
+    /**
+     * @author:wanzhongsu
+     * @description: 产生充电站编码
+     * @date: 2018/9/20 14:42
+     * @return: 充电站编码
+     */
+    private String nextStationCode() {
+        //查询当前最大的充电站编码
+        ChargingStation station = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().orderByDesc(ChargingStation::getStationCode).last("limit 1"));
+        String nextCode;
+        //获取下一个充电站编码
+        if (ObjectUtils.isEmpty(station)) {
+            nextCode = "0000";
+        } else {
+            nextCode = station.getStationCode();
+            int value = Integer.parseInt(nextCode) + 1;
+            nextCode = String.format("%04d", value);
+            if (nextCode.equals("9999")) {
+                throw new BusinessException("充电站编号已用完");
+            }
+        }
+        return nextCode;
+    }
 
-    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
-    //todo Cendar 添加站点 站点编号从0000开始，且该参数由后台自动生成，前台不需要传参，vo里面stationCode，添加时候不需要验证
+    //todo-ok Cendar 添加站点 站点编号从0000开始，且该参数由后台自动生成，前台不需要传参，vo里面stationCode，添加时候不需要验证
     @Override
     @Transactional
     public int saveStation(ChargingStationVo vo) {
@@ -169,43 +163,15 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //根据名字查询该名称是否存在
-        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()).eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL));
+        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()));
         if (!ObjectUtils.isEmpty(hasName) && hasName.getStationState() == ChargingStation.StationState.NORMAL) {
             throw new BusinessException("该充电站名称已存在");
         }
-        ChargingStation hasCode = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
-        if (!ObjectUtils.isEmpty(hasCode) && hasCode.getStationState() == ChargingStation.StationState.NORMAL) {
-            throw new BusinessException("充电站编码已存在");
-        }
-        //todo cedar  不需要联合判断，数据库已经创建组合索引
-        boolean allExists = !ObjectUtils.isEmpty(hasName) && !ObjectUtils.isEmpty(hasCode);
-        boolean notEq = allExists && (hasName.getStationId() != hasCode.getStationId());
-        if (notEq) {
-            throw new BusinessException("充电站名称或编码已存在");
-        }
-        if (allExists || !ObjectUtils.isEmpty(hasName)) {
-            //充电站存在，只是状态删除则修改状态保存
-            hasName.setStationState(ChargingStation.StationState.NORMAL);
-            boolean result = updateById(hasName);
-            //返回保存后的Stationid值，否则-1
-            if (result) {
-                return hasName.getStationId();
-            }
-            return -1;
-        }
-
-        //充电站存在，只是状态删除则修改状态保存
-        hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, vo.getStationCode()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            hasName.setStationState(ChargingStation.StationState.NORMAL);
-            boolean result = updateById(hasName);
-            //返回保存后的Stationid值，否则-1
-            if (result) {
-                return hasName.getStationId();
-            }
-            return -1;
-        }
-        //todo Cedar 不用考虑原有数据存在 新的站点  新的站点编码，站点名称可以与原来一致
+        //产生充电站编码并保存
+        String nextCode = nextStationCode();
+        //todo-ok cedar  不需要联合判断，数据库已经创建组合索引
+        chargingStation.setStationCode(nextCode);
+        //todo-ok Cedar 不用考虑原有数据存在 新的站点  新的站点编码，站点名称可以与原来一致
         //保存商户，商户状态初始化为正常
         chargingStation.setStationState(ChargingStation.StationState.NORMAL);
         boolean value = save(chargingStation);
