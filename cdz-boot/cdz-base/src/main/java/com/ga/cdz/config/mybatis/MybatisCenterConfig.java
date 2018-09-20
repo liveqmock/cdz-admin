@@ -38,7 +38,7 @@ public class MybatisCenterConfig {
     // 配置数据源
     @Primary
     @Bean(name = "dataSource")
-    public DataSource dataSource(DBCenterConfig  config) throws SQLException {
+    public DataSource dataSource(DBCenterConfig config) throws SQLException {
         MysqlXADataSource mysqlXaDataSource = new MysqlXADataSource();
         mysqlXaDataSource.setUrl(config.getUrl());
         mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(true);
@@ -89,10 +89,11 @@ public class MybatisCenterConfig {
 
     /**
      * 在代码中配置MybatisPlus替换掉application.yml中的配置
+     *
      * @return
      */
     @Bean
-    public  GlobalConfig globalConfiguration() {
+    public GlobalConfig globalConfiguration() {
         GlobalConfig.DbConfig conf = new GlobalConfig.DbConfig();
         //数据库自增
         conf.setIdType(IdType.ID_WORKER);
@@ -102,7 +103,7 @@ public class MybatisCenterConfig {
         conf.setTablePrefix("t_");
         //数据库类型
         conf.setDbType(DbType.MYSQL);
-        GlobalConfig  globalConfig=new GlobalConfig();
+        GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setDbConfig(conf);
         return globalConfig;
     }

@@ -15,14 +15,14 @@ import java.util.List;
  * @desc userCardInfoMapper
  */
 public interface UserCardInfoMapper extends BaseMapper<UserCardInfo> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-09 23:07
-   * @desc 查询会员卡信息
-   * @param Page
-   * @return
-   */
-  List<UserMemberCardInfoDTO> getMemberCardInfoListByPage(Page<UserMemberCardInfoDTO> page, @Param("card")UserMemberCardInfoVo userMemberCardInfoVo);
+    /**
+     * @param Page
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-09 23:07
+     * @desc 查询会员卡信息
+     */
+    List<UserMemberCardInfoDTO> getMemberCardInfoListByPage(Page<UserMemberCardInfoDTO> page, @Param("card") UserMemberCardInfoVo userMemberCardInfoVo);
 
     /**
      * @author:luqi

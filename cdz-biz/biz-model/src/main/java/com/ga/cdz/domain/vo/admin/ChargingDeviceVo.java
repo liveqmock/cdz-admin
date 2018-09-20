@@ -18,60 +18,60 @@ import java.util.Date;
 @Accessors(chain = true)
 public class ChargingDeviceVo {
 
-  /**
-   * 充电桩ID
-   */
-  @NotNull(groups = {IMChargingDeviceGroup.subList.class},message = "桩Id 不能为空")
-  private Integer deviceId;
+    /**
+     * 充电桩ID
+     */
+    @NotNull(groups = {IMChargingDeviceGroup.subList.class}, message = "桩Id 不能为空")
+    private Integer deviceId;
 
-  /**
-   * 充电站ID
-   */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,IMChargingDeviceGroup.list.class},message = "站ID 不能为空")
-  private Integer stationId;
+    /**
+     * 充电站ID
+     */
+    @NotNull(groups = {IMChargingDeviceGroup.insert.class, IMChargingDeviceGroup.list.class}, message = "站ID 不能为空")
+    private Integer stationId;
 
-  /**
-   * 充电桩编码
-   */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = " 充电桩编码不能为空")
-  private String deviceCode;
+    /**
+     * 充电桩编码
+     */
+    @NotNull(groups = {IMChargingDeviceGroup.insert.class}, message = " 充电桩编码不能为空")
+    private String deviceCode;
 
-  /**
-   * 充电桩名称
-   */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class},message = "充电桩名称 不能为空")
-  private String deviceName;
+    /**
+     * 充电桩名称
+     */
+    @NotNull(groups = {IMChargingDeviceGroup.insert.class}, message = "充电桩名称 不能为空")
+    private String deviceName;
 
-  /**
-   * 充电桩充电方式
-   */
-  @NotNull(groups = {IMChargingDeviceGroup.insert.class,},message = "充电方式 不能为空")
-  private Integer cgtypeId;
+    /**
+     * 充电桩充电方式
+     */
+    @NotNull(groups = {IMChargingDeviceGroup.insert.class,}, message = "充电方式 不能为空")
+    private Integer cgtypeId;
 
-  /**
-   * 设备功率
-   */
-  private Integer devicePower;
-  /**
-   * 设备最大电压
-   */
-  private Integer deviceVoltage;
-  /**
-   * 设备枪个数
-   */
-  private Integer deviceSubnum;
-  /**
-   * 设备状态
-   */
-  private ChargingDevice.DeviceState deviceState;
+    /**
+     * 设备功率
+     */
+    private Integer devicePower;
+    /**
+     * 设备最大电压
+     */
+    private Integer deviceVoltage;
+    /**
+     * 设备枪个数
+     */
+    private Integer deviceSubnum;
+    /**
+     * 设备状态
+     */
+    private ChargingDevice.DeviceState deviceState;
 
-  /**
-   * 更新时间
-   */
-  private Date updateDt;
+    /**
+     * 更新时间
+     */
+    private Date updateDt;
 
-  /**
-   * 插入时间
-   */
-  private Date insertDt;
+    /**
+     * 插入时间
+     */
+    private Date insertDt;
 }

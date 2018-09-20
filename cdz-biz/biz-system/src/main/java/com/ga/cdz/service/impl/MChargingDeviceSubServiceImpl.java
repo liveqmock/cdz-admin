@@ -17,11 +17,11 @@ public class MChargingDeviceSubServiceImpl extends ServiceImpl<ChargingDeviceSub
 
 
     /**
+     * @param chargingDeviceVo
+     * @return
      * @author huanghaohao
      * @date 2018-09-12 11:33
      * @desc 获取充电枪列表
-     * @param chargingDeviceVo
-     * @return
      */
     @Override
     public List<ChargingDeviceSubDTO> getChargingDeviceSubList(ChargingDeviceVo chargingDeviceVo) {

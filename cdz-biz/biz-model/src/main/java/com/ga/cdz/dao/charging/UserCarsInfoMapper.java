@@ -13,13 +13,13 @@ import java.util.List;
  * @desc userCars Mapper
  */
 public interface UserCarsInfoMapper extends BaseMapper<UserCarsInfo> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-10 11:11
-   * @desc 获取用户 car分页列表
-   * @param pageVo
-   * @return
-   */
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-10 11:11
+     * @desc 获取用户 car分页列表
+     */
     List<UserMemberCarsInfoDTO> getUserCarListPage(Page<UserMemberCarsInfoDTO> page);
 }
 

@@ -40,6 +40,7 @@ public class MAdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInf
 
     @Resource
     MRedisUtil mRedisUtil;
+
     /***
      *  如果不满足请直接 抛出异常
      * */

@@ -26,107 +26,107 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("t_charging_device")
 public class ChargingDevice extends Model<ChargingDevice> {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * 充电桩ID
-   */
-  @TableId(value = "device_id", type = IdType.AUTO)
-  private Integer deviceId;
+    /**
+     * 充电桩ID
+     */
+    @TableId(value = "device_id", type = IdType.AUTO)
+    private Integer deviceId;
 
-  @TableField("station_id")
-  private Integer stationId;
-  /**
-   * 充电桩编码
-   */
-  @TableField("device_code")
-  private String deviceCode;
-  /**
-   * 充电桩名称
-   */
-  @TableField("device_name")
-  private String deviceName;
-  /**
-   * 充电桩充电方式
-   */
-  @TableField("cgtype_id")
-  private Integer cgtypeId;
-  /**
-   * 设备功率
-   */
-  @TableField("device_power")
-  private Integer devicePower;
-  /**
-   * 设备最大电压
-   */
-  @TableField("device_voltage")
-  private Integer deviceVoltage;
-  /**
-   * 设备枪个数
-   */
-  @TableField("device_subnum")
-  private Integer deviceSubnum;
+    @TableField("station_id")
+    private Integer stationId;
+    /**
+     * 充电桩编码
+     */
+    @TableField("device_code")
+    private String deviceCode;
+    /**
+     * 充电桩名称
+     */
+    @TableField("device_name")
+    private String deviceName;
+    /**
+     * 充电桩充电方式
+     */
+    @TableField("cgtype_id")
+    private Integer cgtypeId;
+    /**
+     * 设备功率
+     */
+    @TableField("device_power")
+    private Integer devicePower;
+    /**
+     * 设备最大电压
+     */
+    @TableField("device_voltage")
+    private Integer deviceVoltage;
+    /**
+     * 设备枪个数
+     */
+    @TableField("device_subnum")
+    private Integer deviceSubnum;
 
-  @TableField("device_state")
-  private DeviceState deviceState;
-  /**
-   * 更新时间
-   */
-  @TableField("update_dt")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-  private Date updateDt;
-  /**
-   * 插入时间
-   */
-  @TableField("insert_dt")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-  private Date insertDt;
+    @TableField("device_state")
+    private DeviceState deviceState;
+    /**
+     * 更新时间
+     */
+    @TableField("update_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updateDt;
+    /**
+     * 插入时间
+     */
+    @TableField("insert_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date insertDt;
 
 
-  @Override
-  protected Serializable pkVal() {
-    return this.deviceId;
-  }
+    @Override
+    protected Serializable pkVal() {
+        return this.deviceId;
+    }
 
-  public enum DeviceState implements IEnum<Integer> {
-    ERROR(0, "故障"),
-    IDLE(1, "空闲"),
-    USING(2, "使用中");
+    public enum DeviceState implements IEnum<Integer> {
+        ERROR(0, "故障"),
+        IDLE(1, "空闲"),
+        USING(2, "使用中");
 
-    private Integer code;
-    private String desc;
+        private Integer code;
+        private String desc;
 
-    DeviceState(int code, String desc) {
-      this.code = code;
-      this.desc = desc;
+        DeviceState(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        @Override
+        public Integer getValue() {
+            return code;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
+        }
     }
 
     @Override
-    public Integer getValue() {
-      return code;
+    public String toString() {
+        return "ChargingDevice{" +
+                ", deviceId=" + deviceId +
+                ", stationId=" + stationId +
+                ", deviceCode=" + deviceCode +
+                ", deviceName=" + deviceName +
+                ", cgtypeId=" + cgtypeId +
+                ", devicePower=" + devicePower +
+                ", deviceSubnum=" + deviceSubnum +
+                ", deviceState=" + deviceState +
+                ", updateDt=" + updateDt +
+                ", insertDt=" + insertDt +
+                "}";
     }
-
-    @JsonValue
-    public String getDesc() {
-      return desc;
-    }
-  }
-
-  @Override
-  public String toString() {
-    return "ChargingDevice{" +
-            ", deviceId=" + deviceId +
-            ", stationId=" + stationId +
-            ", deviceCode=" + deviceCode +
-            ", deviceName=" + deviceName +
-            ", cgtypeId=" + cgtypeId +
-            ", devicePower=" + devicePower +
-            ", deviceSubnum=" + deviceSubnum +
-            ", deviceState=" + deviceState +
-            ", updateDt=" + updateDt +
-            ", insertDt=" + insertDt +
-            "}";
-  }
 }

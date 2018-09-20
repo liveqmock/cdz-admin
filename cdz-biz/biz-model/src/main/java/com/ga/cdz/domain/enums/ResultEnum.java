@@ -5,7 +5,7 @@ package com.ga.cdz.domain.enums;
  * @description: 返回结果枚举类
  * @date:2018/9/4_15:53
  */
-public enum  ResultEnum {
+public enum ResultEnum {
     //未知错误 code可以自定义
     UNKONW_ERROR(-1, "未知错误"),
     //成功

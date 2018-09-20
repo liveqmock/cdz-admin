@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberRankController {
 
 
+    @GetMapping("/list")
+    public Result getUserList() {
 
-  @GetMapping("/list")
-  public Result getUserList(){
-
-    return Result.success();
-  }
+        return Result.success();
+    }
 
 
 }

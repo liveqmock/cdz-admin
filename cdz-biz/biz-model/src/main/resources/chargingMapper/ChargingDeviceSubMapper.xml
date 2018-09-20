@@ -12,7 +12,7 @@
         <result column="insert_dt" property="insertDt"/>
     </resultMap>
     <resultMap id="chargingDeviceSubDetail" type="com.ga.cdz.domain.dto.admin.ChargingDeviceSubDTO">
-    <result column="device_sub_id" property="deviceSubId"></result>
+        <result column="device_sub_id" property="deviceSubId"></result>
         <result column="device_id" property="deviceId"></result>
         <result column="device_sub_name" property="deviceSubName"></result>
         <result column="device_sub_state" property="deviceSubState"/>
@@ -42,7 +42,8 @@
         usr.user_id
         FROM
         t_charging_device_sub sub
-        LEFT JOIN (select * from t_charging_order where 1=1 and order_state=2) orders ON orders.device_sub_id = sub.device_sub_id
+        LEFT JOIN (select * from t_charging_order where 1=1 and order_state=2) orders ON orders.device_sub_id =
+        sub.device_sub_id
         LEFT join t_user_info usr on usr.user_id=orders.user_id
         where 1=1
         <if test="device.deviceId != null">

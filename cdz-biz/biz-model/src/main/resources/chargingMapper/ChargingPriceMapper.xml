@@ -47,7 +47,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        station_id, price_name, price_type, price_idx, price_begin_dt, price_end_dt, charging_price, price_parking, service_price, insert_dt
+        station_id, price_name, price_type, price_idx, price_begin_dt, price_end_dt, charging_price, price_parking,
+        service_price, insert_dt
     </sql>
     <select id="getChargingPricePage" resultMap="chargingPriceDTO" parameterType="java.util.Map">
         SELECT
@@ -107,7 +108,7 @@
         <if test="param.stationName!=null">
             AND station.station_name like '%${param.stationName}%'
         </if>
-        <if test="shop!=null" >
+        <if test="shop!=null">
             <if test="shop.shopId!=null">
                 AND station.shop_id='#{shop.shopId}'
             </if>

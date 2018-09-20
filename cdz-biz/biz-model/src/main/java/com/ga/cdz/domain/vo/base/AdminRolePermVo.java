@@ -18,42 +18,42 @@ import java.util.List;
 @Accessors(chain = true)
 public class AdminRolePermVo {
 
-  /**
-   * 管理员角色ID
-   */
-  @NotNull(groups = {IMAdminRoleGroup.Update.class} ,message ="角色ID 不能为空")
-  private Integer roleId;
-  /**
-   * 管理员角色名称
-   */
-  private String roleName;
+    /**
+     * 管理员角色ID
+     */
+    @NotNull(groups = {IMAdminRoleGroup.Update.class}, message = "角色ID 不能为空")
+    private Integer roleId;
+    /**
+     * 管理员角色名称
+     */
+    private String roleName;
 
-  /**
-   *  该角色的权限信息
-   * */
-  /**
-   * 权限ID
-   */
+    /**
+     *  该角色的权限信息
+     * */
+    /**
+     * 权限ID
+     */
 
-  @NotNull(groups={IMAdminRoleGroup.Update.class},message="权限ID 不能为空")
-  private Integer permId;
-  /**
-   * 权限名称
-   */
-  private String permName;
-  /**
-   * 权限父Id
-   */
-  private Integer permParentId;
-  /**
-   * 权限 有效性
-   */
-  private Boolean isValid;
+    @NotNull(groups = {IMAdminRoleGroup.Update.class}, message = "权限ID 不能为空")
+    private Integer permId;
+    /**
+     * 权限名称
+     */
+    private String permName;
+    /**
+     * 权限父Id
+     */
+    private Integer permParentId;
+    /**
+     * 权限 有效性
+     */
+    private Boolean isValid;
 
-  /**
-   * 子权限 集合
-   */
-  private List child;
+    /**
+     * 子权限 集合
+     */
+    private List child;
 
 
 }

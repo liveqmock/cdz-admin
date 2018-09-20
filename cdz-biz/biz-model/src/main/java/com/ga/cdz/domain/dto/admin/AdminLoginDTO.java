@@ -35,8 +35,8 @@ public class AdminLoginDTO {
     private String adminAccount;
 
     /**
-     *  权限code集合
-     * */
+     * 权限code集合
+     */
     private List<String> adminPermissionList;
 
 }

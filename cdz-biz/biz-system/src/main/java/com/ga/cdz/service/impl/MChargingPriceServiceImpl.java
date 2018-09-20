@@ -44,20 +44,20 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
     private ChargingStationMapper chargingStationMapper;
 
     @Override
-    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo,String name) {
+    public Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo, String name) {
         ChargingPriceSelectVo param = new ChargingPriceSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
         //获取分页信息
         Page<ChargingPriceDTO> page = new Page<ChargingPriceDTO>(vo.getIndex(), vo.getSize());
         //查询
-        List<ChargingPriceDTO> lists=null;
-        List<AdminInfo> list=adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName,name));
-        if(list.size()>0){
-           lists= baseMapper.getChargingPricePage(page, param,new ChargingShop());
-        }else{
-            ChargingShop chargingShop=chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin,name));
+        List<ChargingPriceDTO> lists = null;
+        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        if (list.size() > 0) {
+            lists = baseMapper.getChargingPricePage(page, param, new ChargingShop());
+        } else {
+            ChargingShop chargingShop = chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, name));
 
-            lists=baseMapper.getChargingPricePage(page,param,chargingShop);
+            lists = baseMapper.getChargingPricePage(page, param, chargingShop);
         }
         page.setRecords(lists);
         return page;

@@ -35,7 +35,7 @@ public class Operators extends Model<Operators> {
     @TableId(value = "operators_id", type = IdType.AUTO)
     private Integer operatorsId;
     /**
-     *  运营商名称
+     * 运营商名称
      */
     @TableField("operators_name")
     private String operatorsName;

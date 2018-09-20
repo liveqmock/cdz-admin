@@ -221,11 +221,11 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     }
 
     /**
+     * @param userId 用户id
+     * @return
      * @Author: liuyi
      * @Description: 搜索出该用户的全部订单
      * @Date: 2018/9/19_14:36
-     * @param userId 用户id
-     * @return
      */
     private List<ChargingOrderListDTO> getChargingOrderList(Integer userId) {
         //检测缓存
@@ -235,24 +235,24 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
         //List<ChargingOrder> userOrderList=chargingOrderList.stream().filter(chargingOrder ->chargingOrder.getUserId().equals(userId)).collect(Collectors.toList());
         List<ChargingOrderListDTO> ChargingOrderListDTOList = chargingOrderList.stream().filter(chargingOrder -> chargingOrder.getUserId().equals(userId)).map(chargingOrder -> {
             ChargingOrderListDTO chargingOrderListDTO = new ChargingOrderListDTO();
-                chargingOrderListDTO.setChargingOrder(chargingOrder);
-                ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, chargingOrder.getStationId().toString());
-                List<ChargingStationAttach> chargingStationAttach = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ATTACH, chargingOrder.getStationId().toString());
-                chargingOrderListDTO.setStationName(chargingStation.getStationName());
-                if (!chargingStationAttach.isEmpty() && chargingStationAttach.size() > 0) {
-                    chargingOrderListDTO.setAttachPath(stationUrl + chargingStationAttach.get(0).getAttachPath());
-                }
-                return chargingOrderListDTO;
+            chargingOrderListDTO.setChargingOrder(chargingOrder);
+            ChargingStation chargingStation = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_STATION, chargingOrder.getStationId().toString());
+            List<ChargingStationAttach> chargingStationAttach = mRedisUtil.getHash(RedisConstant.TABLE_CHARGING_ATTACH, chargingOrder.getStationId().toString());
+            chargingOrderListDTO.setStationName(chargingStation.getStationName());
+            if (!chargingStationAttach.isEmpty() && chargingStationAttach.size() > 0) {
+                chargingOrderListDTO.setAttachPath(stationUrl + chargingStationAttach.get(0).getAttachPath());
+            }
+            return chargingOrderListDTO;
         }).collect(Collectors.toList());
         return ChargingOrderListDTOList;
     }
 
     /**
+     * @param chargingOrder 订单信息
+     * @return 返回状态
      * @Author: liuyi
      * @Description: 插入数据库
      * @Date: 2018/9/17_14:02
-     * @param chargingOrder 订单信息
-     * @return 返回状态
      */
     @Transactional
     Integer insertAnOrder(ChargingOrder chargingOrder) {
@@ -261,24 +261,24 @@ public class ChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, C
     }
 
     /**
-     * @Author: liuyi
-     * @Description: 生成OrderId
-     * @Date: 2018/9/17_13:35
      * @param userId 用户id
      * @param date   下单时间
      * @return 生成的OrderId
+     * @Author: liuyi
+     * @Description: 生成OrderId
+     * @Date: 2018/9/17_13:35
      */
     private String generateOrderId(int userId, long date) {
         return String.valueOf(userId) + String.valueOf(date / 1000);
     }
 
     /**
-     * @author:luqi
-     * @description: Time类型转换为当天的时间戳
-     * @date:2018/9/14_14:19
      * @param time
      * @param nowDate
      * @return
+     * @author:luqi
+     * @description: Time类型转换为当天的时间戳
+     * @date:2018/9/14_14:19
      */
     private Long timeToNowDateTimeLong(Time time, Date nowDate) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");

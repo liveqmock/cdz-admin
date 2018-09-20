@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author:luqi
- * @description:  请求回包
+ * @description: 请求回包
  * @date:2018/9/4_16:00
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

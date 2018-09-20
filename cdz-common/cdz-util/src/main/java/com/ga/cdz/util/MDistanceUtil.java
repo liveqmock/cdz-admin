@@ -19,8 +19,8 @@ public class MDistanceUtil {
     /**
      * 根据两个位置的经纬度，来计算两地的距离
      *
-     * @param longitudeUser 用户位置经度
-     * @param latitudeUser  用户纬度
+     * @param longitudeUser    用户位置经度
+     * @param latitudeUser     用户纬度
      * @param longitudeStation 站点经度
      * @param latitudeStation  站点纬度
      * @return 返回距离单位为千米

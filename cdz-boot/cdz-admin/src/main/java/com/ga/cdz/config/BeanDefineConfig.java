@@ -30,7 +30,6 @@ public class BeanDefineConfig implements ApplicationListener<ApplicationContextE
     IMAdminRolePermissionService mAdminRolePermissionService;
 
 
-
     @Override
     public void onApplicationEvent(ApplicationContextEvent applicationContextEvent) {
         if (applicationContextEvent.getApplicationContext().getParent() == null) {

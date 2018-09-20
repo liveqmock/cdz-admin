@@ -17,12 +17,12 @@ import java.util.List;
  * @since 2018-09-11
  */
 public interface ChargingDeviceSubMapper extends SuperMapper<ChargingDeviceSub> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 10:51
-   * @desc 获取充电枪列表
-   */
-    List<ChargingDeviceSubDTO> getChargingDeviceSubByDeviceId(@Param("device")ChargingDeviceVo chargingDeviceVo);
+    /**
+     * @author huanghaohao
+     * @date 2018-09-12 10:51
+     * @desc 获取充电枪列表
+     */
+    List<ChargingDeviceSubDTO> getChargingDeviceSubByDeviceId(@Param("device") ChargingDeviceVo chargingDeviceVo);
 
 
 }

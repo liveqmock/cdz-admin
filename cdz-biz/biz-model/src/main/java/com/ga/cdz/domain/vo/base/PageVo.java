@@ -18,5 +18,5 @@ public class PageVo<T> {
     private Integer index;
     @NotNull(message = "size不能为空")
     private Integer size;
-    private  T data;
+    private T data;
 }

@@ -26,66 +26,65 @@ import java.util.Date;
 @TableName("t_charging_station_attach")
 public class ChargingStationAttach extends Model<ChargingStationAttach> {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * 充电站ID
-   */
-  @TableId(value = "station_id", type = IdType.NONE)
-  private Integer stationId;
-  /**
-   * 附件编号
-   */
-  @TableField("attach_idx")
-  private Integer attachIdx;
-  /**
-   * 附件图片路径
-   */
-  @TableField("attach_path")
-  private String attachPath;
-  /**
-   * 附件描述
-   */
-  @TableField("attach_desc")
-  private String attachDesc;
-  /**
-   * 附件状态
-   */
-  @TableField("attach_state")
-  private Integer attachState;
-  /**
-   * 更新时间
-   */
-  @TableField("update_dt")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-  private Date updateDt;
-  /**
-   * 插入时间
-   */
-  @TableField("insert_dt")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-  private Date insertDt;
+    /**
+     * 充电站ID
+     */
+    @TableId(value = "station_id", type = IdType.NONE)
+    private Integer stationId;
+    /**
+     * 附件编号
+     */
+    @TableField("attach_idx")
+    private Integer attachIdx;
+    /**
+     * 附件图片路径
+     */
+    @TableField("attach_path")
+    private String attachPath;
+    /**
+     * 附件描述
+     */
+    @TableField("attach_desc")
+    private String attachDesc;
+    /**
+     * 附件状态
+     */
+    @TableField("attach_state")
+    private Integer attachState;
+    /**
+     * 更新时间
+     */
+    @TableField("update_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updateDt;
+    /**
+     * 插入时间
+     */
+    @TableField("insert_dt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date insertDt;
 
 
+    @Override
+    protected Serializable pkVal() {
+        return this.stationId;
+    }
 
-  @Override
-  protected Serializable pkVal() {
-    return this.stationId;
-  }
-
-  @Override
-  public String toString() {
-    return "ChargingStationAttach{" +
-            ", stationId=" + stationId +
-            ", attachIdx=" + attachIdx +
-            ", attachPath=" + attachPath +
-            ", attachDesc=" + attachDesc +
-            ", attachState=" + attachState +
-            ", updateDt=" + updateDt +
-            ", insertDt=" + insertDt +
-            "}";
-  }
+    @Override
+    public String toString() {
+        return "ChargingStationAttach{" +
+                ", stationId=" + stationId +
+                ", attachIdx=" + attachIdx +
+                ", attachPath=" + attachPath +
+                ", attachDesc=" + attachDesc +
+                ", attachState=" + attachState +
+                ", updateDt=" + updateDt +
+                ", insertDt=" + insertDt +
+                "}";
+    }
 
 }

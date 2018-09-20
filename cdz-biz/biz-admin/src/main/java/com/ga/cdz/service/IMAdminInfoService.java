@@ -17,46 +17,46 @@ import com.ga.cdz.domain.vo.base.PageVo;
  */
 public interface IMAdminInfoService extends IService<AdminInfo> {
 
-     /**
-      * @author:luqi
-      * @description: 添加AdminInfo
-      * @date:2018/9/5_16:22
-      * @param: AdminInfoVo
-      * @return: boolean
-      */
-     boolean saveAdminIno(AdminInfoVo adminInfoVo);
+    /**
+     * @author:luqi
+     * @description: 添加AdminInfo
+     * @date:2018/9/5_16:22
+     * @param: AdminInfoVo
+     * @return: boolean
+     */
+    boolean saveAdminIno(AdminInfoVo adminInfoVo);
 
-     /**
-      * @author:luqi
-      * @description: 修改AdminInfo 通过id
-      * @date:2018/9/5_16:22
-      * @param: AdminInfoVo
-      * @return: boolean
-      */
-     boolean updateAdminInfoById(AdminInfoVo adminInfoVo);
+    /**
+     * @author:luqi
+     * @description: 修改AdminInfo 通过id
+     * @date:2018/9/5_16:22
+     * @param: AdminInfoVo
+     * @return: boolean
+     */
+    boolean updateAdminInfoById(AdminInfoVo adminInfoVo);
 
-     /**
-      * @author:luqi
-      * @description: 修改AdminInfo 通过id
-      * @date:2018/9/5_16:22
-      * @param: AdminInfoVo
-      * @return: boolean
-      */
-     IPage<AdminInfo> getAdminInfoPageByCon(PageVo<AdminInfoVo> vo);
+    /**
+     * @author:luqi
+     * @description: 修改AdminInfo 通过id
+     * @date:2018/9/5_16:22
+     * @param: AdminInfoVo
+     * @return: boolean
+     */
+    IPage<AdminInfo> getAdminInfoPageByCon(PageVo<AdminInfoVo> vo);
 
-     /**
-      * @author:luqi
-      * @description:  删除通过id
-      * @date:2018/9/5_16:22
-      * @param: AdminInfoVo
-      * @return: boolean
-      */
-     boolean removeAdminInfoById(Integer id);
+    /**
+     * @author:luqi
+     * @description: 删除通过id
+     * @date:2018/9/5_16:22
+     * @param: AdminInfoVo
+     * @return: boolean
+     */
+    boolean removeAdminInfoById(Integer id);
 
 
-     /***
-      *  测试关联分页查询
-      * */
-     Page<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo);
+    /***
+     *  测试关联分页查询
+     * */
+    Page<AdminDemoDTO> getAdminDemoDTOPage(PageVo<AdminDemoDTO> pageVo);
 
 }

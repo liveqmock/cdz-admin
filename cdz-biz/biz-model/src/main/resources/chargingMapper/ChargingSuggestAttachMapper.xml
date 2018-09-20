@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingSuggestAttach">
-        <id column="suggest_id" property="suggestId" />
-        <result column="suggest_path" property="suggestPath" />
-        <result column="insert_dt" property="insertDt" />
+        <id column="suggest_id" property="suggestId"/>
+        <result column="suggest_path" property="suggestPath"/>
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

@@ -26,8 +26,8 @@ public interface AdminInfoMapper extends SuperMapper<AdminInfo> {
     List<String> selectAdminPermCodeListById(Integer adminId);
 
     /**
-     *  关联分页测试
-     * */
+     * 关联分页测试
+     */
     List<AdminDemoDTO> selectAdminDemoDTOPage(Page<AdminDemoDTO> page);
 
 }

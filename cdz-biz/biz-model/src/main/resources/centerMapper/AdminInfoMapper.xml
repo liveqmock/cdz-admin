@@ -4,14 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.AdminInfo">
-        <id column="admin_id" property="adminId" />
-        <result column="admin_name" property="adminName" />
-        <result column="admin_account" property="adminAccount" />
-        <result column="admin_pwd" property="adminPwd" />
-        <result column="admin_tel" property="adminTel" />
-        <result column="admin_sex" property="adminSex" />
-        <result column="admin_state" property="adminState" />
-        <result column="insert_dt" property="insertDt" />
+        <id column="admin_id" property="adminId"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="admin_account" property="adminAccount"/>
+        <result column="admin_pwd" property="adminPwd"/>
+        <result column="admin_tel" property="adminTel"/>
+        <result column="admin_sex" property="adminSex"/>
+        <result column="admin_state" property="adminState"/>
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
     <resultMap id="AdminDemoDTOMap" type="com.ga.cdz.domain.dto.admin.AdminDemoDTO">

@@ -32,6 +32,7 @@ public interface IMChargingStationService extends IService<ChargingStation> {
      * @param: PageVo
      * @return: IPage<ChargingStationDTO>
      */
+    //todo Cedar 此接口没有使用请删除
     IPage<ChargingStationDTO> getStationPageByCon(PageVo<ChargingStationSelectVo> vo);
 
     /**

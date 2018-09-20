@@ -16,13 +16,13 @@ import java.util.List;
 public class ShiroConfig extends BaseShiroConfig {
 
 
-     /**
-      * @author:luqi
-      * @description: 重写基类的生成自定义realm方法
-      * @date:2018/9/3_14:29
-      * @param:
-      * @return: 自定义的realm
-      */
+    /**
+     * @author:luqi
+     * @description: 重写基类的生成自定义realm方法
+     * @date:2018/9/3_14:29
+     * @param:
+     * @return: 自定义的realm
+     */
     @Override
     public BaseCustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
@@ -30,13 +30,13 @@ public class ShiroConfig extends BaseShiroConfig {
     }
 
 
-     /**
-      * @author:luqi
-      * @description:  加入不需要过滤的路由
-      * @date:2018/9/3_14:29
-      * @param:
-      * @return: list路由列表
-      */
+    /**
+     * @author:luqi
+     * @description: 加入不需要过滤的路由
+     * @date:2018/9/3_14:29
+     * @param:
+     * @return: list路由列表
+     */
     @Override
     public List<String> filterByAnon() {
         List<String> list = new ArrayList<>();

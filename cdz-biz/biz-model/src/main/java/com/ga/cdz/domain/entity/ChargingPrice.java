@@ -98,7 +98,6 @@ public class ChargingPrice extends Model<ChargingPrice> {
     private Date insertDt;
 
 
-
     @Override
     protected Serializable pkVal() {
         return this.stationId;
@@ -131,6 +130,7 @@ public class ChargingPrice extends Model<ChargingPrice> {
             return this.desc;
         }
     }
+
     /**
      * @author:wanzhongsu
      * @description: 顺序枚举

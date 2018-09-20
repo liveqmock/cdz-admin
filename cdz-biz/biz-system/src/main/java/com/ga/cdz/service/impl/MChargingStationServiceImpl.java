@@ -41,6 +41,8 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
      */
     @Resource
     DistrictMapper districtMapper;
+
+    //todo Cedar 不需要的依赖请删除
     /**
      * 缓存
      */
@@ -57,22 +59,23 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
 
 
     @Override
-    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo,String name) {
+    public IPage<ChargingStationDTO> getStationPage(PageVo<ChargingStationSelectVo> vo, String name) {
         //构建分页信息
         Page<ChargingStationDTO> page = new Page<>(vo.getIndex(), vo.getSize());
         //复制
         ChargingStationSelectVo param = new ChargingStationSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
-        //分页查询
-
-        List<AdminInfo> list=adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName,name));
-        List<ChargingStationDTO> lists=null;
-        if(list.size()>0){
-         //为管理员帐号
-           lists = baseMapper.getStationList(page, param,new ChargingShop() );
-        }else{
+        //todo huanghaohao 根据Admin的 adminAccount来判断，adminName判断不可行，此处应返回 一个AdminInfo对象 而不是 List集合
+        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        //todo Cedar 此次不需要初始化 来自IDEA的提示
+        List<ChargingStationDTO> lists = null;
+        //todo huanghaohao 判断修改
+        if (list.size() > 0) {
+            //为管理员帐号
+            lists = baseMapper.getStationList(page, param, new ChargingShop());
+        } else {
             ChargingShop chargingShop = chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, name));
-          lists = baseMapper.getStationList(page,param,chargingShop);
+            lists = baseMapper.getStationList(page, param, chargingShop);
         }
         //查询后跨库查询区域名称
         lists.forEach(item -> {
@@ -106,14 +109,17 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
     }
 
     @Override
-    public List<ChargingStation> getStationList(ChargingStationVo vo ) {
+    public List<ChargingStation> getStationList(ChargingStationVo vo) {
         List<ChargingStation> chargingStations = baseMapper.selectList(new QueryWrapper<ChargingStation>().lambda().like(ChargingStation::getStationName, vo.getStationName()));
         return chargingStations;
     }
 
+
+    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
     @Override
     @Transactional
     public boolean updateStationById(ChargingStationVo vo) {
+        //todo Cendar 站点名称和站点编号不能修改 请做条件判断
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //验证充电站名称和编码是否已经存在
@@ -130,13 +136,14 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         }
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
-        if(result!=0){
+        if (result != 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
+    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
     @Override
     @Transactional
     public boolean deleteStationById(ChargingStationVo vo) {
@@ -152,6 +159,9 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         return result;
     }
 
+
+    //todo Cendar 把方法返回类型修改为void ，业务异常请使用 BusinessException
+    //todo Cendar 添加站点 站点编号从0000开始，且该参数由后台自动生成，前台不需要传参，vo里面stationCode，添加时候不需要验证
     @Override
     @Transactional
     public int saveStation(ChargingStationVo vo) {
@@ -167,6 +177,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         if (!ObjectUtils.isEmpty(hasCode) && hasCode.getStationState() == ChargingStation.StationState.NORMAL) {
             throw new BusinessException("充电站编码已存在");
         }
+        //todo cedar  不需要联合判断，数据库已经创建组合索引
         boolean allExists = !ObjectUtils.isEmpty(hasName) && !ObjectUtils.isEmpty(hasCode);
         boolean notEq = allExists && (hasName.getStationId() != hasCode.getStationId());
         if (notEq) {
@@ -194,6 +205,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
             }
             return -1;
         }
+        //todo Cedar 不用考虑原有数据存在 新的站点  新的站点编码，站点名称可以与原来一致
         //保存商户，商户状态初始化为正常
         chargingStation.setStationState(ChargingStation.StationState.NORMAL);
         boolean value = save(chargingStation);

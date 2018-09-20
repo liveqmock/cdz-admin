@@ -28,11 +28,11 @@ public class ChargingOrderController extends AbstractBaseController {
     IChargingOrderService chargingOrderService;
 
     /**
+     * @param vo ChargingOrderPageListVo
+     * @return
      * @Author: liuyi
      * @Description: 获取全部订单的分页信息
      * @Date: 2018/9/19_13:43
-     * @param vo ChargingOrderPageListVo
-     * @return
      */
     @PostMapping("/all/list")
     public Result getOrderListOfAllPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
@@ -42,11 +42,11 @@ public class ChargingOrderController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingOrderPageListVo
+     * @return
      * @Author: liuyi
      * @Description: 获取待使用订单的分页信息
      * @Date: 2018/9/19_14:55
-     * @param vo ChargingOrderPageListVo
-     * @return
      */
     @PostMapping("/init/list")
     public Result getOrderListOfInitPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
@@ -56,11 +56,11 @@ public class ChargingOrderController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingOrderPageListVo
+     * @return
      * @Author: liuyi
      * @Description: 获取待支付订单的分页信息
      * @Date: 2018/9/19_14:55
-     * @param vo ChargingOrderPageListVo
-     * @return
      */
     @PostMapping("/paying/list")
     public Result getOrderListOfPayingPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
@@ -70,11 +70,11 @@ public class ChargingOrderController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingOrderPageListVo
+     * @return
      * @Author: liuyi
      * @Description: 获取待评价订单的分页信息
      * @Date: 2018/9/19_14:57
-     * @param vo ChargingOrderPageListVo
-     * @return
      */
     @PostMapping("/payed/list")
     public Result getOrderListOfPayedPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
@@ -84,11 +84,11 @@ public class ChargingOrderController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingOrderPageListVo
+     * @return
      * @Author: liuyi
      * @Description: 获取退款/售后订单的分页信息
      * @Date: 2018/9/19_15:00
-     * @param vo ChargingOrderPageListVo
-     * @return
      */
     @PostMapping("/refunding/list")
     public Result getOrderListOfRefundingPageList(@RequestBody ChargingOrderPageListVo vo, BindingResult bindingResult) {
@@ -98,11 +98,11 @@ public class ChargingOrderController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingOrderInitVo
+     * @return
      * @Author: liuyi
      * @Description: 下单
      * @Date: 2018/9/19_13:44
-     * @param vo ChargingOrderInitVo
-     * @return
      */
     @PostMapping("/price")
     public Result placeOrderByPrice(@RequestBody ChargingOrderInitVo vo, BindingResult bindingResult) {

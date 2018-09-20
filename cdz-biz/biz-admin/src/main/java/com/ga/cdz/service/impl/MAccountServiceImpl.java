@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @date:2018/9/4_10:54
  */
 @Service("mAccountService")
-public class MAccountServiceImpl extends ServiceImpl<AdminInfoMapper,AdminInfo> implements IMAccountService {
+public class MAccountServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInfo> implements IMAccountService {
 
     /***工具类***/
     @Resource
@@ -38,17 +38,17 @@ public class MAccountServiceImpl extends ServiceImpl<AdminInfoMapper,AdminInfo> 
 
     @Override
     public AdminLoginDTO login(AdminInfoVo adminInfoVo) {
-        AdminInfo adminInfo=new AdminInfo();
-        BeanUtils.copyProperties(adminInfoVo,adminInfo);
+        AdminInfo adminInfo = new AdminInfo();
+        BeanUtils.copyProperties(adminInfoVo, adminInfo);
         //密码MD5
-        String md5Pwd= mUtil.MD5(adminInfo.getAdminPwd());
+        String md5Pwd = mUtil.MD5(adminInfo.getAdminPwd());
         AdminInfo hasAdminInfo = baseMapper.selectOne(new QueryWrapper<AdminInfo>().lambda()
                 .eq(AdminInfo::getAdminAccount, adminInfo.getAdminAccount()).eq(AdminInfo::getAdminPwd, md5Pwd));
-        if(ObjectUtils.isEmpty(hasAdminInfo)){
+        if (ObjectUtils.isEmpty(hasAdminInfo)) {
             throw new BusinessException("账号或密码错误");
         }
         //token 生成 uuid 在md5
-        String token=mUtil.MD5(mUtil.UUID16());
+        String token = mUtil.MD5(mUtil.UUID16());
         //redisTokenKey
         String redisTokenKey = RedisConstant.ADMIN_TOKEN + hasAdminInfo.getAdminAccount();
         //权限rediskey

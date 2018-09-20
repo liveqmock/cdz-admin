@@ -21,6 +21,7 @@ public interface IChargingRedisService {
      * @Date: 2018/9/19_9:50
      */
     void cacheChargingStationDetail();
+
     /**
      * @Author: liuyi
      * @Description: 缓存一条订单信息
@@ -29,11 +30,11 @@ public interface IChargingRedisService {
     void cacheOneChargingOrder(ChargingOrder chargingOrder);
 
     /**
+     * @param
+     * @return
      * @Author: liuyi
      * @Description: 缓存一条订单评论
      * @Date: 2018/9/18_11:03
-     * @param
-     * @return
      */
     void cacheOneChargingOrderComment(ChargingOrderComment chargingOrderComment);
 

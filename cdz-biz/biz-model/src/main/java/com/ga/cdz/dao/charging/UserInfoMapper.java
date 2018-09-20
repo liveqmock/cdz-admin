@@ -14,7 +14,6 @@ import java.util.List;
  * @author huanghaohao
  * @date 2018年9月7日 18点03分
  * @desc 会员信息的查询Mapper
- *
  */
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
@@ -36,22 +35,22 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
      */
     MyInfoDTO getMyInfoDTOById(Integer id);
 
-  /**
-   * @author huanghaohao
-   * @desc 分页查询 会员用户信息
-   * @date 2018年9月7日 18点05分
-   * @return
-   */
-    List<UserMemberDTO> getUserMemberListPage( Page<UserMemberDTO> page,@Param("user")UserInfoVo userInfoVo);
+    /**
+     * @return
+     * @author huanghaohao
+     * @desc 分页查询 会员用户信息
+     * @date 2018年9月7日 18点05分
+     */
+    List<UserMemberDTO> getUserMemberListPage(Page<UserMemberDTO> page, @Param("user") UserInfoVo userInfoVo);
 
-  /**
-   * @author huanghaohao
-   * @date 2018年9月9日 22点31分
-   * @desc 分页查询企业会员列表
-   * @param
-   * @return
-   */
-  List<UserMemberDTO> getCompanyMemberListPage(Page<UserMemberDTO> page, @Param("user")UserInfoVo userInfoVo);
+    /**
+     * @param
+     * @return
+     * @author huanghaohao
+     * @date 2018年9月9日 22点31分
+     * @desc 分页查询企业会员列表
+     */
+    List<UserMemberDTO> getCompanyMemberListPage(Page<UserMemberDTO> page, @Param("user") UserInfoVo userInfoVo);
 
 
 }

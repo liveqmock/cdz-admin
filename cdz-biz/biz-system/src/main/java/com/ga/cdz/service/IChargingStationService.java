@@ -37,30 +37,30 @@ public interface IChargingStationService extends IService<ChargingStation> {
     List<ChargingStationPageDTO> getNearStationPage(ChargingStationPageVo vo);
 
     /**
+     * @param vo ChargingStationDetailVo
+     * @return ChargingStationDTO
      * @Author: liuyi
      * @Description: 获取充电站信息
      * @Date: 2018/9/17_14:53
-     * @param vo ChargingStationDetailVo
-     * @return ChargingStationDTO
      */
     ChargingStationDetailDTO getChargingStationDetail(ChargingStationDetailVo vo);
 
-     /**
-      * @Author: liuyi
-      * @Description: 获取充电站终端
-      * @Date: 2018/9/17_15:44
-      * @param vo ChargingStationDetailVo
-      * @return List<ChargingStationTerminalDTO>
-      */
-     List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationDetailVo vo);
+    /**
+     * @param vo ChargingStationDetailVo
+     * @return List<ChargingStationTerminalDTO>
+     * @Author: liuyi
+     * @Description: 获取充电站终端
+     * @Date: 2018/9/17_15:44
+     */
+    List<ChargingStationTerminalDTO> getChargingStationTerminal(ChargingStationDetailVo vo);
 
-     /**
-      * @Author: liuyi
-      * @Description: 获取充电站评论
-      * @Date: 2018/9/17_16:55
-      * @param vo ChargingStationDetailVo
-      * @return List<ChargingStationCommentDTO>
-      */
-     List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationDetailVo vo);
+    /**
+     * @param vo ChargingStationDetailVo
+     * @return List<ChargingStationCommentDTO>
+     * @Author: liuyi
+     * @Description: 获取充电站评论
+     * @Date: 2018/9/17_16:55
+     */
+    List<ChargingStationCommentDTO> getChargingStationComment(ChargingStationDetailVo vo);
 
 }

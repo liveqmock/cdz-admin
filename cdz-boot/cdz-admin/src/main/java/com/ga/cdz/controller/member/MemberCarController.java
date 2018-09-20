@@ -19,32 +19,32 @@ import javax.annotation.Resource;
  * @author huanghaohao
  * @date 2018年9月9日 23点39分
  * @desc 会员汽车列表
- *
  */
 
 @RestController
 @RequestMapping("/member/car")
 public class MemberCarController extends AbstractBaseController {
-  @Resource
-  IMAdminUserCarsInfoService mAdminUserCarsInfoService;
-  /**
-   * @author huanghaohao
-   * @date 2018-09-10 11:25
-   * @desc 获取汽车列表分页
-   * @param pageVo
-   * @param bindingResult
-   * @return
-   */
-  @PostMapping("/list")
-  public Result getCarListPage(@RequestBody @Validated PageVo<UserMemberCarsInfoVo> pageVo, BindingResult bindingResult){
-    checkParams(bindingResult);
+    @Resource
+    IMAdminUserCarsInfoService mAdminUserCarsInfoService;
+
+    /**
+     * @param pageVo
+     * @param bindingResult
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-10 11:25
+     * @desc 获取汽车列表分页
+     */
+    @PostMapping("/list")
+    public Result getCarListPage(@RequestBody @Validated PageVo<UserMemberCarsInfoVo> pageVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
 //    Session session=SecurityUtils.getSubject().getSession();
-    Object name=SecurityUtils.getSubject().getPrincipals();
+        Object name = SecurityUtils.getSubject().getPrincipals();
 //    Object ut=SecurityUtils.getSecurityManager();
-    System.err.println(name.toString());
-    IPage<UserMemberCarsInfoDTO> page = mAdminUserCarsInfoService.getUserCarsListPage(pageVo);
-    return Result.success().data(page);
-  }
+        System.err.println(name.toString());
+        IPage<UserMemberCarsInfoDTO> page = mAdminUserCarsInfoService.getUserCarsListPage(pageVo);
+        return Result.success().data(page);
+    }
 
 
 }

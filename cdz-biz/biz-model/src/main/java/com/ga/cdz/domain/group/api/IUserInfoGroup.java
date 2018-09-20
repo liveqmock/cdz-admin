@@ -36,7 +36,8 @@ public interface IUserInfoGroup {
      * @description: 登陆规则组
      * @date:2018/9/5_11:49
      */
-    interface Login{}
+    interface Login {
+    }
 
 
 }

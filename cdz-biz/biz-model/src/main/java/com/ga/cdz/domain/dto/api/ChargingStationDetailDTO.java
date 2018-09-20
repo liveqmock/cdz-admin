@@ -189,11 +189,11 @@ public class ChargingStationDetailDTO {
     private Double servicePrice;
 
     /**
+     * @param chargingStation
+     * @return
      * @Author: liuyi
      * @Description: 赋值ChargingStation
      * @Date: 2018/9/18_9:25
-     * @param chargingStation
-     * @return
      */
     public void setChargingStation(ChargingStation chargingStation) {
         this.stationId = chargingStation.getStationId();
@@ -216,11 +216,11 @@ public class ChargingStationDetailDTO {
     }
 
     /**
+     * @param chargingShop
+     * @return
      * @Author: liuyi
      * @Description: 赋值ChargingShop
      * @Date: 2018/9/18_9:25
-     * @param chargingShop
-     * @return
      */
     public void setChargingShop(ChargingShop chargingShop) {
         this.shopCode = chargingShop.getShopCode();

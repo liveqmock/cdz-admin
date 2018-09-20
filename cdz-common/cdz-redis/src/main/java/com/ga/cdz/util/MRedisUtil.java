@@ -96,13 +96,13 @@ public class MRedisUtil {
     }
 
 
-     /**
-      * @author:luqi
-      * @description: 删除
-      * @date:2018/9/3_13:41
-      * @param: key
-      * @return: 布尔值，成功与否
-      */
+    /**
+     * @author:luqi
+     * @description: 删除
+     * @date:2018/9/3_13:41
+     * @param: key
+     * @return: 布尔值，成功与否
+     */
     public boolean remove(String key) {
         try {
             redisTemplate.opsForValue().getOperations().delete(key);
@@ -133,11 +133,11 @@ public class MRedisUtil {
 
     /**
      * @author:luqi
-      * @description: 批量删除value通过key的表达式
-      * @date:2018/9/3_13:44
-      * @param: redis表达式
-      * @return: 布尔值，成功与否
-      */
+     * @description: 批量删除value通过key的表达式
+     * @date:2018/9/3_13:44
+     * @param: redis表达式
+     * @return: 布尔值，成功与否
+     */
     public boolean removeMatch(String match) {
         Set<String> set = redisTemplate.keys(match);
         Iterator<String> it = set.iterator();
@@ -170,13 +170,13 @@ public class MRedisUtil {
     }
 
 
-     /**
-      * @author:luqi
-      * @description: 获取
-      * @date:2018/9/3_13:45
-      * @param: key
-      * @return: 泛型对象（获取失败返回null）
-      */
+    /**
+     * @author:luqi
+     * @description: 获取
+     * @date:2018/9/3_13:45
+     * @param: key
+     * @return: 泛型对象（获取失败返回null）
+     */
     public <T> T get(String key) {
         try {
             return (T) redisTemplate.opsForValue().get(key);

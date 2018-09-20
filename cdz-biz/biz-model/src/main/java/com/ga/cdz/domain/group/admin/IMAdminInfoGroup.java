@@ -12,27 +12,31 @@ public interface IMAdminInfoGroup {
      * @description: 后台登陆组
      * @date:2018/9/5_11:57
      */
-    interface Login{}
+    interface Login {
+    }
 
     /**
      * @author:luqi
      * @description: 后台管理员添加组
      * @date:2018/9/5_11:47
      */
-    interface Add{}
+    interface Add {
+    }
 
     /**
      * @author:luqi
      * @description: 后台管理员更新组
      * @date:2018/9/5_11:47
      */
-    interface Update{}
+    interface Update {
+    }
 
     /**
      * @author:luqi
      * @description: 后台管理员删除
      * @date:2018/9/5_11:47
      */
-    interface Remove{}
+    interface Remove {
+    }
 
 }

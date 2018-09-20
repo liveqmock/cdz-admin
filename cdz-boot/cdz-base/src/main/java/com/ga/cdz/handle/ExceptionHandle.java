@@ -66,7 +66,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
             BusinessException businessException = (BusinessException) e;
             //业务逻辑异常
             return Result.fail().message(businessException.getDetail());
-        } else if(e instanceof RSAException){
+        } else if (e instanceof RSAException) {
             //加密异常
             return Result.custom().code(ResultEnum.RSA_ERROR.getCode())
                     .message(ResultEnum.RSA_ERROR.getMessage());

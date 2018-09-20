@@ -79,17 +79,17 @@ public class AdminInfo extends Model<AdminInfo> {
      * @description: 管理员性别枚举
      * @date:2018/9/5_9:46
      */
-   public enum AdminSex implements IEnum<Integer> {
+    public enum AdminSex implements IEnum<Integer> {
 
-        WOMEN(0,"女"),
-        MAN(1,"男");
+        WOMEN(0, "女"),
+        MAN(1, "男");
 
         private int value;
         private String desc;
 
-        AdminSex(final int value, final String desc){
-            this.value=value;
-            this.desc=desc;
+        AdminSex(final int value, final String desc) {
+            this.value = value;
+            this.desc = desc;
         }
 
         @Override
@@ -110,14 +110,14 @@ public class AdminInfo extends Model<AdminInfo> {
      * @date:2018/9/5_9:46
      */
     public enum AdminState implements IEnum<Integer> {
-        ABLE(0,"可用"),
-        DISABLE(1,"禁用");
+        ABLE(0, "可用"),
+        DISABLE(1, "禁用");
         private int value;
         private String desc;
 
-        AdminState(final int value, final String desc){
-            this.value=value;
-            this.desc=desc;
+        AdminState(final int value, final String desc) {
+            this.value = value;
+            this.desc = desc;
         }
 
         @Override

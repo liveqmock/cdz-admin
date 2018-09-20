@@ -7,7 +7,7 @@ import com.ga.cdz.domain.vo.base.AdminInfoVo;
 
 /**
  * @author:luqi
- * @description:  认证服务接口
+ * @description: 认证服务接口
  * @date:2018/9/4_10:49
  */
 public interface IMAccountService extends IService<AdminInfo> {
@@ -15,7 +15,7 @@ public interface IMAccountService extends IService<AdminInfo> {
 
     /**
      * @author:luqi
-     * @description:  登陆
+     * @description: 登陆
      * @date:2018/9/3_14:34
      * @param:
      * @return:

@@ -22,7 +22,7 @@ public interface IMChargingPriceService extends IService<ChargingPrice> {
      * @param: myPriceType 1 专场 2 非专场
      * @return: 分页数据
      */
-    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo,String name);
+    Page<ChargingPriceDTO> getPageByType(PageVo<ChargingPriceSelectVo> vo, String name);
 
     /**
      * @author:wanzhongsu

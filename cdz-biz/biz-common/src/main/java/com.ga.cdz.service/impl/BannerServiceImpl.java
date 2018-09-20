@@ -1,5 +1,6 @@
 package com.ga.cdz.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ga.cdz.dao.charging.BannerMapper;
 import com.ga.cdz.domain.entity.Banner;
@@ -27,9 +28,10 @@ public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> impleme
 
     @Override
     public List<Banner> getListAllBanner() {
-        List<Banner> banners = bannerMapper.selectList(null);
+        List<Banner> banners = bannerMapper.selectList(new QueryWrapper<Banner>().lambda()
+                .eq(Banner::getSmsType, Banner.SmsType.AD_SMS));
         //补全图片路径
-        for(Banner banner : banners ) {
+        for (Banner banner : banners) {
             String picPosition = position + banner.getSmsPic();
             banner.setSmsPic(picPosition);
         }

@@ -71,11 +71,11 @@ public class ChargingStationTerminalDTO {
     private ChargingType.CgtypeState cgtypeState;
 
     /**
+     * @param chargingDevice
+     * @return
      * @Author: liuyi
      * @Description: 赋值ChargingDevice
      * @Date: 2018/9/17_16:32
-     * @param chargingDevice
-     * @return
      */
     public void setChargingDevice(ChargingDevice chargingDevice) {
         this.deviceId = chargingDevice.getDeviceId();
@@ -88,11 +88,11 @@ public class ChargingStationTerminalDTO {
     }
 
     /**
+     * @param chargingType
+     * @return
      * @Author: liuyi
      * @Description: 赋值ChargingType
      * @Date: 2018/9/17_16:33
-     * @param chargingType
-     * @return
      */
     public void setChargingType(ChargingType chargingType) {
         this.cgtypeName = chargingType.getCgtypeName();

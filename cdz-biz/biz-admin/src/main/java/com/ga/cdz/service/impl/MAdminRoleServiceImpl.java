@@ -50,24 +50,24 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
     }
 
     /**
+     * @param :
+     * @return :返回封装好的List<AdminRole>
      * @author :huanghaohao
      * @date : 2018-09-06 15:26
      * @desc :列表展示所有的角色信息
-     * @param :
-     * @return :返回封装好的List<AdminRole>
      */
     @Override
     public List<AdminRole> listAdminRole() {
-        List<AdminRole> list=this.baseMapper.selectList(new QueryWrapper<AdminRole>());
+        List<AdminRole> list = this.baseMapper.selectList(new QueryWrapper<AdminRole>());
         return list;
     }
 
     /**
+     * @param id :roleId
+     * @return ：返回AdminRole实体
      * @author :huanghaohao
      * @date :2018-09-06 16:23
      * @desc 根据RoleId 查询角色详情
-     * @param id :roleId
-     * @return ：返回AdminRole实体
      */
     @Override
     public AdminRole getAdminRoleById(Integer id) {
@@ -75,21 +75,21 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
     }
 
     /**
+     * @param id ：用户传递的roleId
+     * @return :封装好的角色权限数据
      * @author :huanghaohao
      * @desc :但是我告诉你 这里是用于根据用户传递的 role_id 把查询到的数据，按照树状结构整理好 排序给前端使用
      * @date : 2018年9月6日 20点04分
-     * @param id ：用户传递的roleId
-     * @return :封装好的角色权限数据
      */
-    public  AdminRolePermDTO getAdminRolePermById(Integer id){
+    public AdminRolePermDTO getAdminRolePermById(Integer id) {
         //首先查询出，当前角色所拥有的权限
         List<AdminRolePermission> adminRolePermissionList = adminRolePermissionMapper.selectList(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId, id));
         AdminRole adminRole = this.baseMapper.selectOne(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleId, id));
         //用于封装前端数据的 DTO
-        AdminRolePermDTO permDTO=new AdminRolePermDTO();
+        AdminRolePermDTO permDTO = new AdminRolePermDTO();
         //查询出 权限的总母列数据
-        AdminPermission parentPerm=adminPermissionMapper.selectOne(new QueryWrapper<AdminPermission>().lambda().eq(AdminPermission::getPermParentId,0));
-       //封装角色名
+        AdminPermission parentPerm = adminPermissionMapper.selectOne(new QueryWrapper<AdminPermission>().lambda().eq(AdminPermission::getPermParentId, 0));
+        //封装角色名
         permDTO.setRoleName(adminRole.getRoleName());
         //封装角色ID
         permDTO.setRoleId(adminRole.getRoleId());
@@ -108,96 +108,97 @@ public class MAdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRol
     }
 
     /**
+     * @param currentPermDTO          当前 AdminRolePermDTO
+     * @param adminRolePermissionList
+     * @return
      * @author huanghaohao
      * @date ：2018年9月6日 20点23分
      * @desc 用于递归找到子节点 然然后挂靠到母节点上去
-     * @param currentPermDTO 当前 AdminRolePermDTO
-     * @param adminRolePermissionList
-     * @return
      */
-    private void sortPermDate( AdminRolePermDTO currentPermDTO, List<AdminRolePermission> adminRolePermissionList){
+    private void sortPermDate(AdminRolePermDTO currentPermDTO, List<AdminRolePermission> adminRolePermissionList) {
         //根据上级权限ID 查询子权限信息
-        List<AdminPermission> list=adminPermissionMapper.selectList(new QueryWrapper<AdminPermission>().lambda().eq(AdminPermission::getPermParentId,currentPermDTO.getPermId()));
+        List<AdminPermission> list = adminPermissionMapper.selectList(new QueryWrapper<AdminPermission>().lambda().eq(AdminPermission::getPermParentId, currentPermDTO.getPermId()));
         //查不到就是退出 查询到了 继续下挖
-        if(list.size()>0){
+        if (list.size() > 0) {
             //循环所有的孩子权限
-            for(int i=0;i<list.size();i++){
-                AdminRolePermDTO childAdminRolePermDTO= new AdminRolePermDTO();
+            for (int i = 0; i < list.size(); i++) {
+                AdminRolePermDTO childAdminRolePermDTO = new AdminRolePermDTO();
                 childAdminRolePermDTO.setPermId(list.get(i).getPermId());
                 childAdminRolePermDTO.setPermName(list.get(i).getPermName());
                 childAdminRolePermDTO.setRoleId(currentPermDTO.getRoleId());
                 childAdminRolePermDTO.setRoleName(currentPermDTO.getRoleName());
                 childAdminRolePermDTO.setPermParentId(currentPermDTO.getPermId());
-                for(int j=0;j<adminRolePermissionList.size();j++){
-                    if(list.get(i).getPermId() == adminRolePermissionList.get(j).getPermId()){
+                for (int j = 0; j < adminRolePermissionList.size(); j++) {
+                    if (list.get(i).getPermId() == adminRolePermissionList.get(j).getPermId()) {
                         childAdminRolePermDTO.setIsValid(true);
                     }
                 }
-                List listT=currentPermDTO.getChild();
-                if(listT==null){
-                    listT=new LinkedList();
+                List listT = currentPermDTO.getChild();
+                if (listT == null) {
+                    listT = new LinkedList();
                 }
                 listT.add(childAdminRolePermDTO);
                 //把孩子权限挂靠到母权限的child 属性之下
                 currentPermDTO.setChild(listT);
                 //递归孩子的子节点
-                sortPermDate(childAdminRolePermDTO,adminRolePermissionList);
+                sortPermDate(childAdminRolePermDTO, adminRolePermissionList);
             }
-        }else{
-            return ;
+        } else {
+            return;
         }
     }
 
     /**
-     * @author huanghaohao
-     * @date  2018-09-07 14:17
-     * @desc  用于更新或者新增角色的权限
      * @param
+     * @author huanghaohao
+     * @date 2018-09-07 14:17
+     * @desc 用于更新或者新增角色的权限
      */
-
+    //todo huanghaohao  请看接口描述
     @Override
     @Transactional
     public Integer updateOrInsertAdminRolePermission(List<AdminRolePermVo> adminRolePermVoList) {
-        List<AdminRolePermission> list=new LinkedList<AdminRolePermission>();
-        for(int i= 0;i<adminRolePermVoList.size();i++){
-            if(adminRolePermVoList.get(i).getIsValid()){
-               AdminRolePermission adminRolePermission=new AdminRolePermission();
-               adminRolePermission.setPermId(adminRolePermVoList.get(i).getPermId());
-               adminRolePermission.setRoleId(adminRolePermVoList.get(i).getRoleId());
+        List<AdminRolePermission> list = new LinkedList<AdminRolePermission>();
+        for (int i = 0; i < adminRolePermVoList.size(); i++) {
+            if (adminRolePermVoList.get(i).getIsValid()) {
+                AdminRolePermission adminRolePermission = new AdminRolePermission();
+                adminRolePermission.setPermId(adminRolePermVoList.get(i).getPermId());
+                adminRolePermission.setRoleId(adminRolePermVoList.get(i).getRoleId());
                 list.add(adminRolePermission);
             }
         }
-        adminRolePermissionMapper.delete(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId,adminRolePermVoList.get(0).getRoleId()));
+        adminRolePermissionMapper.delete(new QueryWrapper<AdminRolePermission>().lambda().eq(AdminRolePermission::getRoleId, adminRolePermVoList.get(0).getRoleId()));
         return adminRolePermissionMapper.insertBatch(list);
     }
 
     /**
+     * @param adminRoleVo
+     * @return
      * @author huanghaohao
      * @desc 新增角色
      * @date 2018-09-11 16:38
-     * @param adminRoleVo
-     * @return
      */
+    //todo huanghaohao  请看接口描述
     @Override
     public Boolean addAdminRole(AdminRoleVo adminRoleVo) {
-        AdminRole adminRole=new AdminRole();
-        BeanUtils.copyProperties(adminRoleVo,adminRole);
-        List<AdminRole> list=baseMapper.selectList(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleName,adminRole.getRoleName()));
-        if(list.size()>0){
+        AdminRole adminRole = new AdminRole();
+        BeanUtils.copyProperties(adminRoleVo, adminRole);
+        List<AdminRole> list = baseMapper.selectList(new QueryWrapper<AdminRole>().lambda().eq(AdminRole::getRoleName, adminRole.getRoleName()));
+        if (list.size() > 0) {
             return false;
         }
         int i = baseMapper.insert(adminRole);
-        if(i!=1){
+        if (i != 1) {
             return false;
         }
         return true;
     }
 
     /**
+     * @return
      * @author huanghaohao
      * @date 2018-09-11 16:40
      * @desc 返回所有的role
-     * @return
      */
     @Override
     public List<AdminRole> getRoleList() {

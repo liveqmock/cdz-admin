@@ -34,5 +34,4 @@ public class UserLoginDTO {
     private String token;
 
 
-
 }

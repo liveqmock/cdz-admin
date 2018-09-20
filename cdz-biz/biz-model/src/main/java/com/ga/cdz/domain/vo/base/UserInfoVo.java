@@ -22,7 +22,7 @@ public class UserInfoVo {
     /**
      * 用户id
      */
-    @NotNull(groups = {IMUserInfoGroup.updateMemSate.class},message ="更新会员用户状态时会员用户ID 必填" )
+    @NotNull(groups = {IMUserInfoGroup.updateMemSate.class}, message = "更新会员用户状态时会员用户ID 必填")
     private Integer userId;
 
     /**
@@ -72,7 +72,7 @@ public class UserInfoVo {
     /**
      * 用户状态
      */
-    @NotNull(groups = {IMUserInfoGroup.updateMemSate.class},message = "更新状态时 userState必填")
+    @NotNull(groups = {IMUserInfoGroup.updateMemSate.class}, message = "更新状态时 userState必填")
     private UserInfo.UserState userState;
 
     /**

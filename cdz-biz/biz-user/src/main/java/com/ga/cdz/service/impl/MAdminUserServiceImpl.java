@@ -20,47 +20,46 @@ import org.springframework.stereotype.Service;
  */
 @Service("mAdminUserService")
 public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IMAdminUserService {
-  /**
-   * @author huanghaohao
-   * @desc 企业用户会员列表的 分组查询
-   * @date 2018-09-09 21:47
-   * @param pageVo 分页
-   * @return
-   */
-  @Override
-  public IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo) {
-    Page<UserMemberDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
-    return page.setRecords(this.baseMapper.getCompanyMemberListPage(page,pageVo.getData()));
-  }
+    /**
+     * @param pageVo 分页
+     * @return
+     * @author huanghaohao
+     * @desc 企业用户会员列表的 分组查询
+     * @date 2018-09-09 21:47
+     */
+    @Override
+    public IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo) {
+        Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+        return page.setRecords(this.baseMapper.getCompanyMemberListPage(page, pageVo.getData()));
+    }
 
-  /**
-   * @author huanghaohao
-   * @desc 个人会员列表的 分组查询
-   * @date 2018-09-09 21:47
-   * @param pageVo 分页
-   * @return
-   */
-  @Override
-  public IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo) {
-    Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(),pageVo.getSize());
-   return  page.setRecords(this.baseMapper.getUserMemberListPage(page,pageVo.getData()));
-  }
+    /**
+     * @param pageVo 分页
+     * @return
+     * @author huanghaohao
+     * @desc 个人会员列表的 分组查询
+     * @date 2018-09-09 21:47
+     */
+    @Override
+    public IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo) {
+        Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+        return page.setRecords(this.baseMapper.getUserMemberListPage(page, pageVo.getData()));
+    }
 
-  /**
-   * @author huanghaohaohao
-   * @date 2018年9月9日 22点19分
-   * @desc 更新会员状态
-   * @param userInfoVo
-   * @return
-   */
-  @Override
-  public int updateMemUserSate(UserInfoVo userInfoVo) {
-    UserInfo userInfo=new UserInfo();
-    BeanUtils.copyProperties(userInfoVo,userInfo);
-    return this.baseMapper.updateById(userInfo);
+    /**
+     * @param userInfoVo
+     * @return
+     * @author huanghaohaohao
+     * @date 2018年9月9日 22点19分
+     * @desc 更新会员状态
+     */
+    @Override
+    public int updateMemUserSate(UserInfoVo userInfoVo) {
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userInfoVo, userInfo);
+        return this.baseMapper.updateById(userInfo);
 //    return true;
-  }
-
+    }
 
 
 }

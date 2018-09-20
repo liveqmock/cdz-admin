@@ -63,11 +63,11 @@ public interface IMChargingShopService extends IService<ChargingShop> {
     boolean saveChargingShop(ChargingShopVo vo);
 
     /**
-     * @author  huanghaohao
-     * @date 2018年9月19日 14点01分
-     * @desc 商户登陆
      * @param chargingShopVo
      * @return
+     * @author huanghaohao
+     * @date 2018年9月19日 14点01分
+     * @desc 商户登陆
      */
     ChargingShopDTO login(ChargingShopVo chargingShopVo);
 }

@@ -41,7 +41,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        order_id, user_id, station_id, device_id, device_sub_id, total_price, total_energy, chargin_begin_dt, chargin_end_dt, order_state, update_dt, insert_dt
+        order_id, user_id, station_id, device_id, device_sub_id, total_price, total_energy, chargin_begin_dt,
+        chargin_end_dt, order_state, update_dt, insert_dt
     </sql>
     <select id="getChargingOrderListPage" resultMap="chargingOrderList">
         SELECT
@@ -64,7 +65,7 @@
         LEFT JOIN t_charging_station station ON station.station_id = ord.station_id
         LEFT JOIN t_charging_device device ON ord.device_id = device.device_id
         LEFT JOIN t_charging_type type ON type.cgtype_id = device.cgtype_id
-        LEFT JOIN t_charging_device_sub  sub on ord.device_sub_id= sub.device_sub_id and ord.device_id=sub.device_id
+        LEFT JOIN t_charging_device_sub sub on ord.device_sub_id= sub.device_sub_id and ord.device_id=sub.device_id
         WHERE
         1 = 1
         AND price.price_state != 0

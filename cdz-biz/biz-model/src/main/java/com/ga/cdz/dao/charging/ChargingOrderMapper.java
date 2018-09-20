@@ -21,11 +21,11 @@ import java.util.List;
 public interface ChargingOrderMapper extends SuperMapper<ChargingOrder> {
 
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 15:12
-   * @desc 获取订单列表
-   */
-  List<ChargingOrderDTO> getChargingOrderListPage(Page<ChargingOrderDTO> page , @Param("order") ChargingOrderSelectVo chargingOrderSelectVo, @Param("shop") ChargingShop chargingShop);
+    /**
+     * @author huanghaohao
+     * @date 2018-09-12 15:12
+     * @desc 获取订单列表
+     */
+    List<ChargingOrderDTO> getChargingOrderListPage(Page<ChargingOrderDTO> page, @Param("order") ChargingOrderSelectVo chargingOrderSelectVo, @Param("shop") ChargingShop chargingShop);
 
 }

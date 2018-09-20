@@ -50,9 +50,9 @@ public class ChargingPriceController extends AbstractBaseController {
             vo.setData(new ChargingPriceSelectVo());
         }
         vo.getData().setPriceType(ChargingPrice.PriceType.PERSONAL);
-        String name =(String) SecurityUtils.getSubject().getPrincipal();
+        String name = (String) SecurityUtils.getSubject().getPrincipal();
 
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo,name);
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, name);
         return Result.success().data(page);
     }
 
@@ -70,8 +70,8 @@ public class ChargingPriceController extends AbstractBaseController {
             vo.setData(new ChargingPriceSelectVo());
         }
         vo.getData().setPriceType(ChargingPrice.PriceType.NONPERSONAL);
-        String name = (String)SecurityUtils.getSubject().getPrincipal();
-        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo,name);
+        String name = (String) SecurityUtils.getSubject().getPrincipal();
+        Page<ChargingPriceDTO> page = mChargingPriceService.getPageByType(vo, name);
         return Result.success().data(page);
     }
 

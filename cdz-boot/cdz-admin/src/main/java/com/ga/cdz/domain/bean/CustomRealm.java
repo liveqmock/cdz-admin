@@ -27,13 +27,13 @@ public class CustomRealm extends BaseCustomRealm {
     @Resource
     MRedisUtil mRedisUtil;
 
-     /**
-      * @author:luqi
-      * @description:  权限授权
-      * @date:2018/9/3_14:32
-      * @param: PrincipalCollection
-      * @return:  AuthorizationInfo
-      */
+    /**
+     * @author:luqi
+     * @description: 权限授权
+     * @date:2018/9/3_14:32
+     * @param: PrincipalCollection
+     * @return: AuthorizationInfo
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //获取到用户的凭证
@@ -53,13 +53,13 @@ public class CustomRealm extends BaseCustomRealm {
     }
 
 
-     /**
-      * @author:luqi
-      * @description:  登陆认证
-      * @date:2018/9/3_14:34
-      * @param: AuthenticationToken
-      * @return: AuthenticationInfo
-      */
+    /**
+     * @author:luqi
+     * @description: 登陆认证
+     * @date:2018/9/3_14:34
+     * @param: AuthenticationToken
+     * @return: AuthenticationInfo
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         StatelessToken statelessToken = (StatelessToken) token;

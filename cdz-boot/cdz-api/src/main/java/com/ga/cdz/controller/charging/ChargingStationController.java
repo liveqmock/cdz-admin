@@ -59,11 +59,11 @@ public class ChargingStationController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingStationDetailVo
+     * @return Result
      * @Author: liuyi
      * @Description: 充电站详情
      * @Date: 2018/9/18_9:41
-     * @param vo ChargingStationDetailVo
-     * @return Result
      */
     @PostMapping("/detail")
     public Result getChargingStationDetail(@RequestBody @Validated(value = {IChargingStationGroup.Detail.class}) ChargingStationDetailVo vo,
@@ -74,11 +74,11 @@ public class ChargingStationController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingStationDetailVo
+     * @return Result
      * @Author: liuyi
      * @Description: 充电站终端
      * @Date: 2018/9/18_9:41
-     * @param vo ChargingStationDetailVo
-     * @return Result
      */
     @PostMapping("/terminal")
     public Result getChargingStationTerminal(@RequestBody @Validated(value = {IChargingStationGroup.Terminal.class}) ChargingStationDetailVo vo,
@@ -89,11 +89,11 @@ public class ChargingStationController extends AbstractBaseController {
     }
 
     /**
+     * @param vo ChargingStationDetailVo
+     * @return Result
      * @Author: liuyi
      * @Description: 充电站评价
      * @Date: 2018/9/18_9:41
-     * @param vo ChargingStationDetailVo
-     * @return Result
      */
     @PostMapping("/comment")
     public Result getChargingStationComment(@RequestBody @Validated(value = {IChargingStationGroup.Comment.class}) ChargingStationDetailVo vo,

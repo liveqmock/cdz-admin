@@ -18,32 +18,32 @@ import org.springframework.stereotype.Service;
  */
 @Service("mAdminUserCardInfoService")
 public class MAdminUserCardInfoServiceImpl extends ServiceImpl<UserCardInfoMapper, UserCardInfo> implements IMAdminUserCardInfoService {
-  /**
-   * @author huanghaohao
-   * @desc 更新用户会员卡状态 by Id
-   * @date 2018-09-10 10:32
-   * @param userMemberCardInfoVo
-   * @return
-   */
-  @Override
-  public int updateMemCardStatById(UserMemberCardInfoVo userMemberCardInfoVo) {
-    UserCardInfo userCardInfo=new UserCardInfo();
-    userCardInfo.setCardId(userMemberCardInfoVo.getCardId());
-    userCardInfo.setCardState(userMemberCardInfoVo.getCardState());
-    return this.baseMapper.updateById(userCardInfo);
-  }
+    /**
+     * @param userMemberCardInfoVo
+     * @return
+     * @author huanghaohao
+     * @desc 更新用户会员卡状态 by Id
+     * @date 2018-09-10 10:32
+     */
+    @Override
+    public int updateMemCardStatById(UserMemberCardInfoVo userMemberCardInfoVo) {
+        UserCardInfo userCardInfo = new UserCardInfo();
+        userCardInfo.setCardId(userMemberCardInfoVo.getCardId());
+        userCardInfo.setCardState(userMemberCardInfoVo.getCardState());
+        return this.baseMapper.updateById(userCardInfo);
+    }
 
-  /**
-   * @author huanghaohao
-   * @date 2018年9月9日 23点21分
-   * @desc 分页查询会员ka列表
-   * @param pageVo
-   * @return
-   */
-  public Page<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo){
-    Page<UserMemberCardInfoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
-    page.setRecords(this.baseMapper.getMemberCardInfoListByPage(page,pageVo.getData()));
-    return page;
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018年9月9日 23点21分
+     * @desc 分页查询会员ka列表
+     */
+    public Page<UserMemberCardInfoDTO> getMemberCardListPage(PageVo<UserMemberCardInfoVo> pageVo) {
+        Page<UserMemberCardInfoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+        page.setRecords(this.baseMapper.getMemberCardInfoListByPage(page, pageVo.getData()));
+        return page;
 
-  }
+    }
 }

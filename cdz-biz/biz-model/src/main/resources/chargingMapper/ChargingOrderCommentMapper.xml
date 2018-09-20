@@ -41,7 +41,7 @@
         comment_id, order_id, user_id, comment_code, comment_content, comment_pid, comment_type, comment_state,
         update_dt, insert_dt
     </sql>
-    <select id="getChargingCommentOrderListPage" resultMap="chargingCommentDetail" >
+    <select id="getChargingCommentOrderListPage" resultMap="chargingCommentDetail">
         SELECT
         cms.*,
         usr.user_real_name,

@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.AdminPermission">
-        <id column="perm_id" property="permId" />
-        <result column="perm_name" property="permName" />
-        <result column="perm_code" property="permCode" />
-        <result column="perm_parent_id" property="permParentId" />
+        <id column="perm_id" property="permId"/>
+        <result column="perm_name" property="permName"/>
+        <result column="perm_code" property="permCode"/>
+        <result column="perm_parent_id" property="permParentId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

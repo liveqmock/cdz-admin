@@ -26,19 +26,19 @@ public class AccountController extends AbstractBaseController {
     IMChargingShopService mChargingShopService;
 
 
-  /**
-   * @author huanghaohao
-   * @date 2018年9月19日 13点52分
-   * @
-   * @param chargingShopVo
-   * @param bindingResult
-   * @return
-   */
+    /**
+     * @param chargingShopVo
+     * @param bindingResult
+     * @return
+     * @author huanghaohao
+     * @date 2018年9月19日 13点52分
+     * @
+     */
 
-  @PostMapping("/login")
-  public Result login(@RequestBody @Validated({IMChargingShopGroup.login.class})ChargingShopVo chargingShopVo , BindingResult bindingResult){
-    checkParams(bindingResult);
-    ChargingShopDTO chargingShopDTO=mChargingShopService.login(chargingShopVo);
-    return Result.success().message("登陆成功").data(chargingShopDTO);
-  }
+    @PostMapping("/login")
+    public Result login(@RequestBody @Validated({IMChargingShopGroup.login.class}) ChargingShopVo chargingShopVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        ChargingShopDTO chargingShopDTO = mChargingShopService.login(chargingShopVo);
+        return Result.success().message("登陆成功").data(chargingShopDTO);
+    }
 }

@@ -13,12 +13,12 @@ import com.ga.cdz.domain.vo.base.PageVo;
  * @desc 订单评价 service
  */
 public interface IMChargingOrderCommentService extends IService<ChargingOrderComment> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 19:01
-   * @desc 分页获取订单评价
-   * @param pageVo
-   * @return
-   */
-  Page<ChargingOrderCommentDTO> getChargingOrderCommentListPage(PageVo<ChargingOrderCommentVo> pageVo,String name);
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-12 19:01
+     * @desc 分页获取订单评价
+     */
+    Page<ChargingOrderCommentDTO> getChargingOrderCommentListPage(PageVo<ChargingOrderCommentVo> pageVo, String name);
 }

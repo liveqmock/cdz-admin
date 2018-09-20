@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * @author:luqi
- * @description: shiro基类配置,一个工程只能实现其一个子类,除作者外不得修改
+ * @description: shiro基类配置, 一个工程只能实现其一个子类, 除作者外不得修改
  * @date:2018/9/3_12:46
  */
 public abstract class BaseShiroConfig {

@@ -19,7 +19,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_user_cars")
-  public class UserCarsInfo extends Model<UserCarsInfo>{
+public class UserCarsInfo extends Model<UserCarsInfo> {
 
     private static final long serialVersionUID = 1L;
 
@@ -60,8 +60,8 @@ import java.util.Date;
     private String carBattery;
 
 
-  @TableField("car_state")
-  private CarState carState;
+    @TableField("car_state")
+    private CarState carState;
     /**
      * 更新时间
      */
@@ -78,54 +78,54 @@ import java.util.Date;
     private Date insertDt;
 
 
-  /**
-   * @author:luqi
-   * @description: 车辆状态枚举
-   * @date:2018/9/13_10:05
-   */
-  public enum CarState implements IEnum<Integer> {
-    REMOVE(0, "删除"),
-    NORMAL(1, "正常");
+    /**
+     * @author:luqi
+     * @description: 车辆状态枚举
+     * @date:2018/9/13_10:05
+     */
+    public enum CarState implements IEnum<Integer> {
+        REMOVE(0, "删除"),
+        NORMAL(1, "正常");
 
-    private Integer code;
-    private String desc;
+        private Integer code;
+        private String desc;
 
-    CarState(Integer code, String desc) {
-      this.code = code;
-      this.desc = desc;
+        CarState(Integer code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        @Override
+        public Integer getValue() {
+            return this.code;
+        }
+
+        @JsonValue
+        public String getDesc() {
+            return desc;
+        }
     }
-
-    @Override
-    public Integer getValue() {
-      return this.code;
-    }
-
-    @JsonValue
-    public String getDesc() {
-      return desc;
-    }
-  }
 
 
     @Override
     protected Serializable pkVal() {
-      return this.userId;
+        return this.userId;
     }
 
     @Override
     public String toString() {
-      return "UserCars{" +
-              ", userId=" + userId +
-              ", carNo=" + carNo +
-              ", carName=" + carName +
-              ", carModel=" + carModel +
-              ", carEngine=" + carEngine +
-              ", carVin=" + carVin +
-              ", carBattery=" + carBattery +
-              ", carState=" + carState +
-              ", updateDt=" + updateDt +
-              ", insertDt=" + insertDt +
-              "}";
+        return "UserCars{" +
+                ", userId=" + userId +
+                ", carNo=" + carNo +
+                ", carName=" + carName +
+                ", carModel=" + carModel +
+                ", carEngine=" + carEngine +
+                ", carVin=" + carVin +
+                ", carBattery=" + carBattery +
+                ", carState=" + carState +
+                ", updateDt=" + updateDt +
+                ", insertDt=" + insertDt +
+                "}";
     }
-  }
+}
 

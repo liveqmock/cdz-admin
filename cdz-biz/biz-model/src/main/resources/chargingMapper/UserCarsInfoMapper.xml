@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ga.cdz.dao.charging.UserCarsInfoMapper">
-        <!-- 通用查询映射结果 -->
-        <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserCarsInfo">
-            <id column="user_id" property="userId" />
-            <result column="car_no" property="carNo" />
-            <result column="car_name" property="carName" />
-            <result column="car_model" property="carModel" />
-            <result column="car_engine" property="carEngine" />
-            <result column="car_vin" property="carVin" />
-            <result column="car_battery" property="carBattery" />
-            <result column="car_state" property="carState" />
-            <result column="update_dt" property="updateDt" />
-            <result column="insert_dt" property="insertDt" />
-        </resultMap>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserCarsInfo">
+        <id column="user_id" property="userId"/>
+        <result column="car_no" property="carNo"/>
+        <result column="car_name" property="carName"/>
+        <result column="car_model" property="carModel"/>
+        <result column="car_engine" property="carEngine"/>
+        <result column="car_vin" property="carVin"/>
+        <result column="car_battery" property="carBattery"/>
+        <result column="car_state" property="carState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
 
-        <resultMap id="UserMemberCar" type="com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO">
-            <result column="car_no" property="carId"></result>
-            <result column="car_no" property="carCode"></result>
-            <result column="car_name" property="carName"></result>
-            <result column="car_model" property="carModel"></result>
-            <result column="car_battery" property="carBattery"></result>
-            <result column="insert_dt" property="insertDt"></result>
-            <result column="update_dt" property="updateDt"></result>
-            <result column="user_id" property="userId"></result>
+    <resultMap id="UserMemberCar" type="com.ga.cdz.domain.dto.admin.UserMemberCarsInfoDTO">
+        <result column="car_no" property="carId"></result>
+        <result column="car_no" property="carCode"></result>
+        <result column="car_name" property="carName"></result>
+        <result column="car_model" property="carModel"></result>
+        <result column="car_battery" property="carBattery"></result>
+        <result column="insert_dt" property="insertDt"></result>
+        <result column="update_dt" property="updateDt"></result>
+        <result column="user_id" property="userId"></result>
 
-        </resultMap>
+    </resultMap>
 
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, car_no, car_name, car_model, car_engine, car_vin, car_battery, car_state, update_dt, insert_dt
+    </sql>
 
-        <!-- 通用查询结果列 -->
-        <sql id="Base_Column_List">
-            user_id, car_no, car_name, car_model, car_engine, car_vin, car_battery, car_state, update_dt, insert_dt
-        </sql>
-
-    <select id="getUserCarListPage"  resultMap="UserMemberCar">
+    <select id="getUserCarListPage" resultMap="UserMemberCar">
         select car.*,card.card_code from t_user_cars car
         left join t_user_card card on car.user_id=card.user_id
     </select>

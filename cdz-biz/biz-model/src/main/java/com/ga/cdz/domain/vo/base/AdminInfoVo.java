@@ -26,9 +26,9 @@ import java.util.Date;
 @Accessors(chain = true)
 public class AdminInfoVo {
     /**
-     *  ID
-     * */
-    @NotNull(groups = {IMAdminInfoGroup.Update.class,IMAdminInfoGroup.Remove.class},message = "adminId不能为空")
+     * ID
+     */
+    @NotNull(groups = {IMAdminInfoGroup.Update.class, IMAdminInfoGroup.Remove.class}, message = "adminId不能为空")
     private Integer adminId;
 
     /**
@@ -41,28 +41,28 @@ public class AdminInfoVo {
     /**
      * 管理员的账号
      */
-    @NotBlank(groups = {IMAdminInfoGroup.Login.class,IMAdminInfoGroup.Add.class},message = "管理员的账号不能为空")
-    @Size(groups = {IMAdminInfoGroup.Login.class,IMAdminInfoGroup.Add.class},min = 6,max = 12,message = "账号，字符串长度6~12")
+    @NotBlank(groups = {IMAdminInfoGroup.Login.class, IMAdminInfoGroup.Add.class}, message = "管理员的账号不能为空")
+    @Size(groups = {IMAdminInfoGroup.Login.class, IMAdminInfoGroup.Add.class}, min = 6, max = 12, message = "账号，字符串长度6~12")
     private String adminAccount;
 
     /**
      * 管理员密码MD5加密
      */
-    @NotBlank(groups = {IMAdminInfoGroup.Login.class,IMAdminInfoGroup.Add.class,IMAdminInfoGroup.Login.class},message = "登陆密码不能为空")
-    @Size(groups = {IMAdminInfoGroup.Login.class,IMAdminInfoGroup.Add.class,IMAdminInfoGroup.Login.class},min = 6,max = 12,message = "登陆密码，字符串长度6~12")
+    @NotBlank(groups = {IMAdminInfoGroup.Login.class, IMAdminInfoGroup.Add.class, IMAdminInfoGroup.Login.class}, message = "登陆密码不能为空")
+    @Size(groups = {IMAdminInfoGroup.Login.class, IMAdminInfoGroup.Add.class, IMAdminInfoGroup.Login.class}, min = 6, max = 12, message = "登陆密码，字符串长度6~12")
     private String adminPwd;
 
     /**
      * 电话
      */
-    @NotBlank(groups = {IMAdminInfoGroup.Add.class},message = "电话不能为空")
-    @Pattern(groups = {IMAdminInfoGroup.Add.class},regexp = RegexConstant.REGEX_PHONE,message = "电话格式不对")
+    @NotBlank(groups = {IMAdminInfoGroup.Add.class}, message = "电话不能为空")
+    @Pattern(groups = {IMAdminInfoGroup.Add.class}, regexp = RegexConstant.REGEX_PHONE, message = "电话格式不对")
     private String adminTel;
 
     /**
      * 性别 0 女 1男
      */
-    @NotNull(groups = {IMAdminInfoGroup.Add.class},message = "性别不能为空")
+    @NotNull(groups = {IMAdminInfoGroup.Add.class}, message = "性别不能为空")
     private AdminInfo.AdminSex adminSex;
 
     /**
@@ -71,8 +71,8 @@ public class AdminInfoVo {
     private AdminInfo.AdminState adminState;
 
     /**
-     *  插入时间
-     * */
+     * 插入时间
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date insertDt;

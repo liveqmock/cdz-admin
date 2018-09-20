@@ -20,13 +20,15 @@ public interface IMAdminRoleGroup {
      * @desc 查找
      * @date 2018年9月6日 16点39分
      */
-    interface Find{}
+    interface Find {
+    }
 
     /**
      * @author huanghaohao
      * @desc 更信息
      * @date 2018-09-07 13:55
      */
-    interface Update{}
+    interface Update {
+    }
 
 }

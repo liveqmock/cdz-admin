@@ -35,12 +35,12 @@ public interface IMChargingShopGroup {
     }
 
     /**
-     * @author  huanghaohao
+     * @author huanghaohao
      * @date 2018年9月19日 13点42分
      * @desc 登陆 验证
-     *
      */
-    interface login{
+    interface login {
     }
+
     ;
 }

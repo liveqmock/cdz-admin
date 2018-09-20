@@ -13,31 +13,32 @@ import com.ga.cdz.domain.vo.base.UserInfoVo;
  * @desc 会员管理
  */
 public interface IMAdminUserService extends IService<UserInfo> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-09 21:39
-   * @desc 分页查询个人会员列表
-   * @param pageVo
-   * @return
-   */
-   IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo);
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-09 21:39
+     * @desc 分页查询个人会员列表
+     */
+    IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo);
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-09 22:34
-   * @desc 分页查询企业会员列表
-   * @param pageVo
-   * @return
-   */
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-09 22:34
+     * @desc 分页查询企业会员列表
+     */
     IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo);
-  /**
-   * @author huanghaohao
-   * @date 2018年9月9日 22点16分
-   * @desc 更新会员状态
-   * @param userInfoVo
-   * @return
-   */
-  int updateMemUserSate(UserInfoVo userInfoVo);
+
+    /**
+     * @param userInfoVo
+     * @return
+     * @author huanghaohao
+     * @date 2018年9月9日 22点16分
+     * @desc 更新会员状态
+     */
+    int updateMemUserSate(UserInfoVo userInfoVo);
 
 
 }

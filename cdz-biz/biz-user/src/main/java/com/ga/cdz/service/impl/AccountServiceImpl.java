@@ -110,8 +110,8 @@ public class AccountServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> im
         String userTel = userInfoSendSmsVo.getUserTel();
         String smsRedisKey = RedisConstant.USER_RETRIEVE_SMS + userTel;
         /**去数据库验证是否存在该电话*/
-        UserInfo hasUserTel =baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
-        if(ObjectUtils.isEmpty(hasUserTel)){
+        UserInfo hasUserTel = baseMapper.selectOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserTel, userTel));
+        if (ObjectUtils.isEmpty(hasUserTel)) {
             throw new BusinessException("该电话不存在");
         }
         /**生成验证码*/

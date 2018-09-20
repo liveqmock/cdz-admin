@@ -14,6 +14,7 @@ import com.ga.cdz.domain.vo.admin.ChargingOrderSelectVo;
 import com.ga.cdz.domain.vo.base.PageVo;
 import com.ga.cdz.service.IMChargingOrderService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -24,31 +25,32 @@ import java.util.List;
  */
 @Service("mChargingOrderService")
 public class MChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, ChargingOrder> implements IMChargingOrderService {
-  @Resource
-  ChargingShopMapper chargingShopMapper;
-  @Resource
-  AdminInfoMapper adminInfoMapper;
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 18:53
-   * @desc 查询获取订单列表
-   * @param pageVo
-   * @return
-   */
-  @Override
-  public Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderSelectVo> pageVo, String name) {
-    Page<ChargingOrderDTO> page= new Page<>(pageVo.getIndex(),pageVo.getSize());
-    ChargingOrderSelectVo vo= pageVo.getData();
-    List<ChargingOrderDTO> lists;
-    List<AdminInfo> list=adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName,name));
-    if(list.size()>0){
-      lists =this.baseMapper.getChargingOrderListPage(page,vo,new ChargingShop());
-    }else{
-      ChargingShop chargingShop=this.chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin,name));
-      lists=this.baseMapper.getChargingOrderListPage(page,vo,chargingShop);
-    }
+    @Resource
+    ChargingShopMapper chargingShopMapper;
+    @Resource
+    AdminInfoMapper adminInfoMapper;
 
-    page.setRecords(lists);
-    return page;
-  }
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-12 18:53
+     * @desc 查询获取订单列表
+     */
+    @Override
+    public Page<ChargingOrderDTO> getChargingOrderListPag(PageVo<ChargingOrderSelectVo> pageVo, String name) {
+        Page<ChargingOrderDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+        ChargingOrderSelectVo vo = pageVo.getData();
+        List<ChargingOrderDTO> lists;
+        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        if (list.size() > 0) {
+            lists = this.baseMapper.getChargingOrderListPage(page, vo, new ChargingShop());
+        } else {
+            ChargingShop chargingShop = this.chargingShopMapper.selectOne(new QueryWrapper<ChargingShop>().lambda().eq(ChargingShop::getShopLogin, name));
+            lists = this.baseMapper.getChargingOrderListPage(page, vo, chargingShop);
+        }
+
+        page.setRecords(lists);
+        return page;
+    }
 }

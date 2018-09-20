@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author:luqi
- * @description:  异常基类
+ * @description: 异常基类
  * @date:2018/9/4_15:58
  */
 @EqualsAndHashCode(callSuper = true)

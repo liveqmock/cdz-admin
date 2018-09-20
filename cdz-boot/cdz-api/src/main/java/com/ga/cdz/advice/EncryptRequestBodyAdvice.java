@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author:luqi
- * @description:  控制层解密切面，带有@ResquestBody 的参数都会进行拦截
+ * @description: 控制层解密切面，带有@ResquestBody 的参数都会进行拦截
  * @date:2018/9/4_14:33
  */
 @Slf4j
@@ -34,7 +34,7 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
 
 
     @Value("${privateKey}")
-   private String privateKey;
+    private String privateKey;
     @Value("${hasEncrypt}")
     private boolean hasEncrypt;
 
@@ -76,20 +76,20 @@ public class EncryptRequestBodyAdvice implements RequestBodyAdvice {
      * @description: DecryptHttpInputMessage 解密流对象
      * @date:2018/9/4_14:52
      */
-    class DecryptHttpInputMessage implements HttpInputMessage{
+    class DecryptHttpInputMessage implements HttpInputMessage {
         private HttpHeaders headers;
         private InputStream body;
 
         public DecryptHttpInputMessage(HttpInputMessage inputMessage, String privateKey, String charset) throws Exception {
 
-            if(StringUtils.isEmpty(privateKey)){
+            if (StringUtils.isEmpty(privateKey)) {
                 throw new IllegalArgumentException("privateKey is null");
             }
             //获取请求内容
             this.headers = inputMessage.getHeaders();
             String content = IOUtils.toString(inputMessage.getBody(), charset);
-            JSONObject jsonObject=new JSONObject(content);
-            content=jsonObject.getString("data");
+            JSONObject jsonObject = new JSONObject(content);
+            content = jsonObject.getString("data");
             String decryptBody;
             //未加密数据不进行解密操作
             if (content.startsWith("{")) {

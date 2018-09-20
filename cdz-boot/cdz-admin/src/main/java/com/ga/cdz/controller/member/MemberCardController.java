@@ -23,38 +23,38 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/member/card")
 public class MemberCardController extends AbstractBaseController {
-  @Resource
-  IMAdminUserService mAdminUserService; //用户信息 Service
-  @Resource
-  IMAdminUserCardInfoService mAdminUserCardInfoService; //
+    @Resource
+    IMAdminUserService mAdminUserService; //用户信息 Service
+    @Resource
+    IMAdminUserCardInfoService mAdminUserCardInfoService; //
 
-  /**
-   * @author huanghaohao
-   * @data 2018年9月9日 23点38分
-   * @desc 分页查询会员列表
-   * @return
-   */
+    /**
+     * @return
+     * @author huanghaohao
+     * @data 2018年9月9日 23点38分
+     * @desc 分页查询会员列表
+     */
 
-  @PostMapping("/list")
-  public Result getMemberCardListByPage(@RequestBody @Validated PageVo< UserMemberCardInfoVo> pageVo , BindingResult bindingResult){
-    IPage<UserMemberCardInfoDTO> page=mAdminUserCardInfoService.getMemberCardListPage(pageVo);
-    return Result.success().data(page);
-  }
-
-  /**
-   * @author huanghaohao
-   * @date 2018-09-10 10:34
-   * @desc 更新用户状态
-   * @param userMemberCardInfoVo
-   * @return
-   */
-  @PostMapping("/update")
-  public Result updateMemberCardStatById(@RequestBody @Validated(value = IMUserInfoGroup.updateMemCardStat.class)UserMemberCardInfoVo userMemberCardInfoVo){
-    int flag=mAdminUserCardInfoService.updateMemCardStatById(userMemberCardInfoVo);
-    if(flag!=0){
-      return Result.success();
-    }else{
-      return Result.fail().message("无需更新或者更新失败");
+    @PostMapping("/list")
+    public Result getMemberCardListByPage(@RequestBody @Validated PageVo<UserMemberCardInfoVo> pageVo, BindingResult bindingResult) {
+        IPage<UserMemberCardInfoDTO> page = mAdminUserCardInfoService.getMemberCardListPage(pageVo);
+        return Result.success().data(page);
     }
-  }
+
+    /**
+     * @param userMemberCardInfoVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-10 10:34
+     * @desc 更新用户状态
+     */
+    @PostMapping("/update")
+    public Result updateMemberCardStatById(@RequestBody @Validated(value = IMUserInfoGroup.updateMemCardStat.class) UserMemberCardInfoVo userMemberCardInfoVo) {
+        int flag = mAdminUserCardInfoService.updateMemCardStatById(userMemberCardInfoVo);
+        if (flag != 0) {
+            return Result.success();
+        } else {
+            return Result.fail().message("无需更新或者更新失败");
+        }
+    }
 }

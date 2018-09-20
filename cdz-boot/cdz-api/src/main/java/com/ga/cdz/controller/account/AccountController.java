@@ -86,7 +86,7 @@ public class AccountController extends AbstractBaseController {
      * @return: Result
      */
     @PostMapping("/retriever")
-    public Result retriever(@RequestBody @Validated({IUserInfoGroup.Retriever.class})UserInfoRetrieverVo retrieverVo, BindingResult bindingResult) {
+    public Result retriever(@RequestBody @Validated({IUserInfoGroup.Retriever.class}) UserInfoRetrieverVo retrieverVo, BindingResult bindingResult) {
         checkParams(bindingResult);
         accountService.retriever(retrieverVo);
         return Result.success().message("找回密码成功");

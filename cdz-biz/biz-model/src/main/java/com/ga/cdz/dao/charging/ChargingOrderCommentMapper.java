@@ -19,14 +19,14 @@ import java.util.List;
  * @since 2018-09-12
  */
 public interface ChargingOrderCommentMapper extends SuperMapper<ChargingOrderComment> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 19:07
-   * @desc 分页获取订单评价
-   * @param page
-   * @param
-   * @return
-   */
-  List<ChargingOrderCommentDTO> getChargingCommentOrderListPage(@Param("shop") ChargingShop chargingShop, Page<ChargingOrderCommentDTO> page );
+    /**
+     * @param page
+     * @param
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-12 19:07
+     * @desc 分页获取订单评价
+     */
+    List<ChargingOrderCommentDTO> getChargingCommentOrderListPage(@Param("shop") ChargingShop chargingShop, Page<ChargingOrderCommentDTO> page);
 //  List<ChargingOrderCommentDTO> getChargingOrderListPage(Page<ChargingOrderCommentDTO> page , @Param("comment")ChargingOrderInitVo chargingOrderVo);
 }

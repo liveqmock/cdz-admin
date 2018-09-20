@@ -29,13 +29,14 @@ public class MChargingDeviceServiceImpl extends ServiceImpl<ChargingDeviceMapper
     AdminInfoMapper adminInfoMapper;
     @Resource
     UserInfoMapper userInfoMapper;
+
     /**
      * @author huanghaohao
      * @date 2018-09-11 15:10
      * @desc 插入新的充电桩
      */
     @Override
-    public Integer insertNewChargingDevice(ChargingDeviceVo chargingDeviceVo ) {
+    public Integer insertNewChargingDevice(ChargingDeviceVo chargingDeviceVo) {
         ChargingDevice chargingDevice = new ChargingDevice();
         BeanUtils.copyProperties(chargingDeviceVo, chargingDevice);
         /**

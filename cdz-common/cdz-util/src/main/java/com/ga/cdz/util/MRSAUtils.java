@@ -216,7 +216,7 @@ public class MRSAUtils {
      * @return
      * @throws Exception
      */
-    public static byte[]  encryptByPublicKey(byte[] data, String publicKey)
+    public static byte[] encryptByPublicKey(byte[] data, String publicKey)
             throws Exception {
         byte[] keyBytes = MBase64Util.decode(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
@@ -336,12 +336,12 @@ public class MRSAUtils {
 
             byte[] privateData = encryptByPrivateKey(data, privateKey);
             byte[] publicData = encryptByPublicKey(data, publicKey);
-            System.out.println("私钥："+privateData.toString());
-            System.out.println("公钥："+publicData.toString());
+            System.out.println("私钥：" + privateData.toString());
+            System.out.println("公钥：" + publicData.toString());
             String base64PrivateData = MBase64Util.encode(privateData);
-            System.out.println("私钥base64："+base64PrivateData);
+            System.out.println("私钥base64：" + base64PrivateData);
             String base64PublicData = MBase64Util.encode(publicData);
-            System.out.printf("公钥base64："+base64PublicData);
+            System.out.printf("公钥base64：" + base64PublicData);
 
             byte[] ePrivateData = decryptByPrivateKey(MBase64Util.decode(base64PublicData), privateKey);
             byte[] ePublicData = decryptByPublicKey(MBase64Util.decode(base64PrivateData), publicKey);
@@ -352,8 +352,6 @@ public class MRSAUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
         //获取公钥
@@ -381,34 +379,32 @@ public class MRSAUtils {
     }
 
 
-
-
     //将base64编码后的公钥字符串转成PublicKey实例
-    public static PublicKey getPublicKeys(String publicKey) throws Exception{
-        byte[ ] keyBytes= Base64.getDecoder().decode(publicKey.getBytes());
-        X509EncodedKeySpec keySpec=new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory=KeyFactory.getInstance("RSA");
+    public static PublicKey getPublicKeys(String publicKey) throws Exception {
+        byte[] keyBytes = Base64.getDecoder().decode(publicKey.getBytes());
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePublic(keySpec);
     }
 
     //将base64编码后的私钥字符串转成PrivateKey实例
-    public static PrivateKey getPrivateKeys(String privateKey) throws Exception{
-        byte[ ] keyBytes=Base64.getDecoder().decode(privateKey.getBytes());
-        PKCS8EncodedKeySpec keySpec=new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory=KeyFactory.getInstance("RSA");
+    public static PrivateKey getPrivateKeys(String privateKey) throws Exception {
+        byte[] keyBytes = Base64.getDecoder().decode(privateKey.getBytes());
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePrivate(keySpec);
     }
 
     //公钥加密
-    public static byte[] encrypt(byte[] content, PublicKey publicKey) throws Exception{
-        Cipher cipher=Cipher.getInstance("RSA");//java默认"RSA"="RSA/ECB/PKCS1Padding"
+    public static byte[] encrypt(byte[] content, PublicKey publicKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");//java默认"RSA"="RSA/ECB/PKCS1Padding"
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         return cipher.doFinal(content);
     }
 
     //私钥解密
-    public static byte[] decrypt(byte[] content, PrivateKey privateKey) throws Exception{
-        Cipher cipher=Cipher.getInstance("RSA");
+    public static byte[] decrypt(byte[] content, PrivateKey privateKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         return cipher.doFinal(content);
     }

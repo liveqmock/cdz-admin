@@ -36,7 +36,7 @@ public class ChargingShopVo {
     /**
      * 登录名
      */
-    @NotBlank(groups = {IMChargingShopGroup.Add.class, IMChargingShopGroup.update.class,IMChargingShopGroup.login.class}, message = "登录名不能为空")
+    @NotBlank(groups = {IMChargingShopGroup.Add.class, IMChargingShopGroup.update.class, IMChargingShopGroup.login.class}, message = "登录名不能为空")
     private String shopLogin;
     /**
      * 商户名称
@@ -51,7 +51,7 @@ public class ChargingShopVo {
     /**
      * 登录密码
      */
-    @NotBlank(groups = {IMChargingShopGroup.Add.class,IMChargingShopGroup.login.class}, message = "登录密码不能为空")
+    @NotBlank(groups = {IMChargingShopGroup.Add.class, IMChargingShopGroup.login.class}, message = "登录密码不能为空")
     private String shopPwd;
     /**
      * 商户联系电话

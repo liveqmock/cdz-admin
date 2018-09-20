@@ -17,11 +17,11 @@ public interface IUserRedisService {
     void cacheUserList();
 
     /**
+     * @param userInfo 用户信息
+     * @return
      * @Author: liuyi
      * @Description: 缓存一条用户信息
      * @Date: 2018/9/18_15:25
-     * @param userInfo 用户信息
-     * @return
      */
     void cacheOneUserInfo(UserInfo userInfo);
 

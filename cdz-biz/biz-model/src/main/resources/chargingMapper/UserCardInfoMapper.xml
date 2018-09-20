@@ -3,14 +3,14 @@
 <mapper namespace="com.ga.cdz.dao.charging.UserCardInfoMapper">
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserCardInfo">
-        <id column="card_id" property="cardId" />
-        <result column="user_id" property="userId" />
-        <result column="card_code" property="cardCode" />
-        <result column="used_price" property="usedPrice" />
-        <result column="card_score" property="cardScore" />
-        <result column="card_state" property="cardState" />
-        <result column="update_dt" property="updateDt" />
-        <result column="insert_dt" property="insertDt" />
+        <id column="card_id" property="cardId"/>
+        <result column="user_id" property="userId"/>
+        <result column="card_code" property="cardCode"/>
+        <result column="used_price" property="usedPrice"/>
+        <result column="card_score" property="cardScore"/>
+        <result column="card_state" property="cardState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
     </resultMap>
 
     <resultMap id="userCardBaseResult" type="com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO">
@@ -34,7 +34,7 @@
     </sql>
 
 
-    <select id="getMemberCardInfoListByPage" resultMap="userCardBaseResult" >
+    <select id="getMemberCardInfoListByPage" resultMap="userCardBaseResult">
         SELECT
         c.card_id,
         c.card_code,
@@ -74,7 +74,6 @@
 
 
         </if>
-
 
 
     </select>

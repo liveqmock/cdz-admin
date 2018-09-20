@@ -148,28 +148,28 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
     }
 
     /**
+     * @param chargingShopVo
+     * @return
      * @auhtor huanghaohao
      * @date 2018年9月19日 14点30分
-     * @param chargingShopVo
-     * @desc  登陆
-     * @return
+     * @desc 登陆
      */
     @Override
     public ChargingShopDTO login(ChargingShopVo chargingShopVo) {
-        ChargingShop chargingShop= new ChargingShop();
-        BeanUtils.copyProperties(chargingShopVo,chargingShop);
-        String md5Pwd= mUtil.MD5(chargingShop.getShopPwd());
+        ChargingShop chargingShop = new ChargingShop();
+        BeanUtils.copyProperties(chargingShopVo, chargingShop);
+        String md5Pwd = mUtil.MD5(chargingShop.getShopPwd());
         ChargingShop hasChargingShop = baseMapper.selectOne(new QueryWrapper<ChargingShop>().lambda()
                 .eq(ChargingShop::getShopLogin, chargingShop.getShopLogin()).eq(ChargingShop::getShopPwd, md5Pwd));
-        if(ObjectUtils.isEmpty(hasChargingShop)){
+        if (ObjectUtils.isEmpty(hasChargingShop)) {
             throw new BusinessException("账号或密码错误");
         }
 
         //token 生成 uuid 在md5
-        String token=mUtil.MD5(mUtil.UUID16());
+        String token = mUtil.MD5(mUtil.UUID16());
         //redisTokenKey
         String redisTokenKey = RedisConstant.SHOP_TOKEN + hasChargingShop.getShopLogin();
-        ChargingShopDTO chargingShopDTO=new ChargingShopDTO();
+        ChargingShopDTO chargingShopDTO = new ChargingShopDTO();
         chargingShopDTO.setShopCode(hasChargingShop.getShopCode());
         chargingShopDTO.setShopContact(hasChargingShop.getShopContact());
         chargingShopDTO.setShopId(hasChargingShop.getShopId());

@@ -28,65 +28,65 @@ import java.util.List;
 @RestController
 @RequestMapping("/charging/device")
 public class ChargingDeviceController extends AbstractBaseController {
-  @Resource
-  IMChargingDeviceService mChargingDeviceService;//充电桩Service
-  @Resource
-  IMChargingTypeService mChargingTypeService;//充电类型Service
-  @Resource
-  IMChargingDeviceSubService mChargingDeviceSubService;//充电枪
+    @Resource
+    IMChargingDeviceService mChargingDeviceService;//充电桩Service
+    @Resource
+    IMChargingTypeService mChargingTypeService;//充电类型Service
+    @Resource
+    IMChargingDeviceSubService mChargingDeviceSubService;//充电枪
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-11 15:25
-   * @desc 插入新的充电桩
-   * @param chargingDeviceVo
-   * @param bindingResult
-   * @return
-   */
-  @PostMapping("/insert")
-  public Result insertDevice(@RequestBody @Validated(value = {IMChargingDeviceGroup.insert.class})ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult){
-    checkParams(bindingResult);
-    mChargingDeviceService.insertNewChargingDevice(chargingDeviceVo);
-    return Result.success();
-  }
+    /**
+     * @param chargingDeviceVo
+     * @param bindingResult
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-11 15:25
+     * @desc 插入新的充电桩
+     */
+    @PostMapping("/insert")
+    public Result insertDevice(@RequestBody @Validated(value = {IMChargingDeviceGroup.insert.class}) ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        mChargingDeviceService.insertNewChargingDevice(chargingDeviceVo);
+        return Result.success();
+    }
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-11 15:36
-   * @desc 充电桩列表查询
-   * @return
-   */
-  @PostMapping("/list")
-  public Result getChargingDeviceList(@RequestBody @Validated(value = {IMChargingDeviceGroup.list.class})ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult){
-    checkParams(bindingResult);
-    List<ChargingDeviceDTO> list=mChargingDeviceService.getChargingDeviceList(chargingDeviceVo);
-    return Result.success().data(list);
-  }
+    /**
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-11 15:36
+     * @desc 充电桩列表查询
+     */
+    @PostMapping("/list")
+    public Result getChargingDeviceList(@RequestBody @Validated(value = {IMChargingDeviceGroup.list.class}) ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingDeviceDTO> list = mChargingDeviceService.getChargingDeviceList(chargingDeviceVo);
+        return Result.success().data(list);
+    }
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-11 17:59
-   * @desc 返回所有的充电方式
-   * @return
-   */
-  @PostMapping("/charging/type/list")
-  public Result getChargingType(){
-    List<ChargingType> list=mChargingTypeService.getChargingTypeList();
-    return Result.success().data(list);
-  }
+    /**
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-11 17:59
+     * @desc 返回所有的充电方式
+     */
+    @PostMapping("/charging/type/list")
+    public Result getChargingType() {
+        List<ChargingType> list = mChargingTypeService.getChargingTypeList();
+        return Result.success().data(list);
+    }
 
-  /**
-   * @author huanghaohao
-   * @date 2018-09-12 11:38
-   * @desc 获取充电枪列表
-   * @param chargingDeviceVo
-   * @param bindingResult
-   * @return
-   */
-  @PostMapping("/sub/list")
-  public Result getChargingDeviceSubListByDeviceId(@RequestBody @Validated(value = {IMChargingDeviceGroup.subList.class})ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult){
-    checkParams(bindingResult);
-    List<ChargingDeviceSubDTO> list=mChargingDeviceSubService.getChargingDeviceSubList(chargingDeviceVo);
-    return Result.success().data(list);
-  }
+    /**
+     * @param chargingDeviceVo
+     * @param bindingResult
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-12 11:38
+     * @desc 获取充电枪列表
+     */
+    @PostMapping("/sub/list")
+    public Result getChargingDeviceSubListByDeviceId(@RequestBody @Validated(value = {IMChargingDeviceGroup.subList.class}) ChargingDeviceVo chargingDeviceVo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        List<ChargingDeviceSubDTO> list = mChargingDeviceSubService.getChargingDeviceSubList(chargingDeviceVo);
+        return Result.success().data(list);
+    }
 }

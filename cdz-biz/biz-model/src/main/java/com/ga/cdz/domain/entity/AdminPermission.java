@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author:luqi
- * @description:  管理人员权限表
+ * @description: 管理人员权限表
  * @date:2018/9/5_9:44
  */
 @Data

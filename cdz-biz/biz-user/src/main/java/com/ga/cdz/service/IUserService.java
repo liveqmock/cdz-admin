@@ -22,14 +22,14 @@ public interface IUserService extends IService<UserInfo> {
      */
     boolean isUserExist(String tel);
 
-     /**
-      * @author:luqi
-      * @description: 获取我的信息
-      * @date:2018/9/4_10:59
-      * @param: id
-      * @return: User实体类
-      */
-     MyInfoDTO getMyInfoDTOById(Integer id);
+    /**
+     * @author:luqi
+     * @description: 获取我的信息
+     * @date:2018/9/4_10:59
+     * @param: id
+     * @return: User实体类
+     */
+    MyInfoDTO getMyInfoDTOById(Integer id);
 
     /**
      * @author:luqi

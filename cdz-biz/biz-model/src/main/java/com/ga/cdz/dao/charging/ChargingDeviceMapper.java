@@ -9,16 +9,17 @@ import java.util.List;
 
 /**
  * author huanghaohao
+ *
  * @date 2018-09-11 14:55
  * @desc 充电桩Mapper
  */
 public interface ChargingDeviceMapper extends BaseMapper<ChargingDevice> {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-11 16:13
-   * @desc 查询充电桩列表
-   * @param chargingDevice
-   * @return
-   */
-  List<ChargingDeviceDTO> getChargingDeviceListDetail(@Param("device") ChargingDevice chargingDevice);
+    /**
+     * @param chargingDevice
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-11 16:13
+     * @desc 查询充电桩列表
+     */
+    List<ChargingDeviceDTO> getChargingDeviceListDetail(@Param("device") ChargingDevice chargingDevice);
 }

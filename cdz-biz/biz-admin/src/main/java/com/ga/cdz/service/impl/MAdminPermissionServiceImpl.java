@@ -15,5 +15,5 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service("mAdminPermissionService")
-public class MAdminPermissionServiceImpl extends ServiceImpl<AdminPermissionMapper,AdminPermission> implements IMAdminPermissionService {
+public class MAdminPermissionServiceImpl extends ServiceImpl<AdminPermissionMapper, AdminPermission> implements IMAdminPermissionService {
 }

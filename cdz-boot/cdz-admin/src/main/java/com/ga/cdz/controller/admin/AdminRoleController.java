@@ -86,6 +86,7 @@ public class AdminRoleController extends AbstractBaseController {
      * @date 2018-09-07 13:43
      * @desc :用于更新角色权限
      */
+    //todo huanghaohao  mAdminRoleService.updateOrInsertAdminRolePermission 接口修改为void类型  返回的Result对象需要添加 message 提示 更新角色权限成功
     @PostMapping("/permission/update")
     public Result updateAdminRolePermissionList(@RequestBody @Validated(value = IMAdminRoleGroup.Update.class) List<AdminRolePermVo> adminRolePermVoList, BindingResult bindingResult) {
         checkParams(bindingResult);

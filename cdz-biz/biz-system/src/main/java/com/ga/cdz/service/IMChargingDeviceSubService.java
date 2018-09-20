@@ -15,14 +15,12 @@ import java.util.List;
 public interface IMChargingDeviceSubService extends IService<ChargingDeviceSub> {
 
 
-
-
     /**
+     * @param chargingDeviceVo
+     * @return
      * @author huanghaohao
      * @date 2018-09-12 11:29
      * @desc 获取充电枪列表
-     * @param chargingDeviceVo
-     * @return
      */
     List<ChargingDeviceSubDTO> getChargingDeviceSubList(ChargingDeviceVo chargingDeviceVo);
 

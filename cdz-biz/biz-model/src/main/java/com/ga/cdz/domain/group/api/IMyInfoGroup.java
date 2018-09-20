@@ -59,6 +59,4 @@ public interface IMyInfoGroup {
     }
 
 
-
-
 }

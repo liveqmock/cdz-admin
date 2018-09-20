@@ -18,15 +18,15 @@ import org.springframework.stereotype.Service;
  */
 @Service("mAdminUserCarsInfoService")
 public class MAdminUserCarsInfoServiceImpl extends ServiceImpl<UserCarsInfoMapper, UserCarsInfo> implements IMAdminUserCarsInfoService {
-  /**
-   * @author huanghaohao
-   * @date 2018-09-10 11:21
-   * @desc 查询汽车列表分页查询
-   * @param pageVo
-   * @return
-   */
-  public IPage<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo>pageVo){
-    Page<UserMemberCarsInfoDTO> page=new Page<>(pageVo.getIndex(),pageVo.getSize());
-    return page.setRecords(this.baseMapper.getUserCarListPage(page));
-  }
+    /**
+     * @param pageVo
+     * @return
+     * @author huanghaohao
+     * @date 2018-09-10 11:21
+     * @desc 查询汽车列表分页查询
+     */
+    public IPage<UserMemberCarsInfoDTO> getUserCarsListPage(PageVo<UserMemberCarsInfoVo> pageVo) {
+        Page<UserMemberCarsInfoDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
+        return page.setRecords(this.baseMapper.getUserCarListPage(page));
+    }
 }

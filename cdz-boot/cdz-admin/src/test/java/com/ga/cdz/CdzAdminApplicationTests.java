@@ -40,11 +40,11 @@ public class CdzAdminApplicationTests {
      * 测试充电桩联表查询
      */
     @Test
-    public void testChargingDevice(){
-        ChargingDeviceVo chargingDeviceVo=new ChargingDeviceVo();
+    public void testChargingDevice() {
+        ChargingDeviceVo chargingDeviceVo = new ChargingDeviceVo();
         chargingDeviceVo.setStationId(1);
-        List<ChargingDeviceDTO> list=mChargingDeviceService.getChargingDeviceList(chargingDeviceVo);
-        for(int i=0;i<list.size();i++){
+        List<ChargingDeviceDTO> list = mChargingDeviceService.getChargingDeviceList(chargingDeviceVo);
+        for (int i = 0; i < list.size(); i++) {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println(list.get(i).toString());
         }

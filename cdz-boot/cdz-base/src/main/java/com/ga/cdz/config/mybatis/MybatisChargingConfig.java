@@ -86,6 +86,7 @@ public class MybatisChargingConfig {
 
     /**
      * 在代码中配置MybatisPlus替换掉application.yml中的配置
+     *
      * @return
      */
     @Bean
@@ -99,7 +100,7 @@ public class MybatisChargingConfig {
         conf.setTablePrefix("t_");
         //数据库类型
         conf.setDbType(DbType.MYSQL);
-        GlobalConfig  globalConfig=new GlobalConfig();
+        GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setDbConfig(conf);
         return globalConfig;
     }
