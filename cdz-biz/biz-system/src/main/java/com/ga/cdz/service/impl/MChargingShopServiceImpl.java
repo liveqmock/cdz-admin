@@ -80,7 +80,7 @@ public class MChargingShopServiceImpl extends ServiceImpl<ChargingShopMapper, Ch
         if (!ObjectUtils.isEmpty(hasName) && hasName.getShopId() != chargingShop.getShopId()) {
             throw new BusinessException("商户名称已存在");
         }
-
+        chargingShop.setShopCode(getById(chargingShop.getShopId()).getShopCode());
         chargingShop.setShopState(ChargingShop.ShopState.NORMAL);
         boolean result = updateById(chargingShop);
         if (!result) {

@@ -100,6 +100,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         if (!ObjectUtils.isEmpty(hasName) && hasName.getStationId() != chargingStation.getStationId()) {
             throw new BusinessException("充电站名称已存在");
         }
+        chargingStation.setStationCode(getById(chargingStation.getStationId()).getStationCode());
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
         if (result != 0) {

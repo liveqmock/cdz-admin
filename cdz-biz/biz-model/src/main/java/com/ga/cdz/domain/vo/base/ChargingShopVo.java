@@ -30,8 +30,6 @@ public class ChargingShopVo {
     /**
      * 商户编码
      */
-    @NotBlank(groups = {IMChargingShopGroup.update.class}, message = "商户编码不能为空")
-    @Pattern(groups = {IMChargingShopGroup.update.class}, regexp = RegexConstant.SHOP_CODE, message = "商户编码格式不对")
     private String shopCode;
     /**
      * 登录名
