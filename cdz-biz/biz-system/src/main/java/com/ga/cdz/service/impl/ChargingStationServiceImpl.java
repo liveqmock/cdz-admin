@@ -17,6 +17,7 @@ import com.ga.cdz.service.IChargingStationService;
 import com.ga.cdz.service.IUserRedisService;
 import com.ga.cdz.util.MDistanceUtil;
 import com.ga.cdz.util.MRedisUtil;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -357,27 +358,41 @@ public class ChargingStationServiceImpl extends ServiceImpl<ChargingStationMappe
         List<ChargingOrder> chargingOrderList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER);
         //获取所有缓存的评论
         List<ChargingOrderComment> chargingOrderCommentList = mRedisUtil.getHashOfList(RedisConstant.TABLE_CHARGING_ORDER_COMMENT);
+        //无订单或无评论
+        if ((chargingOrderList.isEmpty() || chargingOrderList.size() <= 0)
+                || (chargingOrderCommentList.isEmpty() || chargingOrderCommentList.size() <= 0)) {
+            return Lists.newArrayList();
+        }
+
         //根据stationId得到符合的订单
         List<String> orderIdList = chargingOrderList.stream()
                 .filter(chargingOrder -> chargingOrder.getStationId().equals(vo.getStationId()))
                 .map(chargingOrder -> chargingOrder.getOrderId())
                 .collect(Collectors.toList());
+        //无符合的订单
+        if (orderIdList.isEmpty() || orderIdList.size() <= 0) {
+            return Lists.newArrayList();
+        }
 
         //根据orderId得到评论
-        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream().filter(chargingOrderComment -> chargingOrderComment.getCommentPid() == 0).map(chargingOrderComment -> {
-            ChargingStationCommentDTO chargingStationComment = new ChargingStationCommentDTO();
-            if (!orderIdList.isEmpty() && orderIdList.size() > 0) {
-                for (String orderId : orderIdList) {
-                    if (chargingOrderComment.getOrderId().equals(orderId)) {
-                        chargingStationComment.setChargingOrderComment(chargingOrderComment);
-                        UserInfo userInfo = userInfoMap.get(chargingOrderComment.getUserId().toString());
-                        chargingStationComment.setUserRealName(userInfo.getUserRealName())
-                                .setUserAvatar(userAvatarUrl + userInfo.getUserAvatar());
+        List<ChargingStationCommentDTO> chargingStationCommentList = chargingOrderCommentList.stream()
+                .filter(chargingOrderComment -> chargingOrderComment.getCommentPid() == 0)
+                .map(chargingOrderComment -> {
+                    ChargingStationCommentDTO chargingStationComment = new ChargingStationCommentDTO();
+                    for (String orderId : orderIdList) {
+                        if (chargingOrderComment.getOrderId().equals(orderId)) {
+                            chargingStationComment.setChargingOrderComment(chargingOrderComment);
+                            UserInfo userInfo = userInfoMap.get(chargingOrderComment.getUserId().toString());
+                            chargingStationComment.setUserRealName(userInfo.getUserRealName())
+                                    .setUserAvatar(userAvatarUrl + userInfo.getUserAvatar());
+                        }
                     }
-                }
-            }
-            return chargingStationComment;
-        }).collect(Collectors.toList());
+                    return chargingStationComment;
+                }).collect(Collectors.toList());
+        //无符合的评论
+        if (chargingStationCommentList.isEmpty() || chargingStationCommentList.size() <= 0) {
+            return Lists.newArrayList();
+        }
 
         //分页
         Paging<ChargingStationCommentDTO> mPage = new Paging<>(chargingStationCommentList, vo.getPageIndex(), vo.getPageSize());
