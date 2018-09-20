@@ -85,11 +85,8 @@ public class ChargingPriceController extends AbstractBaseController {
     @PostMapping("/list/save")
     public Result saveChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Add.class) ChargingPriceAddVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean result = mChargingPriceService.saveChargingPriceByKeys(vo);
-        if (result) {
-            return Result.success().message("保存成功");
-        }
-        return Result.success().message("保存失败");
+        mChargingPriceService.saveChargingPriceByKeys(vo);
+        return Result.success().message("保存成功");
     }
 
     /**
@@ -102,11 +99,8 @@ public class ChargingPriceController extends AbstractBaseController {
     @PostMapping("/list/update")
     public Result updateChargingPrice(@RequestBody @Validated(value = IMChargingPriceGroup.Update.class) ChargingPriceAddVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean result = mChargingPriceService.updateChargingPriceByKeys(vo);
-        if (result) {
-            return Result.success().message("修改成功");
-        }
-        return Result.success().message("修改失败");
+        mChargingPriceService.updateChargingPriceByKeys(vo);
+        return Result.success().message("修改成功");
     }
 }
 

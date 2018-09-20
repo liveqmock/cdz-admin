@@ -34,7 +34,6 @@ public class OperatorsVo {
     /**
      * 运营商编码
      */
-    @NotBlank(groups = {IMOperatorsGroup.Add.class}, message = "运营商编码不能为空")
     @Pattern(groups = {IMOperatorsGroup.Add.class}, regexp = RegexConstant.REGEX_CODE, message = "运营商编码只能是两位数字")
     private String operatorsCode;
     /**

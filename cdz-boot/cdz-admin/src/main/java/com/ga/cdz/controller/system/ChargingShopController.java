@@ -72,11 +72,8 @@ public class ChargingShopController extends AbstractBaseController {
     @PostMapping("/add")
     public Result saveShop(@RequestBody @Validated(value = {IMChargingShopGroup.Add.class}) ChargingShopVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Boolean result = mChargingShopService.saveChargingShop(vo);
-        if (result) {
-            return Result.success().message("保存成功");
-        }
-        return Result.fail().message("保存失败");
+        mChargingShopService.saveChargingShop(vo);
+        return Result.success().message("保存成功");
     }
 
     /**
@@ -89,11 +86,8 @@ public class ChargingShopController extends AbstractBaseController {
     @PostMapping("/update")
     public Result updateShop(@RequestBody @Validated(value = IMChargingShopGroup.update.class) ChargingShopVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean result = mChargingShopService.updateShopById(vo);
-        if (result) {
-            return Result.success().message("修改成功");
-        }
-        return Result.fail().message("修改失败");
+        mChargingShopService.updateShopById(vo);
+        return Result.success().message("修改成功");
     }
 
     /**
@@ -106,11 +100,8 @@ public class ChargingShopController extends AbstractBaseController {
     @PostMapping("/delete")
     public Result deleteShop(@RequestBody @Validated(value = IMChargingShopGroup.Delete.class) ChargingShopVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean result = mChargingShopService.deleteShopById(vo);
-        if (result) {
-            return Result.success().message("删除成功");
-        }
-        return Result.fail().message("删除失败");
+        mChargingShopService.deleteShopById(vo);
+        return Result.success().message("删除成功");
     }
 }
 

@@ -69,7 +69,10 @@ public class MOperatorsServiceImpl extends ServiceImpl<OperatorsMapper, Operator
     @Transactional
     @Override
     public void removeOperator(OperatorsVo vo) {
-        Operators delete = getById(vo.getOperatorsId());
+        Operators delete = baseMapper.selectOne(new QueryWrapper<Operators>().lambda().eq(Operators::getOperatorsId, vo.getOperatorsId()));
+        if (ObjectUtils.isEmpty(delete)) {
+            throw new BusinessException("运营商ID不存在");
+        }
         delete.setOperatorsState(Operators.OperatorsState.DELETE);
         updateById(delete);
     }

@@ -40,7 +40,7 @@ public class MChargingOrderCommentServiceImpl extends ServiceImpl<ChargingOrderC
     @Override
     public Page<ChargingOrderCommentDTO> getChargingOrderCommentListPage(PageVo<ChargingOrderCommentVo> pageVo, String name) {
         Page<ChargingOrderCommentDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
-        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminAccount, name));
         List<ChargingOrderCommentDTO> lists = null;
         if (list.size() > 0) {
             lists = this.baseMapper.getChargingCommentOrderListPage(new ChargingShop(), page);

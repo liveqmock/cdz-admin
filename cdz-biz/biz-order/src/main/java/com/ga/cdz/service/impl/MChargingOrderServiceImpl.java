@@ -42,7 +42,7 @@ public class MChargingOrderServiceImpl extends ServiceImpl<ChargingOrderMapper, 
         Page<ChargingOrderDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
         ChargingOrderSelectVo vo = pageVo.getData();
         List<ChargingOrderDTO> lists;
-        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        List<AdminInfo> list = adminInfoMapper.selectList(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminAccount, name));
         if (list.size() > 0) {
             lists = this.baseMapper.getChargingOrderListPage(page, vo, new ChargingShop());
         } else {

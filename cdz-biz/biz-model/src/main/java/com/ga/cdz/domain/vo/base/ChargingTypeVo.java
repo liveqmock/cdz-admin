@@ -37,7 +37,6 @@ public class ChargingTypeVo {
     /**
      * 充电方式编码
      */
-    @NotBlank(groups = {IMChargingTypeGroup.Add.class}, message = "充电方式编码不能为空")
     private String cgtypeCode;
     /**
      * 充电方式状态 0删除  1正常

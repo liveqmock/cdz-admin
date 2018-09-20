@@ -53,11 +53,8 @@ public class ChargingTypeController extends AbstractBaseController {
     @PostMapping("/delete")
     public Result deleteChargingType(@RequestBody @Validated(value = {IMChargingTypeGroup.Delete.class}) ChargingTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer integer = mChargingTypeService.removeChargingTypeById(vo);
-        if (integer > 0) {
-            return Result.success().message("删除成功");
-        }
-        return Result.fail().message("删除失败");
+        mChargingTypeService.removeChargingTypeById(vo);
+        return Result.success().message("删除成功");
     }
 
     /**
@@ -70,10 +67,7 @@ public class ChargingTypeController extends AbstractBaseController {
     @PostMapping("/save")
     public Result saveChargingTypeObj(@RequestBody @Validated(value = {IMChargingTypeGroup.Add.class}) ChargingTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer integer = mChargingTypeService.saveChargingTypeObj(vo);
-        if (integer > 0) {
-            return Result.success().message("保存成功");
-        }
-        return Result.fail().message("保存失败");
+        mChargingTypeService.saveChargingTypeObj(vo);
+        return Result.success().message("保存成功");
     }
 }

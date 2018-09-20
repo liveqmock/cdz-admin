@@ -59,7 +59,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStationSelectVo param = new ChargingStationSelectVo();
         BeanUtils.copyProperties(vo.getData(), param);
         //todo-ok huanghaohao 根据Admin的 adminAccount来判断，adminName判断不可行，此处应返回 一个AdminInfo对象 而不是 List集合
-        AdminInfo adminInfo = adminInfoMapper.selectOne(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminName, name));
+        AdminInfo adminInfo = adminInfoMapper.selectOne(new QueryWrapper<AdminInfo>().lambda().eq(AdminInfo::getAdminAccount, name));
         //todo-ok Cedar 此次不需要初始化 来自IDEA的提示
         List<ChargingStationDTO> lists;
         //todo-ok huanghaohao 判断修改
@@ -95,14 +95,10 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         //todo-ok Cendar 站点名称和站点编号不能修改 请做条件判断
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
-        //验证充电站名称和编码是否已经存在
-        ChargingStation hasName = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
-        ChargingStation hasCode = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationCode, chargingStation.getStationCode()));
+        //验证充电站名称是否已经存在
+        ChargingStation hasName = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL).eq(ChargingStation::getStationName, chargingStation.getStationName()));
         if (!ObjectUtils.isEmpty(hasName) && hasName.getStationId() != chargingStation.getStationId()) {
             throw new BusinessException("充电站名称已存在");
-        }
-        if (!ObjectUtils.isEmpty(hasCode) && hasCode.getStationId() != chargingStation.getStationId()) {
-            throw new BusinessException("充电站编码已存在");
         }
         //保存修改信息
         int result = this.baseMapper.updateById(chargingStation);
@@ -163,8 +159,8 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         ChargingStation chargingStation = new ChargingStation();
         BeanUtils.copyProperties(vo, chargingStation);
         //根据名字查询该名称是否存在
-        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, vo.getStationName()));
-        if (!ObjectUtils.isEmpty(hasName) && hasName.getStationState() == ChargingStation.StationState.NORMAL) {
+        ChargingStation hasName = getOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL).eq(ChargingStation::getStationName, vo.getStationName()));
+        if (!ObjectUtils.isEmpty(hasName)) {
             throw new BusinessException("该充电站名称已存在");
         }
         //产生充电站编码并保存
@@ -177,7 +173,7 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
         boolean value = save(chargingStation);
         //返回保存后的StationId值，否则-1
         if (value) {
-            ChargingStation obj = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationName, chargingStation.getStationName()));
+            ChargingStation obj = baseMapper.selectOne(new QueryWrapper<ChargingStation>().lambda().eq(ChargingStation::getStationState, ChargingStation.StationState.NORMAL).eq(ChargingStation::getStationName, chargingStation.getStationName()));
             int result = obj.getStationId();
             return result;
         } else {

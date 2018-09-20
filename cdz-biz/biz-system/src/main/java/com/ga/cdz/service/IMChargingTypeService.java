@@ -26,18 +26,14 @@ public interface IMChargingTypeService extends IService<ChargingType> {
      * @description: 逻辑删除充电柱充电方式
      * @date: 2018/9/10 9:43
      * @param: ChargingTypeVo
-     * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
-    Integer removeChargingTypeById(ChargingTypeVo vo);
+    void removeChargingTypeById(ChargingTypeVo vo);
 
     /**
      * @author:wanzhongsu
      * @description: 保存充电柱充电方式
      * @date: 2018/9/10 9:43
      * @param: ChargingTypeVo
-     * @return: 返回整数 小于等于0 不成功，大于0 成功
      */
-    Integer saveChargingTypeObj(ChargingTypeVo vo);
-
-
+    void saveChargingTypeObj(ChargingTypeVo vo);
 }

@@ -40,11 +40,8 @@ public class SttpeController extends AbstractBaseController {
     @PostMapping("/save")
     public Result saveStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.Add.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer integer = mChargingStationTypeService.saveCST(vo);
-        if (integer > 0) {
-            return Result.success().message("保存成功");
-        }
-        return Result.fail().message("保存失败");
+        mChargingStationTypeService.saveCST(vo);
+        return Result.success().message("保存成功");
     }
 
     /**
@@ -57,11 +54,8 @@ public class SttpeController extends AbstractBaseController {
     @PostMapping("/delete")
     public Result deleteStpe(@RequestBody @Validated(value = {IMChargingStationTypeGroup.Delete.class}) ChargingStationTypeVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        Integer integer = mChargingStationTypeService.removeCSTById(vo);
-        if (integer > 0) {
-            return Result.success().message("删除成功");
-        }
-        return Result.fail().message("删除失败");
+        mChargingStationTypeService.removeCSTById(vo);
+        return Result.success().message("删除成功");
     }
 
     /**

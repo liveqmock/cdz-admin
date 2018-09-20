@@ -40,9 +40,8 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @description: 修改商户
      * @date: 2018/9/10 14:42
      * @param: ChargingShopVo
-     * @return: 是否成功
      */
-    boolean updateShopById(ChargingShopVo vo);
+    void updateShopById(ChargingShopVo vo);
 
     /**
      * @author:wanzhongsu
@@ -51,7 +50,7 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @param:
      * @return:
      */
-    boolean deleteShopById(ChargingShopVo vo);
+    void deleteShopById(ChargingShopVo vo);
 
     /**
      * @author:wanzhongsu
@@ -60,7 +59,7 @@ public interface IMChargingShopService extends IService<ChargingShop> {
      * @param:
      * @return:
      */
-    boolean saveChargingShop(ChargingShopVo vo);
+    void saveChargingShop(ChargingShopVo vo);
 
     /**
      * @param chargingShopVo

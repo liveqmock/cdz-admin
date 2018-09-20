@@ -193,7 +193,6 @@ public class ChargingStationController extends AbstractBaseController {
     private int saveChargingStation(ChargingStationVo vo) {
         //充电站信息验证
         Integer shopId = vo.getShopId();
-        String stationCode = vo.getStationCode();
         String stationName = vo.getStationName();
         Integer sttpeId = vo.getSttpeId();
         Integer operatorsId = vo.getOperatorsId();
@@ -219,8 +218,6 @@ public class ChargingStationController extends AbstractBaseController {
         //为空验证
         if (ObjectUtils.isEmpty(shopId)) {
             throw new BusinessException("商户ID不能为空");
-        } else if (ObjectUtils.isEmpty(stationCode)) {
-            throw new BusinessException("充电站编码不能为空");
         } else if (ObjectUtils.isEmpty(stationName)) {
             throw new BusinessException("充电站名称不能为空");
         } else if (ObjectUtils.isEmpty(sttpeId)) {
@@ -245,9 +242,6 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("关闭时间不能为空");
         }
         //格式验证
-        if (!Pattern.matches(RegexConstant.STATION_CODE, stationCode)) {
-            throw new BusinessException("充电站编码格式不对");
-        }
         if (!Pattern.matches(RegexConstant.PROVINCE_CODE, province.toString())) {
             throw new BusinessException("省编码格式不对");
         }

@@ -29,18 +29,16 @@ public interface IMChargingPriceService extends IService<ChargingPrice> {
      * @description: 保存添加计费
      * @date: 2018/9/11 17:05
      * @param: ChargingPriceAddVo
-     * @return: 是否成功
      */
-    boolean saveChargingPriceByKeys(ChargingPriceAddVo vo);
+    void saveChargingPriceByKeys(ChargingPriceAddVo vo);
 
     /**
      * @author:wanzhongsu
      * @description: 编辑修改计费信息
      * @date: 2018/9/11 17:06
      * @param: ChargingPriceAddVo
-     * @return: 是否成功
      */
-    boolean updateChargingPriceByKeys(ChargingPriceAddVo vo);
+    void updateChargingPriceByKeys(ChargingPriceAddVo vo);
 
 
 }

@@ -63,9 +63,10 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         return page;
     }
 
+    //todo-ok Cedar 返回类型为void
     @Override
     @Transactional
-    public boolean saveChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
+    public void saveChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
         boolean check1 = checkPriceTime1(chargingPriceAddVo);
         boolean check2 = checkPriceTime2(chargingPriceAddVo);
         boolean check3 = checkPriceTime3(chargingPriceAddVo);
@@ -122,12 +123,12 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
         } catch (Exception e) {
             throw new BusinessException("复合主键重复,请检查充电站是否被占用，选择其他充电站或联系管理员");
         }
-        return true;
     }
 
+    //todo-ok Cedar 返回类型为void
     @Override
     @Transactional
-    public boolean updateChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
+    public void updateChargingPriceByKeys(ChargingPriceAddVo chargingPriceAddVo) {
 //        低谷平谷高峰
 //        低谷高峰平谷
 //        平谷低谷高峰
@@ -201,9 +202,8 @@ public class MChargingPriceServiceImpl extends ServiceImpl<ChargingPriceMapper, 
             high.setStationId(null).setPriceIdx(null);
             update(high, wrapper2);
         } catch (Exception e) {
-            throw new BusinessException("修改失败");
+            throw new BusinessException("修改失败，请检查该充电站是否被使用");
         }
-        return true;
     }
 
     /**

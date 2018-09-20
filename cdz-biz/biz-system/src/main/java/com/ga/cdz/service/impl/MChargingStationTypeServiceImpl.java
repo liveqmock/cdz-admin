@@ -31,41 +31,32 @@ public class MChargingStationTypeServiceImpl extends ServiceImpl<ChargingStation
 
     @Override
     @Transactional
-    public Integer removeCSTById(ChargingStationTypeVo vo) {
+    public void removeCSTById(ChargingStationTypeVo vo) {
         //查询运营商id是否存在
         ChargingStationType exists = baseMapper.selectOne(new QueryWrapper<ChargingStationType>().lambda().eq(ChargingStationType::getSttpeId, vo.getSttpeId()));
         if (ObjectUtils.isEmpty(exists)) {
             throw new BusinessException("运营商不存在");
         }
         //逻辑删除
-//        Integer integer = baseMapper.deleteById(vo.getSttpeId());
         ChargingStationType delete = getById(vo.getSttpeId());
         delete.setSttpeState(ChargingStationType.SttpeState.DELETE);
         updateById(delete);
-        return 1;
     }
 
     @Override
     @Transactional
-    public Integer saveCST(ChargingStationTypeVo vo) {
+    public void saveCST(ChargingStationTypeVo vo) {
         ChargingStationType chargingStationType = new ChargingStationType();
         BeanUtils.copyProperties(vo, chargingStationType);
         //查询运营商名称是否存在
         ChargingStationType hasName = baseMapper.selectOne(new QueryWrapper<ChargingStationType>().lambda().eq(ChargingStationType::getSttpeState, ChargingStationType.SttpeState.NORMAL).eq(ChargingStationType::getSttpeName, chargingStationType.getSttpeName()));
-        if (!ObjectUtils.isEmpty(hasName) && hasName.getSttpeState() == ChargingStationType.SttpeState.NORMAL) {
+        if (!ObjectUtils.isEmpty(hasName)) {
             throw new BusinessException("运营商名称已存在");
         }
-        //已存在，修改状态后保存
-        hasName = baseMapper.selectOne(new QueryWrapper<ChargingStationType>().lambda().eq(ChargingStationType::getSttpeName, chargingStationType.getSttpeName()));
-        if (!ObjectUtils.isEmpty(hasName)) {
-            hasName.setSttpeState(ChargingStationType.SttpeState.NORMAL);
-            updateById(hasName);
-            return 1;
-        }
+
         /**初始化平台状态为可用*/
         chargingStationType.setSttpeState(ChargingStationType.SttpeState.NORMAL);
         //保存运营商名称
-        Integer integer = baseMapper.insert(chargingStationType);
-        return integer;
+        baseMapper.insert(chargingStationType);
     }
 }
