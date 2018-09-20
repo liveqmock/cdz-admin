@@ -83,7 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
     @Override
     public MyInfoDTO getMyInfoDTOById(Integer id) {
         MyInfoDTO myInfoDTO = baseMapper.getMyInfoDTOById(id);
-        String userAvatar = userAvatarUrl + myInfoDTO.getUserAvatar();
+        String userAvatar = userAvatarUrl + mUtil.urlSeparator(myInfoDTO.getUserAvatar());
         myInfoDTO.setUserAvatar(userAvatar);
         if (ObjectUtils.isEmpty(myInfoDTO.getUserPrice())) {
             myInfoDTO.setUserPrice(new BigDecimal("0"));
@@ -146,7 +146,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> imple
             throw new BusinessException("头像上传失败，稍后重试");
         }
         /**新的头像路径*/
-        String backUserAvatarUrl = userAvatarUrl + dbFilePath;
+        String backUserAvatarUrl = userAvatarUrl + mUtil.urlSeparator(dbFilePath);
         UserInfo backUserInfo = new UserInfo();
         backUserInfo.setUserAvatar(backUserAvatarUrl);
         return backUserInfo;

@@ -22,15 +22,15 @@ file:
 
 #文件请求路径
 url:
-  base: http:\\192.168.2.106:8018\img
+  base: http://192.168.2.106:8018/img
    #系统消息
-  system: ${url.base}\\system
+  system: ${url.base}/system
   #banner
-  banner: ${url.base}\banner
+  banner: ${url.base}/banner
   #t头像路径
-  user_avatar: ${url.base}\user\avatar
+  user_avatar: ${url.base}/user/avatar
   #站点路径
-  station: ${url.base}\station
+  station: ${url.base}/station
 
 atomikos:
   logdir: ${config.base_path}\\logs\\cdz-api\\transaction-logs

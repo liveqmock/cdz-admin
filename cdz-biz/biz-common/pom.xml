@@ -23,5 +23,9 @@
             <groupId>com.ga.cdz</groupId>
             <artifactId>cdz-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ga.cdz</groupId>
+            <artifactId>cdz-util</artifactId>
+        </dependency>
     </dependencies>
 </project>
