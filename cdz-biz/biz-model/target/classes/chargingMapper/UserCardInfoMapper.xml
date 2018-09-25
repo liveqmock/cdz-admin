@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.UserCardInfoMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserCardInfo">
+        <id column="card_id" property="cardId"/>
+        <result column="user_id" property="userId"/>
+        <result column="card_code" property="cardCode"/>
+        <result column="used_price" property="usedPrice"/>
+        <result column="card_score" property="cardScore"/>
+        <result column="card_state" property="cardState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <resultMap id="userCardBaseResult" type="com.ga.cdz.domain.dto.admin.UserMemberCardInfoDTO">
+        <id column="card_id" property="cardId"></id>
+        <result column="card_code" property="cardCode"></result>
+        <result column="used_price" property="usedPrice"></result>
+        <result column="card_score" property="cardScore"></result>
+        <result column="user_type" property="userType"></result>
+        <result column="user_real_name" property="userRealName"></result>
+        <result column="user_tel" property="userTel"></result>
+        <result column="user_sex" property="userSex"></result>
+        <result column="update_dt" property="updateDt"></result>
+        <result column="insert_dt" property="insertDt"></result>
+        <result column="car_num" property="carNum"></result>
+        <result column="card_state" property="cardState"></result>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        card_id, user_id, card_code, used_price, card_score, card_state, update_dt, insert_dt
+    </sql>
+
+
+    <select id="getMemberCardInfoListByPage" resultMap="userCardBaseResult">
+        SELECT
+        c.card_id,
+        c.card_code,
+        u.user_type,
+        u.user_real_name,
+        u.user_tel,
+        u.user_sex,
+        c.card_state,
+        c.insert_dt,
+        c.used_price,
+        c.card_score,
+        d.car_num
+        FROM
+        t_user_card c
+        LEFT JOIN t_user_info u ON u.user_id = c.user_id
+        LEFT JOIN (
+        SELECT
+        a.user_id,
+        count( * ) car_num
+        FROM
+        t_user_info a
+        LEFT JOIN t_user_cars b ON a.user_id = b.user_id
+        GROUP BY
+        a.user_id
+        ) d ON u.user_id = d.user_id
+        where 1=1
+        <if test="card!=null">
+            <if test="card.cardCode!=null">
+                and c.card_code like '%#{card.cardCode}%'
+            </if>
+            <if test="card.userRealName!=null">
+                and u.user_real_name like '%#{card.userRealName}%'
+            </if>
+            <if test="card.userTel!=null">
+                and u.user_tel like '%#{card.userTel}%'
+            </if>
+
+
+        </if>
+
+
+    </select>
+    <!--获取最新的cardCode-->
+    <select id="getCardCodeLast" resultType="java.lang.String">
+        SELECT MAX(card_code) FROM t_user_card
+    </select>
+</mapper>

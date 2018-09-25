@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingStationAttachMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingStationAttach">
+        <id column="station_id" property="stationId"/>
+        <result column="attach_idx" property="attachIdx"/>
+        <result column="attach_path" property="attachPath"/>
+        <result column="attach_desc" property="attachDesc"/>
+        <result column="attach_state" property="attachState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        station_id, attach_idx, attach_path, attach_desc, attach_state, update_dt, insert_dt
+    </sql>
+
+</mapper>

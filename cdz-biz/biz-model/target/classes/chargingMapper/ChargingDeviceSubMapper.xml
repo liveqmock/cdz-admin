@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingDeviceSubMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingDeviceSub">
+        <id column="device_sub_id" property="deviceSubId"/>
+        <result column="device_id" property="deviceId"/>
+        <result column="device_sub_name" property="deviceSubName"/>
+        <result column="device_sub_state" property="deviceSubState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+    <resultMap id="chargingDeviceSubDetail" type="com.ga.cdz.domain.dto.admin.ChargingDeviceSubDTO">
+        <result column="device_sub_id" property="deviceSubId"></result>
+        <result column="device_id" property="deviceId"></result>
+        <result column="device_sub_name" property="deviceSubName"></result>
+        <result column="device_sub_state" property="deviceSubState"/>
+        <result column="order_id" property="orderId"/>
+        <result column="chargin_begin_dt" property="charginBeginDt"/>
+        <result column="user_real_name" property="userRealName"/>
+        <result column="user_id" property="userId"></result>
+        <result column="update_dt" property="updateDt"></result>
+        <result column="insert_dt" property="insertDt"></result>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        device_sub_id, device_id, device_sub_name, device_sub_state, update_dt, insert_dt
+    </sql>
+    <select id="getChargingDeviceSubByDeviceId" resultMap="chargingDeviceSubDetail">
+
+        SELECT
+        sub.device_sub_id,
+        sub.device_sub_name,
+        sub.device_sub_state,
+        sub.device_id,
+        orders.order_id,
+        orders.order_state,
+        orders.chargin_begin_dt,
+        usr.user_real_name,
+        usr.user_id
+        FROM
+        t_charging_device_sub sub
+        LEFT JOIN (select * from t_charging_order where 1=1 and order_state=2) orders ON orders.device_sub_id =
+        sub.device_sub_id
+        LEFT join t_user_info usr on usr.user_id=orders.user_id
+        where 1=1
+        <if test="device.deviceId != null">
+            and sub.device_id =#{device.deviceId}
+        </if>
+    </select>
+
+</mapper>

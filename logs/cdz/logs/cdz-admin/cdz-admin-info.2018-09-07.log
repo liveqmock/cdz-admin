@@ -1,0 +1,439 @@
+2018-09-07 17:06:09,722 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 6672 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:06:09,734 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:06:12,658 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:06:13,403 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:06:13,414 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:06:13,414 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:06:13,417 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:06:13,502 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:06:14,313 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:06:14,407 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:06:15,545 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:06:15,547 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:06:15,553 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:06:15,554 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:06:15,555 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:06:15,555 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:06:15,555 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:06:15,555 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:06:15,555 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:06:15,556 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:06:15,616 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:06:15,639 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:06:16,430 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:06:16,450 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:06:16,463 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:06:16,494 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 7.452 seconds (JVM running for 8.489)
+2018-09-07 17:07:08,950 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:10:28,197 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 12980 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:10:28,207 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:10:30,495 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:10:31,191 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:10:31,202 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:10:31,203 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:10:31,207 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:10:31,606 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:10:32,371 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:10:32,468 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:10:33,821 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:10:33,824 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:10:33,834 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:10:33,835 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:10:33,836 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:10:33,837 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:10:33,837 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:10:33,837 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:10:33,837 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:10:33,838 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:10:33,890 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:10:33,912 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:10:34,655 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:10:34,667 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:10:34,688 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:10:34,723 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 8.065 seconds (JVM running for 9.361)
+2018-09-07 17:10:47,515 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:23:58,554 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 8528 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:23:58,557 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:24:00,348 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:24:00,822 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:24:00,833 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:24:00,834 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:24:00,837 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:24:00,946 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:24:01,503 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:24:01,587 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:24:02,659 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:24:02,662 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:24:02,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:24:02,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:24:02,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:24:02,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:24:02,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:24:02,669 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:24:02,710 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:24:02,738 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:24:03,359 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:24:03,368 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:24:03,378 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:24:03,394 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.447 seconds (JVM running for 6.212)
+2018-09-07 17:24:07,054 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:26:32,587 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 9892 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:26:32,605 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:26:34,160 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:26:34,666 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:26:34,676 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:26:34,676 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:26:34,679 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:26:34,759 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:26:35,314 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:26:35,402 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:26:36,410 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:26:36,413 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:26:36,416 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:26:36,417 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:26:36,418 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:26:36,419 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:26:36,419 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:26:36,457 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:26:36,477 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:26:37,010 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:26:37,021 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:26:37,029 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:26:37,047 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.024 seconds (JVM running for 5.594)
+2018-09-07 17:26:37,283 [http-nio-8011-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:28:01,539 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 12616 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:28:01,569 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:28:03,204 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:28:03,729 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:28:03,742 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:28:03,742 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:28:03,745 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:28:03,837 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:28:04,455 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:28:04,541 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:28:05,566 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:28:05,568 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:28:05,573 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:28:05,575 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:28:05,575 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:28:05,575 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:28:05,575 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:28:05,616 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:28:05,637 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:28:06,218 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:28:06,227 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:28:06,236 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:28:06,255 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.337 seconds (JVM running for 6.0)
+2018-09-07 17:28:06,315 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:31:13,396 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 14312 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:31:13,398 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:31:15,027 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:31:15,484 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:31:15,493 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:31:15,494 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:31:15,496 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:31:15,575 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:31:16,119 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:31:16,206 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:31:17,232 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:31:17,235 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:31:17,240 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:31:17,241 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:31:17,242 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:31:17,307 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:31:17,327 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:31:17,920 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:31:17,934 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:31:17,953 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:31:17,974 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.14 seconds (JVM running for 5.747)
+2018-09-07 17:31:26,929 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 11224 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:31:26,933 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:31:28,475 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:31:28,931 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:31:28,940 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:31:28,940 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:31:28,943 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:31:29,021 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:31:29,574 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:31:29,653 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:31:30,657 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:31:30,659 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:31:30,664 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:31:30,664 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:31:30,665 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:31:30,666 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:31:30,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:31:30,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:31:30,667 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:31:30,668 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:31:30,708 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:31:30,745 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:31:31,288 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:31:31,297 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:31:31,307 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:31:31,324 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 4.97 seconds (JVM running for 5.597)
+2018-09-07 17:31:34,874 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:32:30,670 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 14176 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:32:30,672 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:32:32,242 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:32:32,700 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:32:32,708 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:32:32,709 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:32:32,711 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:32:32,789 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:32:33,321 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:32:33,407 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:32:34,398 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:32:34,401 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:32:34,405 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:32:34,405 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:32:34,405 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:32:34,405 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:32:34,405 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:32:34,406 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:32:34,407 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:32:34,408 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:32:34,443 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:32:34,461 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:32:35,034 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:32:35,057 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:32:35,070 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:32:35,093 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.062 seconds (JVM running for 5.749)
+2018-09-07 17:32:35,161 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:34:17,525 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 13684 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:34:17,529 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:34:19,145 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:34:19,715 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:34:19,727 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:34:19,727 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:34:19,731 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:34:19,828 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:34:20,500 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:34:20,609 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:34:21,871 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:34:21,874 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:34:21,879 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:34:21,880 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:34:21,881 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:34:21,882 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:34:21,929 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:34:21,945 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:34:22,688 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:34:22,704 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:34:22,715 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:34:22,736 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 5.917 seconds (JVM running for 7.109)
+2018-09-07 17:34:36,412 [http-nio-8011-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-07 17:36:09,165 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarting] - Starting CdzAdminApplication on DESKTOP-8AACFFC with PID 13424 (D:\project\cdz-service\cdz-boot\cdz-admin\target\classes started by John in D:\project\cdz-service)
+2018-09-07 17:36:09,168 [main] INFO  com.ga.cdz.CdzAdminApplication [logStartupProfileInfo] - The following profiles are active: dev
+2018-09-07 17:36:11,899 [main] WARN  o.a.s.w.m.DefaultWebSecurityManager [setSessionManager] - The org.apache.shiro.web.mgt.DefaultWebSecurityManager implementation expects SessionManager instances that implement the org.apache.shiro.web.session.mgt.WebSessionManager interface.  The configured instance is of type [org.apache.shiro.session.mgt.DefaultSessionManager] which does not implement this interface..  This may cause unexpected behavior.
+2018-09-07 17:36:12,503 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Initializing ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:36:12,514 [main] INFO  o.a.catalina.core.StandardService [log] - Starting service [Tomcat]
+2018-09-07 17:36:12,514 [main] INFO  o.a.catalina.core.StandardEngine [log] - Starting Servlet Engine: Apache Tomcat/8.5.32
+2018-09-07 17:36:12,518 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener [log] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\environment\apache-maven-3.5.4\bin;C:\Users\John\Downloads\redis;C:\Users\John\AppData\Local\Microsoft\WindowsApps;C:\Users\John\AppData\Roaming\npm;.]
+2018-09-07 17:36:12,614 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring embedded WebApplicationContext
+2018-09-07 17:36:13,430 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminInfoRole.
+2018-09-07 17:36:13,524 [main] WARN  c.b.m.core.toolkit.TableInfoHelper [initTableFields] - Warn: Could not find @TableId in Class: com.ga.cdz.domain.entity.AdminRolePermission.
+2018-09-07 17:36:14,611 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Loaded jar:file:/D:/work/maven-repo/repo/com/atomikos/transactions/4.0.6/transactions-4.0.6.jar!/transactions-defaults.properties
+2018-09-07 17:36:14,614 [main] WARN  c.a.icatch.provider.imp.AssemblerImp [logWarning] - Thanks for using Atomikos! Evaluate http://www.atomikos.com/Main/ExtremeTransactions for advanced features and professional support
+or register at http://www.atomikos.com/Main/RegisterYourDownload to disable this message and receive FREE tips & advice
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_max_wait_time_on_shutdown = 9223372036854775807
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.allow_subtransactions = true
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.recovery_delay = 10000
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.automatic_resource_registration = true
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_max_retries = 5
+2018-09-07 17:36:14,618 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.client_demarcation = false
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.threaded_2pc = false
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.serial_jta_transactions = true
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_dir = .\logs\\cdz\\logs\\cdz-admin\\transaction-logs
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.rmi_export_class = none
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_actives = 50
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.checkpoint_interval = 500
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.enable_logging = true
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.log_base_name = cdz-admin-transaction
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.max_timeout = 300000
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.trust_client_tm = false
+2018-09-07 17:36:14,619 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.factory.initial = com.sun.jndi.rmi.registry.RegistryContextFactory
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.tm_unique_name = 192.168.2.18.tm
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.forget_orphaned_log_entries_delay = 86400000
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.oltp_retry_interval = 10000
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: java.naming.provider.url = rmi://localhost:1099
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.force_shutdown_on_vm_exit = false
+2018-09-07 17:36:14,620 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - USING: com.atomikos.icatch.default_jta_timeout = 10000
+2018-09-07 17:36:14,627 [main] INFO  c.a.icatch.provider.imp.AssemblerImp [logInfo] - Using default (local) logging and recovery...
+2018-09-07 17:36:14,683 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource: refreshed XAResource
+2018-09-07 17:36:14,701 [main] INFO  c.a.d.xa.XATransactionalResource [logInfo] - dataSource2: refreshed XAResource
+2018-09-07 17:36:15,307 [main] INFO  c.g.c.s.i.MAdminRolePermissionServiceImpl [initSuperAdminRolePermission] - 超级管理员权限绑定初始化
+2018-09-07 17:36:15,321 [main] INFO  o.a.coyote.http11.Http11NioProtocol [log] - Starting ProtocolHandler ["http-nio-8011"]
+2018-09-07 17:36:15,331 [main] INFO  o.a.tomcat.util.net.NioSelectorPool [log] - Using a shared selector for servlet write/read
+2018-09-07 17:36:15,348 [main] INFO  com.ga.cdz.CdzAdminApplication [logStarted] - Started CdzAdminApplication in 6.803 seconds (JVM running for 7.638)
+2018-09-07 17:40:35,888 [http-nio-8011-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] [log] - Initializing Spring FrameworkServlet 'dispatcherServlet'

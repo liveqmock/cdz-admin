@@ -1,0 +1,7 @@
+2018-09-07 17:31:35,105 [http-nio-8011-exec-1] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:org.springframework.jdbc.BadSqlGrammarException,detail:
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+### The error may involve com.ga.cdz.dao.charging.ChargingTypeMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO t_charging_type    VALUES
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1

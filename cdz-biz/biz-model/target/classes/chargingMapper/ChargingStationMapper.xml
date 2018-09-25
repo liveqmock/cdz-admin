@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingStationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingStation">
+        <id column="station_id" property="stationId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="station_code" property="stationCode"/>
+        <result column="station_name" property="stationName"/>
+        <result column="station_type" property="stationType"/>
+        <result column="sttpe_id" property="sttpeId"/>
+        <result column="operators_id" property="operatorsId"/>
+        <result column="station_addr" property="stationAddr"/>
+        <result column="country" property="country"/>
+        <result column="county" property="county"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
+        <result column="lat" property="lat"/>
+        <result column="lng" property="lng"/>
+        <result column="station_state" property="stationState"/>
+        <result column="station_opendt" property="stationOpendt"/>
+        <result column="station_closedt" property="stationClosedt"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+    <resultMap id="chargingStationDTO" type="com.ga.cdz.domain.dto.admin.ChargingStationDTO">
+        <id column="station_id" property="stationId"/>
+        <result column="station_code" property="stationCode"/>
+        <result column="station_name" property="stationName"/>
+        <result column="station_type" property="stationType"/>
+        <result column="station_addr" property="stationAddr"/>
+        <result column="operators_id" property="operatorsId"/>
+        <result column="sttpe_id" property="sttpeId"/>
+        <result column="device_nums" property="deviceNums"/>
+        <result column="country" property="country"/>
+        <result column="county" property="county"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
+        <result column="lat" property="lat"/>
+        <result column="lng" property="lng"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="insert_dt" property="insertDt"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="sttpe_name" property="sttpeName"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        station_id, shop_id, station_code, station_name, station_type, sttpe_id, operators_id, station_addr, country,
+        county, city, province, lat, lng, station_state, station_opendt, station_closedt, update_dt, insert_dt
+    </sql>
+    <select id="getStationList" resultMap="chargingStationDTO">
+        SELECT
+        a.station_id,
+        a.station_code,
+        a.station_type,
+        a.operators_id,
+        a.country,
+        a.county,
+        a.city,
+        a.province,
+        a.station_addr,
+        c.sttpe_id,
+        c.sttpe_name,
+        a.station_name,
+        a.lat,
+        a.lng,
+        b.shop_code,
+        b.shop_id,
+        b.shop_name,
+        a.insert_dt,
+        (select count(1) from t_charging_device device where device.station_id=a.station_id) device_nums
+        FROM
+        t_charging_station a
+        LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
+        LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
+        where a.station_state=1
+        <if test="param.stationName!=null">
+            AND a.station_name like '%${param.stationName}%'
+        </if>
+        <if test="param.stationType!=null">
+            AND a.station_type like '%${param.stationType}%'
+        </if>
+        <if test="param.sttpeName!=null">
+            AND c.sttpe_name like '%${param.sttpeName}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND b.shop_name like '%${param.shopName}%'
+        </if>
+
+        <if test="shop!=null">
+            <if test="shop.shopId!=null">
+                AND a.shop_id=#{shop.shopId}
+            </if>
+        </if>
+    </select>
+    <select id="getStationListByCon" resultMap="chargingStationDTO"
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingStationSelectVo">
+        SELECT
+        a.station_id,
+        a.station_code,
+        a.station_type,
+        a.country,
+        a.operators_id,
+        a.county,
+        a.city,
+        a.province,
+        a.station_addr,
+        c.sttpe_id,
+        c.sttpe_name,
+        a.station_name,
+        a.lat,
+        a.lng,
+        b.shop_code,
+        b.shop_id,
+        b.shop_name,
+        a.insert_dt,
+        (select count(1) from t_charging_device device where device.station_id=a.station_id) device_nums
+        FROM
+        t_charging_station a
+        LEFT JOIN t_charging_shop b ON a.shop_id = b.shop_id
+        LEFT JOIN t_charging_station_type c ON a.sttpe_id = c.sttpe_id
+        where a.station_state=1
+        <if test="param.stationName!=null">
+            AND a.station_name like '%${param.stationName}%'
+        </if>
+        <if test="param.stationType!=null">
+            AND a.station_type like '%${param.stationType}%'
+        </if>
+        <if test="param.sttpeName!=null">
+            AND c.sttpe_name like '%${param.sttpeName}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND b.shop_name like '%${param.shopName}%'
+        </if>
+    </select>
+
+</mapper>

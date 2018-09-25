@@ -1,0 +1,4 @@
+2018-09-10 11:49:13,638 [http-nio-8011-exec-7] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:org.mybatis.spring.MyBatisSystemException,detail:nested exception is org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 2
+2018-09-10 11:58:11,737 [http-nio-8011-exec-1] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:java.lang.NullPointerException,detail:null
+2018-09-10 11:58:13,262 [http-nio-8011-exec-2] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:java.lang.NullPointerException,detail:null
+2018-09-10 11:58:14,065 [http-nio-8011-exec-3] ERROR com.ga.cdz.handle.ExceptionHandle [handle] - class:java.lang.NullPointerException,detail:null

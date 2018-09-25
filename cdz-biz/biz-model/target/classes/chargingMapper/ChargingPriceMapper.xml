@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingPriceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingPrice">
+        <id column="station_id" property="stationId"/>
+        <result column="price_name" property="priceName"/>
+        <result column="price_type" property="priceType"/>
+        <result column="price_idx" property="priceIdx"/>
+        <result column="price_begin_dt" property="priceBeginDt"/>
+        <result column="price_end_dt" property="priceEndDt"/>
+        <result column="charging_price" property="chargingPrice"/>
+        <result column="price_parking" property="priceParking"/>
+        <result column="service_price" property="servicePrice"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+    <resultMap id="chargingPriceDTO" type="com.ga.cdz.domain.dto.admin.ChargingPriceDTO">
+        <id column="shop_id" property="shopId"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="station_code" property="stationCode"/>
+        <result column="station_name" property="stationName"/>
+        <result column="station_id" property="stationId"/>
+        <result column="price_name" property="priceName"/>
+        <result column="price_type" property="priceType"/>
+        <result column="low" property="low"/>
+        <result column="low_start" property="lowStart"/>
+        <result column="low_end" property="lowEnd"/>
+        <result column="low_price" property="lowPrice"/>
+        <result column="low_parking" property="lowParking"/>
+        <result column="low_service" property="lowService"/>
+        <result column="middle" property="middle"/>
+        <result column="middle_start" property="middleStart"/>
+        <result column="middle_end" property="middleEnd"/>
+        <result column="middle_price" property="middlePrice"/>
+        <result column="middle_parking" property="middleParking"/>
+        <result column="middle_service" property="middleService"/>
+        <result column="high" property="high"/>
+        <result column="high_start" property="highStart"/>
+        <result column="high_end" property="highEnd"/>
+        <result column="high_price" property="highPrice"/>
+        <result column="high_parking" property="highParking"/>
+        <result column="high_service" property="highService"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        station_id, price_name, price_type, price_idx, price_begin_dt, price_end_dt, charging_price, price_parking,
+        service_price, insert_dt
+    </sql>
+    <select id="getChargingPricePage" resultMap="chargingPriceDTO" parameterType="java.util.Map">
+        SELECT
+        shop.shop_id,
+        shop.shop_code,
+        shop.shop_name,
+        station.station_code,
+        station.station_name,
+        a.station_id,
+        a.price_name,
+        a.price_type,
+        a.price_idx low,
+        a.price_begin_dt low_start,
+        a.price_end_dt low_end,
+        a.charging_price low_price,
+        a.price_parking low_parking,
+        a.service_price low_service,
+
+        b.price_idx middle,
+        b.price_begin_dt middle_start,
+        b.price_end_dt middle_end,
+        b.charging_price middle_price,
+        b.price_parking middle_parking,
+        b.service_price middle_service,
+
+        b.price_idx high,
+        b.price_begin_dt high_start,
+        b.price_end_dt high_end,
+        b.charging_price high_price,
+        b.price_parking high_parking,
+        b.service_price high_service
+
+        FROM
+        t_charging_price a
+        LEFT JOIN t_charging_station station ON a.station_id = station.station_id
+        LEFT JOIN t_charging_shop shop ON station.shop_id = shop.shop_id,
+        t_charging_price b,
+        t_charging_price c
+        WHERE
+        a.price_idx = 1
+        AND b.price_idx = 2
+        AND c.price_idx = 3
+        AND b.station_id = a.station_id
+        AND b.price_name = a.price_name
+        AND c.station_id = a.station_id
+        AND c.price_name = a.price_name
+        AND a.price_type =#{param.priceType}
+        <if test="param.shopCode !=null">
+            AND shop.shop_code like '%${param.shopCode}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND shop.shop_name like '%${param.shopName}%'
+        </if>
+        <if test="param.stationCode!=null">
+            AND station.station_code like '%${param.stationCode}%'
+        </if>
+        <if test="param.stationName!=null">
+            AND station.station_name like '%${param.stationName}%'
+        </if>
+        <if test="shop!=null">
+            <if test="shop.shopId!=null">
+                AND station.shop_id='#{shop.shopId}'
+            </if>
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.UserSmsPushMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.UserSmsPush">
+        <id column="user_id" property="userId"/>
+        <result column="push_tag" property="pushTag"/>
+        <result column="push_alias" property="pushAlias"/>
+        <result column="push_regid" property="pushRegid"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, push_tag, push_alias, push_regid
+    </sql>
+
+</mapper>

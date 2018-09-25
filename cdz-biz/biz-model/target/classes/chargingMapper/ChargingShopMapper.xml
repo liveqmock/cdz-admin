@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingShopMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingShop">
+        <id column="shop_id" property="shopId"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="shop_login" property="shopLogin"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_pwd" property="shopPwd"/>
+        <result column="shop_contact" property="shopContact"/>
+        <result column="shop_tel" property="shopTel"/>
+        <result column="shop_state" property="shopState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+    <resultMap id="chargingShopDTO" type="com.ga.cdz.domain.dto.admin.ChargingShopDTO">
+        <id column="shop_id" property="shopId"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="shop_login" property="shopLogin"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_contact" property="shopContact"/>
+        <result column="shop_tel" property="shopTel"/>
+        <result column="station_name" property="stationName"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        shop_id, shop_code, shop_name, shop_contact, shop_tel, shop_state, update_dt, insert_dt
+    </sql>
+    <select id="getShopList" resultMap="chargingShopDTO"
+            parameterType="com.ga.cdz.domain.vo.admin.ChargingShopSelectVo">
+        SELECT
+        shop.shop_id,
+        shop.shop_code,
+        shop.shop_name,
+        shop.shop_login,
+        shop.shop_tel,
+        shop.shop_contact,
+        shop.insert_dt,
+        station.station_name
+        FROM
+        t_charging_shop shop
+        LEFT JOIN t_charging_station station ON shop.shop_id = station.shop_id
+        WHERE
+        shop.shop_state =1
+        <if test="param.shopCode!=null">
+            AND shop.shop_code like '%${param.shopCode}%'
+        </if>
+        <if test="param.shopName!=null">
+            AND shop.shop_name like '%${param.shopName}%'
+        </if>
+        <if test="param.stationName!=null">
+            AND station.station_name like '%${param.stationName}%'
+        </if>
+        <if test="param.shopContact!=null">
+            AND shop.shop_contact like '%${param.shopContact}%'
+        </if>
+    </select>
+
+</mapper>

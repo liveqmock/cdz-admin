@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.cdz.dao.charging.ChargingOrderCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ga.cdz.domain.entity.ChargingOrderComment">
+        <id column="comment_id" property="commentId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="comment_code" property="commentCode"/>
+        <result column="comment_content" property="commentContent"/>
+        <result column="comment_pid" property="commentPid"/>
+        <result column="comment_type" property="commentType"/>
+        <result column="comment_state" property="commentState"/>
+        <result column="update_dt" property="updateDt"/>
+        <result column="insert_dt" property="insertDt"/>
+    </resultMap>
+
+    <resultMap id="chargingCommentDetail" type="com.ga.cdz.domain.dto.admin.ChargingOrderCommentDTO">
+        <result column="comment_id" property="commentId"></result>
+        <result column="order_id" property="orderId"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="comment_code" property="commentCode"></result>
+        <result column="comment_content" property="commentContent"></result>
+        <result column="comment_type" property="commentType"></result>
+        <result column="comment_state" property="commentState"></result>
+        <result column="update_dt" property="updateDt"></result>
+        <result column="insert_dt" property="insertDt"></result>
+        <result column="user_real_name" property="userRealName"></result>
+        <result column="station_name" property="stationName"></result>
+        <result column="station_code" property="stationCode"></result>
+        <result column="device_code" property="deviceCode"></result>
+        <result column="device_name" property="deviceName"></result>
+        <result column="device_sub_id" property="deviceSubId"></result>
+        <result column="device_sub_name" property="deviceSubName"></result>
+        <result column="cgtype_name" property="cgtypeName"></result>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        comment_id, order_id, user_id, comment_code, comment_content, comment_pid, comment_type, comment_state,
+        update_dt, insert_dt
+    </sql>
+    <select id="getChargingCommentOrderListPage" resultMap="chargingCommentDetail">
+        SELECT
+        cms.*,
+        usr.user_real_name,
+        sta.station_name,
+        sta.station_code,
+        dev.device_code,
+        dev.device_name,
+        sub.device_sub_id,
+        sub.device_sub_name,
+        type.cgtype_name
+        FROM
+        t_charging_order_comment cms
+        LEFT JOIN t_user_info usr ON cms.user_id = usr.user_id
+        LEFT JOIN t_charging_order ord ON cms.order_id = ord.order_id
+        LEFT JOIN t_charging_device_sub sub ON ord.device_id = sub.device_id
+        AND sub.device_sub_id = ord.device_sub_id
+        LEFT JOIN t_charging_station sta ON ord.station_id = sta.station_id
+        LEFT JOIN t_charging_device dev ON dev.device_id = ord.device_id
+        LEFT JOIN t_charging_type type ON dev.cgtype_id = type.cgtype_id
+        WHERE 1=1
+        <if test="shop!=null">
+            <if test="shop.shopId!=null">
+                AND sta.shop_id='#{shop.shopId}'
+            </if>
+        </if>
+    </select>
+
+</mapper>
