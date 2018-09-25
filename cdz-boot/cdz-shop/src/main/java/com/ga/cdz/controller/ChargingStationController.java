@@ -274,11 +274,8 @@ public class ChargingStationController extends AbstractBaseController {
     @PostMapping("/delete")
     public Result deleteStation(@RequestBody @Validated(value = IMChargingStationGroup.Delete.class) ChargingStationVo vo, BindingResult bindingResult) {
         checkParams(bindingResult);
-        boolean result = mChargingStationService.deleteStationById(vo);
-        if (result) {
-            return Result.success().message("删除成功");
-        }
-        return Result.fail().message("删除失败");
+        mChargingStationService.deleteStationById(vo);
+        return Result.success().message("删除成功");
     }
 
     /**
@@ -317,11 +314,8 @@ public class ChargingStationController extends AbstractBaseController {
             throw new BusinessException("乡镇街道编码格式不对");
         }
         //修改信息
-        boolean result = mChargingStationService.updateStationById(vo);
-        if (result) {
-            return Result.success().message("修改成功");
-        }
-        return Result.fail().message("修改失败");
+        mChargingStationService.updateStationById(vo);
+        return Result.success().message("修改成功");
     }
 
 }
