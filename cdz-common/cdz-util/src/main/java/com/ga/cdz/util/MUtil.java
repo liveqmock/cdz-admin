@@ -2,7 +2,9 @@ package com.ga.cdz.util;
 
 import com.ga.cdz.constant.RegexConstant;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import java.io.File;
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -38,6 +40,21 @@ public class MUtil {
         }
         return null;
     }
+
+    /**
+     * @author:luqi
+     * @description: url 字符串 反斜杠 \\ 转斜杠/
+     * @date:2018/9/20_14:26
+     * @param:
+     * @return:
+     */
+    public String urlSeparator(String url) {
+        if (StringUtils.isEmpty(url)) {
+            return "";
+        }
+        return url.replaceAll("\\\\", "/");
+    }
+
 
     /**
      * @author:luqi

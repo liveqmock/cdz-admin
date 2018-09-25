@@ -40,11 +40,6 @@ public class MChargingStationServiceImpl extends ServiceImpl<ChargingStationMapp
      */
     @Resource
     DistrictMapper districtMapper;
-
-    //todo-ok Cedar 不需要的依赖请删除
-    /**
-     *
-     */
     @Resource
     AdminInfoMapper adminInfoMapper;
     @Resource
