@@ -216,7 +216,7 @@ public class ChargingStationController extends AbstractBaseController {
             vo.setLng(106.632442);
         }
         //为空验证
-        
+
         if (ObjectUtils.isEmpty(shopId)) {
             throw new BusinessException("商户ID不能为空");
         } else if (ObjectUtils.isEmpty(stationCode)) {

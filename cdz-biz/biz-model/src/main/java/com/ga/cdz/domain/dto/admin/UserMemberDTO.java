@@ -43,6 +43,18 @@ public class UserMemberDTO {
      */
     private UserInfo.UserSex userSex;
     /**
+     * 省名称
+     */
+    private String provinceName;
+    /**
+     * 市名称
+     */
+    private String cityName;
+    /**
+     * 县名称
+     */
+    private String countyName;
+    /**
      * 省级编码
      */
     private String province;

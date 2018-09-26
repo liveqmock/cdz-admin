@@ -3,6 +3,7 @@ package com.ga.cdz.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ga.cdz.dao.center.DistrictMapper;
 import com.ga.cdz.dao.charging.UserInfoMapper;
 import com.ga.cdz.domain.dto.admin.UserMemberDTO;
 import com.ga.cdz.domain.entity.UserInfo;
@@ -12,6 +13,9 @@ import com.ga.cdz.service.IMAdminUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 
 /**
  * @author huanghaohao
@@ -20,6 +24,8 @@ import org.springframework.stereotype.Service;
  */
 @Service("mAdminUserService")
 public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IMAdminUserService {
+    @Resource
+    DistrictMapper districtMapper;
     /**
      * @param pageVo 分页
      * @return
@@ -30,7 +36,14 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
     @Override
     public IPage<UserMemberDTO> getCompanyMemberListPage(PageVo<UserInfoVo> pageVo) {
         Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
-        return page.setRecords(this.baseMapper.getCompanyMemberListPage(page, pageVo.getData()));
+        List<UserMemberDTO> list = this.baseMapper.getCompanyMemberListPage(page, pageVo.getData());
+        list.forEach(item -> {
+            item.setProvinceName(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setCityName(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setCountyName(districtMapper.selectById(item.getCountry()).getDistrictName());
+        });
+        page.setRecords(list);
+        return page;
     }
 
     /**
@@ -43,7 +56,14 @@ public class MAdminUserServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
     @Override
     public IPage<UserMemberDTO> getUserMemberListPage(PageVo<UserInfoVo> pageVo) {
         Page<UserMemberDTO> page = new Page<>(pageVo.getIndex(), pageVo.getSize());
-        return page.setRecords(this.baseMapper.getUserMemberListPage(page, pageVo.getData()));
+        List<UserMemberDTO> userMemberDTOS = this.baseMapper.getUserMemberListPage(page, pageVo.getData());
+        userMemberDTOS.forEach(item -> {
+            item.setProvinceName(districtMapper.selectById(item.getProvince()).getDistrictName());
+            item.setCityName(districtMapper.selectById(item.getCity()).getDistrictName());
+            item.setCountyName(districtMapper.selectById(item.getCountry()).getDistrictName());
+        });
+        page.setRecords(userMemberDTOS);
+        return page;
     }
 
     /**
