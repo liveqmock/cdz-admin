@@ -40,6 +40,7 @@ public class UserSmsAddVo {
     /**
      * 消息URL
      */
+    @NotBlank(groups = IMUserSmsGroup.Add.class, message = "消息内容不能为空")
     private String smsUrl;
     /**
      * 消息类型 1系统消息 2 广告banner

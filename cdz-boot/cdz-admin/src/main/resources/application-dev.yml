@@ -10,6 +10,8 @@ file:
   system: ${file.base}\\system
   #banner
   banner: ${file.base}\\banner
+  #自定义html
+  custom_url: ${file.base}\\custom_url
   #用户头像图片
   user_avatar: ${file.base}\\user\\avatar
   #站点图片
@@ -22,6 +24,8 @@ url:
   system: ${url.base}\img\system
   #banner
   banner: ${url.base}\img\banner
+  #自定义html
+  custom_url: ${url.base}\img\custom_url
   #t头像路径
   user_avatar: ${url.base}\user\avatar
   #站点路径

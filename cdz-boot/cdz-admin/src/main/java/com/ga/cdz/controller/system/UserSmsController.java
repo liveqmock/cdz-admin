@@ -13,6 +13,7 @@ import com.ga.cdz.service.IMUserSmsService;
 import com.ga.cdz.util.MFileUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -52,6 +55,16 @@ public class UserSmsController extends AbstractBaseController {
     @Value("${file.system}")
     protected String systemFile;
     /**
+     * 自定义html文件路径
+     */
+    @Value("${file.custom_url}")
+    protected String customFile;
+    /**
+     * 自定义html访问路径
+     */
+    @Value("${url.custom_url}")
+    protected String customUrl;
+    /**
      * 广告图片文件路径
      */
     @Value("${file.banner}")
@@ -77,6 +90,54 @@ public class UserSmsController extends AbstractBaseController {
             return Result.success().message("删除成功");
         } catch (Exception e) {
             throw new BusinessException("删除失败");
+        }
+    }
+
+    /**
+     * @author:wanzhongsu
+     * @description: 发布消息，创建文件
+     * @date: 2018/10/8 15:05
+     * @param: UserSmsAddVo
+     * @return: Result
+     */
+    @PostMapping("/publish")
+    @Transactional
+    public Result publisSms(@RequestBody @Validated(value = IMUserSmsGroup.Add.class) UserSmsAddVo vo, BindingResult bindingResult) {
+        checkParams(bindingResult);
+        System.out.println(vo.getSmsUrl());
+        String content = vo.getSmsUrl();
+        vo.setSmsUrl("等待更新......");
+        int smsId = mUserSmsService.saveSms(vo);
+
+        /**生成新的文件目录*/
+        String newFilePath = mFileUtil.getTimePath() + smsId;
+        /**保存在数据库的dbFilePath*/
+        String dbFilePath = newFilePath;
+        newFilePath = customFile + newFilePath;
+        newFilePath = newFilePath + ".html";
+        File file = new File(newFilePath);
+
+        dbFilePath = customUrl + dbFilePath + ".html";
+        //保存文件
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(content.getBytes());
+            outputStream.flush();
+            //更新数据库中的文件
+            dbFilePath = dbFilePath.replaceAll("\\\\", "/");
+            vo.setSmsUrl(dbFilePath);
+            UserSms userSms = new UserSms();
+            BeanUtils.copyProperties(vo, userSms);
+            userSms.setSmsId(smsId);
+            mUserSmsService.updateById(userSms);
+            return Result.success().message("提交成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BusinessException("提交失败");
         }
     }
 
